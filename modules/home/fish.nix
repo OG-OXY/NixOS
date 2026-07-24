@@ -45,7 +45,11 @@
       set -g fish_greeting "Welcome to NixOS!"
       set -g fish_handle_reflow 1
 
-      fastfetch
+      if test "$USER" = "root"
+          fastfetch 2>/dev/null
+        else
+          fastfetch
+      end
       starship init fish | source
       if test "$USER" = "root"
         set -gx ATUIN_CONFIG_DIR "/root/.config/atuin"
@@ -55,7 +59,6 @@
       if type -q direnv
           direnv hook fish | source
       end
-      fish_add_path -p "$HOME/.local/bin"
     '';
 
     plugins = with pkgs.fishPlugins; [
@@ -84,7 +87,7 @@
         src = pkgs.fetchFromGitHub {
           owner = "gazorby";
           repo = "fish-abbreviation-tips";
-          rev = "v0.7.0"; # Verified latest tag
+          rev = "v0.7.0";
           sha256 = "sha256-F1t81VliD+v6WEWqj1c1ehFBXzqLyumx5vV46s/FZRU=";
         };
       }
