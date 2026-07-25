@@ -32,6 +32,7 @@
     ./modules/home/fish.nix
     ./modules/home/ghostty.nix
     ./modules/home/git.nix
+    ./modules/home/github-cli.nix
     ./modules/home/jujutsu.nix
     ./modules/home/tmux.nix
     ./modules/home/yazi.nix
@@ -45,7 +46,6 @@
       systemd.enable = true;
     };
     herdr.enable = true;
-    gh.enable = true;
     devenv.enable = true;
     home-manager.enable = true;
   };
