@@ -45,6 +45,7 @@
       systemd.enable = true;
     };
     herdr.enable = true;
+    gh.enable = true;
     devenv.enable = true;
     home-manager.enable = true;
   };

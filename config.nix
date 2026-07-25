@@ -243,6 +243,7 @@
         qalculate-gtk
         #CLI-Tools.
         git
+        gh
         nix-output-monitor
         nvd
         nh
