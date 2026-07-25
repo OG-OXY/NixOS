@@ -1,4 +1,5 @@
 {
+  pkgs,
   ...
 }:
 {
@@ -10,6 +11,8 @@
     sessionVariables = {
       EDITOR = "nvf";
       VISUAL = "nvf";
+    };
+    file = {
     };
   };
 
@@ -35,7 +38,14 @@
     ./modules/home/jujutsu.nix
     ./modules/home/ssh.nix
     ./modules/home/rbw.nix
+    ./modules/home/gpg.nix
   ];
+
+  systemd.user = {
+    sessionVariables = {
+      PINENTRY_USER_DATA = "gtk";
+    };
+  };
 
   programs = {
     waybar = {

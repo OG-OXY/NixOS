@@ -126,11 +126,6 @@
       enable = true;
       nix-direnv.enable = true;
     };
-    gnupg.agent = {
-      enable = true;
-      enableSSHSupport = false;
-      pinentryPackage = pkgs.pinentry-gnome3;
-    };
     regreet.enable = true;
     fish.enable = true;
     zoxide.enable = true;
@@ -230,6 +225,7 @@
         nh
         fh
         rbw
+        secretspec
         rofi-rbw-wayland
         mpv
         imv
