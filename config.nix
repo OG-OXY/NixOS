@@ -126,18 +126,6 @@
       enable = true;
       nix-direnv.enable = true;
     };
-    git = {
-      enable = true;
-      config = {
-        user = {
-          name = "Ty";
-          email = "ogoxy.yt@gmail.com";
-          signingkey = "~/.ssh/id_ed25519.pub";
-        };
-        gpg.format = "ssh";
-        commit.gpgsign = true;
-      };
-    };
     ssh = {
       extraConfig = ''
         Host Nix-On-Droid
@@ -254,6 +242,7 @@
         pavucontrol
         qalculate-gtk
         #CLI-Tools.
+        git
         nix-output-monitor
         nvd
         nh

@@ -31,6 +31,8 @@
   imports = [
     ./modules/home/fish.nix
     ./modules/home/ghostty.nix
+    ./modules/home/git.nix
+    ./modules/home/jujutsu.nix
     ./modules/home/tmux.nix
     ./modules/home/yazi.nix
     ./modules/home/atuin.nix
