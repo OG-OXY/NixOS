@@ -1,4 +1,6 @@
-{ ... }:
+{
+  ...
+}:
 {
   programs.gh = {
     enable = true;
