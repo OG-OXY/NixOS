@@ -1,8 +1,5 @@
 {
   pkgs,
-  config,
-  lib,
-  inputs,
   ...
 }:
 {
@@ -10,6 +7,8 @@
     enable = true;
     settings = {
       email = "ogoxy.yt@gmail.com";
+      pinentry = pkgs.pinentry-gnome3;
+      lock_timeout = 86400;
     };
   };
 }

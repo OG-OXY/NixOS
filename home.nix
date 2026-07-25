@@ -1,8 +1,4 @@
 {
-  config,
-  pkgs,
-  lib,
-  inputs,
   ...
 }:
 {
@@ -29,14 +25,15 @@
     };
   };
   imports = [
-    ./modules/home/fish.nix
     ./modules/home/ghostty.nix
+    ./modules/home/tmux.nix
+    ./modules/home/fish.nix
+    ./modules/home/atuin.nix
+    ./modules/home/yazi.nix
     ./modules/home/git.nix
     ./modules/home/github-cli.nix
     ./modules/home/jujutsu.nix
-    ./modules/home/tmux.nix
-    ./modules/home/yazi.nix
-    ./modules/home/atuin.nix
+    ./modules/home/ssh.nix
     ./modules/home/rbw.nix
   ];
 
