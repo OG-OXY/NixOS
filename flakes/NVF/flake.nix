@@ -10,7 +10,6 @@
 
   outputs =
     {
-      self,
       nixpkgs,
       nvf,
       ...
@@ -212,9 +211,9 @@
       # Exposes the packages for both system environments
       packages = forAllSystems (
         {
-          system,
           pkgs,
           customNeovim,
+          ...
         }:
         {
           default = pkgs.symlinkJoin {

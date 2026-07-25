@@ -93,9 +93,6 @@
         "wireshark"
         "tcpdump"
       ];
-      packages = [
-        #
-      ];
     };
   };
 
@@ -268,6 +265,7 @@
         hyprshot
         hyprpicker
         btop
+        tree
         fastfetch
         tealdeer
         wl-clipboard
@@ -296,7 +294,6 @@
         inputs.llm-agents.packages.${pkgs.system}.default
       ];
     etc = {
-      #
     };
   };
 

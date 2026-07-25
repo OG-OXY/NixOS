@@ -1,8 +1,5 @@
 {
-  config,
-  pkgs,
   lib,
-  inputs,
   ...
 }:
 {
@@ -16,6 +13,6 @@
   programs.starship = {
     enable = true;
     enableFishIntegration = true;
-    settings = builtins.fromTOML (builtins.readFile ./starship/starship-root.toml);
+    settings = lib.importTOML ./starship/starship-root.toml;
   };
 }
