@@ -7,7 +7,7 @@
     enable = true;
     functions = {
       gback = {
-        description = "Safely undo the last Git commit but keep file changes";
+        description = "Safely undo the last Git commit but keep file changes.";
         body = ''
           if not git rev-parse --is-inside-work-tree >/dev/null 2>&1
             echo (set_color red)"❌ Error: Not a git repository!"(set_color normal)
@@ -15,6 +15,18 @@
           end
           echo (set_color yellow)"⏪ Undoing last commit safely (keeping modifications)..."(set_color normal)       git reset --soft HEAD~1
           echo (set_color green)"✨ Done! Check 'git status' to see your uncommitted files."(set_color normal)
+        '';
+      };
+      jj = {
+        description = "tell jj to grab secrets from secretspec.";
+        body = ''
+          secretspec run -- jj $argv
+        '';
+      };
+      gh = {
+        description = "tell github-cli to grab secrets from secretspec";
+        body = ''
+          secretspec run -- gh $argv
         '';
       };
     };

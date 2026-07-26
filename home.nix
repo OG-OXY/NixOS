@@ -1,5 +1,4 @@
 {
-  pkgs,
   ...
 }:
 {
@@ -13,6 +12,7 @@
       VISUAL = "nvf";
     };
     file = {
+      "NixOS/secretspec.toml".source = ./config/secretspec/secretspec.toml;
     };
   };
 
@@ -27,18 +27,18 @@
         provider = "keyring"
         profile = "default"
       '';
-      "secretspec/secretspec.toml".text = ''
-        [project]
-        name = "global-dev"
-        version = "1.0"
-        [secrets]
-        GITHUB_TOKEN = { description = "GitHub Access Token" }
-      '';
     };
     dataFile = {
       #
     };
   };
+
+  systemd.user = {
+    sessionVariables = {
+      PINENTRY_USER_DATA = "gtk";
+    };
+  };
+
   imports = [
     ./modules/home/ghostty.nix
     ./modules/home/tmux.nix
@@ -52,12 +52,6 @@
     ./modules/home/rbw.nix
     ./modules/home/gpg.nix
   ];
-
-  systemd.user = {
-    sessionVariables = {
-      PINENTRY_USER_DATA = "gtk";
-    };
-  };
 
   programs = {
     waybar = {

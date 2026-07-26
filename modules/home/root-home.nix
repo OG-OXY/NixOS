@@ -13,6 +13,6 @@
   programs.starship = {
     enable = true;
     enableFishIntegration = true;
-    settings = lib.importTOML ./starship/starship-root.toml;
+    settings = lib.importTOML ../../config/starship/starship-root.toml;
   };
 }
