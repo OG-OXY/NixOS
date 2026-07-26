@@ -12,7 +12,7 @@
       VISUAL = "nvf";
     };
     file = {
-      "NixOS/secretspec.toml".source = ./config/secretspec/secretspec.toml;
+      "secretspec.toml".source = ./config/secretspec/secretspec.toml;
     };
   };
 
