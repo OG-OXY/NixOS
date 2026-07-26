@@ -195,12 +195,14 @@
     sessionVariables = {
       NIXOS_OZONE_WL = "1";
       WLR_NO_HARDWARE_CURSORS = "1";
-      ANTHROPIC_BASE_URL = "http://127.0.0.1:11434/v1";
-      ANTHROPIC_API_KEY = "local";
-      ANTHROPIC_DEFAULT_SONNET_MODEL = "qwen-14b";
-      CLAUDE_CODE_ATTRIBUTION_HEADER = "0";
       EDITOR = "nvf";
       VISUAL = "nvf";
+      SSH_AUTH_SOCK = "$HOME/.bitwarden-ssh-agent.sock";
+      SECRETSPEC_PROVIDER = "keyring";
+      ANTHROPIC_DEFAULT_SONNET_MODEL = "qwen-14b";
+      ANTHROPIC_BASE_URL = "http://127.0.0.1:11434/v1";
+      ANTHROPIC_API_KEY = "local";
+      CLAUDE_CODE_ATTRIBUTION_HEADER = "0";
     };
     systemPackages =
       with pkgs;

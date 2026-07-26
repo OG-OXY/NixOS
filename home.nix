@@ -22,6 +22,18 @@
         theme = GruvBoxDark
         background-opacity = 1.0
       '';
+      "secretspec/config.toml".text = ''
+        [defaults]
+        provider = "keyring"
+        profile = "default"
+      '';
+      "secretspec/secretspec.toml".text = ''
+        [project]
+        name = "global-dev"
+        version = "1.0"
+        [secrets]
+        GITHUB_TOKEN = { description = "GitHub Access Token" }
+      '';
     };
     dataFile = {
       #
