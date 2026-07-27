@@ -17,6 +17,9 @@ only_attached = false
 symbol        = "🌿"
 style         = "bold purple"
 format        = "on [$symbol$branch]($style) "
+symbol = "🌿 "
+style = "bold purple"
+format = "on [$symbol$branch]($style) "
 
 # Git status emojis
 [git_status]
@@ -27,8 +30,6 @@ diverged   = "🔱"
 untracked  = "🤷"
 staged     = "📦"
 modified   = "📝"
-renamed    = "🚚 "
-deleted    = "🗑️ "
 format     = '([\[$all_status$ahead_behind\]]($style) )'
 style      = "bold red"
 
@@ -38,6 +39,17 @@ when    = "test -d .jj"
 style   = "bold purple"
 format  = "on [$symbol$output]($style) "
 symbol  = "🌿"
+conflicted = "💥 "
+ahead = "🚀 "
+behind = "🐢 "
+diverged = "🔱 "
+untracked = "🤷 "
+staged = "📦 "
+modified = "📝 "
+renamed = "🚚 "
+deleted = "🗑️ "
+format = '([\[$all_status$ahead_behind\]]($style) )'
+style = "bold red"
 
 # Python language indicator
 [python]
