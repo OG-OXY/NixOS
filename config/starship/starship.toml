@@ -33,7 +33,7 @@ format     = '([\[$all_status$ahead_behind\]]($style) )'
 style      = "bold red"
 
 [custom.jj]
-command = '''jj log -r @ --no-graph -T 'local_bookmarks.join(", ")' '''
+command = '''jj bookmark list -r @ --template 'name ++ "\n"' | head -n 1 | tr -d '\n' '''
 when    = "test -d .jj"
 style   = "bold purple"
 format  = "[$symbol$output]($style) "
