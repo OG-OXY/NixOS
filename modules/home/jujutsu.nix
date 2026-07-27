@@ -21,6 +21,9 @@
         editor = "nvf";
         paginate = "never"; # or "auto"
       };
+      fsmonitor = {
+        backend = "watchman";
+      };
       aliases = {
         s = [ "status" ];
         l = [

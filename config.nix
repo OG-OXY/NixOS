@@ -208,6 +208,7 @@
       with pkgs;
       [
         hyprpolkitagent
+        watchman
         pinentry-gnome3
         waybar
         mako
@@ -284,6 +285,9 @@
 
   # Display Manager.
   services = {
+    greetd.enable = true;
+    kmscon.enable = true;
+    tailscale.enable = true;
     gnome.gnome-keyring.enable = true;
     power-profiles-daemon.enable = true;
     hardware.openrgb = {
@@ -291,9 +295,6 @@
       package = pkgs.openrgb-with-all-plugins;
       motherboard = "amd";
     };
-    kmscon.enable = true;
-    greetd.enable = true;
-    tailscale.enable = true;
     logind.settings = {
       Login = {
         IdleAction = "ignore";
