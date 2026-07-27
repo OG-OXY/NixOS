@@ -51,6 +51,7 @@
       nrtu = "sudo nixos-rebuild test --upgrade --flake .#nixos";
       nrvm = "sudo nixos-rebuild build-vm --flake .#nixos";
       vm = "./result/bin/run-nixos-vm";
+      nhs = "nh os switch .";
       nb = "nix-backup";
       nub = "nix-upgrade-backup";
       ts = "doas tailscale up";
