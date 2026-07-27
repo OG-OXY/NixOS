@@ -11,6 +11,8 @@
       };
       git = {
         auto-local-bookmark = true;
+        push-revset = [ "master" ];
+        default-push = "master";
       };
       signing = {
         sign-all = true;

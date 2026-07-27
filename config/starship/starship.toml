@@ -1,4 +1,4 @@
-format = '[Ty](bold green)[@](bold red)[NixOS](bold blue)[:](bold red)$directory$git_branch$custom_jj$git_status$nix_shell$package$python$rust[\]](bold green)[†](bold red) $character$status'
+format = '[Ty](bold green)[@](bold red)[NixOS](bold blue)[:](bold red)$directory$git_branch${custom.jj}$git_status$nix_shell$package$python$rust[\]](bold green)[†](bold red) $character$status'
 
 [character]
 success_symbol = "[❯](bold blue)"
@@ -14,30 +14,30 @@ fish_style_pwd_dir_length = 1
 [git_branch]
 disabled      = true
 only_attached = false
-symbol        = "🌿 "
+symbol        = "🌿"
 style         = "bold purple"
 format        = "on [$symbol$branch]($style) "
 
 # Git status emojis
 [git_status]
-conflicted = "💥 "
-ahead      = "🚀 "
-behind     = "🐢 "
-diverged   = "🔱 "
-untracked  = "🤷 "
-staged     = "📦 "
-modified   = "📝 "
+conflicted = "💥"
+ahead      = "🚀"
+behind     = "🐢"
+diverged   = "🔱"
+untracked  = "🤷"
+staged     = "📦"
+modified   = "📝"
 renamed    = "🚚 "
 deleted    = "🗑️ "
 format     = '([\[$all_status$ahead_behind\]]($style) )'
 style      = "bold red"
 
-[custom_jj]
-command = '''jj bookmark list -r @ --template 'name ++ "\n"' | head -n 1 | tr -d '\n' '''
+[custom.jj]
+command = '''jj log -r @ --no-graph -T 'local_bookmarks.join(", ")' '''
 when    = "test -d .jj"
 style   = "bold purple"
-format  = "[$symbol$output]($style) "
-symbol  = "🌿 "
+format  = "on [$symbol$output]($style) "
+symbol  = "🌿"
 
 # Python language indicator
 [python]
