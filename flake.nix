@@ -3,6 +3,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/567a49d1913ce81ac6e9582e3553dd90a955875f";
+    chaotic.url = "github:chaotic-cx/nyx";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -16,6 +17,7 @@
       self,
       nixpkgs,
       nixpkgs-stable,
+      chaotic,
       home-manager,
       ...
     }@inputs:
@@ -24,9 +26,16 @@
         specialArgs = { inherit inputs self; };
         modules = [
           ./config.nix
+          chaotic.nixosModules.default
           {
             nixpkgs = {
-              hostPlatform = "x86_64-linux";
+              hostPlatform = {
+                system = "x86_64-linux";
+                #gcc = {
+                #arch = "znver4";
+                #tune = "znver4";
+                #};
+              };
               config = {
                 allowUnfree = true;
                 cudaSupport = true;
