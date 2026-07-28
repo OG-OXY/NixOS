@@ -1,5 +1,5 @@
 {
-  description = "Ty's Standalone AI Agent Hub - Package & DevShell Targets";
+  description = "AI Agent-Hub: Package & DevShell Targets";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
