@@ -21,7 +21,6 @@
       ...
     }:
     let
-      # Define architectures so both PC and Android are supported natively
       supportedSystems = [
         "x86_64-linux"
         "aarch64-linux"
@@ -33,13 +32,12 @@
           f (
             import nixpkgs {
               inherit system;
-              config.allowUnfree = true; # Required for proprietary agent engines
+              config.allowUnfree = true;
             }
           )
         );
     in
     {
-      # TARGET 1: Standalone Package Output (For your main PC System Packages)
       packages = forEachSystem (
         pkgs:
         let
@@ -57,7 +55,6 @@
         }
       );
 
-      # TARGET 2: DevShell Output (The ultimate portable and sandboxed workspace)
       devShells = forEachSystem (
         pkgs:
         let
@@ -66,8 +63,6 @@
         {
           default = pkgs.mkShell {
             name = "agent-sandbox";
-
-            # Use nativeBuildInputs for devshell packages so tools are placed into $PATH properly
             nativeBuildInputs = [
               # Agents from Numtide
               agents.claude-code
