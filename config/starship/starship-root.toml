@@ -20,15 +20,15 @@ format        = "on [$symbol$branch]($style) "
 
 # Git status emojis
 [git_status]
-conflicted = "💥 "
-ahead      = "🚀 "
-behind     = "🐢 "
-diverged   = "🔱 "
-untracked  = "🤷 "
-staged     = "📦 "
-modified   = "📝 "
-renamed    = "🚚 "
-deleted    = "🗑️ "
+conflicted = "💥"
+ahead      = "🚀"
+behind     = "🐢"
+diverged   = "🔱"
+untracked  = "🤷"
+staged     = "📦"
+modified   = "📝"
+renamed    = "🚚"
+deleted    = "🗑️"
 format     = '([\[$all_status$ahead_behind\]]($style) )'
 style      = "bold red"
 

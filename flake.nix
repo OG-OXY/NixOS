@@ -29,13 +29,7 @@
           chaotic.nixosModules.default
           {
             nixpkgs = {
-              hostPlatform = {
-                system = "x86_64-linux";
-                #gcc = {
-                #arch = "znver4";
-                #tune = "znver4";
-                #};
-              };
+              hostPlatform = "x86_64-linux";
               config = {
                 allowUnfree = true;
                 cudaSupport = true;
