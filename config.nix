@@ -236,7 +236,6 @@
         hyprpicker
         btop
         tree
-        fastfetch
         tealdeer
         wl-clipboard
         cliphist
