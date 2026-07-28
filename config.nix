@@ -249,6 +249,7 @@
         ripgrep
         herdr
         llama-cpp
+        llm
         fd
         bun
         devenv
