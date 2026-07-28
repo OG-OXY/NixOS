@@ -1,5 +1,5 @@
 {
-  description = "AstroNvim Replication Package using NVF";
+  description = "NVF Neovim IDE Flake";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nvf = {
