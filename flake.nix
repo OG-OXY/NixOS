@@ -33,6 +33,7 @@
               config = {
                 allowUnfree = true;
                 cudaSupport = true;
+                cudaCapabilities = [ "6.1" ];
                 permittedInsecurePackages = [
                   "electron-39.8.10"
                 ];

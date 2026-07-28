@@ -326,20 +326,10 @@
     };
     ollama = {
       enable = true;
-      package = pkgs.ollama-cuda;
+      package = pkgs.ollama-vulkan;
     };
     llama-cpp = {
       enable = true;
-      package =
-        (pkgs.llama-cpp.override {
-          cudaSupport = true;
-        }).overrideAttrs
-          (oldAttrs: {
-            # This is how you correctly pass extra flags to the build system
-            cmakeFlags = (oldAttrs.cmakeFlags or [ ]) ++ [
-              "-DCMAKE_CUDA_ARCHITECTURES=61"
-            ];
-          });
       settings = {
         hf-repo = "Qwen/Qwen2.5-Coder-14B-Instruct-GGUF";
         hf-file = "qwen2.5-coder-14b-instruct-q5_k_m.gguf";
@@ -348,6 +338,15 @@
         ctx-size = 4096;
         n-gpu-layers = 20;
       };
+      package =
+        (pkgs.llama-cpp.override {
+          cudaSupport = true;
+        }).overrideAttrs
+          (oldAttrs: {
+            cmakeFlags = (oldAttrs.cmakeFlags or [ ]) ++ [
+              "-DCMAKE_CUDA_ARCHITECTURES=61"
+            ];
+          });
     };
     resolved.enable = false;
     libinput.enable = false;
