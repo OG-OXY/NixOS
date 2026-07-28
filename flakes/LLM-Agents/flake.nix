@@ -6,11 +6,6 @@
     llm-agents = {
       url = "github:numtide/llm-agents.nix";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
-    };
-    devenv = {
-      url = "github:cachix/devenv/latest";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -71,7 +66,6 @@
 
               # Native utilities from nixpkgs
               pkgs.herdr
-              pkgs.devenv
               pkgs.llama-cpp
               pkgs.nodejs_22
               pkgs.ripgrep
