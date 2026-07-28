@@ -14,6 +14,7 @@
     file = {
       "secretspec.toml".source = ./config/secretspec/secretspec.toml;
       "NixOS/secretspec.toml".source = ./config/secretspec/secretspec.toml;
+      ".config/tealdeer/config.toml".source = ./config/tealdeer/config.toml;
     };
   };
 
