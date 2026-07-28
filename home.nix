@@ -19,10 +19,6 @@
 
   xdg = {
     configFile = {
-      "ghostty/config".text = ''
-        theme = GruvBoxDark
-        background-opacity = 1.0
-      '';
       "secretspec/config.toml".text = ''
         [defaults]
         provider = "keyring"
