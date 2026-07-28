@@ -26,6 +26,9 @@
       fsmonitor = {
         backend = "watchman";
       };
+      revsets = {
+        immutable-heads = "tracked_remote_bookmarks()";
+      };
       aliases = {
         s = [ "status" ];
         l = [
