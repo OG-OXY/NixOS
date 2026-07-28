@@ -50,6 +50,7 @@
     ./modules/home/ssh.nix
     ./modules/home/rbw.nix
     ./modules/home/gpg.nix
+    ./modules/home/hyprpaper.nix
   ];
 
   programs = {

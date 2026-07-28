@@ -2,12 +2,13 @@
   ...
 }:
 let
-  dirString = "/home/ty/Media/Pictures/wpapers";
-  wallpaperDir = /. + dirString; # Converts string to a Nix path
-  wallpapers = map (file: "${dirString}/${file}") (
+  wallpaperDir = ../../config/theme/wpapers;
+
+  wallpapers = map (file: "${wallpaperDir}/${file}") (
     builtins.attrNames (builtins.readDir wallpaperDir)
   );
-  defaultWallpaper = "${dirString}/gruvbox-rainbow-nix.png";
+
+  defaultWallpaper = "${wallpaperDir}/gruvbox-rainbow-nix.png";
 in
 {
   services.hyprpaper = {
@@ -17,7 +18,10 @@ in
       splash = false;
       preload = wallpapers;
       wallpaper = [
-        ",${defaultWallpaper}"
+        {
+          monitor = "";
+          path = "${defaultWallpaper}";
+        }
       ];
     };
   };
