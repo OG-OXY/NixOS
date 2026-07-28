@@ -8,6 +8,8 @@
     settings = {
       theme = "Aurora";
       background-opacity = 1.0;
+      adjust-cell-height = "-10%";
+      adjust-cell-width = "-10%";
       cursor-style = "block";
       shell-integration-features = "no-cursor";
       font-family = "JetBrainsMono Nerd Font Bold";

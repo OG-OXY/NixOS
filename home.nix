@@ -42,6 +42,7 @@
     ./modules/home/tmux.nix
     ./modules/home/fish.nix
     ./modules/home/atuin.nix
+    ./modules/home/fastfetch.nix
     ./modules/home/yazi.nix
     ./modules/home/git.nix
     ./modules/home/github-cli.nix
