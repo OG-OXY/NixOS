@@ -1,4 +1,4 @@
-format = '[Ty](bold green)[@](bold red)[NixOS](bold blue)[:](bold red)$directory$git_branch${custom.jj}$git_status$nix_shell$package$python$rust[\]](bold green)[†](bold red) $character$status'
+format = '[Ty](bold green)[@](bold red)[NixOS](bold blue)[:](bold red)$directory$git_branch${custom.jj-}${custom.jj}$git_status$nix_shell$package$python$rust[\]](bold green)[†](bold red) $character$status'
 
 [character]
 success_symbol = "[❯](bold blue)"
@@ -33,11 +33,20 @@ format     = '([\[$all_status$ahead_behind\]]($style) )'
 style      = "bold red"
 
 [custom.jj]
-command = '''jj log -r @ --no-graph -T 'local_bookmarks.join(", ")' '''
-when    = "test -d .jj"
-style   = "bold purple"
-format  = "on [$symbol$output]($style) "
-symbol  = "🌿 "
+command  = '''jj log -r @ --no-graph -T 'local_bookmarks.join(", ")' '''
+symbol   = "🌿 "
+style    = "bold purple"
+format   = "on [$symbol$output]($style) "
+when     = "test -d .jj"
+disabled = false
+
+#[custom.jj-]
+#command = '''jj log -r @ --no-graph -T 'local_bookmarks.join(", ")' '''
+#symbol  = "🌿 "
+#style   = "bold purple"
+#format  = "on [$symbol$output]($style) "
+#when    = "test -d .jj"
+#disabled = false
 
 # Python language indicator
 [python]
