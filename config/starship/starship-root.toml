@@ -1,4 +1,4 @@
-format = '[Root](bold yellow)[@](bold red)[NixOS](bold blue)[:](bold red)$directory$git_branch${custom.jj}$git_status$nix_shell$package$python$rust[\]](bold yellow)[‡](bold red) $character$status'
+format = '[Root](bold yellow)[@](bold red)[NixOS](bold blue)[:](bold red)$directory$git_branch${custom.jj-}${custom.jj}$git_status$nix_shell$package$python$rust[\]](bold yellow)[‡](bold red) $character$status'
 
 [character]
 success_symbol = "[❯](bold blue)"
@@ -38,6 +38,14 @@ when    = "test -d .jj"
 style   = "bold purple"
 format  = "on [$symbol$output]($style) "
 symbol  = "🌿 "
+
+#[custom.jj-]
+#command = '''jj log -r @ --no-graph -T 'local_bookmarks.join(", ")' '''
+#symbol  = "🌿 "
+#style   = "bold purple"
+#format  = "on [$symbol$output]($style) "
+#when    = "test -d .jj"
+#disabled = false
 
 # Python language indicator
 [python]
