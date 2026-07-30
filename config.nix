@@ -199,13 +199,15 @@
       VISUAL = "nvf";
       SSH_AUTH_SOCK = "$HOME/.bitwarden-ssh-agent.sock";
       SECRETSPEC_PROVIDER = "keyring";
+      ANTHROPIC_BASE_URL = "http://127.0.0.1:8012";
       ANTHROPIC_DEFAULT_SONNET_MODEL = "qwen-14b";
-      ANTHROPIC_BASE_URL = "http://127.0.0.1:11434/v1";
       ANTHROPIC_DEFAULT_OPUS_MODEL = "qwen2.5-coder";
       ANTHROPIC_DEFAULT_HAIKU_MODEL = "qwen2.5-coder";
       ANTHROPIC_API_KEY = "local";
+      ANTHROPIC_AUTH_TOKEN = "local";
       CLAUDE_CODE_ATTRIBUTION_HEADER = "0";
       CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC = "1";
+      NODE_OPTIONS = "--dns-result-order=ipv4first";
     };
     systemPackages =
       with pkgs;
@@ -239,6 +241,7 @@
         hyprpicker
         btop
         tree
+        dysk
         tealdeer
         wl-clipboard
         cliphist
@@ -336,7 +339,10 @@
         hf-file = "qwen2.5-coder-14b-instruct-q5_k_m.gguf";
         port = 8012;
         jinja = true;
-        ctx-size = 4096;
+        flash-attn = "on";
+        ctx-size = 32768;
+        cache-type-k = "q8_0";
+        cache-type-v = "q8_0";
         n-gpu-layers = 20;
       };
       package =
@@ -422,6 +428,25 @@
     podman = {
       enable = true;
       dockerCompat = true;
+    };
+    containers.enable = true;
+    oci-containers = {
+      backend = "podman";
+      containers = {
+        unsloth-proxy = {
+          image = "docker.io/unsloth/unsloth:latest";
+          autoStart = true;
+          ports = [ "4000:4000" ];
+          extraOptions = [
+            "--network=host"
+            "--entrypoint=/bin/bash"
+          ];
+          cmd = [
+            "-c"
+            "unsloth --api-base http://127.0.0.1:8012/v1 --port 4000"
+          ];
+        };
+      };
     };
   };
 
