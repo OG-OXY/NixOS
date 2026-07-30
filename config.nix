@@ -31,6 +31,8 @@
   nix = {
     settings = {
       auto-optimise-store = true;
+      donwload-buffer-size = 536870912;
+      max-substitution-jobs = 128;
       experimental-features = [
         "nix-command"
         "flakes"
