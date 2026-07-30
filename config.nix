@@ -202,6 +202,7 @@
       ANTHROPIC_DEFAULT_SONNET_MODEL = "qwen-14b";
       ANTHROPIC_BASE_URL = "http://127.0.0.1:11434/v1";
       ANTHROPIC_API_KEY = "local";
+      OPENAI_API_KEY = "local";
       CLAUDE_CODE_ATTRIBUTION_HEADER = "0";
     };
     systemPackages =
