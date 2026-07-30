@@ -71,7 +71,6 @@
                     filetree.neo-tree.enable = true;
                     telescope.enable = true;
 
-                    # Core AstroNvim Utilities
                     git = {
                       enable = true;
                       gitsigns.enable = true;
@@ -86,7 +85,6 @@
                       setupOpts.direction = "float";
                     };
 
-                    # FIXED: Changed from nvimBufferLine to nvimBufferline
                     tabline.nvimBufferline.enable = true;
                     autocomplete.blink-cmp.enable = true;
                     snippets.luasnip.enable = true;
