@@ -51,6 +51,7 @@
     ./modules/home/rbw.nix
     ./modules/home/gpg.nix
     ./modules/home/hyprpaper.nix
+    ./modules/home/ai-chat.nix
   ];
 
   programs = {
