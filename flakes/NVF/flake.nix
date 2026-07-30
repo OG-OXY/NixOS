@@ -45,6 +45,7 @@
                       termguicolors = true;
                       number = true;
                       relativenumber = true;
+                      clipboard = "unnamedplus";
                       mouse = "a";
                     };
 
@@ -131,6 +132,24 @@
                         action = ":bdelete<CR>";
                         mode = "n";
                         desc = "Close Buffer";
+                      }
+                      {
+                        key = "<leader>y";
+                        action = "\"+y";
+                        mode = [
+                          "n"
+                          "v"
+                        ];
+                        desc = "Yank to Clipboard";
+                      }
+                      {
+                        key = "<leader>p";
+                        action = "\"+p";
+                        mode = [
+                          "n"
+                          "v"
+                        ];
+                        desc = "Paste from Clipboard";
                       }
                     ];
 
