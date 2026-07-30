@@ -201,8 +201,11 @@
       SECRETSPEC_PROVIDER = "keyring";
       ANTHROPIC_DEFAULT_SONNET_MODEL = "qwen-14b";
       ANTHROPIC_BASE_URL = "http://127.0.0.1:11434/v1";
+      ANTHROPIC_DEFAULT_OPUS_MODEL = "qwen2.5-coder";
+      ANTHROPIC_DEFAULT_HAIKU_MODEL = "qwen2.5-coder";
       ANTHROPIC_API_KEY = "local";
       CLAUDE_CODE_ATTRIBUTION_HEADER = "0";
+      CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC = "1";
     };
     systemPackages =
       with pkgs;
@@ -248,7 +251,6 @@
         ripgrep
         herdr
         llama-cpp
-        llm
         fd
         bun
         devenv
