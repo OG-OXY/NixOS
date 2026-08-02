@@ -10,11 +10,11 @@
         {
           type = "openai-compatible";
           name = "local";
-          api_base = "http://127.0.0.1:8012/v1"; # Replace with your local port/path
-          api_key = "not-needed"; # Some clients require a placeholder string
+          api_base = "http://127.0.0.1:8012/v1";
+          api_key = "not-needed";
           models = [
             {
-              name = "qwen2.5-coder"; # MUST match the exact name your local backend expects
+              name = "qwen2.5-coder";
               max_input_tokens = 32768;
             }
           ];

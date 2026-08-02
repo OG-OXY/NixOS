@@ -1,4 +1,5 @@
 {
+  pkgs,
   ...
 }:
 {
@@ -15,6 +16,16 @@
       "secretspec.toml".source = ./config/secretspec/secretspec.toml;
       "NixOS/secretspec.toml".source = ./config/secretspec/secretspec.toml;
       ".config/tealdeer/config.toml".source = ./config/tealdeer/config.toml;
+      ".config/hypr/.luarc.json".text = builtins.toJSON {
+        workspace = {
+          library = [
+            "${pkgs.hyprland}/share/hypr/stubs"
+          ];
+        };
+        diagnostics = {
+          globals = [ "hl" ];
+        };
+      };
     };
   };
 
@@ -52,6 +63,7 @@
     ./modules/home/gpg.nix
     ./modules/home/hyprpaper.nix
     ./modules/home/ai-chat.nix
+    #./modules/home/litellm.nix
   ];
 
   programs = {

@@ -31,7 +31,7 @@
   nix = {
     settings = {
       auto-optimise-store = true;
-      donwload-buffer-size = 536870912;
+      download-buffer-size = 536870912;
       max-substitution-jobs = 128;
       experimental-features = [
         "nix-command"
@@ -203,10 +203,10 @@
       SECRETSPEC_PROVIDER = "keyring";
       GOOGLE_API_KEY = "AQ.Ab8RN6IaaXJOK7QowOW5CTMiwx6n5gVKoXwfG2UCwDwVzCChJA";
       GEMINI_API_KEY = "AQ.Ab8RN6IaaXJOK7QowOW5CTMiwx6n5gVKoXwfG2UCwDwVzCChJA";
-      ANTHROPIC_BASE_URL = "http://127.0.0.1:8012";
       ANTHROPIC_API_KEY = "local";
       ANTHROPIC_AUTH_TOKEN = "ollama";
-      ANTHROPIC_DEFAULT_SONNET_MODEL = "qwen-14b";
+      ANTHROPIC_BASE_URL = "http://127.0.0.1:11434";
+      ANTHROPIC_DEFAULT_SONNET_MODEL = "qwen-32b";
       ANTHROPIC_DEFAULT_OPUS_MODEL = "qwen2.5-coder";
       ANTHROPIC_DEFAULT_HAIKU_MODEL = "qwen2.5-coder";
       OLLAMA_CONTEXT_LENGTH = "32768";
@@ -259,6 +259,8 @@
         ripgrep
         herdr
         llama-cpp
+        aider-chat
+        litellm
         fd
         bun
         devenv
@@ -340,15 +342,16 @@
     llama-cpp = {
       enable = true;
       settings = {
-        hf-repo = "Qwen/Qwen2.5-Coder-14B-Instruct-GGUF";
-        hf-file = "qwen2.5-coder-14b-instruct-q5_k_m.gguf";
+        hf-repo = "Qwen/Qwen2.5-Coder-32B-Instruct-GGUF";
+        hf-file = "qwen2.5-coder-32b-instruct-q4_k_m.gguf";
+        host = "0.0.0.0";
         port = 8012;
         jinja = true;
         flash-attn = "on";
         ctx-size = 32768;
         cache-type-k = "q8_0";
         cache-type-v = "q8_0";
-        n-gpu-layers = 20;
+        n-gpu-layers = 40;
       };
       package =
         (pkgs.llama-cpp.override {
@@ -442,13 +445,11 @@
           image = "docker.io/unsloth/unsloth:latest";
           autoStart = true;
           ports = [ "4000:4000" ];
-          extraOptions = [
-            "--network=host"
-            "--entrypoint=/bin/bash"
-          ];
+          extraOptions = [ "--network=host" ];
           cmd = [
-            "-c"
-            "unsloth --api-base http://127.0.0.1:8012/v1 --port 4000"
+            "unsloth run \
+            -H 127.0.0.1 \
+            -p 4000"
           ];
         };
       };
