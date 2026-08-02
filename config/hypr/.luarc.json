@@ -1,0 +1,12 @@
+{
+  "workspace": {
+    "library": [
+      "${pkgs.hyprland}/share/hypr/stubs"
+    ]
+  },
+  "diagnostics": {
+    "globals": [
+      "hl"
+    ]
+  }
+}

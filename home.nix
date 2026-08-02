@@ -16,16 +16,18 @@
       "secretspec.toml".source = ./config/secretspec/secretspec.toml;
       "NixOS/secretspec.toml".source = ./config/secretspec/secretspec.toml;
       ".config/tealdeer/config.toml".source = ./config/tealdeer/config.toml;
-      ".config/hypr/.luarc.json".text = builtins.toJSON {
-        workspace = {
-          library = [
-            "${pkgs.hyprland}/share/hypr/stubs"
-          ];
-        };
-        diagnostics = {
-          globals = [ "hl" ];
-        };
-      };
+      "./config/hypr/.luarc.json".text = ''
+        {
+          "workspace": {
+            "library": [
+              "${pkgs.hyprland}/share/hypr/stubs"
+            ]
+          },
+          "diagnostics": {
+            "globals": ["hl"]
+          }
+        }
+      '';
     };
   };
 
@@ -36,6 +38,7 @@
         provider = "keyring"
         profile = "default"
       '';
+      "hypr/hyprland.lua".source = ./config/hypr/hyprland.lua;
     };
     dataFile = {
       #
