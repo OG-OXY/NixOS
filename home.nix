@@ -63,7 +63,6 @@
     ./modules/home/gpg.nix
     ./modules/home/hyprpaper.nix
     ./modules/home/ai-chat.nix
-    #./modules/home/litellm.nix
   ];
 
   programs = {

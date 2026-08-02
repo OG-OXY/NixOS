@@ -8,6 +8,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    stylix = {
+      url = "github:nix-community/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
     nvf.url = "path:./flakes/NVF";
     llm-agents.url = "path:./flakes/LLM-Agents";
@@ -19,6 +23,7 @@
       nixpkgs-stable,
       chaotic,
       home-manager,
+      stylix,
       ...
     }@inputs:
     {
@@ -27,6 +32,7 @@
         modules = [
           ./config.nix
           chaotic.nixosModules.default
+          stylix.nixosModules.stylix
           {
             nixpkgs = {
               hostPlatform = "x86_64-linux";

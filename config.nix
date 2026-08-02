@@ -240,6 +240,7 @@
         rbw
         secretspec
         rofi-rbw-wayland
+        mpd
         mpv
         imv
         hyprshot
