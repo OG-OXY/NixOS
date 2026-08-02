@@ -201,12 +201,16 @@
       VISUAL = "nvf";
       SSH_AUTH_SOCK = "$HOME/.bitwarden-ssh-agent.sock";
       SECRETSPEC_PROVIDER = "keyring";
+      GOOGLE_API_KEY = "AQ.Ab8RN6IaaXJOK7QowOW5CTMiwx6n5gVKoXwfG2UCwDwVzCChJA";
+      GEMINI_API_KEY = "AQ.Ab8RN6IaaXJOK7QowOW5CTMiwx6n5gVKoXwfG2UCwDwVzCChJA";
       ANTHROPIC_BASE_URL = "http://127.0.0.1:8012";
+      ANTHROPIC_API_KEY = "local";
+      ANTHROPIC_AUTH_TOKEN = "ollama";
       ANTHROPIC_DEFAULT_SONNET_MODEL = "qwen-14b";
       ANTHROPIC_DEFAULT_OPUS_MODEL = "qwen2.5-coder";
       ANTHROPIC_DEFAULT_HAIKU_MODEL = "qwen2.5-coder";
       ANTHROPIC_API_KEY = "local";
-      ANTHROPIC_AUTH_TOKEN = "local";
+      OLLAMA_CONTEXT_LENGTH = "32768";
       CLAUDE_CODE_ATTRIBUTION_HEADER = "0";
       CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC = "1";
       NODE_OPTIONS = "--dns-result-order=ipv4first";
