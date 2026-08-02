@@ -260,7 +260,6 @@
         herdr
         llama-cpp
         aider-chat
-        litellm
         fd
         bun
         devenv
