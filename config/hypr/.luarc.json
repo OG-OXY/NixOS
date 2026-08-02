@@ -1,12 +1,1 @@
-{
-  "workspace": {
-    "library": [
-      "${pkgs.hyprland}/share/hypr/stubs"
-    ]
-  },
-  "diagnostics": {
-    "globals": [
-      "hl"
-    ]
-  }
-}
+/nix/store/k17n29c3gblvx5d6bcp6zjxb5apb5qlc-home-manager-files/NixOS/Master/config/hypr/.luarc.json
