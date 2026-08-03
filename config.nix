@@ -123,7 +123,6 @@
       enable = true;
       nix-direnv.enable = true;
     };
-    regreet.enable = true;
     fish.enable = true;
     zoxide.enable = true;
     gamemode.enable = true;
@@ -281,8 +280,8 @@
         inputs.zen-browser.packages.${pkgs.system}.default
         inputs.nvf.packages.${pkgs.system}.default
         inputs.llm-agents.packages.${pkgs.system}.default
-        pkgs.cudaPackages.cuda_nvcc
-        pkgs.cudaPackages.cudatoolkit
+        #pkgs.cudaPackages.cuda_nvcc
+        #pkgs.cudaPackages.cudatoolkit
       ];
     etc = {
     };
@@ -306,6 +305,52 @@
 
   # Display Manager.
   services = {
+    displayManager.regreet = {
+      enable = true;
+      cageArgs = [
+        "-s"
+        "-m"
+        "clone"
+      ];
+      settings = {
+        background = {
+          path = "/etc/nixos/wallpaper.png";
+          fit = "Cover";
+        };
+        #theme = {
+        #  package = "";
+        #  name = "";
+        #};
+        #iconTheme = {
+        #  package = "";
+        #  name = "";
+        #};
+        #cursorTheme = {
+        #  package = "";
+        #  name = "";
+        #};
+        #GTK = {
+        #  theme_name = "Adwaita-dark";
+        #  icon_theme_name = "Adwaita";
+        #  cursor_theme_name = "";
+        #  font_name = lib.mkDefault "Inter 11";
+        #};
+        commands = {
+          reboot = [
+            "doas"
+            "reboot"
+            "now"
+          ];
+          shutdown = [
+            "doas"
+            "shutdown"
+            "now"
+          ];
+        };
+        #extraCss = ''
+        #'';
+      };
+    };
     greetd.enable = true;
     kmscon.enable = true;
     tailscale.enable = true;

@@ -4,9 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/567a49d1913ce81ac6e9582e3553dd90a955875f";
-    flake-parts = {
-      url = "github:hercules-ci/flake-parts";
-    };
+    flake-parts.url = "github:hercules-ci/flake-parts";
     chaotic.url = "github:chaotic-cx/nyx";
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -56,7 +54,7 @@
                     };
                   in
                   {
-                    #cantarell-fonts = stable.cantarell-fonts;
+                    #package = packagename.stable
                   }
                 )
               ];
