@@ -1,3 +1,4 @@
+#config.nix
 {
   pkgs,
   lib,
@@ -8,9 +9,7 @@
 
 {
   imports = [
-    ./modules/hardware/hardware.nix
-    ./modules/hardware/amd.nix
-    ./modules/hardware/nvidia.nix
+    ./systemModules.nix
   ];
 
   # Bootloader + GRUB parameters.
@@ -120,10 +119,6 @@
       withUWSM = true;
       xwayland.enable = true;
     };
-    neovim = {
-      enable = true;
-      defaultEditor = true;
-    };
     direnv = {
       enable = true;
       nix-direnv.enable = true;
@@ -194,6 +189,10 @@
   # Install system PKGS.
   environment = {
     shells = with pkgs; [ fish ];
+    variables = {
+      CPATH = "/run/current-system/sw/include";
+      LIBRARY_PATH = "/run/current-system/sw/lib";
+    };
     sessionVariables = {
       NIXOS_OZONE_WL = "1";
       WLR_NO_HARDWARE_CURSORS = "1";
@@ -217,6 +216,13 @@
     systemPackages =
       with pkgs;
       [
+        stdenv.cc
+        binutils
+        gnumake
+        cmake
+        pkg-config
+        gdb
+        valgrind
         hyprpolkitagent
         watchman
         pinentry-gnome3
@@ -236,6 +242,7 @@
         nix-output-monitor
         nvd
         nh
+        just
         fh
         rbw
         secretspec
@@ -274,6 +281,8 @@
         inputs.zen-browser.packages.${pkgs.system}.default
         inputs.nvf.packages.${pkgs.system}.default
         inputs.llm-agents.packages.${pkgs.system}.default
+        pkgs.cudaPackages.cuda_nvcc
+        pkgs.cudaPackages.cudatoolkit
       ];
     etc = {
     };
@@ -337,7 +346,14 @@
     };
     ollama = {
       enable = true;
-      package = pkgs.ollama-vulkan;
+      package =
+        (pkgs.ollama-cuda.override {
+        }).overrideAttrs
+          (oldAttrs: {
+            cmakeFlags = (oldAttrs.cmakeFlags or [ ]) ++ [
+              "-DCMAKE_CUDA_ARCHITECTURES=61"
+            ];
+          });
     };
     llama-cpp = {
       enable = true;
