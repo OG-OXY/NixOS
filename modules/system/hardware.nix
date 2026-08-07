@@ -20,7 +20,7 @@
         "sd_mod"
       ];
     };
-    kernelPackages = pkgs.linuxPackages_cachyos;
+    kernelPackages = pkgs.linuxPackages_cachyos-lto-znver4;
     kernelModules = [
       "kvm-amd"
       "vfio"

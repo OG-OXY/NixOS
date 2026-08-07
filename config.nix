@@ -136,10 +136,6 @@
       nerd-fonts.jetbrains-mono
       nerd-fonts.fira-code
       font-awesome
-      comic-mono
-      fantasque-sans-mono
-      cozette
-      monaspace
       inter
     ];
     fontconfig = {
@@ -150,10 +146,6 @@
           "Font Awesome 6 Free"
           "Font Awesome 6 Brands"
           "FiraCode Nerd Font"
-          "Comic Mono"
-          "Fantasque Sans Mono"
-          "Cozette"
-          "Monaspace Neon"
           "Inter"
         ];
         sansSerif = [
@@ -162,21 +154,13 @@
           "Font Awesome 6 Brands"
           "JetBrainsMono Nerd Font"
           "FiraCode Nerd Font"
-          "Comic Mono"
-          "Fantasque Sans Mono"
-          "Cozette"
-          "Monaspace Neon"
         ];
         serif = [
-          "Comic Mono"
+          "Inter"
           "Font Awesome 6 Free"
           "Font Awesome 6 Brands"
           "JetBrainsMono Nerd Font"
           "FiraCode Nerd Font"
-          "Inter"
-          "Fantasque Sans Mono"
-          "Cozette"
-          "Monaspace Neon"
         ];
       };
       #localConf = ''
@@ -502,17 +486,17 @@
     oci-containers = {
       backend = "podman";
       containers = {
-        unsloth-proxy = {
-          image = "docker.io/unsloth/unsloth:latest";
-          autoStart = true;
-          ports = [ "4000:4000" ];
-          extraOptions = [ "--network=host" ];
-          cmd = [
-            "unsloth run \
-            -H 127.0.0.1 \
-            -p 4000"
-          ];
-        };
+        #unsloth-proxy = {
+        # image = "docker.io/unsloth/unsloth:latest";
+        # autoStart = true;
+        # ports = [ "4000:4000" ];
+        # extraOptions = [ "--network=host" ];
+        # cmd = [
+        #   "unsloth run \
+        #    -H 127.0.0.1 \
+        #     -p 4000"
+        #  ];
+        #};
       };
     };
   };
