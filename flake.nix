@@ -80,8 +80,6 @@
             hardware.enableRedistributableFirmware = true;
           }
           ./config.nix
-          import-tree.nixosModules.import-tree
-          wrappers.nixosModules.wrappers
           chaotic.nixosModules.default
           sops.nixosModules.sops
           stylix.nixosModules.stylix

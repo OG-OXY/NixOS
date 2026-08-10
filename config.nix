@@ -88,6 +88,7 @@
         "render"
         "input"
         "audio"
+        "seat"
         "docker"
         "libvirtd"
         "vboxusers"
