@@ -38,6 +38,8 @@
     ];
     kernel.sysctl = {
       "kernel.sysrq" = true;
+      "kernel.unprivileged_userns_clone" = 1;
+      "vm.max_map_count" = 2147483642;
       "vm.swappiness" = 100;
       "vm.dirty_background_ratio" = 5;
       "vm.dirty_ratio" = 10;
@@ -48,36 +50,54 @@
 
   fileSystems = {
     "/" = {
-      device = "/dev/disk/by-uuid/2990dbf8-472f-4656-be4f-3c2363bf7482";
+      device = "/dev/disk/by-partlabel/NixOS";
       fsType = "ext4";
-    };
-    "/boot" = {
-      device = "/dev/disk/by-uuid/DC0A-2C5E";
-      fsType = "vfat";
       options = [
-        "fmask=0077"
-        "dmask=0077"
+        "nofail"
+        "noatime"
+        "nodiratime"
       ];
     };
-    "/2TB-HDD" = {
-      device = "/dev/disk/by-uuid/366beafd-26b6-4fd7-bd10-23795514d3fb";
-      fsType = "ext4";
-      options = [ "nofail" ];
-    };
-    "/ventoy" = {
-      device = "/dev/disk/by-uuid/4E21-0000";
-      fsType = "exfat";
-    };
-    "/gentoo" = {
-      device = "/dev/disk/by-uuid/0eee5a7c-ed6b-473e-8063-86994222e03d";
-      fsType = "ext4";
-    };
-    "/gentoo/boot" = {
-      device = "/dev/disk/by-uuid/CB66-8A42";
+    "/boot" = {
+      device = "/dev/disk/by-partlabel/NixOS-BOOT";
       fsType = "vfat";
       options = [
-        "fmask=0077"
-        "dmask=0077"
+        "fmask=0022"
+        "dmask=0022"
+      ];
+    };
+    "/home/ty/2TB-HDD" = {
+      device = "/dev/disk/by-partlabel/2TB-HDD";
+      fsType = "ext4";
+      options = [
+        "defaults"
+        "nofail"
+        "exec"
+        "noatime"
+        "x-systemd.automount"
+        "x-systemd.device-timeout=5s"
+        "x-systemd.idle-timeout=10m"
+      ];
+    };
+    "/home/ty/400GB-HDD" = {
+      device = "/dev/disk/by-partlabel/400GB-HDD";
+      fsType = "ext4";
+      options = [
+        "defaults"
+        "nofail"
+        "exec"
+        "x-systemd.automount"
+        "x-systemd.device-timeout=5s"
+      ];
+    };
+    "/home/ty/Ventoy" = {
+      device = "/dev/disk/by-label/Ventoy";
+      fsType = "exfat";
+      options = [
+        "defaults"
+        "nofail"
+        "x-systemd.automount"
+        "x-systemd.device-timeout=5s"
       ];
     };
   };

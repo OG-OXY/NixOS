@@ -194,11 +194,13 @@ hl.config({
   },
 })
 
---hl.gesture({
---fingers = 3,
---direction = "horizontal",
---action = "workspace"
---})
+hl.gesture({
+  fingers = 3,
+  direction = "horizontal",
+  action = "workspace",
+  workspace_swipe_create_new = false,
+  workspace_swipe_forever = false,
+})
 
 -- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Devices/ for more
 
@@ -211,8 +213,31 @@ hl.device({
 -- See https://wiki.hypr.land/Configuring/Basics/Binds/ for more
 
 local mainMod = "SUPER"
+--local layouts = { "dwindle", "master", "scrolling" }
+--local current_idx = 1
 local hyprShutdown = "command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"
 
+---- PURE LUA LAYOUT CYCLER ----
+local next_layout_map = {
+  dwindle = "scrolling",
+  scrolling = "monocle",
+  monocle = "dwindle",
+}
+
+hl.bind(mainMod .. " + L", function()
+  -- 1. Read current active layout dynamically
+  local current = hl.get_config("general.layout")
+
+  -- 2. Lookup the next layout (defaults to dwindle if unrecognized)
+  local next_layout = next_layout_map[current] or "dwindle"
+
+  -- 3. Dynamically set the new layout option
+  hl.config({
+    general = { layout = next_layout },
+  })
+end)
+
+-- Bind using native Lua resolution
 hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(Terminal))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(FileManager))
 hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.exec_cmd(FileManagerCD))
@@ -223,6 +248,7 @@ hl.bind(mainMod .. " + V", hl.dsp.exec_cmd(Discord))
 hl.bind(mainMod .. " + SHIFT + V", hl.dsp.exec_cmd("rofi-rbw"))
 hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("rofi-rbw --action type --clear 30"))
 hl.bind(mainMod .. " + SHIFT + P", hl.dsp.exec_cmd("rofi-rbw --action type --target password --clear 30"))
+hl.bind(mainMod .. " + Tab", hl.dsp.focus({ window = "cyclenext" }))
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle" }))
 hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.pseudo())
@@ -232,31 +258,27 @@ hl.bind(mainMod .. " + SHIFT + CTRL + M", hl.dsp.exec_cmd(hyprShutdown))
 
 -- Maps keys 1-5 to target workspaces 6-10 for the modifiers
 for i = 1, 5 do
-  local Monitor2_Map = { [1] = 6, [2] = 7, [3] = 8, [4] = 9, [5] = 10 }
-  local Target_Focus = Monitor2_Map[i]
-  -- SUPER + [1-5] -> Focus Workspaces 1-5 (Main Monitor)<M-D-Z><M-D-Z><M-D-A><M-D-X>
-  hl.bind(mainMod .. " + " .. i, hl.dsp.focus({ workspace = i }))
-  -- SUPER + SHIFT + [1-5] -> Focus Workspaces 6-10 (Second Monitor)
-  hl.bind(mainMod .. " + SHIFT + " .. i, hl.dsp.focus({ workspace = Target_Focus }))
+  local secondary = i + 5
+  local ws_main = tostring(i)
+  local ws_sec = tostring(secondary)
 
+  -- SUPER + [1-5] -> Focus Workspaces 1-5 (Monitor1)
+  hl.bind(mainMod .. " + " .. i, hl.dsp.focus({ workspace = i }))
   -- SUPER + ALT + [1-5] -> Move active window to Workspaces 1-5
   hl.bind(mainMod .. " + ALT + " .. i, hl.dsp.window.move({ workspace = i }))
-  -- SUPER + SHIFT + CTRL + [1-5] -> Move active window to Workspaces 6-10
-  hl.bind(mainMod .. " + ALT + SHIFT + " .. i, hl.dsp.window.move({ workspace = Target_Focus }))
+
+  -- SUPER + SHIFT + [1-5] -> Focus Workspaces 6-10 (Monitor2)
+  hl.bind(mainMod .. " + SHIFT + " .. i, hl.dsp.focus({ workspace = secondary }))
+  -- SUPER + SHIFT + [1-5] -> Move active window to Workspaces 6-10
+  hl.bind(mainMod .. " + ALT + SHIFT + " .. i, hl.dsp.window.move({ workspace = secondary }))
+
+  -- Workspaces 1-5 hardware-locked to Monitor1
+  hl.workspace_rule({ workspace = ws_main, monitor = Monitor1, persistent = true })
+
+  -- Workspaces 6-10 hardware-locked to Monitor2
+  hl.workspace_rule({ workspace = ws_sec, monitor = Monitor2, persistent = true })
 end
 
--- Map Workspaces 1-5 to your hardware-locked Main Monitor
-for i = 1, 5 do
-  hl.workspace_rule({ workspace = tostring(i), monitor = Monitor1 })
-end
-
--- Map Workspaces 6-10 to your hardware-locked Secondary Monitor
-for i = 6, 10 do
-  hl.workspace_rule({ workspace = tostring(i), monitor = Monitor2 })
-end
-for i = 11, 20 do
-  hl.workspace_rule({ workspace = tostring(i), monitor = "off" })
-end
 -- Move focus with mainMod + arrow keys
 hl.bind(mainMod .. " + left", hl.dsp.focus({ direction = "left" }))
 hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))
@@ -270,6 +292,9 @@ hl.bind(mainMod .. " + CTRL + SHIFT + S", hl.dsp.window.move({ workspace = "spec
 -- Scroll through existing workspaces with mainMod + scroll
 hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
 hl.bind(mainMod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
+
+hl.bind(mainMod .. " + SHIFT + mouse_down", hl.dsp.focus({ workspace = "m+1" }))
+hl.bind(mainMod .. " + SHIFT + mouse_up", hl.dsp.focus({ workspace = "m-1" }))
 
 -- Move/resize windows with mainMod + LMB/RMB and dragging
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
@@ -320,6 +345,11 @@ local suppressMaximizeRule = hl.window_rule({
 suppressMaximizeRule:set_enabled(true)
 
 hl.window_rule({
+  match = { workspace = "r[11-100]" },
+  workspace = "10",
+})
+
+hl.window_rule({
   -- Fix some dragging issues with XWayland
   name = "fix-xwayland-drags",
   match = {
@@ -333,6 +363,13 @@ hl.window_rule({
   no_focus = true,
 })
 
+hl.window_rule({
+  name = "move-hyprland-run",
+  match = { class = "hyprland-run" },
+  move = "20 monitor_h-120",
+  float = true,
+})
+
 -- Layer rules also return a handle.
 
 -- local overlayLayerRule = hl.layer_rule({
@@ -344,10 +381,4 @@ hl.window_rule({
 
 -- Hyprland-run windowrule
 
-hl.window_rule({
-  name = "move-hyprland-run",
-  match = { class = "hyprland-run" },
-  move = "20 monitor_h-120",
-  float = true,
-})
 --local closeWindowBind = hl.bind(mainMod .. " + C", hl.dsp.window.close())

@@ -48,6 +48,7 @@
   # User account.
   security = {
     polkit.enable = true;
+    rtkit.enable = true;
     doas = {
       enable = true;
       extraRules = [
@@ -72,6 +73,12 @@
         }
       ];
     };
+    wrappers.bwrap = {
+      source = "${pkgs.bubblewrap}/bin/bwrap";
+      owner = "root";
+      group = "root";
+      setuid = true;
+    };
   };
 
   # User parameters.
@@ -89,6 +96,7 @@
         "input"
         "audio"
         "seat"
+        "seatd"
         "docker"
         "libvirtd"
         "vboxusers"
@@ -126,8 +134,40 @@
     };
     fish.enable = true;
     zoxide.enable = true;
-    gamemode.enable = true;
-    steam.enable = true;
+    gamemode = {
+      enable = true;
+      enableRenice = true;
+      settings = {
+        general = {
+          renice = 20;
+        };
+
+        # Warning: GPU optimisations have the potential to damage hardware
+        gpu = {
+          apply_gpu_optimisations = "accept-responsibility";
+          gpu_device = 1;
+          nv_powermode = "prefer-maximum-performance";
+        };
+
+        custom = {
+          start = "${pkgs.libnotify}/bin/notify-send 'GameMode started'";
+          end = "${pkgs.libnotify}/bin/notify-send 'GameMode ended'";
+        };
+      };
+    };
+    gamescope = {
+      enable = true;
+      capSysNice = false;
+    };
+    steam = {
+      enable = true;
+      remotePlay.openFirewall = true;
+      dedicatedServer.openFirewall = true;
+      gamescopeSession.enable = true;
+      extraCompatPackages = with pkgs; [
+        proton-ge-bin
+      ];
+    };
     virt-manager.enable = true;
     nano.enable = false;
   };
@@ -180,12 +220,14 @@
     sessionVariables = {
       NIXOS_OZONE_WL = "1";
       WLR_NO_HARDWARE_CURSORS = "1";
+      SDL_VIDEO_DRIVER = "wayland,x11";
+      PROTON_ENABLE_WAYLAND = "1";
+      PROTON_ENABLE_NVAPI = "1";
+      ENABLE_GAMESCOPE_WSI = "1";
       EDITOR = "nvf";
       VISUAL = "nvf";
-      SSH_AUTH_SOCK = "$HOME/.bitwarden-ssh-agent.sock";
+      SSH_AUTH_SOCK = "home/ty/.bitwarden-ssh-agent.sock";
       SECRETSPEC_PROVIDER = "keyring";
-      GOOGLE_API_KEY = "AQ.Ab8RN6IaaXJOK7QowOW5CTMiwx6n5gVKoXwfG2UCwDwVzCChJA";
-      GEMINI_API_KEY = "AQ.Ab8RN6IaaXJOK7QowOW5CTMiwx6n5gVKoXwfG2UCwDwVzCChJA";
       ANTHROPIC_API_KEY = "local";
       ANTHROPIC_AUTH_TOKEN = "ollama";
       ANTHROPIC_BASE_URL = "http://127.0.0.1:11434";
@@ -219,6 +261,8 @@
         bitwarden-desktop
         vesktop
         pavucontrol
+        pipewire
+        pulseaudio-ctl
         qalculate-gtk
         #CLI-Tools.
         git
@@ -257,6 +301,7 @@
         devenv
         starship
         atuin
+        libnotify
         # Formatters.
         nixfmt
         jq
@@ -349,6 +394,7 @@
     logind.settings = {
       Login = {
         IdleAction = "ignore";
+        HandlePowerKey = "ignore";
         HandleLidSwitch = "ignore";
         HandleLidSwitchExternalPower = "ignore";
       };
@@ -356,7 +402,9 @@
     pipewire = {
       enable = true;
       alsa.enable = true;
+      alsa.support32Bit = true;
       pulse.enable = true;
+      jack.enable = true;
     };
     zram-generator = {
       enable = true;
@@ -409,6 +457,7 @@
             ];
           });
     };
+    pulseaudio.enable = false;
     resolved.enable = false;
     libinput.enable = false;
     printing.enable = false;
