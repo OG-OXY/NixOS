@@ -1,5 +1,6 @@
 #home.nix
 {
+  config,
   ...
 }:
 {
@@ -33,7 +34,6 @@
         provider = "keyring"
         profile = "default"
       '';
-      "hypr/hyprland.lua".source = ./config/hypr/hyprland.lua;
     };
     dataFile = {
       #
