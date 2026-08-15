@@ -1,5 +1,8 @@
 format = '[Ty](bold green)[@](bold red)[NixOS](bold blue)[:](bold red)$directory$git_branch${custom.jj-}${custom.jj}$git_status$nix_shell$package$python$rust[\]](bold green)[†](bold red) $character$status'
 
+scan_timeout    = 100
+command_timeout = 500
+
 [character]
 success_symbol = "[❯](bold blue)"
 error_symbol   = "[❯](bold red)"
@@ -33,12 +36,13 @@ format     = '([\[$all_status$ahead_behind\]]($style) )'
 style      = "bold red"
 
 [custom.jj]
-command  = '''jj log -r @ --no-graph -T 'local_bookmarks.join(", ")' '''
-symbol   = "🌿 "
-style    = "bold purple"
-format   = "on [$symbol$output]($style) "
-when     = "test -d .jj"
-disabled = false
+command        = '''jj log -r @ --no-graph -T 'local_bookmarks.join(", ")' '''
+detect_folders = [".jj"]
+symbol         = "🌿 "
+style          = "bold purple"
+format         = "on [$symbol$output]($style) "
+when           = "test -d .jj"
+disabled       = false
 
 #[custom.jj-]
 #command = '''jj log -r @ --no-graph -T 'local_bookmarks.join(", ")' '''

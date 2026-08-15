@@ -157,6 +157,7 @@
     };
     gamescope = {
       enable = true;
+      enableWsi = true;
       capSysNice = false;
     };
     steam = {
@@ -220,10 +221,15 @@
     sessionVariables = {
       NIXOS_OZONE_WL = "1";
       WLR_NO_HARDWARE_CURSORS = "1";
+      NVD_BACKEND = "direct";
+      ELECTRON_OZONE_PLATFORM_HINT = "auto";
+      QT_QPA_PLATFORM = "wayland;xcb";
       SDL_VIDEO_DRIVER = "wayland,x11";
       PROTON_ENABLE_WAYLAND = "1";
       PROTON_ENABLE_NVAPI = "1";
       ENABLE_GAMESCOPE_WSI = "1";
+      HYPRCURSOR_SIZE = "24";
+      XCURSOR_SIZE = "24";
       EDITOR = "nvf";
       VISUAL = "nvf";
       SSH_AUTH_SOCK = "home/ty/.bitwarden-ssh-agent.sock";
@@ -260,6 +266,7 @@
         hyprpaper
         bitwarden-desktop
         vesktop
+        telegram-desktop
         pavucontrol
         pipewire
         pulseaudio-ctl
@@ -275,6 +282,7 @@
         rbw
         secretspec
         rofi-rbw-wayland
+        tg
         mpd
         mpv
         imv
@@ -339,8 +347,7 @@
       enable = true;
       cageArgs = [
         "-s"
-        "-m"
-        "clone"
+        "-m clone"
       ];
       settings = {
         background = {
