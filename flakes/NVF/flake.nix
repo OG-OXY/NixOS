@@ -258,10 +258,10 @@
                           "core.dirman" = {
                             config = {
                               workspaces = {
-                                notes = "~/Documents/norg/notes";
-                                sync = "~/Documents/norg/sync";
+                                notes = "~/Documents/Notes";
+                                sync = "~/.norg_sync";
                               };
-                              default_workspace = "notes";
+                              default_workspace = "Notes";
                             };
                             "core.completion" = {
                               config = {
