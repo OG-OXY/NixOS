@@ -11,7 +11,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     chaotic = {
-      url = "github:chaotic-cx/nyx";
+      url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
@@ -38,9 +38,6 @@
       self,
       nixpkgs,
       nixpkgs-stable,
-      flake-parts,
-      import-tree,
-      wrappers,
       chaotic,
       home-manager,
       sops,
