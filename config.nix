@@ -5,9 +5,7 @@
   inputs,
   self,
   ...
-}:
-
-{
+}: {
   imports = [
     ./systemModules.nix
   ];
@@ -53,7 +51,7 @@
       enable = true;
       extraRules = [
         {
-          users = [ "ty" ];
+          users = ["ty"];
           noPass = true;
           keepEnv = true;
         }
@@ -63,21 +61,15 @@
       enable = true;
       extraRules = [
         {
-          groups = [ "wheel" ];
+          groups = ["wheel"];
           commands = [
             {
               command = "ALL";
-              options = [ "NOPASSWD" ];
+              options = ["NOPASSWD"];
             }
           ];
         }
       ];
-    };
-    wrappers.bwrap = {
-      source = "${pkgs.bubblewrap}/bin/bwrap";
-      owner = "root";
-      group = "root";
-      setuid = true;
     };
   };
 
@@ -115,8 +107,8 @@
       dns = "dnsmasq";
     };
     firewall = {
-      allowedTCPPorts = [ 22 ];
-      trustedInterfaces = [ "tailscale0" ];
+      allowedTCPPorts = [22];
+      trustedInterfaces = ["tailscale0"];
     };
     wireless.enable = false;
   };
@@ -127,6 +119,16 @@
       enable = true;
       withUWSM = true;
       xwayland.enable = true;
+    };
+    uwsm = {
+      enable = true;
+      waylandCompositors.niri = {
+        prettyName = "Niri";
+        binPath = "${pkgs.niri}/bin/niri";
+      };
+    };
+    niri = {
+      enable = true;
     };
     direnv = {
       enable = true;
@@ -145,7 +147,7 @@
         # Warning: GPU optimisations have the potential to damage hardware
         gpu = {
           apply_gpu_optimisations = "accept-responsibility";
-          gpu_device = 1;
+          gpu_device = "NVIDIA";
           nv_powermode = "prefer-maximum-performance";
         };
 
@@ -158,13 +160,21 @@
     gamescope = {
       enable = true;
       enableWsi = true;
-      capSysNice = false;
+      capSysNice = true;
     };
     steam = {
       enable = true;
       remotePlay.openFirewall = true;
       dedicatedServer.openFirewall = true;
-      gamescopeSession.enable = true;
+      gamescopeSession = {
+        enable = true;
+        args = [
+          "-W 1920"
+          "-H 1080"
+          "-r 239"
+          "--vrr"
+        ];
+      };
       extraCompatPackages = with pkgs; [
         proton-ge-bin
       ];
@@ -213,7 +223,7 @@
 
   # Install system PKGS.
   environment = {
-    shells = with pkgs; [ fish ];
+    shells = with pkgs; [fish];
     variables = {
       CPATH = "/run/current-system/sw/include";
       LIBRARY_PATH = "/run/current-system/sw/lib";
@@ -245,8 +255,7 @@
       CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC = "1";
       NODE_OPTIONS = "--dns-result-order=ipv4first";
     };
-    systemPackages =
-      with pkgs;
+    systemPackages = with pkgs;
       [
         stdenv.cc
         binutils
@@ -327,7 +336,7 @@
 
   xdg.portal = {
     enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
+    extraPortals = [pkgs.xdg-desktop-portal-hyprland];
     config.common.default = "*";
   };
 
@@ -433,12 +442,14 @@
       enable = true;
       package =
         (pkgs.ollama-cuda.override {
-        }).overrideAttrs
-          (oldAttrs: {
-            cmakeFlags = (oldAttrs.cmakeFlags or [ ]) ++ [
+          }).overrideAttrs
+        (oldAttrs: {
+          cmakeFlags =
+            (oldAttrs.cmakeFlags or [])
+            ++ [
               "-DCMAKE_CUDA_ARCHITECTURES=61"
             ];
-          });
+        });
     };
     llama-cpp = {
       enable = true;
@@ -458,11 +469,13 @@
         (pkgs.llama-cpp.override {
           cudaSupport = true;
         }).overrideAttrs
-          (oldAttrs: {
-            cmakeFlags = (oldAttrs.cmakeFlags or [ ]) ++ [
+        (oldAttrs: {
+          cmakeFlags =
+            (oldAttrs.cmakeFlags or [])
+            ++ [
               "-DCMAKE_CUDA_ARCHITECTURES=61"
             ];
-          });
+        });
     };
     pulseaudio.enable = false;
     resolved.enable = false;
@@ -480,14 +493,14 @@
       hybrid-sleep.enable = false;
     };
     services = {
-      ollama.wantedBy = pkgs.lib.mkForce [ ];
-      llama-cpp.wantedBy = pkgs.lib.mkForce [ ];
+      ollama.wantedBy = pkgs.lib.mkForce [];
+      llama-cpp.wantedBy = pkgs.lib.mkForce [];
     };
     user.services = {
       waybar = {
         unitConfig = {
-          After = [ "graphical-session.target" ];
-          Requires = [ "dbus.socket" ];
+          After = ["graphical-session.target"];
+          Requires = ["dbus.socket"];
         };
         serviceConfig = {
           ExecStartPre = "${pkgs.glib}/bin/gdbus wait --system net.hadess.PowerProfiles";
@@ -495,10 +508,10 @@
       };
       rbw-autounlock = {
         description = "Securely unlock Bitwarden Vault on Hyprland Startup";
-        wantedBy = [ "graphical-session.target" ];
+        wantedBy = ["graphical-session.target"];
         unitConfig = {
-          After = [ "graphical-session.target" ];
-          PartOf = [ "graphical-session.target" ];
+          After = ["graphical-session.target"];
+          PartOf = ["graphical-session.target"];
         };
         serviceConfig = {
           Type = "oneshot";
@@ -523,7 +536,7 @@
       virtualisation = {
         memorySize = 8192;
         cores = 8;
-        qemu.options = [ "-device virtio-vga-gl -display gtk,gl=on" ];
+        qemu.options = ["-device virtio-vga-gl -display gtk,gl=on"];
       };
     };
     libvirtd = {

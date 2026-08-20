@@ -1,17 +1,22 @@
 {
   pkgs,
+  lib,
   modulesPath,
   ...
-}:
-
-{
+}: {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
+  specialisation.cachyos.configuration = {
+    system.nixos.label = "NYXOS";
+    boot.kernelPackages = lib.mkForce pkgs.linuxPackages_cachyos-lto-znver4;
+    hardware.nvidia.package = lib.mkForce pkgs.linuxPackages_cachyos-lto-znver4.nvidiaPackages.legacy_580;
+  };
+
   boot = {
     initrd = {
-      kernelModules = [ "amdgpu" ];
+      kernelModules = ["amdgpu"];
       availableKernelModules = [
         "xhci_pci"
         "ahci"
@@ -20,7 +25,7 @@
         "sd_mod"
       ];
     };
-    kernelPackages = pkgs.linuxPackages_cachyos-lto-znver4;
+    kernelPackages = lib.mkDefault pkgs.linuxPackages;
     kernelModules = [
       "kvm-amd"
       "vfio"
@@ -29,7 +34,7 @@
       "i2c-dev"
       "i2c-piix4"
     ];
-    extraModulePackages = [ ];
+    extraModulePackages = [];
     kernelParams = [
       "processor.max_cstate=0"
       "amd_idle.max_cstate=0"
@@ -45,7 +50,7 @@
       "vm.dirty_ratio" = 10;
       "fs.inotify.max_user_watches" = 524288;
     };
-    binfmt.emulatedSystems = [ "aarch64-linux" ];
+    binfmt.emulatedSystems = ["aarch64-linux"];
   };
 
   fileSystems = {

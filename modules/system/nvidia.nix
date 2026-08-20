@@ -1,9 +1,8 @@
 {
   config,
+  lib,
   ...
-}:
-
-{
+}: {
   services.xserver.videoDrivers = [
     "nvidia"
   ];
@@ -17,7 +16,7 @@
       powerManagement.enable = true;
       open = false;
       nvidiaSettings = true;
-      package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
+      package = lib.mkDefault config.boot.kernelPackages.nvidiaPackages.legacy_580;
     };
   };
 }
