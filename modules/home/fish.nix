@@ -1,9 +1,5 @@
 #fish.nix
-{
-  pkgs,
-  ...
-}:
-{
+{pkgs, ...}: {
   programs.fish = {
     enable = true;
     functions = {
@@ -52,9 +48,12 @@
       ls = "ls -a";
       cds = "cd ~/NixOS/nixos";
       ga = "git add -A";
-      gc = "git commit -m \"";
+      gc = "git commit -m \"\"";
       gp = "git push -u origin master";
       gpf = "git push -u --force origin master";
+      jb = "jj bookmark set master -r @";
+      jd = "jj describe -m \"\"";
+      jp = "jj git push --all --allow-empty-description";
       yz = "yazi";
       nv = "nvf";
       snv = "sudoedit nvf";

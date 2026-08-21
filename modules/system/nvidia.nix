@@ -1,4 +1,5 @@
 {
+  pkgs,
   config,
   lib,
   ...
@@ -16,7 +17,7 @@
       powerManagement.enable = true;
       open = false;
       nvidiaSettings = true;
-      package = lib.mkDefault config.boot.kernelPackages.nvidiaPackages.legacy_580;
+      package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
     };
   };
 }
