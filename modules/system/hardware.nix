@@ -8,13 +8,36 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  specialisation.cachyos.configuration = {
-    system.nixos.label = "NYXOS";
-    boot.kernelPackages = lib.mkForce pkgs.linuxPackages_cachyos-lto-znver4;
-    hardware.nvidia.package = lib.mkForce pkgs.linuxPackages_cachyos-lto-znver4.nvidiaPackages.legacy_580;
+  specialisation = {
+    NYXOS.configuration = lib.mkDefault {
+      system.nixos.label = "NYXOS";
+      boot = {
+        loader.grub.configurationName = "NYXOS";
+        kernelPackages = pkgs.linuxPackages_cachyos-lto-znver4;
+      };
+    };
+    NIXOS.configuration = {
+      system.nixos.label = "NIXOS";
+      boot = {
+        loader.grub.configurationName = "NIXOS";
+        kernelPackages = pkgs.linuxPackages;
+      };
+    };
   };
 
   boot = {
+    loader = {
+      grub = {
+        enable = true;
+        efiSupport = true;
+        useOSProber = true;
+        device = "nodev";
+        configurationLimit = 30;
+      };
+      efi = {
+        canTouchEfiVariables = true;
+      };
+    };
     initrd = {
       kernelModules = ["amdgpu"];
       availableKernelModules = [
@@ -25,7 +48,6 @@
         "sd_mod"
       ];
     };
-    kernelPackages = lib.mkDefault pkgs.linuxPackages;
     kernelModules = [
       "kvm-amd"
       "vfio"
