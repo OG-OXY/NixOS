@@ -33,67 +33,63 @@
     nvf.url = "path:./flakes/NVF";
     llm-agents.url = "path:./flakes/LLM-Agents";
   };
-  outputs =
-    {
-      self,
-      nixpkgs,
-      nixpkgs-stable,
-      chaotic,
-      home-manager,
-      sops,
-      stylix,
-      ...
-    }@inputs:
-    {
-      nixosConfigurations."nixos" = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs self; };
-        modules = [
-          {
-            nixpkgs = {
-              hostPlatform = "x86_64-linux";
-              config = {
-                allowUnfree = true;
-                cudaSupport = true;
-                cudaCapabilities = [ "6.1" ];
-                permittedInsecurePackages = [
-                  "electron-39.8.10"
-                ];
-              };
-              overlays = [
-                (
-                  final: prev:
-                  let
-                    stable = import nixpkgs-stable {
-                      inherit (prev) system;
-                      config = prev.config;
-                    };
-                  in
-                  {
-                    #package = packagename.stable
-                  }
-                )
+  outputs = {
+    self,
+    nixpkgs,
+    nixpkgs-stable,
+    chaotic,
+    home-manager,
+    sops,
+    stylix,
+    ...
+  } @ inputs: {
+    nixosConfigurations."nixos" = nixpkgs.lib.nixosSystem {
+      specialArgs = {inherit inputs self;};
+      modules = [
+        {
+          nixpkgs = {
+            hostPlatform = "x86_64-linux";
+            config = {
+              allowUnfree = true;
+              cudaSupport = true;
+              cudaCapabilities = ["6.1"];
+              permittedInsecurePackages = [
+                "electron-39.8.10"
               ];
             };
-            hardware.enableRedistributableFirmware = true;
-          }
-          ./config.nix
-          chaotic.nixosModules.default
-          sops.nixosModules.sops
-          stylix.nixosModules.stylix
-          home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              backupFileExtension = ".bak";
-              users = {
-                root = import ./modules/home/root-home.nix;
-                ty = import ./modules/home/ty-home.nix;
-              };
-              extraSpecialArgs = { inherit inputs self; };
+            overlays = [
+              (
+                final: prev: let
+                  stable = import nixpkgs-stable {
+                    inherit (prev) system;
+                    config = prev.config;
+                  };
+                in {
+                  #package = packagename.stable
+                }
+              )
+            ];
+          };
+          hardware.enableRedistributableFirmware = true;
+        }
+        ./config.nix
+        chaotic.nixosModules.default
+        sops.nixosModules.sops
+        stylix.nixosModules.stylix
+        home-manager.nixosModules.home-manager
+        {
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            backupFileExtension = ".bak";
+            users = {
+              root = import ./modules/home/root-home.nix;
+              ty = import ./modules/home/ty-home.nix;
             };
-          }
-        ];
-      };
+            extraSpecialArgs = {inherit inputs self;};
+          };
+        }
+      ];
     };
+  };
 }
