@@ -1,5 +1,5 @@
 #fish.nix
-{pkgs, ...}: {
+{ pkgs, ... }: {
   programs.fish = {
     enable = true;
     functions = {
@@ -41,6 +41,12 @@
               gamescope --backend wayland --adaptive-sync -w 1920 -h 1080 -W 2560 -H 1440 -r 236 -f -e -- steam -gamepadui $argv
         '';
       };
+      pci = {
+        description = "Ls and Grep PCI ID's";
+        body = ''
+          lspci | grep $argv
+        '';
+      };
     };
 
     shellAbbrs = {
@@ -51,9 +57,9 @@
       gc = "git commit -m \"\"";
       gp = "git push -u origin master";
       gpf = "git push -u --force origin master";
-      jb = "jj bookmark set master -r @";
-      jd = "jj describe -m \"\"";
-      jp = "jj git push --all --allow-empty-description";
+      jbs = "jj bookmark set master -r @";
+      jdc = "jj describe -m \"\"";
+      jgp = "jj git push --all --allow-empty-description";
       yz = "yazi";
       nv = "nvf";
       snv = "sudoedit nvf";
@@ -70,6 +76,7 @@
       nb = "nix-backup";
       nub = "nix-upgrade-backup";
       ts = "doas tailscale up";
+      pcig = "lspci | grep \'|\'";
     };
 
     interactiveShellInit = ''
@@ -92,45 +99,40 @@
       end
     '';
 
-    plugins = with pkgs.fishPlugins; [
-      {
-        name = "bass";
-        src = bass.src;
-      }
-      {
-        name = "fzf-fish";
-        src = fzf-fish.src;
-      }
-      {
-        name = "autopair";
-        src = autopair.src;
-      }
-      {
-        name = "sponge";
-        src = sponge.src;
-      }
-      {
-        name = "done";
-        src = done.src;
-      }
-      {
-        name = "abbreviation-tips";
-        src = pkgs.fetchFromGitHub {
-          owner = "gazorby";
-          repo = "fish-abbreviation-tips";
-          rev = "v0.7.0";
-          sha256 = "sha256-F1t81VliD+v6WEWqj1c1ehFBXzqLyumx5vV46s/FZRU=";
+    plugins =
+      let
+        fish = pkgs.fishPlugins;
+        mkPlugin = pkg: {
+          name = pkg.pname or pkg.name;
+          src = pkg.src or pkg;
         };
-      }
-      {
-        name = "fish-you-should-use";
-        src = pkgs.fetchFromGitHub {
-          owner = "paysonwallach";
-          repo = "fish-you-should-use";
-          rev = "master";
-          sha256 = "sha256-MmGDFTgxEFgHdX95OjH3jKsVG1hdwo6bRht+Lvvqe5Y=";
-        };
-      }
-    ];
+      in
+      (map mkPlugin [
+        fish.bass
+        fish.fzf-fish
+        fish.autopair
+        fish.sponge
+        fish.done
+      ])
+      ++ [
+        {
+          name = "abbreviation-tips";
+          src = pkgs.fetchFromGitHub {
+            owner = "gazorby";
+            repo = "fish-abbreviation-tips";
+            rev = "v0.7.0";
+            sha256 = "sha256-F1t81VliD+v6WEWqj1c1ehFBXzqLyumx5vV46s/FZRU=";
+          };
+        }
+        {
+          name = "fish-you-should-use";
+          src = pkgs.fetchFromGitHub {
+            owner = "paysonwallach";
+            repo = "fish-you-should-use";
+            rev = "master";
+            sha256 = "sha256-MmGDFTgxEFgHdX95OjH3jKsVG1hdwo6bRht+Lvvqe5Y=";
+          };
+        }
+      ];
   };
 }

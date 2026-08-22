@@ -30,6 +30,10 @@
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    iTerm2 = {
+      url = "github:mbadolato/iTerm2-Color-Schemes";
+      flake = false;
+    };
     nvf.url = "path:./flakes/NVF";
     llm-agents.url = "path:./flakes/LLM-Agents";
   };
@@ -37,10 +41,13 @@
     self,
     nixpkgs,
     nixpkgs-stable,
+    flake-parts,
+    wrappers,
     chaotic,
     home-manager,
     sops,
     stylix,
+    iTerm2,
     ...
   } @ inputs: {
     nixosConfigurations."nixos" = nixpkgs.lib.nixosSystem {

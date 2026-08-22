@@ -1,8 +1,5 @@
 #homeModules.nix
-{
-  ...
-}:
-{
+{...}: {
   imports = [
     ./modules/home/ai-chat.nix
     ./modules/home/atuin.nix
