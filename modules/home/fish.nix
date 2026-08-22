@@ -14,7 +14,7 @@
           echo (set_color green)"✨ Done! Check 'git status' to see your uncommitted files."(set_color normal)
         '';
       };
-      jj = {
+      j = {
         description = "tell jj to grab secrets from secretspec.";
         body = ''
           secretspec run -- jj $argv
