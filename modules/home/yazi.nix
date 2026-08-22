@@ -1,7 +1,4 @@
-{
-  ...
-}:
-{
+{...}: {
   programs.yazi = {
     enable = true;
     enableFishIntegration = true;
@@ -13,15 +10,15 @@
         sort_sensitive = false;
         sort_reverse = true;
       };
-      opener = {
-        edit = [
-          {
-            run = "nvf \"$@\"";
-            block = true;
-            desc = "Edit";
-          }
-        ];
-      };
+      #opener = {
+      #  edit = [
+      #    {
+      #      run = "nvf \"$@\"";
+      #      block = true;
+      #      desc = "Edit";
+      #    }
+      #  ];
+      #};
     };
   };
 }

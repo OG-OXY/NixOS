@@ -230,9 +230,8 @@
     };
     sessionVariables = {
       NIXOS_OZONE_WL = "1";
-      WLR_NO_HARDWARE_CURSORS = "1";
-      NVD_BACKEND = "direct";
       ELECTRON_OZONE_PLATFORM_HINT = "auto";
+      AQ_DRM_DEVICES = "/dev/dri/by-path/pci-0000:0e:00.0-card:/dev/dri/by-path/pci-0000:01:00.0-card";
       QT_QPA_PLATFORM = "wayland;xcb";
       SDL_VIDEO_DRIVER = "wayland,x11";
       PROTON_ENABLE_WAYLAND = "1";
@@ -441,8 +440,7 @@
     ollama = {
       enable = true;
       package =
-        (pkgs.ollama-cuda.override {
-          }).overrideAttrs
+        (pkgs.ollama-cuda.override {}).overrideAttrs
         (oldAttrs: {
           cmakeFlags =
             (oldAttrs.cmakeFlags or [])
@@ -450,6 +448,10 @@
               "-DCMAKE_CUDA_ARCHITECTURES=61"
             ];
         });
+      environmentVariables = {
+        CUDA_VISIBLE_DEVICES = "0";
+        OLLAMA_GPU_OVERHEAD = "512";
+      };
     };
     llama-cpp = {
       enable = true;

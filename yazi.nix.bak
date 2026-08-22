@@ -1,0 +1,44 @@
+{
+  self,
+  inputs,
+  ...
+}: {
+  perSystem = {pkgs, ...}: let
+    # Pure store-baked Yazi configuration files
+    yaziToml = pkgs.writeText "yazi.toml" ''
+      [mgr]
+      ratio = [1, 4, 3]
+      sort_by = "modified"
+      sort_reverse = true
+      sort_dir_first = true
+      show_hidden = true
+      show_symlink = true
+    '';
+
+    themeToml = pkgs.writeText "theme.toml" ''
+      :.
+    '';
+
+    # Create a unified config directory tree in the Nix store
+    yaziConfigDir = pkgs.runCommand "yazi-config" {} ''
+      mkdir -p $out
+      ln -s ${yaziToml} $out/yazi.toml
+      ln -s ${themeToml} $out/theme.toml
+    '';
+  in {
+    # Self-contained wrapped binary that forces YAZI_CONFIG_HOME to our store path
+    packages.myYazi = inputs.wrappers.lib.wrapPackage {
+      inherit pkgs;
+      package = pkgs.yazi;
+      env = {
+        "YAZI_CONFIG_HOME" = yaziConfigDir;
+      };
+    };
+  };
+
+  flake.nixosModules.yazi = {pkgs, ...}: {
+    environment.systemPackages = [
+      self.packages.${pkgs.stdenv.hostPlatform.system}.myYazi
+    ];
+  };
+}
