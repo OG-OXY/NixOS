@@ -30,10 +30,6 @@
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    iTerm2 = {
-      url = "github:mbadolato/iTerm2-Color-Schemes";
-      flake = false;
-    };
     nvf.url = "path:./flakes/NVF";
     llm-agents.url = "path:./flakes/LLM-Agents";
   };
@@ -47,7 +43,6 @@
     home-manager,
     sops,
     stylix,
-    iTerm2,
     ...
   } @ inputs: {
     nixosConfigurations."nixos" = nixpkgs.lib.nixosSystem {
@@ -64,18 +59,18 @@
                 "electron-39.8.10"
               ];
             };
-            overlays = [
-              (
-                final: prev: let
-                  stable = import nixpkgs-stable {
-                    inherit (prev) system;
-                    config = prev.config;
-                  };
-                in {
+            #overlays = [
+              #  (
+              #    final: prev: let
+              #     stable = import nixpkgs-stable {
+              #       inherit (prev) system;
+              #       config = prev.config;
+              #     };
+              #   in {
                   #package = packagename.stable
-                }
-              )
-            ];
+              #   }
+              # )
+              #];
           };
           hardware.enableRedistributableFirmware = true;
         }

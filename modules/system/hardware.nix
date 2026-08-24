@@ -21,14 +21,14 @@
       system.nixos.label = "NIXOS";
       boot = {
         loader.grub.configurationName = "NIXOS";
-        kernelPackages = pkgs.linuxPackages;
+        kernelPackages = pkgs.linuxPackages_cachyos-lts;
       };
     };
     NIXOS-HACKER.configuration = {
       system.nixos.label = "NIXOS-HACKER";
       boot = {
         loader.grub.configurationName = "NIXOS-HACKER";
-        kernelPackages = pkgs.linuxPackages_hardened;
+        kernelPackages = pkgs.linuxPackages_cachyos-hardened;
       };
     };
   };
@@ -71,6 +71,7 @@
       "amd_idle.max_cstate=0"
       "amd_iommu=on"
       "iommu=pt"
+      #"nvidia-drm.modeset=1"
     ];
     kernel.sysctl = {
       "kernel.sysrq" = true;
