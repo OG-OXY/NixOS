@@ -5,9 +5,9 @@
   inputs,
   self,
   ...
-}: {
+}:
+{
   imports = [
-    ./systemModules.nix
   ];
 
   # Bootloader + GRUB parameters.
@@ -51,7 +51,7 @@
       enable = true;
       extraRules = [
         {
-          users = ["ty"];
+          users = [ "ty" ];
           noPass = true;
           keepEnv = true;
         }
@@ -61,11 +61,11 @@
       enable = true;
       extraRules = [
         {
-          groups = ["wheel"];
+          groups = [ "wheel" ];
           commands = [
             {
               command = "ALL";
-              options = ["NOPASSWD"];
+              options = [ "NOPASSWD" ];
             }
           ];
         }
@@ -107,8 +107,8 @@
       dns = "dnsmasq";
     };
     firewall = {
-      allowedTCPPorts = [22];
-      trustedInterfaces = ["tailscale0"];
+      allowedTCPPorts = [ 22 ];
+      trustedInterfaces = [ "tailscale0" ];
     };
     wireless.enable = false;
   };
@@ -175,8 +175,8 @@
           "--vrr"
         ];
       };
-      extraCompatPackages = with pkgs; [
-        proton-ge-bin
+      extraCompatPackages = [
+        pkgs.proton-ge-bin
       ];
     };
     virt-manager.enable = true;
@@ -184,11 +184,11 @@
   };
 
   fonts = {
-    packages = with pkgs; [
-      nerd-fonts.jetbrains-mono
-      nerd-fonts.fira-code
-      font-awesome
-      inter
+    packages = [
+      pkgs.nerd-fonts.jetbrains-mono
+      pkgs.nerd-fonts.fira-code
+      pkgs.font-awesome
+      pkgs.inter
     ];
     fontconfig = {
       enable = true;
@@ -223,7 +223,7 @@
 
   # Install system PKGS.
   environment = {
-    shells = with pkgs; [fish];
+    shells = [ pkgs.fish ];
     variables = {
       CPATH = "/run/current-system/sw/include";
       LIBRARY_PATH = "/run/current-system/sw/lib";
@@ -231,7 +231,12 @@
     sessionVariables = {
       NIXOS_OZONE_WL = "1";
       ELECTRON_OZONE_PLATFORM_HINT = "auto";
-      AQ_DRM_DEVICES = "/dev/dri/by-path/pci-0000:0e:00.0-card:/dev/dri/by-path/pci-0000:01:00.0-card";
+      #AQ_DRM_DEVICES = "/dev/dri/by-path/pci-0000:01:00.0-card:/dev/dri/by-path/pci-0000:0e:00.0-card";
+      LIBVA_DRIVER_NAME = "nvidia";
+      XDG_SESSION_TYPE = "wayland";
+      GBM_BACKEND = "nvidia-drm";
+      __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+      NVD_BACKEND = "direct";
       QT_QPA_PLATFORM = "wayland;xcb";
       SDL_VIDEO_DRIVER = "wayland,x11";
       PROTON_ENABLE_WAYLAND = "1";
@@ -254,88 +259,90 @@
       CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC = "1";
       NODE_OPTIONS = "--dns-result-order=ipv4first";
     };
-    systemPackages = with pkgs;
-      [
-        stdenv.cc
-        binutils
-        gnumake
-        cmake
-        pkg-config
-        gdb
-        valgrind
-        hyprpolkitagent
-        watchman
-        pinentry-gnome3
-        waybar
-        mako
-        wofi
-        ghostty
-        yazi
-        hyprpaper
-        bitwarden-desktop
-        vesktop
-        telegram-desktop
-        pavucontrol
-        pipewire
-        pulseaudio-ctl
-        qalculate-gtk
-        #CLI-Tools.
-        git
-        gh
-        nix-output-monitor
-        nvd
-        nh
-        just
-        fh
-        rbw
-        secretspec
-        rofi-rbw-wayland
-        tg
-        mpd
-        mpv
-        imv
-        hyprshot
-        hyprpicker
-        btop
-        tree
-        dysk
-        tealdeer
-        wl-clipboard
-        cliphist
-        wtype
-        curl
-        w3m
-        wget
-        wget2
-        fzf
-        ripgrep
-        herdr
-        llama-cpp
-        aider-chat
-        fd
-        bun
-        devenv
-        starship
-        atuin
-        libnotify
-        # Formatters.
-        nixfmt
-        jq
-      ]
-      ++ [
-        inputs.zen-browser.packages.${pkgs.system}.default
-        inputs.nvf.packages.${pkgs.system}.default
-        inputs.llm-agents.packages.${pkgs.system}.default
-        #pkgs.cudaPackages.cuda_nvcc
-        #pkgs.cudaPackages.cudatoolkit
-      ];
+    systemPackages = [
+      pkgs.stdenv.cc
+      pkgs.binutils
+      pkgs.gnumake
+      pkgs.cmake
+      pkgs.pkg-config
+      pkgs.gdb
+      pkgs.valgrind
+      pkgs.hyprpolkitagent
+      pkgs.watchman
+      pkgs.pinentry-gnome3
+      pkgs.waybar
+      pkgs.mako
+      pkgs.wofi
+      pkgs.ghostty
+      pkgs.yazi
+      pkgs.hyprpaper
+      pkgs.bitwarden-desktop
+      pkgs.vesktop
+      pkgs.telegram-desktop
+      pkgs.pavucontrol
+      pkgs.pipewire
+      pkgs.pulseaudio-ctl
+      pkgs.qalculate-gtk
+      #CLI-Tools.
+      pkgs.git
+      pkgs.gh
+      pkgs.nix-output-monitor
+      pkgs.nvd
+      pkgs.nh
+      pkgs.just
+      pkgs.fh
+      pkgs.rbw
+      pkgs.secretspec
+      pkgs.rofi-rbw-wayland
+      pkgs.tg
+      pkgs.mpd
+      pkgs.mpv
+      pkgs.imv
+      pkgs.hyprshot
+      pkgs.hyprpicker
+      pkgs.btop
+      pkgs.tree
+      pkgs.dysk
+      pkgs.tealdeer
+      pkgs.wl-clipboard
+      pkgs.cliphist
+      pkgs.wtype
+      pkgs.curl
+      pkgs.w3m
+      pkgs.wget
+      pkgs.wget2
+      pkgs.fzf
+      pkgs.ripgrep
+      pkgs.herdr
+      pkgs.llama-cpp
+      pkgs.aider-chat
+      pkgs.fd
+      pkgs.bun
+      pkgs.devenv
+      pkgs.starship
+      pkgs.atuin
+      pkgs.libnotify
+      # Formatters.
+      pkgs.nixfmt
+      pkgs.jq
+    ]
+    ++ [
+      inputs.zen-browser.packages.${pkgs.system}.default
+      inputs.nvf.packages.${pkgs.system}.default
+      inputs.llm-agents.packages.${pkgs.system}.default
+      #pkgs.cudaPackages.cuda_nvcc
+      #pkgs.cudaPackages.cudatoolkit
+    ];
     etc = {
+      "iTerm2" = {
+        source = inputs.iTerm2;
+      };
     };
   };
 
   xdg.portal = {
     enable = true;
-    extraPortals = [pkgs.xdg-desktop-portal-hyprland];
+    extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
     config.common.default = "*";
   };
 
@@ -439,15 +446,11 @@
     };
     ollama = {
       enable = true;
-      package =
-        (pkgs.ollama-cuda.override {}).overrideAttrs
-        (oldAttrs: {
-          cmakeFlags =
-            (oldAttrs.cmakeFlags or [])
-            ++ [
-              "-DCMAKE_CUDA_ARCHITECTURES=61"
-            ];
-        });
+      package = (pkgs.ollama-cuda.override { }).overrideAttrs (oldAttrs: {
+        cmakeFlags = (oldAttrs.cmakeFlags or [ ]) ++ [
+          "-DCMAKE_CUDA_ARCHITECTURES=61"
+        ];
+      });
       environmentVariables = {
         CUDA_VISIBLE_DEVICES = "0";
         OLLAMA_GPU_OVERHEAD = "512";
@@ -471,13 +474,11 @@
         (pkgs.llama-cpp.override {
           cudaSupport = true;
         }).overrideAttrs
-        (oldAttrs: {
-          cmakeFlags =
-            (oldAttrs.cmakeFlags or [])
-            ++ [
+          (oldAttrs: {
+            cmakeFlags = (oldAttrs.cmakeFlags or [ ]) ++ [
               "-DCMAKE_CUDA_ARCHITECTURES=61"
             ];
-        });
+          });
     };
     pulseaudio.enable = false;
     resolved.enable = false;
@@ -495,14 +496,14 @@
       hybrid-sleep.enable = false;
     };
     services = {
-      ollama.wantedBy = pkgs.lib.mkForce [];
-      llama-cpp.wantedBy = pkgs.lib.mkForce [];
+      ollama.wantedBy = pkgs.lib.mkForce [ ];
+      llama-cpp.wantedBy = pkgs.lib.mkForce [ ];
     };
     user.services = {
       waybar = {
         unitConfig = {
-          After = ["graphical-session.target"];
-          Requires = ["dbus.socket"];
+          After = [ "graphical-session.target" ];
+          Requires = [ "dbus.socket" ];
         };
         serviceConfig = {
           ExecStartPre = "${pkgs.glib}/bin/gdbus wait --system net.hadess.PowerProfiles";
@@ -510,10 +511,10 @@
       };
       rbw-autounlock = {
         description = "Securely unlock Bitwarden Vault on Hyprland Startup";
-        wantedBy = ["graphical-session.target"];
+        wantedBy = [ "graphical-session.target" ];
         unitConfig = {
-          After = ["graphical-session.target"];
-          PartOf = ["graphical-session.target"];
+          After = [ "graphical-session.target" ];
+          PartOf = [ "graphical-session.target" ];
         };
         serviceConfig = {
           Type = "oneshot";
@@ -538,7 +539,7 @@
       virtualisation = {
         memorySize = 8192;
         cores = 8;
-        qemu.options = ["-device virtio-vga-gl -display gtk,gl=on"];
+        qemu.options = [ "-device virtio-vga-gl -display gtk,gl=on" ];
       };
     };
     libvirtd = {

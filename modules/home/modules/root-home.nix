@@ -8,7 +8,7 @@
     homeDirectory = "/root";
   };
 
-  imports = [ ../../home.nix ];
+  imports = [ ../ty.nix ];
 
   programs.starship = {
     enable = true;

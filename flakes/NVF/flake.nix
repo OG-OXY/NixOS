@@ -7,12 +7,14 @@
       url = "github:notashelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    iTerm2.url = "github:mbadolato/iTerm2-Color-Schemes/ghostty/Aurora";
   };
 
   outputs =
     {
       nixpkgs,
       nvf,
+      iTerm2,
       ...
     }:
     let
@@ -28,6 +30,7 @@
         system:
         let
           pkgs = nixpkgs.legacyPackages.${system};
+          Aurora = builtins.readFile "${iTerm2}";
           customNeovim = nvf.lib.neovimConfiguration {
             inherit pkgs;
             modules = [
@@ -61,7 +64,7 @@
                   };
 
                   theme = {
-                    enable = true;
+                    enable = false;
                     name = "gruvbox";
                     style = "dark";
                     transparent = false;
@@ -167,11 +170,24 @@
                       mode = [ "n" ];
                       desc = "Format Buffer Manually";
                     }
+                    {
+                      key = "<leader>w";
+                      action = ''
+                        lua function()
+                          if vim.bo.filetype ~= "nix" then
+                            vim.lsp.buf.format({ async = false })
+                          end
+                          vim.cmd('write')
+                        end()
+                      '';
+                      mode = [ "n" ];
+                      desc = "Save (format if not Nix)";
+                    }
                   ];
 
                   lsp = {
                     enable = true;
-                    formatOnSave = true;
+                    formatOnSave = false;
                     servers.lua-language-server = {
                       settings = {
                         Lua = {
@@ -201,10 +217,7 @@
                     nix = {
                       enable = true;
                       lsp.servers = [ "nixd" ];
-                      format = {
-                        enable = false;
-                        type = [ "nixfmt" ];
-                      };
+                      format.type = [ "nixfmt" ];
                     };
 
                     lua = {
@@ -249,13 +262,39 @@
                   };
 
                   luaConfigRC = {
-                    treesitter-auto-start = ''
-                      vim.api.nvim_create_autocmd("FileType", {
+                    master-repo-grep = ''
+                      vim.api.nvim_create_user_command('Masterg', function()
+                        require('telescope.builtin').live_grep({
+                          cwd = "/home/ty/NixOS/Master/",
+                          prompt_title = "Master Repo Grep",
+                        })
+                      end, {})
+                    '';
+                    smart-write-commands = ''
+                      local function smart_write(extra_cmd)
+                        if vim.bo.filetype ~= "nix" then
+                          pcall(vim.lsp.buf.format, { async = false })
+                        end
+                        vim.cmd('write')
+                        if extra_cmd then
+                          vim.cmd(extra_cmd)
+                        end
+                      end
+
+                      vim.api.nvim_create_user_command('W', function() smart_write() end, {})
+                      vim.api.nvim_create_user_command('Wq', function() smart_write('quit') end, {})
+                      vim.api.nvim_create_user_command('WQ', function() smart_write('quit') end, {})
+                    '';
+                    buffer-quit-autosave = ''
+                      vim.api.nvim_create_autocmd({ "FocusLost", "BufLeave" }, {
                         pattern = "*",
-                        callback = function()
-                          pcall(vim.treesitter.start)
-                        end,
+                        command = "silent! wa",
                       })
+                    '';
+                    aurora-custom-theme = ''
+                      local aurora-theme = [[
+                      ${Aurora}
+                      ]]
                     '';
                     neorg-auto-export = ''
                       vim.api.nvim_create_autocmd("BufWritePost", {
@@ -265,18 +304,11 @@
                         end,
                       })
                     '';
-                    buffer-quit-autosave = ''
-                      vim.api.nvim_create_autocmd({ "FocusLost", "BufLeave" }, {
-                        pattern = "*",
-                        command = "silent! wa",
-                      })
-                    '';
-                    disable-nix-autoformat = ''
+                    treesitter-auto-start = ''
                       vim.api.nvim_create_autocmd("FileType", {
-                        pattern = "nix",
+                        pattern = "*",
                         callback = function()
-                          vim.b.autoformat = false
-                          vim.b.disable_autoformat = true
+                          pcall(vim.treesitter.start)
                         end,
                       })
                     '';

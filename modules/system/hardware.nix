@@ -3,7 +3,8 @@
   lib,
   modulesPath,
   ...
-}: {
+}:
+{
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
@@ -23,6 +24,13 @@
         kernelPackages = pkgs.linuxPackages;
       };
     };
+    NIXOS-HACKER.configuration = {
+      system.nixos.label = "NIXOS-HACKER";
+      boot = {
+        loader.grub.configurationName = "NIXOS-HACKER";
+        kernelPackages = pkgs.linuxPackages_hardened;
+      };
+    };
   };
 
   boot = {
@@ -40,7 +48,7 @@
       };
     };
     initrd = {
-      kernelModules = ["amdgpu"];
+      kernelModules = [ "amdgpu" ];
       availableKernelModules = [
         "xhci_pci"
         "ahci"
@@ -57,7 +65,7 @@
       "i2c-dev"
       "i2c-piix4"
     ];
-    extraModulePackages = [];
+    extraModulePackages = [ ];
     kernelParams = [
       "processor.max_cstate=0"
       "amd_idle.max_cstate=0"
@@ -73,7 +81,7 @@
       "vm.dirty_ratio" = 10;
       "fs.inotify.max_user_watches" = 524288;
     };
-    binfmt.emulatedSystems = ["aarch64-linux"];
+    binfmt.emulatedSystems = [ "aarch64-linux" ];
   };
 
   fileSystems = {

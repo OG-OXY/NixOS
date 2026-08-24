@@ -14,14 +14,14 @@
     {
       devShells.${system}.default = pkgs.mkShell {
         name = "QMK-ENV";
-        nativeBuildInputs = with pkgs; [
-          git
-          gnumake
-          qmk
-          dfu-programmer
-          dfu-util
-          avrdude
-          gcc-arm-embedded
+        nativeBuildInputs = [
+          pkgs.git
+          pkgs.gnumake
+          pkgs.qmk
+          pkgs.dfu-programmer
+          pkgs.dfu-util
+          pkgs.avrdude
+          pkgs.gcc-arm-embedded
         ];
 
         shellHook = ''

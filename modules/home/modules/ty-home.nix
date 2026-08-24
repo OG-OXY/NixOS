@@ -8,7 +8,7 @@
     homeDirectory = "/home/ty";
   };
 
-  imports = [ ../../home.nix ];
+  imports = [ ../ty.nix ];
 
   programs.starship = {
     enable = true;
