@@ -161,19 +161,19 @@
     gamescope = {
       enable = true;
       enableWsi = true;
-      capSysNice = true;
+      capSysNice = false;
     };
     steam = {
       enable = true;
       remotePlay.openFirewall = true;
       dedicatedServer.openFirewall = true;
+      localNetworkGameTransfers.openFirewall = true;
       gamescopeSession = {
         enable = true;
         args = [
           "-W 1920"
           "-H 1080"
           "-r 239"
-          "--vrr"
         ];
       };
       extraCompatPackages = with pkgs; [
@@ -232,11 +232,11 @@
     sessionVariables = {
       NIXOS_OZONE_WL = "1";
       ELECTRON_OZONE_PLATFORM_HINT = "auto";
-      #AQ_DRM_DEVICES = "/dev/dri/by-path/pci-0000:01:00.0-card:/dev/dri/by-path/pci-0000:0e:00.0-card";
+      #AQ_DRM_DEVICES = "/dev/dri/by-path/pci-0000:01:00.0-card";
       LIBVA_DRIVER_NAME = "nvidia";
       XDG_SESSION_TYPE = "wayland";
       GBM_BACKEND = "nvidia-drm";
-      __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+      #__GLX_VENDOR_LIBRARY_NAME = "nvidia";
       NVD_BACKEND = "direct";
       QT_QPA_PLATFORM = "wayland;xcb";
       SDL_VIDEO_DRIVER = "wayland,x11";
@@ -247,7 +247,7 @@
       XCURSOR_SIZE = "24";
       EDITOR = "nvf";
       VISUAL = "nvf";
-      SSH_AUTH_SOCK = "home/ty/.bitwarden-ssh-agent.sock";
+      SSH_AUTH_SOCK = "/home/ty/.bitwarden-ssh-agent.sock";
       SECRETSPEC_PROVIDER = "keyring";
       ANTHROPIC_API_KEY = "local";
       ANTHROPIC_AUTH_TOKEN = "ollama";
@@ -282,9 +282,14 @@
       pkgs.telegram-desktop
       pkgs.pavucontrol
       pkgs.pipewire
+      pkgs.pulseaudio
       pkgs.pulseaudio-ctl
       pkgs.qalculate-gtk
+      pkgs.steam-run
+      pkgs.winetricks
+      pkgs.xinit
       #CLI-Tools.
+      pkgs.ttyd
       pkgs.git
       pkgs.gh
       pkgs.nix-output-monitor
@@ -356,49 +361,65 @@
 
   # Display Manager.
   services = {
-    displayManager.regreet = {
+    xserver = {
       enable = true;
-      cageArgs = [
-        "-s"
-        "-m clone"
-      ];
-      settings = {
-        background = {
-          path = "/etc/nixos/wallpaper.png";
-          fit = "Cover";
+      extraConfig = ''
+        Section "ServerFlags"
+          Option "AutoAddGPU" "true"
+        EndSection
+      
+        Section "Device"
+          Identifier "GTX1070"
+          Driver "nvidia"
+          BusID "PCI:1:0:0"
+        EndSection
+      '';
+    };
+    displayManager = {
+      regreet = {
+        enable = true;
+        cageArgs = [
+          "-s"
+          "-m clone"
+        ];
+        settings = {
+          background = {
+            path = "/etc/nixos/wallpaper.png";
+            fit = "Cover";
+          };
+          #theme = {
+          #  package = "";
+          #  name = "";
+          #};
+          #iconTheme = {
+          #  package = "";
+          #  name = "";
+          #};
+          #cursorTheme = {
+          #  package = "";
+          #  name = "";
+          #};
+          #GTK = {
+          #  theme_name = "Adwaita-dark";
+          #  icon_theme_name = "Adwaita";
+          #  cursor_theme_name = "";
+          #  font_name = lib.mkDefault "Inter 11";
+          #};
+          commands = {
+            reboot = [
+              "doas"
+              "reboot"
+              "now"
+            ];
+            shutdown = [
+              "doas"
+              "shutdown"
+              "now"
+            ];
+          };
+          #extraCss = ''
+          #'';
         };
-        #theme = {
-        #  package = "";
-        #  name = "";
-        #};
-        #iconTheme = {
-        #  package = "";
-        #  name = "";
-        #};
-        #cursorTheme = {
-        #  package = "";
-        #  name = "";
-        #};
-        #GTK = {
-        #  theme_name = "Adwaita-dark";
-        #  icon_theme_name = "Adwaita";
-        #  cursor_theme_name = "";
-        #  font_name = lib.mkDefault "Inter 11";
-        #};
-        commands = {
-          reboot = [
-            "doas"
-            "reboot"
-            "now"
-          ];
-          shutdown = [
-            "doas"
-            "shutdown"
-            "now"
-          ];
-        };
-        #extraCss = ''
-        #'';
       };
     };
     greetd.enable = true;

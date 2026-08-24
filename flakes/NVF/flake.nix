@@ -7,14 +7,12 @@
       url = "github:notashelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    iTerm2.url = "github:iTerm2-Color-Schemes/ghostty/Aurora";
   };
 
   outputs =
     {
       nixpkgs,
       nvf,
-      iTerm2,
       ...
     }:
     let
@@ -30,7 +28,6 @@
         system:
         let
           pkgs = nixpkgs.legacyPackages.${system};
-          Aurora = builtins.readFile "${iTerm2}";
           customNeovim = nvf.lib.neovimConfiguration {
             inherit pkgs;
             modules = [
@@ -64,7 +61,7 @@
                   };
 
                   theme = {
-                    enable = false;
+                    enable = true;
                     name = "gruvbox";
                     style = "dark";
                     transparent = false;
@@ -271,9 +268,6 @@
                       end, {})
                     '';
                     aurora-custom-theme = ''
-                      local aurora-theme = [[
-                      ${Aurora}
-                      ]]
                     '';
                     smart-write-commands = ''
                       local function smart_write(extra_cmd)
