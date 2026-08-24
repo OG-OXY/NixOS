@@ -7,7 +7,7 @@
       url = "github:notashelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    iTerm2.url = "github:mbadolato/iTerm2-Color-Schemes/ghostty/Aurora";
+    iTerm2.url = "github:iTerm2-Color-Schemes/ghostty/Aurora";
   };
 
   outputs =
@@ -64,7 +64,7 @@
                   };
 
                   theme = {
-                    enable = false;
+                    enable = true;
                     name = "gruvbox";
                     style = "dark";
                     transparent = false;
@@ -270,6 +270,11 @@
                         })
                       end, {})
                     '';
+                    aurora-custom-theme = ''
+                      local aurora-theme = [[
+                      ${Aurora}
+                      ]]
+                    '';
                     smart-write-commands = ''
                       local function smart_write(extra_cmd)
                         if vim.bo.filetype ~= "nix" then
@@ -290,11 +295,6 @@
                         pattern = "*",
                         command = "silent! wa",
                       })
-                    '';
-                    aurora-custom-theme = ''
-                      local aurora-theme = [[
-                      ${Aurora}
-                      ]]
                     '';
                     neorg-auto-export = ''
                       vim.api.nvim_create_autocmd("BufWritePost", {
