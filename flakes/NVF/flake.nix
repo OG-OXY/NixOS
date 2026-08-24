@@ -64,7 +64,7 @@
                   };
 
                   theme = {
-                    enable = true;
+                    enable = false;
                     name = "gruvbox";
                     style = "dark";
                     transparent = false;
