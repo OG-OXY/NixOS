@@ -1,11 +1,11 @@
-#flake.nix
 {
-  description = "System Flake";
+  description = "Nix Dendritic Flake";
+
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-26.05";
     flake-parts.url = "github:hercules-ci/flake-parts";
-    import-tree.url = "github:denful/import-tree";
+    import-tree.url = "github:vic/import-tree";
     wrappers = {
       url = "github:BirdeeHub/nix-wrapper-modules";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -37,66 +37,6 @@
     nvf.url = "path:./flakes/NVF";
     llm-agents.url = "path:./flakes/LLM-Agents";
   };
-  outputs = {
-    self,
-    nixpkgs,
-    nixpkgs-stable,
-    flake-parts,
-    wrappers,
-    chaotic,
-    home-manager,
-    sops,
-    stylix,
-    iTerm2,
-    ...
-  } @ inputs: {
-    nixosConfigurations."nixos" = nixpkgs.lib.nixosSystem {
-      specialArgs = {inherit inputs self;};
-      modules = [
-        {
-          nixpkgs = {
-            hostPlatform = "x86_64-linux";
-            config = {
-              allowUnfree = true;
-              cudaSupport = true;
-              cudaCapabilities = ["6.1"];
-              permittedInsecurePackages = [
-                "electron-39.8.10"
-              ];
-            };
-            overlays = [
-              (
-                final: prev: let
-                  stable = import nixpkgs-stable {
-                    inherit (prev) system;
-                    config = prev.config;
-                  };
-                in {
-                  #package = packagename.stable
-                }
-              )
-            ];
-          };
-          hardware.enableRedistributableFirmware = true;
-        }
-        ./config.nix
-        chaotic.nixosModules.default
-        sops.nixosModules.sops
-        stylix.nixosModules.stylix
-        home-manager.nixosModules.home-manager
-        {
-          home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            backupFileExtension = ".bak";
-            users = {
-              root = import ./modules/home/root-home.nix;
-              ty = import ./modules/home/ty-home.nix;
-            };
-            extraSpecialArgs = {inherit inputs self;};
-          };
-        }
-      ];
-    };
-  };
+
+  outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
 }

@@ -2,7 +2,8 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   boot = {
     kernelPackages = pkgs.linuxPackages_cachyos-lto-znver4;
 
@@ -18,11 +19,24 @@
     };
 
     initrd = {
-      kernelModules = ["amdgpu"];
-      availableKernelModules = ["xhci_pci" "ahci" "nvme" "usbhid" "sd_mod"];
+      kernelModules = [ "amdgpu" ];
+      availableKernelModules = [
+        "xhci_pci"
+        "ahci"
+        "nvme"
+        "usbhid"
+        "sd_mod"
+      ];
     };
 
-    kernelModules = ["kvm-amd" "vfio" "vfio_iommu_type1" "vfio_pci" "i2c-dev" "i2c-piix4"];
+    kernelModules = [
+      "kvm-amd"
+      "vfio"
+      "vfio_iommu_type1"
+      "vfio_pci"
+      "i2c-dev"
+      "i2c-piix4"
+    ];
 
     kernelParams = [
       "processor.max_cstate=0"
@@ -41,7 +55,7 @@
       "fs.inotify.max_user_watches" = 524288;
     };
 
-    binfmt.emulatedSystems = ["aarch64-linux"];
+    binfmt.emulatedSystems = [ "aarch64-linux" ];
   };
 
   hardware.nvidia = {
@@ -61,7 +75,21 @@
       isNormalUser = true;
       home = "/home/ty";
       shell = pkgs.fish;
-      extraGroups = ["wheel" "networkmanager" "video" "audio"];
+      extraGroups = [
+        "wheel"
+        "networkmanager"
+        "video"
+        "render"
+        "input"
+        "audio"
+        "seat"
+        "seatd"
+        "docker"
+        "libvirtd"
+        "vboxusers"
+        "wireshark"
+        "tcpdump"
+      ];
     };
   };
 
@@ -81,7 +109,7 @@
   home-manager.users.ty = {
     home = {
       stateVersion = "26.11";
-      sessionPath = ["$HOME/.local/bin"];
+      sessionPath = [ "$HOME/.local/bin" ];
       sessionVariables = {
         EDITOR = "nvf";
         VISUAL = "nvf";
@@ -204,7 +232,9 @@
               keys = "blue";
               title = "blue";
             };
-            percent = {type = 3;};
+            percent = {
+              type = 3;
+            };
           };
           modules = [
             "title"
@@ -244,7 +274,10 @@
           font-family-italic = "JetBrainsMono Nerd Font Bold Italic";
           font-family-bold-italic = "JetBrainsMono Nerd Font ExtraBold Italic";
           font-size = 22;
-          font-feature = ["liga" "calt"];
+          font-feature = [
+            "liga"
+            "calt"
+          ];
         };
       };
 
@@ -262,7 +295,7 @@
           };
           git = {
             auto-local-bookmark = true;
-            push-revset = ["master"];
+            push-revset = [ "master" ];
             default-push = "master";
           };
           signing = {
@@ -281,8 +314,11 @@
             immutable-heads = "tracked_remote_bookmarks()";
           };
           aliases = {
-            s = ["status"];
-            l = ["log" "-r"];
+            s = [ "status" ];
+            l = [
+              "log"
+              "-r"
+            ];
           };
         };
       };
@@ -354,35 +390,35 @@
           extraOptions = "--term xterm-256color";
         };
 
-        environment.systemPackages = with pkgs; [
-          aircrack-ng
-          hcxdumptool
-          hcxtools
-          wifite
-          kismet
-          nmap
-          masscan
-          rustscan
-          netcat
-          tcpdump
-          wireshark
-          tshark
-          dnsenum
-          enum4linux
-          metasploit
-          sqlmap
-          hydra
-          gobuster
-          ffuf
-          nikto
-          burpsuite
-          john
-          hashcat
-          cewl
-          binwalk
-          strace
-          ltrace
-          htop
+        environment.systemPackages = [
+          pkgs.aircrack-ng
+          pkgs.hcxdumptool
+          pkgs.hcxtools
+          pkgs.wifite
+          pkgs.kismet
+          pkgs.nmap
+          pkgs.masscan
+          pkgs.rustscan
+          pkgs.netcat
+          pkgs.tcpdump
+          pkgs.wireshark
+          pkgs.tshark
+          pkgs.dnsenum
+          pkgs.enum4linux
+          pkgs.metasploit
+          pkgs.sqlmap
+          pkgs.hydra
+          pkgs.gobuster
+          pkgs.ffuf
+          pkgs.nikto
+          pkgs.burpsuite
+          pkgs.john
+          pkgs.hashcat
+          pkgs.cewl
+          pkgs.binwalk
+          pkgs.strace
+          pkgs.ltrace
+          pkgs.htop
         ];
       };
     };

@@ -10,15 +10,6 @@
         sort_sensitive = false;
         sort_reverse = true;
       };
-      #opener = {
-      #  edit = [
-      #    {
-      #      run = "nvf \"$@\"";
-      #      block = true;
-      #      desc = "Edit";
-      #    }
-      #  ];
-      #};
     };
   };
 }
