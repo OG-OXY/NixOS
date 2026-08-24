@@ -8,6 +8,7 @@
 }:
 {
   imports = [
+    ./systemModules.nix
   ];
 
   # Bootloader + GRUB parameters.
@@ -175,8 +176,8 @@
           "--vrr"
         ];
       };
-      extraCompatPackages = [
-        pkgs.proton-ge-bin
+      extraCompatPackages = with pkgs; [
+        proton-ge-bin
       ];
     };
     virt-manager.enable = true;
@@ -184,11 +185,11 @@
   };
 
   fonts = {
-    packages = [
-      pkgs.nerd-fonts.jetbrains-mono
-      pkgs.nerd-fonts.fira-code
-      pkgs.font-awesome
-      pkgs.inter
+    packages = with pkgs; [
+      nerd-fonts.jetbrains-mono
+      nerd-fonts.fira-code
+      font-awesome
+      inter
     ];
     fontconfig = {
       enable = true;
@@ -223,7 +224,7 @@
 
   # Install system PKGS.
   environment = {
-    shells = [ pkgs.fish ];
+    shells = with pkgs; [ fish ];
     variables = {
       CPATH = "/run/current-system/sw/include";
       LIBRARY_PATH = "/run/current-system/sw/lib";
@@ -334,9 +335,6 @@
       #pkgs.cudaPackages.cudatoolkit
     ];
     etc = {
-      "iTerm2" = {
-        source = inputs.iTerm2;
-      };
     };
   };
 
