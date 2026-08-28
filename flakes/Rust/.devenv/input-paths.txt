@@ -1,0 +1,7 @@
+/home/ty/NixOS/Master/flakes/Rust/.devenv/bootstrap/bootstrapLib.nix
+/home/ty/NixOS/Master/flakes/Rust/.devenv/bootstrap/default.nix
+/home/ty/NixOS/Master/flakes/Rust/.devenv/bootstrap/resolve-lock.nix
+/home/ty/NixOS/Master/flakes/Rust/devenv.local.nix
+/home/ty/NixOS/Master/flakes/Rust/devenv.lock
+/home/ty/NixOS/Master/flakes/Rust/devenv.nix
+/home/ty/NixOS/Master/flakes/Rust/devenv.yaml

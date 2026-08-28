@@ -1,0 +1,13 @@
+/home/ty/NixOS/Master/flakes/Rust/target/debug/deps/udev-0db5a4d17c2fca35.d: /home/ty/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/udev-0.6.3/src/lib.rs /home/ty/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/udev-0.6.3/src/device.rs /home/ty/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/udev-0.6.3/src/enumerator.rs /home/ty/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/udev-0.6.3/src/list.rs /home/ty/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/udev-0.6.3/src/monitor.rs /home/ty/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/udev-0.6.3/src/udev.rs /home/ty/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/udev-0.6.3/src/util.rs
+
+/home/ty/NixOS/Master/flakes/Rust/target/debug/deps/libudev-0db5a4d17c2fca35.rlib: /home/ty/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/udev-0.6.3/src/lib.rs /home/ty/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/udev-0.6.3/src/device.rs /home/ty/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/udev-0.6.3/src/enumerator.rs /home/ty/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/udev-0.6.3/src/list.rs /home/ty/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/udev-0.6.3/src/monitor.rs /home/ty/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/udev-0.6.3/src/udev.rs /home/ty/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/udev-0.6.3/src/util.rs
+
+/home/ty/NixOS/Master/flakes/Rust/target/debug/deps/libudev-0db5a4d17c2fca35.rmeta: /home/ty/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/udev-0.6.3/src/lib.rs /home/ty/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/udev-0.6.3/src/device.rs /home/ty/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/udev-0.6.3/src/enumerator.rs /home/ty/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/udev-0.6.3/src/list.rs /home/ty/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/udev-0.6.3/src/monitor.rs /home/ty/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/udev-0.6.3/src/udev.rs /home/ty/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/udev-0.6.3/src/util.rs
+
+/home/ty/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/udev-0.6.3/src/lib.rs:
+/home/ty/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/udev-0.6.3/src/device.rs:
+/home/ty/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/udev-0.6.3/src/enumerator.rs:
+/home/ty/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/udev-0.6.3/src/list.rs:
+/home/ty/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/udev-0.6.3/src/monitor.rs:
+/home/ty/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/udev-0.6.3/src/udev.rs:
+/home/ty/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/udev-0.6.3/src/util.rs:
