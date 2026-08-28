@@ -176,8 +176,8 @@
           "-r 239"
         ];
       };
-      extraCompatPackages = with pkgs; [
-        proton-ge-bin
+      extraCompatPackages = [
+        pkgs.proton-ge-bin
       ];
     };
     virt-manager.enable = true;
@@ -185,11 +185,11 @@
   };
 
   fonts = {
-    packages = with pkgs; [
-      nerd-fonts.jetbrains-mono
-      nerd-fonts.fira-code
-      font-awesome
-      inter
+    packages = [
+      pkgs.nerd-fonts.jetbrains-mono
+      pkgs.nerd-fonts.fira-code
+      pkgs.font-awesome
+      pkgs.inter
     ];
     fontconfig = {
       enable = true;
@@ -224,7 +224,7 @@
 
   # Install system PKGS.
   environment = {
-    shells = with pkgs; [ fish ];
+    shells = [ pkgs.fish ];
     variables = {
       CPATH = "/run/current-system/sw/include";
       LIBRARY_PATH = "/run/current-system/sw/lib";

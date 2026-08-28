@@ -354,35 +354,35 @@
           extraOptions = "--term xterm-256color";
         };
 
-        environment.systemPackages = with pkgs; [
-          aircrack-ng
-          hcxdumptool
-          hcxtools
-          wifite
-          kismet
-          nmap
-          masscan
-          rustscan
-          netcat
-          tcpdump
-          wireshark
-          tshark
-          dnsenum
-          enum4linux
-          metasploit
-          sqlmap
-          hydra
-          gobuster
-          ffuf
-          nikto
-          burpsuite
-          john
-          hashcat
-          cewl
-          binwalk
-          strace
-          ltrace
-          htop
+        environment.systemPackages = [
+          pkgs.aircrack-ng
+          pkgs.hcxdumptool
+          pkgs.hcxtools
+          pkgs.wifite
+          pkgs.kismet
+          pkgs.nmap
+          pkgs.masscan
+          pkgs.rustscan
+          pkgs.netcat
+          pkgs.tcpdump
+          pkgs.wireshark
+          pkgs.tshark
+          pkgs.dnsenum
+          pkgs.enum4linux
+          pkgs.metasploit
+          pkgs.sqlmap
+          pkgs.hydra
+          pkgs.gobuster
+          pkgs.ffuf
+          pkgs.nikto
+          pkgs.burpsuite
+          pkgs.john
+          pkgs.hashcat
+          pkgs.cewl
+          pkgs.binwalk
+          pkgs.strace
+          pkgs.ltrace
+          pkgs.htop
         ];
       };
     };
