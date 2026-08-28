@@ -1,0 +1,11 @@
+/home/ty/NixOS/Master/flakes/Rust/target/debug/deps/wayland_commons-f75240e3503da939.d: /home/ty/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wayland-commons-0.28.6/src/lib.rs /home/ty/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wayland-commons-0.28.6/src/debug.rs /home/ty/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wayland-commons-0.28.6/src/filter.rs /home/ty/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wayland-commons-0.28.6/src/map.rs /home/ty/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wayland-commons-0.28.6/src/socket.rs /home/ty/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wayland-commons-0.28.6/src/user_data.rs /home/ty/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wayland-commons-0.28.6/src/wire.rs
+
+/home/ty/NixOS/Master/flakes/Rust/target/debug/deps/libwayland_commons-f75240e3503da939.rmeta: /home/ty/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wayland-commons-0.28.6/src/lib.rs /home/ty/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wayland-commons-0.28.6/src/debug.rs /home/ty/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wayland-commons-0.28.6/src/filter.rs /home/ty/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wayland-commons-0.28.6/src/map.rs /home/ty/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wayland-commons-0.28.6/src/socket.rs /home/ty/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wayland-commons-0.28.6/src/user_data.rs /home/ty/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wayland-commons-0.28.6/src/wire.rs
+
+/home/ty/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wayland-commons-0.28.6/src/lib.rs:
+/home/ty/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wayland-commons-0.28.6/src/debug.rs:
+/home/ty/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wayland-commons-0.28.6/src/filter.rs:
+/home/ty/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wayland-commons-0.28.6/src/map.rs:
+/home/ty/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wayland-commons-0.28.6/src/socket.rs:
+/home/ty/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wayland-commons-0.28.6/src/user_data.rs:
+/home/ty/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wayland-commons-0.28.6/src/wire.rs:

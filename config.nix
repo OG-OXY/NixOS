@@ -286,6 +286,7 @@
       pkgs.pulseaudio-ctl
       pkgs.qalculate-gtk
       pkgs.steam-run
+      pkgs.lutris
       pkgs.winetricks
       pkgs.xinit
       #CLI-Tools.
@@ -328,6 +329,8 @@
       pkgs.starship
       pkgs.atuin
       pkgs.libnotify
+      pkgs.aria2
+      pkgs.monero-cli
       # Formatters.
       pkgs.nixfmt
       pkgs.jq
@@ -336,6 +339,7 @@
       inputs.zen-browser.packages.${pkgs.system}.default
       inputs.nvf.packages.${pkgs.system}.default
       inputs.llm-agents.packages.${pkgs.system}.default
+      inputs.woomer.packages.${pkgs.system}.default
       #pkgs.cudaPackages.cuda_nvcc
       #pkgs.cudaPackages.cudatoolkit
     ];

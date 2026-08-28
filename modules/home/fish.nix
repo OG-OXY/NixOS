@@ -32,18 +32,18 @@
           secretspec run -- $argv
         '';
       };
-      steamrun = {
-        description = "Start GameScope with optimized settings with full steamdeck experience";
+      #steamrun = {
+      #  description = "Start GameScope with optimized settings with full steamdeck experience";
         #body = ''
         #  env __NV_PRIME_RENDER_OFFLOAD=1 \
         #     __GLX_VENDOR_LIBRARY_NAME=nvidia \
         #      ENABLE_GAMESCOPE_WSI=1 \
         #      gamescope --backend wayland --adaptive-sync -w 1920 -h 1080 -W 2560 -H 1440 -r 236 -f -e -- steam -gamepadui $argv
         #'';
-        body = ''
-          gamescope --backend wayland -W 1920 -H 1080 -r 240 -f -e -- steam -gamepadui $argv
-        '';
-      };
+      #  body = ''
+      #    gamescope --backend wayland -W 1920 -H 1080 -r 240 -f -e -- steam -gamepadui $argv
+      #  '';
+      #};
       pci = {
         description = "Ls and Grep PCI ID's";
         body = ''
@@ -53,6 +53,7 @@
     };
 
     shellAbbrs = {
+      steamrun = "gamescope --backend wayland -W 1920 -H 1080 -r 240 -f -e -- steam -gamepadui";
       su = "doas fish";
       ls = "ls -a";
       cds = "cd ~/NixOS/nixos";
