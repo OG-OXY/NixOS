@@ -228,6 +228,8 @@
     variables = {
       CPATH = "/run/current-system/sw/include";
       LIBRARY_PATH = "/run/current-system/sw/lib";
+      #VST_PATH = "$HOME/.vst:$HOME/.wine/drive_c/Program Files/Steinburg/VstPlugins";
+      #VST3_PATH = "$HOME/.vst3:$HOME/.wine/drive_c/Program Files/Common Files/VST3";
     };
     sessionVariables = {
       NIXOS_OZONE_WL = "1";
@@ -331,6 +333,7 @@
       pkgs.libnotify
       pkgs.aria2
       pkgs.monero-cli
+      pkgs.easyeffects
       # Formatters.
       pkgs.nixfmt
       pkgs.jq
@@ -450,6 +453,17 @@
       alsa.support32Bit = true;
       pulse.enable = true;
       jack.enable = true;
+      extraConfig.pipewire = {
+        "99-client-quality" = {
+          "context.properties" = {
+            "default.clock.rate" = 48000;
+            "default.clock.allowed-rates" = [ 44100 48000 96000 ];
+            "default.clock.quantum" = 512;
+            "default.clock.min-quantum" = 32;
+            "default.clock.max-quantum" = 2048;
+          };
+        };
+      };
     };
     zram-generator = {
       enable = true;
