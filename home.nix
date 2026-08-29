@@ -1,6 +1,6 @@
 #home.nix
 {
-  config,
+  pkgs,
   ...
 }:
 {
@@ -43,6 +43,21 @@
   systemd.user = {
     sessionVariables = {
       PINENTRY_USER_DATA = "gtk";
+    };
+    services = {
+      easyeffects = {
+        Unit = {
+          Description = "EasyEffects Audio Limiter & EQ";
+          After = [ "pipewire.service" ];
+        };
+        Service = {
+          ExecStart = "${pkgs.easyeffects}/bin/easyeffects --gapplication-service";
+          Restart = "on-failure";
+        };
+        Install = {
+          WantedBy = [ "graphical-session.target" ];
+        };
+      };
     };
   };
 
