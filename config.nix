@@ -290,7 +290,10 @@
       pkgs.steam-run
       pkgs.lutris
       pkgs.winetricks
+      pkgs.wine
+      pkgs.wine-staging
       pkgs.xinit
+      pkgs.obs-studio
       #CLI-Tools.
       pkgs.ttyd
       pkgs.git
@@ -342,7 +345,7 @@
       inputs.zen-browser.packages.${pkgs.system}.default
       inputs.nvf.packages.${pkgs.system}.default
       inputs.llm-agents.packages.${pkgs.system}.default
-      inputs.woomer.packages.${pkgs.system}.default
+      #inputs.woomer.packages.${pkgs.system}.default
       #pkgs.cudaPackages.cuda_nvcc
       #pkgs.cudaPackages.cudatoolkit
     ];
@@ -537,32 +540,32 @@
       llama-cpp.wantedBy = pkgs.lib.mkForce [ ];
     };
     user.services = {
-      waybar = {
-        unitConfig = {
-          After = [ "graphical-session.target" ];
-          Requires = [ "dbus.socket" ];
-        };
-        serviceConfig = {
-          ExecStartPre = "${pkgs.glib}/bin/gdbus wait --system net.hadess.PowerProfiles";
-        };
-      };
-      rbw-autounlock = {
-        description = "Securely unlock Bitwarden Vault on Hyprland Startup";
-        wantedBy = [ "graphical-session.target" ];
-        unitConfig = {
-          After = [ "graphical-session.target" ];
-          PartOf = [ "graphical-session.target" ];
-        };
-        serviceConfig = {
-          Type = "oneshot";
-          Environment = [
-            "WAYLAND_DISPLAY=wayland-0"
-            "DISPLAY=:0"
-          ];
-          ExecStart = "${pkgs.rbw}/bin/rbw unlock";
-          RemainAfterExit = false;
-        };
-      };
+      #waybar = {
+      #  unitConfig = {
+      #    After = [ "graphical-session.target" ];
+      #    Requires = [ "dbus.socket" ];
+      #  };
+      #  serviceConfig = {
+      #    ExecStartPre = "${pkgs.glib}/bin/gdbus wait --system net.hadess.PowerProfiles";
+      #  };
+      #};
+      #rbw-autounlock = {
+      #  description = "Securely unlock Bitwarden Vault on Hyprland Startup";
+      #  wantedBy = [ "graphical-session.target" ];
+      #  unitConfig = {
+      #    After = [ "graphical-session.target" ];
+      #    PartOf = [ "graphical-session.target" ];
+      #  };
+      #  serviceConfig = {
+      #    Type = "oneshot";
+      #    Environment = [
+      #      "WAYLAND_DISPLAY=wayland-0"
+      #      "DISPLAY=:0"
+      #    ];
+      #    ExecStart = "${pkgs.rbw}/bin/rbw unlock";
+      #    RemainAfterExit = false;
+      #  };
+      #};
     };
   };
 

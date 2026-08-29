@@ -77,6 +77,7 @@
       nrvm = "sudo nixos-rebuild build-vm --flake .#nixos";
       vm = "./result/bin/run-nixos-vm";
       nhs = "nh os switch .";
+      nhsu = "nh os switch . --upgrade";
       nb = "nix-backup";
       nub = "nix-upgrade-backup";
       ts = "doas tailscale up";
@@ -86,6 +87,7 @@
     interactiveShellInit = ''
       set -g fish_greeting "Welcome to NixOS!"
       set -g fish_handle_reflow 1
+      fish_vi_key_bindings
 
       if test "$USER" = "root"
           fastfetch 2>/dev/null

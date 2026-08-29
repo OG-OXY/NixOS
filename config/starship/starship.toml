@@ -43,6 +43,7 @@ style          = "bold purple"
 format         = "on [$symbol$output]($style) "
 when           = "test -d .jj"
 disabled       = false
+ignore_timeout = true
 
 #[custom.jj-]
 #command = '''jj log -r @ --no-graph -T 'local_bookmarks.join(", ")' '''

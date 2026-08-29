@@ -30,7 +30,7 @@
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    woomer.url = "github:coffeeispower/woomer";
+    #woomer.url = "github:coffeeispower/woomer";
     nvf.url = "path:./flakes/NVF";
     llm-agents.url = "path:./flakes/LLM-Agents";
   };
@@ -44,7 +44,7 @@
     home-manager,
     sops,
     stylix,
-    woomer,
+    #woomer,
     ...
   } @ inputs: {
     nixosConfigurations."nixos" = nixpkgs.lib.nixosSystem {
