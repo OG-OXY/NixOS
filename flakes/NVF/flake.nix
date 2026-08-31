@@ -15,7 +15,9 @@
       nvf,
       ...
     }:
+    
     let
+      
       supportedSystems = [
         "x86_64-linux"
         "aarch64-linux"
@@ -126,18 +128,6 @@
                       desc = "Toggle Floating Terminal";
                     }
                     {
-                      key = "L";
-                      action = ":BufferLineCycleNext<CR>";
-                      mode = "n";
-                      desc = "Next Buffer";
-                    }
-                    {
-                      key = "H";
-                      action = ":BufferLineCyclePrev<CR>";
-                      mode = "n";
-                      desc = "Previous Buffer";
-                    }
-                    {
                       key = "<leader>c";
                       action = ":bdelete<CR>";
                       mode = "n";
@@ -235,7 +225,6 @@
 
                     markdown = {
                       enable = true;
-                      lsp.enable = true;
                       format.type = [ "deno" ];
                     };
 

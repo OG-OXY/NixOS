@@ -114,6 +114,15 @@
     wireless.enable = false;
   };
 
+  #sops = {
+  #  defaultSopsFile = "";
+  #  defaultSopsFormat = "yaml";
+  #  age.keyFile = "";
+  #  secrets = {
+
+  #  };
+  #};
+  
   # Install PKGS with system parameters.
   programs = {
     hyprland = {
@@ -230,6 +239,7 @@
       LIBRARY_PATH = "/run/current-system/sw/lib";
       #VST_PATH = "$HOME/.vst:$HOME/.wine/drive_c/Program Files/Steinburg/VstPlugins";
       #VST3_PATH = "$HOME/.vst3:$HOME/.wine/drive_c/Program Files/Common Files/VST3";
+      STARSHIP_LOG = "error";
     };
     sessionVariables = {
       NIXOS_OZONE_WL = "1";
@@ -305,6 +315,7 @@
       pkgs.fh
       pkgs.rbw
       pkgs.secretspec
+      pkgs.age
       pkgs.rofi-rbw-wayland
       pkgs.tg
       pkgs.mpd
@@ -540,32 +551,32 @@
       llama-cpp.wantedBy = pkgs.lib.mkForce [ ];
     };
     user.services = {
-      #waybar = {
-      #  unitConfig = {
-      #    After = [ "graphical-session.target" ];
-      #    Requires = [ "dbus.socket" ];
-      #  };
-      #  serviceConfig = {
-      #    ExecStartPre = "${pkgs.glib}/bin/gdbus wait --system net.hadess.PowerProfiles";
-      #  };
-      #};
-      #rbw-autounlock = {
-      #  description = "Securely unlock Bitwarden Vault on Hyprland Startup";
-      #  wantedBy = [ "graphical-session.target" ];
-      #  unitConfig = {
-      #    After = [ "graphical-session.target" ];
-      #    PartOf = [ "graphical-session.target" ];
-      #  };
-      #  serviceConfig = {
-      #    Type = "oneshot";
-      #    Environment = [
-      #      "WAYLAND_DISPLAY=wayland-0"
-      #      "DISPLAY=:0"
-      #    ];
-      #    ExecStart = "${pkgs.rbw}/bin/rbw unlock";
-      #    RemainAfterExit = false;
-      #  };
-      #};
+      waybar = {
+        unitConfig = {
+          After = [ "graphical-session.target" ];
+          Requires = [ "dbus.socket" ];
+        };
+        serviceConfig = {
+          ExecStartPre = "${pkgs.glib}/bin/gdbus wait --system net.hadess.PowerProfiles";
+        };
+      };
+      rbw-autounlock = {
+        description = "Securely unlock Bitwarden Vault on Hyprland Startup";
+        wantedBy = [ "graphical-session.target" ];
+        unitConfig = {
+          After = [ "graphical-session.target" ];
+          PartOf = [ "graphical-session.target" ];
+        };
+        serviceConfig = {
+          Type = "oneshot";
+          Environment = [
+            "WAYLAND_DISPLAY=wayland-0"
+            "DISPLAY=:0"
+          ];
+          ExecStart = "${pkgs.rbw}/bin/rbw unlock";
+          RemainAfterExit = false;
+        };
+      };
     };
   };
 
