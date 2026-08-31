@@ -1,47 +1,47 @@
 format = '[Root](bold yellow)[@](bold red)[NixOS](bold blue)[:](bold red)$directory$git_branch${custom.jj-}${custom.jj}$git_status$nix_shell$package$python$rust[\]](bold yellow)[‡](bold red) $character$status'
 
-scan_timeout    = 100
-command_timeout = 500
+scan_timeout = 0
+command_timeout = 0
 
 [character]
 success_symbol = "[❯](bold blue)"
-error_symbol   = "[❯](bold red)"
-disabled       = false
+error_symbol = "[❯](bold red)"
+disabled = false
 
 [directory]
-style                     = "bold green"
-truncation_length         = 3
+style = "bold green"
+truncation_length = 3
 fish_style_pwd_dir_length = 1
 
 # Git branch appearance
 [git_branch]
-disabled      = true
+disabled = true
 only_attached = false
-symbol        = "🌿 "
-style         = "bold purple"
-format        = "on [$symbol$branch]($style) "
+symbol = "🌿 "
+style = "bold purple"
+format = "on [$symbol$branch]($style) "
 
 # Git status emojis
 [git_status]
 conflicted = "💥"
-ahead      = "🚀"
-behind     = "🐢"
-diverged   = "🔱"
-untracked  = "🤷"
-staged     = "📦"
-modified   = "📝"
-renamed    = "🚚"
-deleted    = "🗑️"
-format     = '([\[$all_status$ahead_behind\]]($style) )'
-style      = "bold red"
+ahead = "🚀"
+behind = "🐢"
+diverged = "🔱"
+untracked = "🤷"
+staged = "📦"
+modified = "📝"
+renamed = "🚚"
+deleted = "🗑️"
+format = '([\[$all_status$ahead_behind\]]($style) )'
+style = "bold red"
 
 [custom.jj]
-command        = '''jj log -r @ --no-graph -T 'local_bookmarks.join(", ")' '''
+command = '''jj log -r @ --no-graph -T 'local_bookmarks.join(", ")' '''
 detect_folders = [".jj"]
-when           = "test -d .jj"
-style          = "bold purple"
-format         = "on [$symbol$output]($style) "
-symbol         = "🌿 "
+when = "test -d .jj"
+style = "bold purple"
+format = "on [$symbol$output]($style) "
+symbol = "🌿 "
 ignore_timeout = true
 
 #[custom.jj-]
@@ -54,24 +54,24 @@ ignore_timeout = true
 
 # Python language indicator
 [python]
-symbol   = "🐍 "
-style    = "bold yellow"
+symbol = "🐍 "
+style = "bold yellow"
 disabled = false
-format   = "via [$symbol$version]($style) "
+format = "via [$symbol$version]($style) "
 
 # Rust language indicator
 [rust]
-symbol   = "🦀 "
-style    = "bold red"
+symbol = "🦀 "
+style = "bold red"
 disabled = false
-format   = "via [$symbol$version]($style) "
+format = "via [$symbol$version]($style) "
 
 [nix_shell]
 disabled = false
-symbol   = "❄️ "
-style    = "bold blue"
-format   = "via [$symbol$state$name]($style) "
+symbol = "❄️ "
+style = "bold blue"
+format = "via [$symbol$state$name]($style) "
 
 [status]
 disabled = false
-format   = '[\[$int\]](bold red) '
+format = '[\[$int\]](bold red) '

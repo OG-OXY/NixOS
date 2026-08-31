@@ -10,7 +10,7 @@
   ];
 
   specialisation = {
-    NYXOS.configuration = lib.mkDefault {
+    NYXOS.configuration = {
       system.nixos.label = "NYXOS";
       boot = {
         loader.grub.configurationName = "NYXOS";
@@ -41,14 +41,24 @@
         useOSProber = true;
         device = "nodev";
         configurationLimit = 30;
-        default = "0";
+        default = "saved";
       };
       efi = {
         canTouchEfiVariables = true;
       };
     };
+    plymouth = {
+      enable = true;
+      theme = "breeze";
+    };
     initrd = {
-      kernelModules = [ "amdgpu" ];
+      kernelModules = [
+        "amdgpu"
+        "nvidia"
+        "nvidia_modeset"
+        "nvidia_uvm"
+        "nvidia_drm"
+      ];
       availableKernelModules = [
         "xhci_pci"
         "ahci"
@@ -67,11 +77,13 @@
     ];
     extraModulePackages = [ ];
     kernelParams = [
+      "quiet"
+      "splash"
       "processor.max_cstate=0"
       "amd_idle.max_cstate=0"
       "amd_iommu=on"
       "iommu=pt"
-      #"nvidia-drm.modeset=1"
+      "nvidia-drm.modeset=1"
     ];
     kernel.sysctl = {
       "kernel.sysrq" = true;

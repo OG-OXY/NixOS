@@ -45,19 +45,19 @@
       PINENTRY_USER_DATA = "gtk";
     };
     services = {
-      waybar = {
-        Unit = {
-          After = [ "graphical-session.target" ];
-          Requires = [ "dbus.socket" ];
-        };
-        Service = {
-          ExecStartPre = "${pkgs.glib}/bin/gdbus wait --system net.hadess.PowerProfiles";
-          Restart = "on-failure";
-        };
-        Install = {
-          WantedBy = [ "graphical-session.target" ];
-        };
-      };
+      #waybar = {
+      #  Unit = {
+      #    After = [ "graphical-session.target" ];
+      #    Requires = [ "dbus.socket" ];
+      #  };
+      #  Service = {
+      #    ExecStartPre = "${pkgs.glib}/bin/gdbus wait --system net.hadess.PowerProfiles";
+      #    Restart = "on-failure";
+      #  };
+      #  Install = {
+      #    WantedBy = [ "graphical-session.target" ];
+      #  };
+      #};
       easyeffects = {
         Unit = {
           Description = "EasyEffects Audio Limiter & EQ";
@@ -71,25 +71,25 @@
           WantedBy = [ "graphical-session.target" ];
         };
       };
-      rbw-autounlock = {
-        Unit =  {
-          Description = "Securely unlock Bitwarden Vault on Hyprland Startup";
-          After = [ "graphical-session.target" ];
-          PartOf = [ "graphical-session.target" ];
-        };
-        Service = {
-          Type = "oneshot";
-          Environment = [
-            "WAYLAND_DISPLAY=wayland-0"
-            "DISPLAY=:0"
-          ];
-          ExecStart = "${pkgs.rbw}/bin/rbw unlock";
-          RemainAfterExit = false;
-        };
-        Install = {
-          WantedBy = [ "graphical-session.target" ];
-        };
-      };
+      #rbw-autounlock = {
+      #  Unit =  {
+      #    Description = "Securely unlock Bitwarden Vault on Hyprland Startup";
+      #    After = [ "graphical-session.target" ];
+      #    PartOf = [ "graphical-session.target" ];
+      #  };
+      #  Service = {
+      #    Type = "oneshot";
+      #    Environment = [
+      #      "WAYLAND_DISPLAY=wayland-0"
+      #      "DISPLAY=:0"
+      #    ];
+      #    ExecStart = "${pkgs.rbw}/bin/rbw unlock";
+      #    RemainAfterExit = false;
+      #  };
+      #  Install = {
+      #    WantedBy = [ "graphical-session.target" ];
+      #  };
+      #};
     };
   };
 

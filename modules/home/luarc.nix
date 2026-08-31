@@ -11,7 +11,7 @@
         ];
       };
       diagnostics = {
-        globals = [ "hl" ];
+        globals = { hl = true; };
       };
     };
   };
