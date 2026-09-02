@@ -42,7 +42,7 @@
 
   systemd.user = {
     sessionVariables = {
-      PINENTRY_USER_DATA = "gtk";
+      GITHUB_TOKEN = "$(cat /run/user/1000/secrets/github_token 2>/dev/null)";
     };
     services = {
       #waybar = {
