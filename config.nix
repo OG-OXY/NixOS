@@ -114,14 +114,23 @@
     wireless.enable = false;
   };
 
-  #sops = {
-  #  defaultSopsFile = "";
-  #  defaultSopsFormat = "yaml";
-  #  age.keyFile = "";
-  #  secrets = {
-
-  #  };
-  #};
+  sops = {
+    defaultSopsFile = "/var/lib/sops/secrets.yaml";
+    defaultSopsFormat = "yaml";
+    age = {
+      sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+    };
+    secrets = {
+      "GITHUB_TOKEN" = {
+        owner = "ty";
+        mode = "0444";
+      };
+      "GOOGLE_API_KEY" = {
+        owner = "ty";
+        mode = "0444";
+      };
+    };
+  };
   
   # Install PKGS with system parameters.
   programs = {
@@ -239,7 +248,6 @@
       LIBRARY_PATH = "/run/current-system/sw/lib";
       #VST_PATH = "$HOME/.vst:$HOME/.wine/drive_c/Program Files/Steinburg/VstPlugins";
       #VST3_PATH = "$HOME/.vst3:$HOME/.wine/drive_c/Program Files/Common Files/VST3";
-      STARSHIP_LOG = "error";
     };
     sessionVariables = {
       NIXOS_OZONE_WL = "1";
@@ -562,17 +570,20 @@
       };
       rbw-autounlock = {
         description = "Securely unlock Bitwarden Vault on Hyprland Startup";
-        wantedBy = [ "graphical-session.target" ];
+        wantedBy = [ "wayland-session@Hyprland.target"];
+        #wantedBy = [ "graphical-session.target" ];
         unitConfig = {
-          After = [ "graphical-session.target" ];
-          PartOf = [ "graphical-session.target" ];
+          After = [ "wayland-session@Hyprland.target" "dbus.socket" ];
+          PartOf = [ "wayland-session@Hyprland.target" ];
+          #After = [ "graphical-session.target" ];
+          #PartOf = [ "graphical-session.target" ];
         };
         serviceConfig = {
           Type = "oneshot";
-          Environment = [
-            "WAYLAND_DISPLAY=wayland-0"
-            "DISPLAY=:0"
-          ];
+          #Environment = [
+          #  "WAYLAND_DISPLAY=wayland-0"
+          #  "DISPLAY=:0"
+          #];
           ExecStart = "${pkgs.rbw}/bin/rbw unlock";
           RemainAfterExit = false;
         };
