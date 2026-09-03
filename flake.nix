@@ -44,7 +44,6 @@
     home-manager,
     sops,
     stylix,
-    #woomer,
     ...
   } @ inputs: {
     nixosConfigurations."nixos" = nixpkgs.lib.nixosSystem {

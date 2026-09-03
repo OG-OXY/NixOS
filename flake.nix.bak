@@ -1,0 +1,100 @@
+{
+  description = "System Flake";
+
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-26.05";
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    import-tree.url = "github:denful/import-tree";
+    wrappers = {
+      url = "github:BirdeeHub/nix-wrapper-modules";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    chaotic = {
+      url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    sops = {
+      url = "github:mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    stylix = {
+      url = "github:nix-community/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nvf.url = "path:./modules/flakes/NVF";
+    llm-agents.url = "path:./modules/flakes/LLM-Agents";
+  };
+
+  outputs = inputs:
+    let
+      inherit (inputs.nixpkgs) lib;
+      inherit (lib.fileset) toList fileFilter;
+
+      isNixModule = file:
+        let
+          pathStr = toString file;
+        in
+        file.hasExt "nix"
+        && file.name != "flake.nix"
+        && !lib.hasPrefix "_" file.name
+        && !lib.hasInfix ".devenv" pathStr
+        && !lib.hasInfix ".direnv" pathStr;
+
+      importTree = path:
+        toList (fileFilter isNixModule path);
+    in
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
+      imports = [];
+
+      flake = {
+        nixosConfigurations."nixos" = inputs.nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs; };
+          modules = [
+            {
+              nixpkgs = {
+                hostPlatform = "x86_64-linux";
+                config = {
+                  allowUnfree = true;
+                  cudaSupport = true;
+                  cudaCapabilities = [ "6.1" ];
+                  permittedInsecurePackages = [
+                    "electron-39.8.10"
+                  ];
+                };
+              };
+              hardware.enableRedistributableFirmware = true;
+            }
+            ./config.nix
+            ./systemModules.nix
+            ./home.nix
+            ./homeModules.nix
+            inputs.chaotic.nixosModules.default
+            inputs.sops.nixosModules.sops
+            inputs.stylix.nixosModules.stylix
+            inputs.home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                backupFileExtension = ".bak";
+                users = {
+                  root = import ./modules/home/root-home.nix;
+                  ty = import ./modules/home/ty-home.nix;
+                };
+                extraSpecialArgs = { inherit inputs; };
+              };
+            }
+          ] ++ importTree ./modules;
+        };
+      };
+    };
+}

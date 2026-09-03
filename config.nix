@@ -72,6 +72,12 @@
         }
       ];
     };
+    pam.services = {
+      login = {
+        enableGnomeKeyring = true;
+        enableKwallet = false;
+      };
+    };
   };
 
   # User parameters.
@@ -115,9 +121,11 @@
   };
 
   sops = {
-    defaultSopsFile = "/var/lib/sops/secrets.yaml";
+    defaultSopsFile = "/home/ty/NixOS/secrets.yaml";
     defaultSopsFormat = "yaml";
+    validateSopsFiles = false;
     age = {
+      keyFile = "/home/ty/.config/sops/age/keys.txt";
       sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
     };
     secrets = {
@@ -323,6 +331,7 @@
       pkgs.fh
       pkgs.rbw
       pkgs.secretspec
+      pkgs.sops
       pkgs.age
       pkgs.rofi-rbw-wayland
       pkgs.tg
@@ -451,6 +460,7 @@
         };
       };
     };
+    dbus.enable = true;
     greetd.enable = true;
     kmscon.enable = true;
     tailscale.enable = true;
@@ -570,11 +580,10 @@
       };
       rbw-autounlock = {
         description = "Securely unlock Bitwarden Vault on Hyprland Startup";
-        wantedBy = [ "wayland-session@Hyprland.target"];
-        #wantedBy = [ "graphical-session.target" ];
+        wantedBy = [ "wayland-session@Hyprland-uwsm.target"];
         unitConfig = {
-          After = [ "wayland-session@Hyprland.target" "dbus.socket" ];
-          PartOf = [ "wayland-session@Hyprland.target" ];
+          After = [ "wayland-session@Hyprland-uwsm.target" "dbus.socket" ];
+          PartOf = [ "wayland-session@Hyprland-uwsm.target" ];
           #After = [ "graphical-session.target" ];
           #PartOf = [ "graphical-session.target" ];
         };
