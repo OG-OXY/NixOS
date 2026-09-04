@@ -1,7 +1,16 @@
 [package]
-name = "Rust"
+name = "vigspa"
 version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-smithay = "0.3.0"
+smithay = { version = "0.4.4", features = [
+  "backend_winit",
+  "backend_egl",
+  "renderer_glow",
+  "wayland_frontend"
+] }
+
+calloop = "0.13"
+tracing = "0.1"
+tracing-subscriber = "0.3"

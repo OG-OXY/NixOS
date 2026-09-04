@@ -2,91 +2,156 @@ PATH=${PATH:-}
 nix_saved_PATH="$PATH"
 XDG_DATA_DIRS=${XDG_DATA_DIRS:-}
 nix_saved_XDG_DATA_DIRS="$XDG_DATA_DIRS"
-AS='as'
-export AS
-NIX_CFLAGS_COMPILE_FOR_BUILD=' -isystem /nix/store/ad0w92xhd7f1gbwzfgpkd0nz1ipijd8h-bash-interactive-5.3p15-dev/include -fmacro-prefix-map=/nix/store/ad0w92xhd7f1gbwzfgpkd0nz1ipijd8h-bash-interactive-5.3p15-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-bash-interactive-5.3p15-dev -isystem /nix/store/7ydf0dzbsq7w35bxifci2mslm76pw1qf-gnumake-4.4.1/include -fmacro-prefix-map=/nix/store/7ydf0dzbsq7w35bxifci2mslm76pw1qf-gnumake-4.4.1=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gnumake-4.4.1 -isystem /nix/store/bg2bp1zmii5spb2hkgv5xn6mzva7nx9r-gdb-17.2/include -fmacro-prefix-map=/nix/store/bg2bp1zmii5spb2hkgv5xn6mzva7nx9r-gdb-17.2=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gdb-17.2 -isystem /nix/store/5jhgdsgl541jznvgv2xlhhksnkix2hib-valgrind-3.27.1-dev/include -fmacro-prefix-map=/nix/store/5jhgdsgl541jznvgv2xlhhksnkix2hib-valgrind-3.27.1-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-valgrind-3.27.1-dev -isystem /nix/store/7svfxf5fpqsn4jjf8r044f65a030f40x-wayland-1.26.0-dev/include -fmacro-prefix-map=/nix/store/7svfxf5fpqsn4jjf8r044f65a030f40x-wayland-1.26.0-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-wayland-1.26.0-dev -isystem /nix/store/2nlq43n0gc4s8cbjjxpnfg97kgmk8blh-wayland-protocols-1.49/include -fmacro-prefix-map=/nix/store/2nlq43n0gc4s8cbjjxpnfg97kgmk8blh-wayland-protocols-1.49=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-wayland-protocols-1.49 -isystem /nix/store/1sqzajgcm7nk3knr8y2ygdxgsicrh72x-libxkbcommon-1.13.2-dev/include -fmacro-prefix-map=/nix/store/1sqzajgcm7nk3knr8y2ygdxgsicrh72x-libxkbcommon-1.13.2-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libxkbcommon-1.13.2-dev -isystem /nix/store/ghf184l1525ks9h8dm3nsqpnw1wnq6ws-libinput-1.31.3-dev/include -fmacro-prefix-map=/nix/store/ghf184l1525ks9h8dm3nsqpnw1wnq6ws-libinput-1.31.3-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libinput-1.31.3-dev -isystem /nix/store/00vmp292cjgwhzp089cszl51xiq8ncrj-systemd-minimal-libs-261.2-dev/include -fmacro-prefix-map=/nix/store/00vmp292cjgwhzp089cszl51xiq8ncrj-systemd-minimal-libs-261.2-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-systemd-minimal-libs-261.2-dev -isystem /nix/store/s30pndvs4kh1dk7jxxj4ljn27spyr8fv-dbus-1.16.2-dev/include -fmacro-prefix-map=/nix/store/s30pndvs4kh1dk7jxxj4ljn27spyr8fv-dbus-1.16.2-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-dbus-1.16.2-dev -isystem /nix/store/g5l3mkk656ccm58gzz0a9kryy2grih01-compiler-rt-libc-21.1.8-dev/include -fmacro-prefix-map=/nix/store/g5l3mkk656ccm58gzz0a9kryy2grih01-compiler-rt-libc-21.1.8-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-compiler-rt-libc-21.1.8-dev -isystem /nix/store/ad0w92xhd7f1gbwzfgpkd0nz1ipijd8h-bash-interactive-5.3p15-dev/include -fmacro-prefix-map=/nix/store/ad0w92xhd7f1gbwzfgpkd0nz1ipijd8h-bash-interactive-5.3p15-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-bash-interactive-5.3p15-dev -isystem /nix/store/7ydf0dzbsq7w35bxifci2mslm76pw1qf-gnumake-4.4.1/include -fmacro-prefix-map=/nix/store/7ydf0dzbsq7w35bxifci2mslm76pw1qf-gnumake-4.4.1=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gnumake-4.4.1 -isystem /nix/store/bg2bp1zmii5spb2hkgv5xn6mzva7nx9r-gdb-17.2/include -fmacro-prefix-map=/nix/store/bg2bp1zmii5spb2hkgv5xn6mzva7nx9r-gdb-17.2=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gdb-17.2 -isystem /nix/store/5jhgdsgl541jznvgv2xlhhksnkix2hib-valgrind-3.27.1-dev/include -fmacro-prefix-map=/nix/store/5jhgdsgl541jznvgv2xlhhksnkix2hib-valgrind-3.27.1-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-valgrind-3.27.1-dev -isystem /nix/store/7svfxf5fpqsn4jjf8r044f65a030f40x-wayland-1.26.0-dev/include -fmacro-prefix-map=/nix/store/7svfxf5fpqsn4jjf8r044f65a030f40x-wayland-1.26.0-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-wayland-1.26.0-dev -isystem /nix/store/2nlq43n0gc4s8cbjjxpnfg97kgmk8blh-wayland-protocols-1.49/include -fmacro-prefix-map=/nix/store/2nlq43n0gc4s8cbjjxpnfg97kgmk8blh-wayland-protocols-1.49=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-wayland-protocols-1.49 -isystem /nix/store/1sqzajgcm7nk3knr8y2ygdxgsicrh72x-libxkbcommon-1.13.2-dev/include -fmacro-prefix-map=/nix/store/1sqzajgcm7nk3knr8y2ygdxgsicrh72x-libxkbcommon-1.13.2-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libxkbcommon-1.13.2-dev -isystem /nix/store/ghf184l1525ks9h8dm3nsqpnw1wnq6ws-libinput-1.31.3-dev/include -fmacro-prefix-map=/nix/store/ghf184l1525ks9h8dm3nsqpnw1wnq6ws-libinput-1.31.3-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libinput-1.31.3-dev -isystem /nix/store/00vmp292cjgwhzp089cszl51xiq8ncrj-systemd-minimal-libs-261.2-dev/include -fmacro-prefix-map=/nix/store/00vmp292cjgwhzp089cszl51xiq8ncrj-systemd-minimal-libs-261.2-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-systemd-minimal-libs-261.2-dev -isystem /nix/store/s30pndvs4kh1dk7jxxj4ljn27spyr8fv-dbus-1.16.2-dev/include -fmacro-prefix-map=/nix/store/s30pndvs4kh1dk7jxxj4ljn27spyr8fv-dbus-1.16.2-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-dbus-1.16.2-dev -isystem /nix/store/g5l3mkk656ccm58gzz0a9kryy2grih01-compiler-rt-libc-21.1.8-dev/include -fmacro-prefix-map=/nix/store/g5l3mkk656ccm58gzz0a9kryy2grih01-compiler-rt-libc-21.1.8-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-compiler-rt-libc-21.1.8-dev -isystem /nix/store/ad0w92xhd7f1gbwzfgpkd0nz1ipijd8h-bash-interactive-5.3p15-dev/include -fmacro-prefix-map=/nix/store/ad0w92xhd7f1gbwzfgpkd0nz1ipijd8h-bash-interactive-5.3p15-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-bash-interactive-5.3p15-dev -isystem /nix/store/7ydf0dzbsq7w35bxifci2mslm76pw1qf-gnumake-4.4.1/include -fmacro-prefix-map=/nix/store/7ydf0dzbsq7w35bxifci2mslm76pw1qf-gnumake-4.4.1=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gnumake-4.4.1 -isystem /nix/store/bg2bp1zmii5spb2hkgv5xn6mzva7nx9r-gdb-17.2/include -fmacro-prefix-map=/nix/store/bg2bp1zmii5spb2hkgv5xn6mzva7nx9r-gdb-17.2=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gdb-17.2 -isystem /nix/store/5jhgdsgl541jznvgv2xlhhksnkix2hib-valgrind-3.27.1-dev/include -fmacro-prefix-map=/nix/store/5jhgdsgl541jznvgv2xlhhksnkix2hib-valgrind-3.27.1-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-valgrind-3.27.1-dev -isystem /nix/store/7svfxf5fpqsn4jjf8r044f65a030f40x-wayland-1.26.0-dev/include -fmacro-prefix-map=/nix/store/7svfxf5fpqsn4jjf8r044f65a030f40x-wayland-1.26.0-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-wayland-1.26.0-dev -isystem /nix/store/2nlq43n0gc4s8cbjjxpnfg97kgmk8blh-wayland-protocols-1.49/include -fmacro-prefix-map=/nix/store/2nlq43n0gc4s8cbjjxpnfg97kgmk8blh-wayland-protocols-1.49=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-wayland-protocols-1.49 -isystem /nix/store/1sqzajgcm7nk3knr8y2ygdxgsicrh72x-libxkbcommon-1.13.2-dev/include -fmacro-prefix-map=/nix/store/1sqzajgcm7nk3knr8y2ygdxgsicrh72x-libxkbcommon-1.13.2-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libxkbcommon-1.13.2-dev -isystem /nix/store/ghf184l1525ks9h8dm3nsqpnw1wnq6ws-libinput-1.31.3-dev/include -fmacro-prefix-map=/nix/store/ghf184l1525ks9h8dm3nsqpnw1wnq6ws-libinput-1.31.3-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libinput-1.31.3-dev -isystem /nix/store/00vmp292cjgwhzp089cszl51xiq8ncrj-systemd-minimal-libs-261.2-dev/include -fmacro-prefix-map=/nix/store/00vmp292cjgwhzp089cszl51xiq8ncrj-systemd-minimal-libs-261.2-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-systemd-minimal-libs-261.2-dev -isystem /nix/store/s30pndvs4kh1dk7jxxj4ljn27spyr8fv-dbus-1.16.2-dev/include -fmacro-prefix-map=/nix/store/s30pndvs4kh1dk7jxxj4ljn27spyr8fv-dbus-1.16.2-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-dbus-1.16.2-dev -isystem /nix/store/g5l3mkk656ccm58gzz0a9kryy2grih01-compiler-rt-libc-21.1.8-dev/include -fmacro-prefix-map=/nix/store/g5l3mkk656ccm58gzz0a9kryy2grih01-compiler-rt-libc-21.1.8-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-compiler-rt-libc-21.1.8-dev'
-export NIX_CFLAGS_COMPILE_FOR_BUILD
-depsTargetTargetPropagated=''
-export depsTargetTargetPropagated
-DEVENV_PROFILE='/nix/store/jspy1sm5x42jnxdyh216g7rrr2vlh038-devenv-profile'
-export DEVENV_PROFILE
-depsBuildTargetPropagated=''
-export depsBuildTargetPropagated
-buildInputs=''
-export buildInputs
-depsBuildBuild=''
-export depsBuildBuild
-outputLib='out'
-READELF='readelf'
-export READELF
-NIX_LDFLAGS='-rpath /nix/store/x41jgj3lvnz0sllib4800341xbp7qrqf-devenv-shell-env/lib  -L/nix/store/ijpixkxqhvlsjmjbgwfh7dr8iz9rn3lz-rust-stable-1.98.0-1.98.0/lib -L/nix/store/ijpixkxqhvlsjmjbgwfh7dr8iz9rn3lz-rust-stable-1.98.0-1.98.0/lib -L/nix/store/2y91v9adfb6kyrwzkjix0j9yx78xmyy0-clang-tools-21.1.8/lib -L/nix/store/2y91v9adfb6kyrwzkjix0j9yx78xmyy0-clang-tools-21.1.8/lib -L/nix/store/bg2bp1zmii5spb2hkgv5xn6mzva7nx9r-gdb-17.2/lib -L/nix/store/bg2bp1zmii5spb2hkgv5xn6mzva7nx9r-gdb-17.2/lib -L/nix/store/vjcwhp0milwa1jqy1inpjxrsh8hjrgwc-wayland-1.26.0/lib -L/nix/store/vjcwhp0milwa1jqy1inpjxrsh8hjrgwc-wayland-1.26.0/lib -L/nix/store/yk95z4hjlzdk418px0fc797qszccfj5p-libxkbcommon-1.13.2/lib -L/nix/store/yk95z4hjlzdk418px0fc797qszccfj5p-libxkbcommon-1.13.2/lib -L/nix/store/4hlgp6r4j5p6b2b9sxw01cba0x3fjxd6-systemd-minimal-libs-261.2/lib -L/nix/store/4hlgp6r4j5p6b2b9sxw01cba0x3fjxd6-systemd-minimal-libs-261.2/lib -L/nix/store/y11wm3zhcvjav2vbav9p0ky99xa2wlyv-libinput-1.31.3/lib -L/nix/store/y11wm3zhcvjav2vbav9p0ky99xa2wlyv-libinput-1.31.3/lib -L/nix/store/yn8y98bfwgr9jxcrl1x32h04mshpn9wc-dbus-1.16.2-lib/lib -L/nix/store/yn8y98bfwgr9jxcrl1x32h04mshpn9wc-dbus-1.16.2-lib/lib -L/nix/store/ijpixkxqhvlsjmjbgwfh7dr8iz9rn3lz-rust-stable-1.98.0-1.98.0/lib -L/nix/store/ijpixkxqhvlsjmjbgwfh7dr8iz9rn3lz-rust-stable-1.98.0-1.98.0/lib -L/nix/store/2y91v9adfb6kyrwzkjix0j9yx78xmyy0-clang-tools-21.1.8/lib -L/nix/store/2y91v9adfb6kyrwzkjix0j9yx78xmyy0-clang-tools-21.1.8/lib -L/nix/store/bg2bp1zmii5spb2hkgv5xn6mzva7nx9r-gdb-17.2/lib -L/nix/store/bg2bp1zmii5spb2hkgv5xn6mzva7nx9r-gdb-17.2/lib -L/nix/store/vjcwhp0milwa1jqy1inpjxrsh8hjrgwc-wayland-1.26.0/lib -L/nix/store/vjcwhp0milwa1jqy1inpjxrsh8hjrgwc-wayland-1.26.0/lib -L/nix/store/yk95z4hjlzdk418px0fc797qszccfj5p-libxkbcommon-1.13.2/lib -L/nix/store/yk95z4hjlzdk418px0fc797qszccfj5p-libxkbcommon-1.13.2/lib -L/nix/store/4hlgp6r4j5p6b2b9sxw01cba0x3fjxd6-systemd-minimal-libs-261.2/lib -L/nix/store/4hlgp6r4j5p6b2b9sxw01cba0x3fjxd6-systemd-minimal-libs-261.2/lib -L/nix/store/y11wm3zhcvjav2vbav9p0ky99xa2wlyv-libinput-1.31.3/lib -L/nix/store/y11wm3zhcvjav2vbav9p0ky99xa2wlyv-libinput-1.31.3/lib -L/nix/store/yn8y98bfwgr9jxcrl1x32h04mshpn9wc-dbus-1.16.2-lib/lib -L/nix/store/yn8y98bfwgr9jxcrl1x32h04mshpn9wc-dbus-1.16.2-lib/lib'
-export NIX_LDFLAGS
-LD='ld'
-export LD
-depsHostHostPropagated=''
-export depsHostHostPropagated
-declare -a envHostTargetHooks=('ccWrapper_addCVars' 'bintoolsWrapper_addLDVars' 'ccWrapper_addCVars' 'bintoolsWrapper_addLDVars' 'pkgConfigWrapper_addPkgConfigPath' )
-OBJDUMP='objdump'
-export OBJDUMP
-patches=''
-export patches
-NIX_BINTOOLS_WRAPPER_TARGET_BUILD_x86_64_unknown_linux_gnu='1'
-export NIX_BINTOOLS_WRAPPER_TARGET_BUILD_x86_64_unknown_linux_gnu
-OPTERR='1'
-hardeningDisable=''
-export hardeningDisable
-declare -a envBuildBuildHooks=('ccWrapper_addCVars' 'bintoolsWrapper_addLDVars' )
-outputs='out'
-export outputs
-RANLIB='ranlib'
-export RANLIB
-XDG_DATA_DIRS='/nix/store/7a60q5dgnv6z96c279rc1nalyiw4mgqn-bash-interactive-5.3p15/share:/nix/store/6vv06lcrdpnsdkhz3al5xm1azaz7sizx-rust-analyzer-preview-1.98.0-x86_64-unknown-linux-gnu/share:/nix/store/ijpixkxqhvlsjmjbgwfh7dr8iz9rn3lz-rust-stable-1.98.0-1.98.0/share:/nix/store/7ydf0dzbsq7w35bxifci2mslm76pw1qf-gnumake-4.4.1/share:/nix/store/bg2bp1zmii5spb2hkgv5xn6mzva7nx9r-gdb-17.2/share:/nix/store/2nlq43n0gc4s8cbjjxpnfg97kgmk8blh-wayland-protocols-1.49/share:/nix/store/yk95z4hjlzdk418px0fc797qszccfj5p-libxkbcommon-1.13.2/share:/nix/store/00vmp292cjgwhzp089cszl51xiq8ncrj-systemd-minimal-libs-261.2-dev/share:/nix/store/y11wm3zhcvjav2vbav9p0ky99xa2wlyv-libinput-1.31.3/share:/nix/store/2swbxihjql78pnn5kfmhjq5dvp9m744b-dbus-1.16.2/share:/nix/store/7fx93fz9c809w8yjxb0934zw6xcjis58-pkg-config-wrapper-0.29.2/share:/nix/store/fpig164lz7fcipbndn61sfd2y2yq363n-patchelf-0.15.2/share'
-export XDG_DATA_DIRS
-doInstallCheck=''
-export doInstallCheck
-outputInfo='out'
-CONFIG_SHELL='/nix/store/9ipfvwnqp1q8ijnmi5sxvlx9r8w34lw3-bash-5.3p15/bin/bash'
-export CONFIG_SHELL
-mesonFlags=''
-export mesonFlags
-name='devenv-shell-env'
-export name
-builder='/nix/store/9ipfvwnqp1q8ijnmi5sxvlx9r8w34lw3-bash-5.3p15/bin/bash'
-export builder
-NIX_BUILD_CORES='6'
-export NIX_BUILD_CORES
-depsHostHost=''
-export depsHostHost
-declare -a propagatedBuildDepFiles=('propagated-build-build-deps' 'propagated-native-build-inputs' 'propagated-build-target-deps' )
-DEVENV_DOTFILE='/home/ty/NixOS/Master/flakes/Rust/.devenv'
-export DEVENV_DOTFILE
-declare -a propagatedHostDepFiles=('propagated-host-host-deps' 'propagated-build-inputs' )
-out='/nix/store/x41jgj3lvnz0sllib4800341xbp7qrqf-devenv-shell-env'
-export out
-READELF_FOR_BUILD='readelf'
-export READELF_FOR_BUILD
-__structuredAttrs=''
-export __structuredAttrs
-NIX_PKG_CONFIG_WRAPPER_TARGET_HOST_x86_64_unknown_linux_gnu='1'
-export NIX_PKG_CONFIG_WRAPPER_TARGET_HOST_x86_64_unknown_linux_gnu
-DEVENV_TASK_FILE='/nix/store/v6bzsvjfhv44hcn9mkav3nb56y65lggx-tasks.json'
-export DEVENV_TASK_FILE
-outputBin='out'
-outputInclude='out'
-declare -a envTargetTargetHooks=()
-declare -a preConfigureHooks=('_multioutConfig' )
-outputDevman='out'
-AR='ar'
-export AR
-pkg='/nix/store/w88q44gqd1qg5wmkk7v0h97rpiqvam0l-gcc-wrapper-15.3.0'
-DEVENV_TASKS=''
-export DEVENV_TASKS
-NIX_CC_WRAPPER_TARGET_HOST_x86_64_unknown_linux_gnu='1'
-export NIX_CC_WRAPPER_TARGET_HOST_x86_64_unknown_linux_gnu
-SIZE='size'
-export SIZE
 HOST_PATH='/nix/store/ync7h8cyhw4nzw2laba4wra6b8mcn9by-compiler-rt-libc-21.1.8/bin:/nix/store/3qgy8q2j64v2m9jy3a5jmssacbblhd4r-coreutils-9.11/bin:/nix/store/i4kjidyvl8ciwbcwm75g75sriq3knav0-findutils-4.11.0/bin:/nix/store/xw09m9cnc9ayb2j53y2rj8jhm1h7kkxa-diffutils-3.12/bin:/nix/store/4nylac9gazdpsid79qyk0jpqm312b2jx-gnused-4.10/bin:/nix/store/yhr4ps9rdmb55pgqaq246vlh7xfac1dx-gnugrep-3.12/bin:/nix/store/bpy2ps3f0f3gvgvqjwgqriw1j1n840wd-gawk-5.4.1/bin:/nix/store/w2mbg6mcq7k3j088sbwfziy8vsdhyk7v-gnutar-1.35/bin:/nix/store/sd9qcv5s2gxvd6hpp5hk5cixq2bd4jd1-gzip-1.14/bin:/nix/store/622jkvg8hgffly7dca6iif9drvimingx-bzip2-1.0.8-bin/bin:/nix/store/hd36xbvbc0vrn9f9idrfwxznri0ax427-gnumake-4.4.1/bin:/nix/store/9ipfvwnqp1q8ijnmi5sxvlx9r8w34lw3-bash-5.3p15/bin:/nix/store/1rcr9yyj9qlgm3dyin1j37xl7q84h15i-patch-2.8/bin:/nix/store/0fb3jrf20z28598alm6g7rrsw6dz2cqj-xz-5.8.3-bin/bin:/nix/store/xcab8m6wdrd30l10bw3hkz32yiibynzv-file-5.48/bin'
 export HOST_PATH
+propagatedBuildInputs=''
+export propagatedBuildInputs
+outputDev='out'
+READELF='readelf'
+export READELF
+NIX_CC_WRAPPER_TARGET_BUILD_x86_64_unknown_linux_gnu='1'
+export NIX_CC_WRAPPER_TARGET_BUILD_x86_64_unknown_linux_gnu
+SIZE='size'
+export SIZE
+SIZE_FOR_BUILD='size'
+export SIZE_FOR_BUILD
+CXX='clang++'
+export CXX
+CC='clang'
+export CC
+NIX_BINTOOLS_WRAPPER_TARGET_BUILD_x86_64_unknown_linux_gnu='1'
+export NIX_BINTOOLS_WRAPPER_TARGET_BUILD_x86_64_unknown_linux_gnu
+NM='nm'
+export NM
+NIX_CC_WRAPPER_TARGET_HOST_x86_64_unknown_linux_gnu='1'
+export NIX_CC_WRAPPER_TARGET_HOST_x86_64_unknown_linux_gnu
+RANLIB='ranlib'
+export RANLIB
+declare -a envHostTargetHooks=('ccWrapper_addCVars' 'bintoolsWrapper_addLDVars' 'ccWrapper_addCVars' 'bintoolsWrapper_addLDVars' 'pkgConfigWrapper_addPkgConfigPath' )
+outputDevdoc='REMOVE'
+PATH='/nix/store/w88q44gqd1qg5wmkk7v0h97rpiqvam0l-gcc-wrapper-15.3.0/bin:/nix/store/4yxdxw3kppr2pbic95p4mri520rkdag2-gcc-15.3.0/bin:/nix/store/axmdd5wlxg1c9dbblvj09pjhkawqxmqx-glibc-2.42-84-bin/bin:/nix/store/3qgy8q2j64v2m9jy3a5jmssacbblhd4r-coreutils-9.11/bin:/nix/store/rm982p6i9ry7rwq5jn638kdpv0a2331f-binutils-wrapper-2.46/bin:/nix/store/5pa1282x1sasbwhmnah6bny1g9pc2lj1-binutils-2.46/bin:/nix/store/7a60q5dgnv6z96c279rc1nalyiw4mgqn-bash-interactive-5.3p15/bin:/nix/store/6vv06lcrdpnsdkhz3al5xm1azaz7sizx-rust-analyzer-preview-1.98.0-x86_64-unknown-linux-gnu/bin:/nix/store/xrgydm47d3f9256z7fwffwrzm4lnk5hk-rust-stable-1.98.0-1.98.0/bin:/nix/store/2y91v9adfb6kyrwzkjix0j9yx78xmyy0-clang-tools-21.1.8/bin:/nix/store/7ydf0dzbsq7w35bxifci2mslm76pw1qf-gnumake-4.4.1/bin:/nix/store/6jh160z5zby7p11nk8x7z3jdnxmimpjp-ccls-0.20250815.1/bin:/nix/store/bg2bp1zmii5spb2hkgv5xn6mzva7nx9r-gdb-17.2/bin:/nix/store/7p6qjr2kqkbd0i3ylndwrxsb0j7m317k-valgrind-3.27.1/bin:/nix/store/5rhnyy8qnwnasmadd83bbrp1agylvwjs-lld-21.1.8/bin:/nix/store/07izjnizaihn7z0jzaxjgbwvdyyfp7p4-foot-1.27.0/bin:/nix/store/yk95z4hjlzdk418px0fc797qszccfj5p-libxkbcommon-1.13.2/bin:/nix/store/yn8y98bfwgr9jxcrl1x32h04mshpn9wc-dbus-1.16.2-lib/bin:/nix/store/2swbxihjql78pnn5kfmhjq5dvp9m744b-dbus-1.16.2/bin:/nix/store/v5c40hysv678q0yjwvdi0q97rdmxr9r4-mesa-26.2.1/bin:/nix/store/00s8a1232vhvgg7jdslifsnqzkl8wxj1-libdrm-2.4.134-bin/bin:/nix/store/h9z78lc5ik5la0b23jjsvb2hfyrvcxvz-seatd-0.9.3-bin/bin:/nix/store/z203ci88037mkq16c1kn8gy518m3ab1y-freetype-2.14.3-dev/bin:/nix/store/622jkvg8hgffly7dca6iif9drvimingx-bzip2-1.0.8-bin/bin:/nix/store/34vidkz6jm5pinhhyxi64pj82x70vida-brotli-1.2.0/bin:/nix/store/p8m024sxqwg7il6660zqgshrqpsvf43l-libpng-apng-1.6.58-dev/bin:/nix/store/iss09vixlpbq7jwf2y5wkmxvcfydgm3v-expat-2.8.3-dev/bin:/nix/store/122fcxcqy3ay3jkm3fa2bav0vb8mgdjy-fontconfig-2.18.2-bin/bin:/nix/store/w021fbcg4z6vxihnp6gb6vijyifl051f-clang-wrapper-21.1.8/bin:/nix/store/603yaax3l2jmc0hfv6g3hgjr1qk5jfxk-clang-21.1.8/bin:/nix/store/vs80ag6hsr58wv5fn3nlq8qi32x9hwfi-binutils-wrapper-2.46/bin:/nix/store/7fx93fz9c809w8yjxb0934zw6xcjis58-pkg-config-wrapper-0.29.2/bin:/nix/store/fpig164lz7fcipbndn61sfd2y2yq363n-patchelf-0.15.2/bin:/nix/store/ync7h8cyhw4nzw2laba4wra6b8mcn9by-compiler-rt-libc-21.1.8/bin:/nix/store/3qgy8q2j64v2m9jy3a5jmssacbblhd4r-coreutils-9.11/bin:/nix/store/i4kjidyvl8ciwbcwm75g75sriq3knav0-findutils-4.11.0/bin:/nix/store/xw09m9cnc9ayb2j53y2rj8jhm1h7kkxa-diffutils-3.12/bin:/nix/store/4nylac9gazdpsid79qyk0jpqm312b2jx-gnused-4.10/bin:/nix/store/yhr4ps9rdmb55pgqaq246vlh7xfac1dx-gnugrep-3.12/bin:/nix/store/bpy2ps3f0f3gvgvqjwgqriw1j1n840wd-gawk-5.4.1/bin:/nix/store/w2mbg6mcq7k3j088sbwfziy8vsdhyk7v-gnutar-1.35/bin:/nix/store/sd9qcv5s2gxvd6hpp5hk5cixq2bd4jd1-gzip-1.14/bin:/nix/store/622jkvg8hgffly7dca6iif9drvimingx-bzip2-1.0.8-bin/bin:/nix/store/hd36xbvbc0vrn9f9idrfwxznri0ax427-gnumake-4.4.1/bin:/nix/store/9ipfvwnqp1q8ijnmi5sxvlx9r8w34lw3-bash-5.3p15/bin:/nix/store/1rcr9yyj9qlgm3dyin1j37xl7q84h15i-patch-2.8/bin:/nix/store/0fb3jrf20z28598alm6g7rrsw6dz2cqj-xz-5.8.3-bin/bin:/nix/store/xcab8m6wdrd30l10bw3hkz32yiibynzv-file-5.48/bin'
+export PATH
+NM_FOR_BUILD='nm'
+export NM_FOR_BUILD
+doInstallCheck=''
+export doInstallCheck
+NIX_BINTOOLS_FOR_BUILD='/nix/store/rm982p6i9ry7rwq5jn638kdpv0a2331f-binutils-wrapper-2.46'
+export NIX_BINTOOLS_FOR_BUILD
+XDG_DATA_DIRS='/nix/store/7a60q5dgnv6z96c279rc1nalyiw4mgqn-bash-interactive-5.3p15/share:/nix/store/6vv06lcrdpnsdkhz3al5xm1azaz7sizx-rust-analyzer-preview-1.98.0-x86_64-unknown-linux-gnu/share:/nix/store/xrgydm47d3f9256z7fwffwrzm4lnk5hk-rust-stable-1.98.0-1.98.0/share:/nix/store/7ydf0dzbsq7w35bxifci2mslm76pw1qf-gnumake-4.4.1/share:/nix/store/bg2bp1zmii5spb2hkgv5xn6mzva7nx9r-gdb-17.2/share:/nix/store/07izjnizaihn7z0jzaxjgbwvdyyfp7p4-foot-1.27.0/share:/nix/store/2nlq43n0gc4s8cbjjxpnfg97kgmk8blh-wayland-protocols-1.49/share:/nix/store/yk95z4hjlzdk418px0fc797qszccfj5p-libxkbcommon-1.13.2/share:/nix/store/00vmp292cjgwhzp089cszl51xiq8ncrj-systemd-minimal-libs-261.2-dev/share:/nix/store/y11wm3zhcvjav2vbav9p0ky99xa2wlyv-libinput-1.31.3/share:/nix/store/2swbxihjql78pnn5kfmhjq5dvp9m744b-dbus-1.16.2/share:/nix/store/v5c40hysv678q0yjwvdi0q97rdmxr9r4-mesa-26.2.1/share:/nix/store/00s8a1232vhvgg7jdslifsnqzkl8wxj1-libdrm-2.4.134-bin/share:/nix/store/5qg70j0rzbxqlxlzrq87k4ksgzdwrwr6-libdrm-2.4.134/share:/nix/store/z203ci88037mkq16c1kn8gy518m3ab1y-freetype-2.14.3-dev/share:/nix/store/nd34kmibbq6y7qmp78rhw38adsj5ffd0-zlib-1.3.2-dev/share:/nix/store/l3p6y554mkxi4vipnnp8809kxj0g1lyv-zlib-1.3.2/share:/nix/store/34vidkz6jm5pinhhyxi64pj82x70vida-brotli-1.2.0/share:/nix/store/dczkv6755chri9gsvacxvqpz9nn2dwld-freetype-2.14.3/share:/nix/store/iss09vixlpbq7jwf2y5wkmxvcfydgm3v-expat-2.8.3-dev/share:/nix/store/2gkqj0v0msfcagwf5ix199rf1lnwf2a1-expat-2.8.3/share:/nix/store/122fcxcqy3ay3jkm3fa2bav0vb8mgdjy-fontconfig-2.18.2-bin/share:/nix/store/iv0yvsywa1v35xzdkqz9wdzhg7vshpdd-fontconfig-2.18.2-lib/share:/nix/store/q9bsac1xi1q9fhqkg1pdlk80637v9fkw-egl-wayland-1.1.21-dev/share:/nix/store/jaw4nr6lwfpv40140zk7prh9q8jap2gz-eglexternalplatform-1.2.1/share:/nix/store/6slvk1x4gashcfg4bgvcc7ywbwzf1isy-egl-wayland-1.1.21/share:/nix/store/y4k7f46xqci803kfbi78sfy09r1a978x-xorgproto-2025.1/share:/nix/store/3vlnkr6z7hh86rrn087df45s4cfjxy65-libx11-1.8.13/share:/nix/store/7fx93fz9c809w8yjxb0934zw6xcjis58-pkg-config-wrapper-0.29.2/share:/nix/store/fpig164lz7fcipbndn61sfd2y2yq363n-patchelf-0.15.2/share'
+export XDG_DATA_DIRS
+MACHTYPE='x86_64-pc-linux-gnu'
+depsBuildBuildPropagated=''
+export depsBuildBuildPropagated
+configureFlags=''
+export configureFlags
+doCheck=''
+export doCheck
+DEVENV_RUNTIME='/run/user/1000/devenv-0b49da7'
+export DEVENV_RUNTIME
+DEVENV_ROOT='/home/ty/NixOS/Master/flakes/Rust'
+export DEVENV_ROOT
+AR='ar'
+export AR
+OLDPWD=''
+export OLDPWD
+allowSubstitutes=''
+export allowSubstitutes
+outputBin='out'
+outputDoc='out'
+CXX_FOR_BUILD='g++'
+export CXX_FOR_BUILD
+LD_FOR_BUILD='ld'
+export LD_FOR_BUILD
+depsHostHost=''
+export depsHostHost
+PKG_CONFIG='pkg-config'
+export PKG_CONFIG
+DEVENV_TASK_FILE='/nix/store/v6bzsvjfhv44hcn9mkav3nb56y65lggx-tasks.json'
+export DEVENV_TASK_FILE
+NIX_BINTOOLS='/nix/store/vs80ag6hsr58wv5fn3nlq8qi32x9hwfi-binutils-wrapper-2.46'
+export NIX_BINTOOLS
+declare -a preFixupHooks=('_moveToShare' '_multioutDocs' '_multioutDevs' )
+shell='/nix/store/9ipfvwnqp1q8ijnmi5sxvlx9r8w34lw3-bash-5.3p15/bin/bash'
+export shell
+stdenv='/nix/store/dvj9bnk0vdbzzhn76wsnzk1dv6c6jbx1-stdenv-linux'
+export stdenv
+hardeningDisable=''
+export hardeningDisable
+IFS=' 	
+'
+NIX_CFLAGS_COMPILE_FOR_BUILD=' -isystem /nix/store/ad0w92xhd7f1gbwzfgpkd0nz1ipijd8h-bash-interactive-5.3p15-dev/include -fmacro-prefix-map=/nix/store/ad0w92xhd7f1gbwzfgpkd0nz1ipijd8h-bash-interactive-5.3p15-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-bash-interactive-5.3p15-dev -isystem /nix/store/7ydf0dzbsq7w35bxifci2mslm76pw1qf-gnumake-4.4.1/include -fmacro-prefix-map=/nix/store/7ydf0dzbsq7w35bxifci2mslm76pw1qf-gnumake-4.4.1=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gnumake-4.4.1 -isystem /nix/store/bg2bp1zmii5spb2hkgv5xn6mzva7nx9r-gdb-17.2/include -fmacro-prefix-map=/nix/store/bg2bp1zmii5spb2hkgv5xn6mzva7nx9r-gdb-17.2=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gdb-17.2 -isystem /nix/store/5jhgdsgl541jznvgv2xlhhksnkix2hib-valgrind-3.27.1-dev/include -fmacro-prefix-map=/nix/store/5jhgdsgl541jznvgv2xlhhksnkix2hib-valgrind-3.27.1-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-valgrind-3.27.1-dev -isystem /nix/store/yrr1yqaxyr673b1f9p5lfh4lqp7hpf9j-lld-21.1.8-dev/include -fmacro-prefix-map=/nix/store/yrr1yqaxyr673b1f9p5lfh4lqp7hpf9j-lld-21.1.8-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-lld-21.1.8-dev -isystem /nix/store/7svfxf5fpqsn4jjf8r044f65a030f40x-wayland-1.26.0-dev/include -fmacro-prefix-map=/nix/store/7svfxf5fpqsn4jjf8r044f65a030f40x-wayland-1.26.0-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-wayland-1.26.0-dev -isystem /nix/store/2nlq43n0gc4s8cbjjxpnfg97kgmk8blh-wayland-protocols-1.49/include -fmacro-prefix-map=/nix/store/2nlq43n0gc4s8cbjjxpnfg97kgmk8blh-wayland-protocols-1.49=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-wayland-protocols-1.49 -isystem /nix/store/1sqzajgcm7nk3knr8y2ygdxgsicrh72x-libxkbcommon-1.13.2-dev/include -fmacro-prefix-map=/nix/store/1sqzajgcm7nk3knr8y2ygdxgsicrh72x-libxkbcommon-1.13.2-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libxkbcommon-1.13.2-dev -isystem /nix/store/ghf184l1525ks9h8dm3nsqpnw1wnq6ws-libinput-1.31.3-dev/include -fmacro-prefix-map=/nix/store/ghf184l1525ks9h8dm3nsqpnw1wnq6ws-libinput-1.31.3-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libinput-1.31.3-dev -isystem /nix/store/00vmp292cjgwhzp089cszl51xiq8ncrj-systemd-minimal-libs-261.2-dev/include -fmacro-prefix-map=/nix/store/00vmp292cjgwhzp089cszl51xiq8ncrj-systemd-minimal-libs-261.2-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-systemd-minimal-libs-261.2-dev -isystem /nix/store/s30pndvs4kh1dk7jxxj4ljn27spyr8fv-dbus-1.16.2-dev/include -fmacro-prefix-map=/nix/store/s30pndvs4kh1dk7jxxj4ljn27spyr8fv-dbus-1.16.2-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-dbus-1.16.2-dev -isystem /nix/store/8kmh5aaiadz1vfv1nal7vf3x41b2l92j-pixman-0.46.4/include -fmacro-prefix-map=/nix/store/8kmh5aaiadz1vfv1nal7vf3x41b2l92j-pixman-0.46.4=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-pixman-0.46.4 -isystem /nix/store/p3s3wkz0s0xkgxnrn7x99w1bl6hd8283-libdrm-2.4.134-dev/include -fmacro-prefix-map=/nix/store/p3s3wkz0s0xkgxnrn7x99w1bl6hd8283-libdrm-2.4.134-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libdrm-2.4.134-dev -isystem /nix/store/7ifsxb6iqz7f3jkg1kfbcnmr1f0y1n08-seatd-0.9.3-dev/include -fmacro-prefix-map=/nix/store/7ifsxb6iqz7f3jkg1kfbcnmr1f0y1n08-seatd-0.9.3-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-seatd-0.9.3-dev -isystem /nix/store/vwlb36mv7jbar7y76l7kilvln04xqf6n-fontconfig-2.18.2-dev/include -fmacro-prefix-map=/nix/store/vwlb36mv7jbar7y76l7kilvln04xqf6n-fontconfig-2.18.2-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-fontconfig-2.18.2-dev -isystem /nix/store/z203ci88037mkq16c1kn8gy518m3ab1y-freetype-2.14.3-dev/include -fmacro-prefix-map=/nix/store/z203ci88037mkq16c1kn8gy518m3ab1y-freetype-2.14.3-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-freetype-2.14.3-dev -isystem /nix/store/nd34kmibbq6y7qmp78rhw38adsj5ffd0-zlib-1.3.2-dev/include -fmacro-prefix-map=/nix/store/nd34kmibbq6y7qmp78rhw38adsj5ffd0-zlib-1.3.2-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-zlib-1.3.2-dev -isystem /nix/store/9vxrnnhc400s1rgq801wqfdxhzpcl1z1-bzip2-1.0.8-dev/include -fmacro-prefix-map=/nix/store/9vxrnnhc400s1rgq801wqfdxhzpcl1z1-bzip2-1.0.8-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-bzip2-1.0.8-dev -isystem /nix/store/46hh240hlj9si28zra66dyc3nj85lynw-brotli-1.2.0-dev/include -fmacro-prefix-map=/nix/store/46hh240hlj9si28zra66dyc3nj85lynw-brotli-1.2.0-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-brotli-1.2.0-dev -isystem /nix/store/p8m024sxqwg7il6660zqgshrqpsvf43l-libpng-apng-1.6.58-dev/include -fmacro-prefix-map=/nix/store/p8m024sxqwg7il6660zqgshrqpsvf43l-libpng-apng-1.6.58-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libpng-apng-1.6.58-dev -isystem /nix/store/iss09vixlpbq7jwf2y5wkmxvcfydgm3v-expat-2.8.3-dev/include -fmacro-prefix-map=/nix/store/iss09vixlpbq7jwf2y5wkmxvcfydgm3v-expat-2.8.3-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-expat-2.8.3-dev -isystem /nix/store/knyasnbdxksxz6ilfygnrwa08m9n35m7-libglvnd-1.7.0-dev/include -fmacro-prefix-map=/nix/store/knyasnbdxksxz6ilfygnrwa08m9n35m7-libglvnd-1.7.0-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libglvnd-1.7.0-dev -isystem /nix/store/jaw4nr6lwfpv40140zk7prh9q8jap2gz-eglexternalplatform-1.2.1/include -fmacro-prefix-map=/nix/store/jaw4nr6lwfpv40140zk7prh9q8jap2gz-eglexternalplatform-1.2.1=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-eglexternalplatform-1.2.1 -isystem /nix/store/4sh8xds6acpkvb2f1dqh0jsgvgn5p2sy-libx11-1.8.13-dev/include -fmacro-prefix-map=/nix/store/4sh8xds6acpkvb2f1dqh0jsgvgn5p2sy-libx11-1.8.13-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libx11-1.8.13-dev -isystem /nix/store/y4k7f46xqci803kfbi78sfy09r1a978x-xorgproto-2025.1/include -fmacro-prefix-map=/nix/store/y4k7f46xqci803kfbi78sfy09r1a978x-xorgproto-2025.1=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-xorgproto-2025.1 -isystem /nix/store/g5l3mkk656ccm58gzz0a9kryy2grih01-compiler-rt-libc-21.1.8-dev/include -fmacro-prefix-map=/nix/store/g5l3mkk656ccm58gzz0a9kryy2grih01-compiler-rt-libc-21.1.8-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-compiler-rt-libc-21.1.8-dev -isystem /nix/store/ad0w92xhd7f1gbwzfgpkd0nz1ipijd8h-bash-interactive-5.3p15-dev/include -fmacro-prefix-map=/nix/store/ad0w92xhd7f1gbwzfgpkd0nz1ipijd8h-bash-interactive-5.3p15-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-bash-interactive-5.3p15-dev -isystem /nix/store/7ydf0dzbsq7w35bxifci2mslm76pw1qf-gnumake-4.4.1/include -fmacro-prefix-map=/nix/store/7ydf0dzbsq7w35bxifci2mslm76pw1qf-gnumake-4.4.1=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gnumake-4.4.1 -isystem /nix/store/bg2bp1zmii5spb2hkgv5xn6mzva7nx9r-gdb-17.2/include -fmacro-prefix-map=/nix/store/bg2bp1zmii5spb2hkgv5xn6mzva7nx9r-gdb-17.2=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gdb-17.2 -isystem /nix/store/5jhgdsgl541jznvgv2xlhhksnkix2hib-valgrind-3.27.1-dev/include -fmacro-prefix-map=/nix/store/5jhgdsgl541jznvgv2xlhhksnkix2hib-valgrind-3.27.1-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-valgrind-3.27.1-dev -isystem /nix/store/yrr1yqaxyr673b1f9p5lfh4lqp7hpf9j-lld-21.1.8-dev/include -fmacro-prefix-map=/nix/store/yrr1yqaxyr673b1f9p5lfh4lqp7hpf9j-lld-21.1.8-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-lld-21.1.8-dev -isystem /nix/store/7svfxf5fpqsn4jjf8r044f65a030f40x-wayland-1.26.0-dev/include -fmacro-prefix-map=/nix/store/7svfxf5fpqsn4jjf8r044f65a030f40x-wayland-1.26.0-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-wayland-1.26.0-dev -isystem /nix/store/2nlq43n0gc4s8cbjjxpnfg97kgmk8blh-wayland-protocols-1.49/include -fmacro-prefix-map=/nix/store/2nlq43n0gc4s8cbjjxpnfg97kgmk8blh-wayland-protocols-1.49=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-wayland-protocols-1.49 -isystem /nix/store/1sqzajgcm7nk3knr8y2ygdxgsicrh72x-libxkbcommon-1.13.2-dev/include -fmacro-prefix-map=/nix/store/1sqzajgcm7nk3knr8y2ygdxgsicrh72x-libxkbcommon-1.13.2-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libxkbcommon-1.13.2-dev -isystem /nix/store/ghf184l1525ks9h8dm3nsqpnw1wnq6ws-libinput-1.31.3-dev/include -fmacro-prefix-map=/nix/store/ghf184l1525ks9h8dm3nsqpnw1wnq6ws-libinput-1.31.3-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libinput-1.31.3-dev -isystem /nix/store/00vmp292cjgwhzp089cszl51xiq8ncrj-systemd-minimal-libs-261.2-dev/include -fmacro-prefix-map=/nix/store/00vmp292cjgwhzp089cszl51xiq8ncrj-systemd-minimal-libs-261.2-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-systemd-minimal-libs-261.2-dev -isystem /nix/store/s30pndvs4kh1dk7jxxj4ljn27spyr8fv-dbus-1.16.2-dev/include -fmacro-prefix-map=/nix/store/s30pndvs4kh1dk7jxxj4ljn27spyr8fv-dbus-1.16.2-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-dbus-1.16.2-dev -isystem /nix/store/8kmh5aaiadz1vfv1nal7vf3x41b2l92j-pixman-0.46.4/include -fmacro-prefix-map=/nix/store/8kmh5aaiadz1vfv1nal7vf3x41b2l92j-pixman-0.46.4=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-pixman-0.46.4 -isystem /nix/store/p3s3wkz0s0xkgxnrn7x99w1bl6hd8283-libdrm-2.4.134-dev/include -fmacro-prefix-map=/nix/store/p3s3wkz0s0xkgxnrn7x99w1bl6hd8283-libdrm-2.4.134-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libdrm-2.4.134-dev -isystem /nix/store/7ifsxb6iqz7f3jkg1kfbcnmr1f0y1n08-seatd-0.9.3-dev/include -fmacro-prefix-map=/nix/store/7ifsxb6iqz7f3jkg1kfbcnmr1f0y1n08-seatd-0.9.3-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-seatd-0.9.3-dev -isystem /nix/store/vwlb36mv7jbar7y76l7kilvln04xqf6n-fontconfig-2.18.2-dev/include -fmacro-prefix-map=/nix/store/vwlb36mv7jbar7y76l7kilvln04xqf6n-fontconfig-2.18.2-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-fontconfig-2.18.2-dev -isystem /nix/store/z203ci88037mkq16c1kn8gy518m3ab1y-freetype-2.14.3-dev/include -fmacro-prefix-map=/nix/store/z203ci88037mkq16c1kn8gy518m3ab1y-freetype-2.14.3-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-freetype-2.14.3-dev -isystem /nix/store/nd34kmibbq6y7qmp78rhw38adsj5ffd0-zlib-1.3.2-dev/include -fmacro-prefix-map=/nix/store/nd34kmibbq6y7qmp78rhw38adsj5ffd0-zlib-1.3.2-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-zlib-1.3.2-dev -isystem /nix/store/9vxrnnhc400s1rgq801wqfdxhzpcl1z1-bzip2-1.0.8-dev/include -fmacro-prefix-map=/nix/store/9vxrnnhc400s1rgq801wqfdxhzpcl1z1-bzip2-1.0.8-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-bzip2-1.0.8-dev -isystem /nix/store/46hh240hlj9si28zra66dyc3nj85lynw-brotli-1.2.0-dev/include -fmacro-prefix-map=/nix/store/46hh240hlj9si28zra66dyc3nj85lynw-brotli-1.2.0-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-brotli-1.2.0-dev -isystem /nix/store/p8m024sxqwg7il6660zqgshrqpsvf43l-libpng-apng-1.6.58-dev/include -fmacro-prefix-map=/nix/store/p8m024sxqwg7il6660zqgshrqpsvf43l-libpng-apng-1.6.58-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libpng-apng-1.6.58-dev -isystem /nix/store/iss09vixlpbq7jwf2y5wkmxvcfydgm3v-expat-2.8.3-dev/include -fmacro-prefix-map=/nix/store/iss09vixlpbq7jwf2y5wkmxvcfydgm3v-expat-2.8.3-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-expat-2.8.3-dev -isystem /nix/store/knyasnbdxksxz6ilfygnrwa08m9n35m7-libglvnd-1.7.0-dev/include -fmacro-prefix-map=/nix/store/knyasnbdxksxz6ilfygnrwa08m9n35m7-libglvnd-1.7.0-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libglvnd-1.7.0-dev -isystem /nix/store/jaw4nr6lwfpv40140zk7prh9q8jap2gz-eglexternalplatform-1.2.1/include -fmacro-prefix-map=/nix/store/jaw4nr6lwfpv40140zk7prh9q8jap2gz-eglexternalplatform-1.2.1=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-eglexternalplatform-1.2.1 -isystem /nix/store/4sh8xds6acpkvb2f1dqh0jsgvgn5p2sy-libx11-1.8.13-dev/include -fmacro-prefix-map=/nix/store/4sh8xds6acpkvb2f1dqh0jsgvgn5p2sy-libx11-1.8.13-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libx11-1.8.13-dev -isystem /nix/store/y4k7f46xqci803kfbi78sfy09r1a978x-xorgproto-2025.1/include -fmacro-prefix-map=/nix/store/y4k7f46xqci803kfbi78sfy09r1a978x-xorgproto-2025.1=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-xorgproto-2025.1 -isystem /nix/store/g5l3mkk656ccm58gzz0a9kryy2grih01-compiler-rt-libc-21.1.8-dev/include -fmacro-prefix-map=/nix/store/g5l3mkk656ccm58gzz0a9kryy2grih01-compiler-rt-libc-21.1.8-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-compiler-rt-libc-21.1.8-dev -isystem /nix/store/ad0w92xhd7f1gbwzfgpkd0nz1ipijd8h-bash-interactive-5.3p15-dev/include -fmacro-prefix-map=/nix/store/ad0w92xhd7f1gbwzfgpkd0nz1ipijd8h-bash-interactive-5.3p15-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-bash-interactive-5.3p15-dev -isystem /nix/store/7ydf0dzbsq7w35bxifci2mslm76pw1qf-gnumake-4.4.1/include -fmacro-prefix-map=/nix/store/7ydf0dzbsq7w35bxifci2mslm76pw1qf-gnumake-4.4.1=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gnumake-4.4.1 -isystem /nix/store/bg2bp1zmii5spb2hkgv5xn6mzva7nx9r-gdb-17.2/include -fmacro-prefix-map=/nix/store/bg2bp1zmii5spb2hkgv5xn6mzva7nx9r-gdb-17.2=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gdb-17.2 -isystem /nix/store/5jhgdsgl541jznvgv2xlhhksnkix2hib-valgrind-3.27.1-dev/include -fmacro-prefix-map=/nix/store/5jhgdsgl541jznvgv2xlhhksnkix2hib-valgrind-3.27.1-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-valgrind-3.27.1-dev -isystem /nix/store/yrr1yqaxyr673b1f9p5lfh4lqp7hpf9j-lld-21.1.8-dev/include -fmacro-prefix-map=/nix/store/yrr1yqaxyr673b1f9p5lfh4lqp7hpf9j-lld-21.1.8-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-lld-21.1.8-dev -isystem /nix/store/7svfxf5fpqsn4jjf8r044f65a030f40x-wayland-1.26.0-dev/include -fmacro-prefix-map=/nix/store/7svfxf5fpqsn4jjf8r044f65a030f40x-wayland-1.26.0-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-wayland-1.26.0-dev -isystem /nix/store/2nlq43n0gc4s8cbjjxpnfg97kgmk8blh-wayland-protocols-1.49/include -fmacro-prefix-map=/nix/store/2nlq43n0gc4s8cbjjxpnfg97kgmk8blh-wayland-protocols-1.49=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-wayland-protocols-1.49 -isystem /nix/store/1sqzajgcm7nk3knr8y2ygdxgsicrh72x-libxkbcommon-1.13.2-dev/include -fmacro-prefix-map=/nix/store/1sqzajgcm7nk3knr8y2ygdxgsicrh72x-libxkbcommon-1.13.2-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libxkbcommon-1.13.2-dev -isystem /nix/store/ghf184l1525ks9h8dm3nsqpnw1wnq6ws-libinput-1.31.3-dev/include -fmacro-prefix-map=/nix/store/ghf184l1525ks9h8dm3nsqpnw1wnq6ws-libinput-1.31.3-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libinput-1.31.3-dev -isystem /nix/store/00vmp292cjgwhzp089cszl51xiq8ncrj-systemd-minimal-libs-261.2-dev/include -fmacro-prefix-map=/nix/store/00vmp292cjgwhzp089cszl51xiq8ncrj-systemd-minimal-libs-261.2-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-systemd-minimal-libs-261.2-dev -isystem /nix/store/s30pndvs4kh1dk7jxxj4ljn27spyr8fv-dbus-1.16.2-dev/include -fmacro-prefix-map=/nix/store/s30pndvs4kh1dk7jxxj4ljn27spyr8fv-dbus-1.16.2-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-dbus-1.16.2-dev -isystem /nix/store/8kmh5aaiadz1vfv1nal7vf3x41b2l92j-pixman-0.46.4/include -fmacro-prefix-map=/nix/store/8kmh5aaiadz1vfv1nal7vf3x41b2l92j-pixman-0.46.4=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-pixman-0.46.4 -isystem /nix/store/p3s3wkz0s0xkgxnrn7x99w1bl6hd8283-libdrm-2.4.134-dev/include -fmacro-prefix-map=/nix/store/p3s3wkz0s0xkgxnrn7x99w1bl6hd8283-libdrm-2.4.134-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libdrm-2.4.134-dev -isystem /nix/store/7ifsxb6iqz7f3jkg1kfbcnmr1f0y1n08-seatd-0.9.3-dev/include -fmacro-prefix-map=/nix/store/7ifsxb6iqz7f3jkg1kfbcnmr1f0y1n08-seatd-0.9.3-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-seatd-0.9.3-dev -isystem /nix/store/vwlb36mv7jbar7y76l7kilvln04xqf6n-fontconfig-2.18.2-dev/include -fmacro-prefix-map=/nix/store/vwlb36mv7jbar7y76l7kilvln04xqf6n-fontconfig-2.18.2-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-fontconfig-2.18.2-dev -isystem /nix/store/z203ci88037mkq16c1kn8gy518m3ab1y-freetype-2.14.3-dev/include -fmacro-prefix-map=/nix/store/z203ci88037mkq16c1kn8gy518m3ab1y-freetype-2.14.3-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-freetype-2.14.3-dev -isystem /nix/store/nd34kmibbq6y7qmp78rhw38adsj5ffd0-zlib-1.3.2-dev/include -fmacro-prefix-map=/nix/store/nd34kmibbq6y7qmp78rhw38adsj5ffd0-zlib-1.3.2-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-zlib-1.3.2-dev -isystem /nix/store/9vxrnnhc400s1rgq801wqfdxhzpcl1z1-bzip2-1.0.8-dev/include -fmacro-prefix-map=/nix/store/9vxrnnhc400s1rgq801wqfdxhzpcl1z1-bzip2-1.0.8-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-bzip2-1.0.8-dev -isystem /nix/store/46hh240hlj9si28zra66dyc3nj85lynw-brotli-1.2.0-dev/include -fmacro-prefix-map=/nix/store/46hh240hlj9si28zra66dyc3nj85lynw-brotli-1.2.0-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-brotli-1.2.0-dev -isystem /nix/store/p8m024sxqwg7il6660zqgshrqpsvf43l-libpng-apng-1.6.58-dev/include -fmacro-prefix-map=/nix/store/p8m024sxqwg7il6660zqgshrqpsvf43l-libpng-apng-1.6.58-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libpng-apng-1.6.58-dev -isystem /nix/store/iss09vixlpbq7jwf2y5wkmxvcfydgm3v-expat-2.8.3-dev/include -fmacro-prefix-map=/nix/store/iss09vixlpbq7jwf2y5wkmxvcfydgm3v-expat-2.8.3-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-expat-2.8.3-dev -isystem /nix/store/knyasnbdxksxz6ilfygnrwa08m9n35m7-libglvnd-1.7.0-dev/include -fmacro-prefix-map=/nix/store/knyasnbdxksxz6ilfygnrwa08m9n35m7-libglvnd-1.7.0-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libglvnd-1.7.0-dev -isystem /nix/store/jaw4nr6lwfpv40140zk7prh9q8jap2gz-eglexternalplatform-1.2.1/include -fmacro-prefix-map=/nix/store/jaw4nr6lwfpv40140zk7prh9q8jap2gz-eglexternalplatform-1.2.1=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-eglexternalplatform-1.2.1 -isystem /nix/store/4sh8xds6acpkvb2f1dqh0jsgvgn5p2sy-libx11-1.8.13-dev/include -fmacro-prefix-map=/nix/store/4sh8xds6acpkvb2f1dqh0jsgvgn5p2sy-libx11-1.8.13-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libx11-1.8.13-dev -isystem /nix/store/y4k7f46xqci803kfbi78sfy09r1a978x-xorgproto-2025.1/include -fmacro-prefix-map=/nix/store/y4k7f46xqci803kfbi78sfy09r1a978x-xorgproto-2025.1=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-xorgproto-2025.1 -isystem /nix/store/g5l3mkk656ccm58gzz0a9kryy2grih01-compiler-rt-libc-21.1.8-dev/include -fmacro-prefix-map=/nix/store/g5l3mkk656ccm58gzz0a9kryy2grih01-compiler-rt-libc-21.1.8-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-compiler-rt-libc-21.1.8-dev'
+export NIX_CFLAGS_COMPILE_FOR_BUILD
+depsBuildTarget=''
+export depsBuildTarget
+cmakeFlags=''
+export cmakeFlags
+depsTargetTargetPropagated=''
+export depsTargetTargetPropagated
+NIX_ENFORCE_NO_NATIVE='1'
+export NIX_ENFORCE_NO_NATIVE
+LIBRARY_PATH='/nix/store/vjcwhp0milwa1jqy1inpjxrsh8hjrgwc-wayland-1.26.0/lib:/nix/store/2nlq43n0gc4s8cbjjxpnfg97kgmk8blh-wayland-protocols-1.49/lib:/nix/store/yk95z4hjlzdk418px0fc797qszccfj5p-libxkbcommon-1.13.2/lib:/nix/store/y11wm3zhcvjav2vbav9p0ky99xa2wlyv-libinput-1.31.3/lib:/nix/store/4hlgp6r4j5p6b2b9sxw01cba0x3fjxd6-systemd-minimal-libs-261.2/lib:/nix/store/yn8y98bfwgr9jxcrl1x32h04mshpn9wc-dbus-1.16.2-lib/lib:/nix/store/8kmh5aaiadz1vfv1nal7vf3x41b2l92j-pixman-0.46.4/lib:/nix/store/v5c40hysv678q0yjwvdi0q97rdmxr9r4-mesa-26.2.1/lib:/nix/store/5qg70j0rzbxqlxlzrq87k4ksgzdwrwr6-libdrm-2.4.134/lib:/nix/store/rcwvn48vi65zr4jzgk0rp3y7czfd1a9m-seatd-0.9.3/lib:/nix/store/iv0yvsywa1v35xzdkqz9wdzhg7vshpdd-fontconfig-2.18.2-lib/lib:/nix/store/lk4614327cn1h9z3m6cvnls95n13m1cj-vulkan-loader-1.4.357.0/lib:/nix/store/rarvfpm927fcbd6b9p0crg09w9r3ywb3-libglvnd-1.7.0/lib:/nix/store/6slvk1x4gashcfg4bgvcc7ywbwzf1isy-egl-wayland-1.1.21/lib:/nix/store/3vlnkr6z7hh86rrn087df45s4cfjxy65-libx11-1.8.13/lib'
+export LIBRARY_PATH
+declare -a fixupOutputHooks=('fixupEglExternalPlatformIcdJsonHook' 'if [ -z "${dontPatchELF-}" ]; then patchELF "$prefix"; fi' 'if [[ -z "${noAuditTmpdir-}" && -e "$prefix" ]]; then auditTmpdir "$prefix"; fi' 'if [ -z "${dontGzipMan-}" ]; then compressManPages "$prefix"; fi' '_moveLib64' '_moveSbin' '_moveSystemdUserUnits' 'patchShebangsAuto' '_pruneLibtoolFiles' '_doStrip' )
+CC_FOR_BUILD='gcc'
+export CC_FOR_BUILD
+outputInfo='out'
+IN_NIX_SHELL='impure'
+export IN_NIX_SHELL
+NIX_HARDENING_ENABLE='bindnow format fortify fortify3 libcxxhardeningfast pic relro stackclashprotection stackprotector strictflexarrays1 strictoverflow zerocallusedregs'
+export NIX_HARDENING_ENABLE
+declare -a envBuildBuildHooks=('ccWrapper_addCVars' 'bintoolsWrapper_addLDVars' )
+STRINGS_FOR_BUILD='strings'
+export STRINGS_FOR_BUILD
+declare -a postFixupHooks=('noBrokenSymlinksInAllOutputs' '_makeSymlinksRelative' '_multioutPropagateDev' )
+outputDevman='out'
+builder='/nix/store/9ipfvwnqp1q8ijnmi5sxvlx9r8w34lw3-bash-5.3p15/bin/bash'
+export builder
+mesonFlags=''
+export mesonFlags
+NIX_CC_FOR_BUILD='/nix/store/w88q44gqd1qg5wmkk7v0h97rpiqvam0l-gcc-wrapper-15.3.0'
+export NIX_CC_FOR_BUILD
+declare -a propagatedBuildDepFiles=('propagated-build-build-deps' 'propagated-native-build-inputs' 'propagated-build-target-deps' )
+NIX_CC='/nix/store/w021fbcg4z6vxihnp6gb6vijyifl051f-clang-wrapper-21.1.8'
+export NIX_CC
+NIX_PKG_CONFIG_WRAPPER_TARGET_HOST_x86_64_unknown_linux_gnu='1'
+export NIX_PKG_CONFIG_WRAPPER_TARGET_HOST_x86_64_unknown_linux_gnu
+declare -a pkgsHostTarget=()
+prefix='/nix/store/v1grndznp541aklnc3cknd30asw8f6i9-devenv-shell-env'
+NIX_CFLAGS_COMPILE=' -frandom-seed=v1grndznp5 -isystem /nix/store/ad0w92xhd7f1gbwzfgpkd0nz1ipijd8h-bash-interactive-5.3p15-dev/include -fmacro-prefix-map=/nix/store/ad0w92xhd7f1gbwzfgpkd0nz1ipijd8h-bash-interactive-5.3p15-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-bash-interactive-5.3p15-dev -isystem /nix/store/ad0w92xhd7f1gbwzfgpkd0nz1ipijd8h-bash-interactive-5.3p15-dev/include -fmacro-prefix-map=/nix/store/ad0w92xhd7f1gbwzfgpkd0nz1ipijd8h-bash-interactive-5.3p15-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-bash-interactive-5.3p15-dev -isystem /nix/store/7ydf0dzbsq7w35bxifci2mslm76pw1qf-gnumake-4.4.1/include -fmacro-prefix-map=/nix/store/7ydf0dzbsq7w35bxifci2mslm76pw1qf-gnumake-4.4.1=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gnumake-4.4.1 -isystem /nix/store/7ydf0dzbsq7w35bxifci2mslm76pw1qf-gnumake-4.4.1/include -fmacro-prefix-map=/nix/store/7ydf0dzbsq7w35bxifci2mslm76pw1qf-gnumake-4.4.1=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gnumake-4.4.1 -isystem /nix/store/bg2bp1zmii5spb2hkgv5xn6mzva7nx9r-gdb-17.2/include -fmacro-prefix-map=/nix/store/bg2bp1zmii5spb2hkgv5xn6mzva7nx9r-gdb-17.2=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gdb-17.2 -isystem /nix/store/bg2bp1zmii5spb2hkgv5xn6mzva7nx9r-gdb-17.2/include -fmacro-prefix-map=/nix/store/bg2bp1zmii5spb2hkgv5xn6mzva7nx9r-gdb-17.2=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gdb-17.2 -isystem /nix/store/5jhgdsgl541jznvgv2xlhhksnkix2hib-valgrind-3.27.1-dev/include -fmacro-prefix-map=/nix/store/5jhgdsgl541jznvgv2xlhhksnkix2hib-valgrind-3.27.1-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-valgrind-3.27.1-dev -isystem /nix/store/5jhgdsgl541jznvgv2xlhhksnkix2hib-valgrind-3.27.1-dev/include -fmacro-prefix-map=/nix/store/5jhgdsgl541jznvgv2xlhhksnkix2hib-valgrind-3.27.1-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-valgrind-3.27.1-dev -isystem /nix/store/yrr1yqaxyr673b1f9p5lfh4lqp7hpf9j-lld-21.1.8-dev/include -fmacro-prefix-map=/nix/store/yrr1yqaxyr673b1f9p5lfh4lqp7hpf9j-lld-21.1.8-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-lld-21.1.8-dev -isystem /nix/store/yrr1yqaxyr673b1f9p5lfh4lqp7hpf9j-lld-21.1.8-dev/include -fmacro-prefix-map=/nix/store/yrr1yqaxyr673b1f9p5lfh4lqp7hpf9j-lld-21.1.8-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-lld-21.1.8-dev -isystem /nix/store/7svfxf5fpqsn4jjf8r044f65a030f40x-wayland-1.26.0-dev/include -fmacro-prefix-map=/nix/store/7svfxf5fpqsn4jjf8r044f65a030f40x-wayland-1.26.0-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-wayland-1.26.0-dev -isystem /nix/store/7svfxf5fpqsn4jjf8r044f65a030f40x-wayland-1.26.0-dev/include -fmacro-prefix-map=/nix/store/7svfxf5fpqsn4jjf8r044f65a030f40x-wayland-1.26.0-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-wayland-1.26.0-dev -isystem /nix/store/2nlq43n0gc4s8cbjjxpnfg97kgmk8blh-wayland-protocols-1.49/include -fmacro-prefix-map=/nix/store/2nlq43n0gc4s8cbjjxpnfg97kgmk8blh-wayland-protocols-1.49=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-wayland-protocols-1.49 -isystem /nix/store/2nlq43n0gc4s8cbjjxpnfg97kgmk8blh-wayland-protocols-1.49/include -fmacro-prefix-map=/nix/store/2nlq43n0gc4s8cbjjxpnfg97kgmk8blh-wayland-protocols-1.49=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-wayland-protocols-1.49 -isystem /nix/store/1sqzajgcm7nk3knr8y2ygdxgsicrh72x-libxkbcommon-1.13.2-dev/include -fmacro-prefix-map=/nix/store/1sqzajgcm7nk3knr8y2ygdxgsicrh72x-libxkbcommon-1.13.2-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libxkbcommon-1.13.2-dev -isystem /nix/store/1sqzajgcm7nk3knr8y2ygdxgsicrh72x-libxkbcommon-1.13.2-dev/include -fmacro-prefix-map=/nix/store/1sqzajgcm7nk3knr8y2ygdxgsicrh72x-libxkbcommon-1.13.2-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libxkbcommon-1.13.2-dev -isystem /nix/store/ghf184l1525ks9h8dm3nsqpnw1wnq6ws-libinput-1.31.3-dev/include -fmacro-prefix-map=/nix/store/ghf184l1525ks9h8dm3nsqpnw1wnq6ws-libinput-1.31.3-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libinput-1.31.3-dev -isystem /nix/store/ghf184l1525ks9h8dm3nsqpnw1wnq6ws-libinput-1.31.3-dev/include -fmacro-prefix-map=/nix/store/ghf184l1525ks9h8dm3nsqpnw1wnq6ws-libinput-1.31.3-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libinput-1.31.3-dev -isystem /nix/store/00vmp292cjgwhzp089cszl51xiq8ncrj-systemd-minimal-libs-261.2-dev/include -fmacro-prefix-map=/nix/store/00vmp292cjgwhzp089cszl51xiq8ncrj-systemd-minimal-libs-261.2-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-systemd-minimal-libs-261.2-dev -isystem /nix/store/00vmp292cjgwhzp089cszl51xiq8ncrj-systemd-minimal-libs-261.2-dev/include -fmacro-prefix-map=/nix/store/00vmp292cjgwhzp089cszl51xiq8ncrj-systemd-minimal-libs-261.2-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-systemd-minimal-libs-261.2-dev -isystem /nix/store/s30pndvs4kh1dk7jxxj4ljn27spyr8fv-dbus-1.16.2-dev/include -fmacro-prefix-map=/nix/store/s30pndvs4kh1dk7jxxj4ljn27spyr8fv-dbus-1.16.2-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-dbus-1.16.2-dev -isystem /nix/store/s30pndvs4kh1dk7jxxj4ljn27spyr8fv-dbus-1.16.2-dev/include -fmacro-prefix-map=/nix/store/s30pndvs4kh1dk7jxxj4ljn27spyr8fv-dbus-1.16.2-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-dbus-1.16.2-dev -isystem /nix/store/8kmh5aaiadz1vfv1nal7vf3x41b2l92j-pixman-0.46.4/include -fmacro-prefix-map=/nix/store/8kmh5aaiadz1vfv1nal7vf3x41b2l92j-pixman-0.46.4=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-pixman-0.46.4 -isystem /nix/store/8kmh5aaiadz1vfv1nal7vf3x41b2l92j-pixman-0.46.4/include -fmacro-prefix-map=/nix/store/8kmh5aaiadz1vfv1nal7vf3x41b2l92j-pixman-0.46.4=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-pixman-0.46.4 -isystem /nix/store/p3s3wkz0s0xkgxnrn7x99w1bl6hd8283-libdrm-2.4.134-dev/include -fmacro-prefix-map=/nix/store/p3s3wkz0s0xkgxnrn7x99w1bl6hd8283-libdrm-2.4.134-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libdrm-2.4.134-dev -isystem /nix/store/p3s3wkz0s0xkgxnrn7x99w1bl6hd8283-libdrm-2.4.134-dev/include -fmacro-prefix-map=/nix/store/p3s3wkz0s0xkgxnrn7x99w1bl6hd8283-libdrm-2.4.134-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libdrm-2.4.134-dev -isystem /nix/store/7ifsxb6iqz7f3jkg1kfbcnmr1f0y1n08-seatd-0.9.3-dev/include -fmacro-prefix-map=/nix/store/7ifsxb6iqz7f3jkg1kfbcnmr1f0y1n08-seatd-0.9.3-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-seatd-0.9.3-dev -isystem /nix/store/7ifsxb6iqz7f3jkg1kfbcnmr1f0y1n08-seatd-0.9.3-dev/include -fmacro-prefix-map=/nix/store/7ifsxb6iqz7f3jkg1kfbcnmr1f0y1n08-seatd-0.9.3-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-seatd-0.9.3-dev -isystem /nix/store/vwlb36mv7jbar7y76l7kilvln04xqf6n-fontconfig-2.18.2-dev/include -fmacro-prefix-map=/nix/store/vwlb36mv7jbar7y76l7kilvln04xqf6n-fontconfig-2.18.2-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-fontconfig-2.18.2-dev -isystem /nix/store/vwlb36mv7jbar7y76l7kilvln04xqf6n-fontconfig-2.18.2-dev/include -fmacro-prefix-map=/nix/store/vwlb36mv7jbar7y76l7kilvln04xqf6n-fontconfig-2.18.2-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-fontconfig-2.18.2-dev -isystem /nix/store/z203ci88037mkq16c1kn8gy518m3ab1y-freetype-2.14.3-dev/include -fmacro-prefix-map=/nix/store/z203ci88037mkq16c1kn8gy518m3ab1y-freetype-2.14.3-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-freetype-2.14.3-dev -isystem /nix/store/z203ci88037mkq16c1kn8gy518m3ab1y-freetype-2.14.3-dev/include -fmacro-prefix-map=/nix/store/z203ci88037mkq16c1kn8gy518m3ab1y-freetype-2.14.3-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-freetype-2.14.3-dev -isystem /nix/store/nd34kmibbq6y7qmp78rhw38adsj5ffd0-zlib-1.3.2-dev/include -fmacro-prefix-map=/nix/store/nd34kmibbq6y7qmp78rhw38adsj5ffd0-zlib-1.3.2-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-zlib-1.3.2-dev -isystem /nix/store/nd34kmibbq6y7qmp78rhw38adsj5ffd0-zlib-1.3.2-dev/include -fmacro-prefix-map=/nix/store/nd34kmibbq6y7qmp78rhw38adsj5ffd0-zlib-1.3.2-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-zlib-1.3.2-dev -isystem /nix/store/9vxrnnhc400s1rgq801wqfdxhzpcl1z1-bzip2-1.0.8-dev/include -fmacro-prefix-map=/nix/store/9vxrnnhc400s1rgq801wqfdxhzpcl1z1-bzip2-1.0.8-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-bzip2-1.0.8-dev -isystem /nix/store/9vxrnnhc400s1rgq801wqfdxhzpcl1z1-bzip2-1.0.8-dev/include -fmacro-prefix-map=/nix/store/9vxrnnhc400s1rgq801wqfdxhzpcl1z1-bzip2-1.0.8-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-bzip2-1.0.8-dev -isystem /nix/store/46hh240hlj9si28zra66dyc3nj85lynw-brotli-1.2.0-dev/include -fmacro-prefix-map=/nix/store/46hh240hlj9si28zra66dyc3nj85lynw-brotli-1.2.0-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-brotli-1.2.0-dev -isystem /nix/store/46hh240hlj9si28zra66dyc3nj85lynw-brotli-1.2.0-dev/include -fmacro-prefix-map=/nix/store/46hh240hlj9si28zra66dyc3nj85lynw-brotli-1.2.0-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-brotli-1.2.0-dev -isystem /nix/store/p8m024sxqwg7il6660zqgshrqpsvf43l-libpng-apng-1.6.58-dev/include -fmacro-prefix-map=/nix/store/p8m024sxqwg7il6660zqgshrqpsvf43l-libpng-apng-1.6.58-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libpng-apng-1.6.58-dev -isystem /nix/store/p8m024sxqwg7il6660zqgshrqpsvf43l-libpng-apng-1.6.58-dev/include -fmacro-prefix-map=/nix/store/p8m024sxqwg7il6660zqgshrqpsvf43l-libpng-apng-1.6.58-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libpng-apng-1.6.58-dev -isystem /nix/store/iss09vixlpbq7jwf2y5wkmxvcfydgm3v-expat-2.8.3-dev/include -fmacro-prefix-map=/nix/store/iss09vixlpbq7jwf2y5wkmxvcfydgm3v-expat-2.8.3-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-expat-2.8.3-dev -isystem /nix/store/iss09vixlpbq7jwf2y5wkmxvcfydgm3v-expat-2.8.3-dev/include -fmacro-prefix-map=/nix/store/iss09vixlpbq7jwf2y5wkmxvcfydgm3v-expat-2.8.3-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-expat-2.8.3-dev -isystem /nix/store/knyasnbdxksxz6ilfygnrwa08m9n35m7-libglvnd-1.7.0-dev/include -fmacro-prefix-map=/nix/store/knyasnbdxksxz6ilfygnrwa08m9n35m7-libglvnd-1.7.0-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libglvnd-1.7.0-dev -isystem /nix/store/knyasnbdxksxz6ilfygnrwa08m9n35m7-libglvnd-1.7.0-dev/include -fmacro-prefix-map=/nix/store/knyasnbdxksxz6ilfygnrwa08m9n35m7-libglvnd-1.7.0-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libglvnd-1.7.0-dev -isystem /nix/store/jaw4nr6lwfpv40140zk7prh9q8jap2gz-eglexternalplatform-1.2.1/include -fmacro-prefix-map=/nix/store/jaw4nr6lwfpv40140zk7prh9q8jap2gz-eglexternalplatform-1.2.1=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-eglexternalplatform-1.2.1 -isystem /nix/store/jaw4nr6lwfpv40140zk7prh9q8jap2gz-eglexternalplatform-1.2.1/include -fmacro-prefix-map=/nix/store/jaw4nr6lwfpv40140zk7prh9q8jap2gz-eglexternalplatform-1.2.1=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-eglexternalplatform-1.2.1 -isystem /nix/store/4sh8xds6acpkvb2f1dqh0jsgvgn5p2sy-libx11-1.8.13-dev/include -fmacro-prefix-map=/nix/store/4sh8xds6acpkvb2f1dqh0jsgvgn5p2sy-libx11-1.8.13-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libx11-1.8.13-dev -isystem /nix/store/4sh8xds6acpkvb2f1dqh0jsgvgn5p2sy-libx11-1.8.13-dev/include -fmacro-prefix-map=/nix/store/4sh8xds6acpkvb2f1dqh0jsgvgn5p2sy-libx11-1.8.13-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libx11-1.8.13-dev -isystem /nix/store/y4k7f46xqci803kfbi78sfy09r1a978x-xorgproto-2025.1/include -fmacro-prefix-map=/nix/store/y4k7f46xqci803kfbi78sfy09r1a978x-xorgproto-2025.1=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-xorgproto-2025.1 -isystem /nix/store/y4k7f46xqci803kfbi78sfy09r1a978x-xorgproto-2025.1/include -fmacro-prefix-map=/nix/store/y4k7f46xqci803kfbi78sfy09r1a978x-xorgproto-2025.1=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-xorgproto-2025.1 -isystem /nix/store/g5l3mkk656ccm58gzz0a9kryy2grih01-compiler-rt-libc-21.1.8-dev/include -fmacro-prefix-map=/nix/store/g5l3mkk656ccm58gzz0a9kryy2grih01-compiler-rt-libc-21.1.8-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-compiler-rt-libc-21.1.8-dev -isystem /nix/store/g5l3mkk656ccm58gzz0a9kryy2grih01-compiler-rt-libc-21.1.8-dev/include -fmacro-prefix-map=/nix/store/g5l3mkk656ccm58gzz0a9kryy2grih01-compiler-rt-libc-21.1.8-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-compiler-rt-libc-21.1.8-dev -isystem /nix/store/ad0w92xhd7f1gbwzfgpkd0nz1ipijd8h-bash-interactive-5.3p15-dev/include -fmacro-prefix-map=/nix/store/ad0w92xhd7f1gbwzfgpkd0nz1ipijd8h-bash-interactive-5.3p15-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-bash-interactive-5.3p15-dev -isystem /nix/store/ad0w92xhd7f1gbwzfgpkd0nz1ipijd8h-bash-interactive-5.3p15-dev/include -fmacro-prefix-map=/nix/store/ad0w92xhd7f1gbwzfgpkd0nz1ipijd8h-bash-interactive-5.3p15-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-bash-interactive-5.3p15-dev -isystem /nix/store/7ydf0dzbsq7w35bxifci2mslm76pw1qf-gnumake-4.4.1/include -fmacro-prefix-map=/nix/store/7ydf0dzbsq7w35bxifci2mslm76pw1qf-gnumake-4.4.1=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gnumake-4.4.1 -isystem /nix/store/7ydf0dzbsq7w35bxifci2mslm76pw1qf-gnumake-4.4.1/include -fmacro-prefix-map=/nix/store/7ydf0dzbsq7w35bxifci2mslm76pw1qf-gnumake-4.4.1=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gnumake-4.4.1 -isystem /nix/store/bg2bp1zmii5spb2hkgv5xn6mzva7nx9r-gdb-17.2/include -fmacro-prefix-map=/nix/store/bg2bp1zmii5spb2hkgv5xn6mzva7nx9r-gdb-17.2=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gdb-17.2 -isystem /nix/store/bg2bp1zmii5spb2hkgv5xn6mzva7nx9r-gdb-17.2/include -fmacro-prefix-map=/nix/store/bg2bp1zmii5spb2hkgv5xn6mzva7nx9r-gdb-17.2=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gdb-17.2 -isystem /nix/store/5jhgdsgl541jznvgv2xlhhksnkix2hib-valgrind-3.27.1-dev/include -fmacro-prefix-map=/nix/store/5jhgdsgl541jznvgv2xlhhksnkix2hib-valgrind-3.27.1-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-valgrind-3.27.1-dev -isystem /nix/store/5jhgdsgl541jznvgv2xlhhksnkix2hib-valgrind-3.27.1-dev/include -fmacro-prefix-map=/nix/store/5jhgdsgl541jznvgv2xlhhksnkix2hib-valgrind-3.27.1-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-valgrind-3.27.1-dev -isystem /nix/store/yrr1yqaxyr673b1f9p5lfh4lqp7hpf9j-lld-21.1.8-dev/include -fmacro-prefix-map=/nix/store/yrr1yqaxyr673b1f9p5lfh4lqp7hpf9j-lld-21.1.8-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-lld-21.1.8-dev -isystem /nix/store/yrr1yqaxyr673b1f9p5lfh4lqp7hpf9j-lld-21.1.8-dev/include -fmacro-prefix-map=/nix/store/yrr1yqaxyr673b1f9p5lfh4lqp7hpf9j-lld-21.1.8-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-lld-21.1.8-dev -isystem /nix/store/7svfxf5fpqsn4jjf8r044f65a030f40x-wayland-1.26.0-dev/include -fmacro-prefix-map=/nix/store/7svfxf5fpqsn4jjf8r044f65a030f40x-wayland-1.26.0-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-wayland-1.26.0-dev -isystem /nix/store/7svfxf5fpqsn4jjf8r044f65a030f40x-wayland-1.26.0-dev/include -fmacro-prefix-map=/nix/store/7svfxf5fpqsn4jjf8r044f65a030f40x-wayland-1.26.0-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-wayland-1.26.0-dev -isystem /nix/store/2nlq43n0gc4s8cbjjxpnfg97kgmk8blh-wayland-protocols-1.49/include -fmacro-prefix-map=/nix/store/2nlq43n0gc4s8cbjjxpnfg97kgmk8blh-wayland-protocols-1.49=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-wayland-protocols-1.49 -isystem /nix/store/2nlq43n0gc4s8cbjjxpnfg97kgmk8blh-wayland-protocols-1.49/include -fmacro-prefix-map=/nix/store/2nlq43n0gc4s8cbjjxpnfg97kgmk8blh-wayland-protocols-1.49=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-wayland-protocols-1.49 -isystem /nix/store/1sqzajgcm7nk3knr8y2ygdxgsicrh72x-libxkbcommon-1.13.2-dev/include -fmacro-prefix-map=/nix/store/1sqzajgcm7nk3knr8y2ygdxgsicrh72x-libxkbcommon-1.13.2-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libxkbcommon-1.13.2-dev -isystem /nix/store/1sqzajgcm7nk3knr8y2ygdxgsicrh72x-libxkbcommon-1.13.2-dev/include -fmacro-prefix-map=/nix/store/1sqzajgcm7nk3knr8y2ygdxgsicrh72x-libxkbcommon-1.13.2-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libxkbcommon-1.13.2-dev -isystem /nix/store/ghf184l1525ks9h8dm3nsqpnw1wnq6ws-libinput-1.31.3-dev/include -fmacro-prefix-map=/nix/store/ghf184l1525ks9h8dm3nsqpnw1wnq6ws-libinput-1.31.3-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libinput-1.31.3-dev -isystem /nix/store/ghf184l1525ks9h8dm3nsqpnw1wnq6ws-libinput-1.31.3-dev/include -fmacro-prefix-map=/nix/store/ghf184l1525ks9h8dm3nsqpnw1wnq6ws-libinput-1.31.3-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libinput-1.31.3-dev -isystem /nix/store/00vmp292cjgwhzp089cszl51xiq8ncrj-systemd-minimal-libs-261.2-dev/include -fmacro-prefix-map=/nix/store/00vmp292cjgwhzp089cszl51xiq8ncrj-systemd-minimal-libs-261.2-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-systemd-minimal-libs-261.2-dev -isystem /nix/store/00vmp292cjgwhzp089cszl51xiq8ncrj-systemd-minimal-libs-261.2-dev/include -fmacro-prefix-map=/nix/store/00vmp292cjgwhzp089cszl51xiq8ncrj-systemd-minimal-libs-261.2-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-systemd-minimal-libs-261.2-dev -isystem /nix/store/s30pndvs4kh1dk7jxxj4ljn27spyr8fv-dbus-1.16.2-dev/include -fmacro-prefix-map=/nix/store/s30pndvs4kh1dk7jxxj4ljn27spyr8fv-dbus-1.16.2-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-dbus-1.16.2-dev -isystem /nix/store/s30pndvs4kh1dk7jxxj4ljn27spyr8fv-dbus-1.16.2-dev/include -fmacro-prefix-map=/nix/store/s30pndvs4kh1dk7jxxj4ljn27spyr8fv-dbus-1.16.2-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-dbus-1.16.2-dev -isystem /nix/store/8kmh5aaiadz1vfv1nal7vf3x41b2l92j-pixman-0.46.4/include -fmacro-prefix-map=/nix/store/8kmh5aaiadz1vfv1nal7vf3x41b2l92j-pixman-0.46.4=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-pixman-0.46.4 -isystem /nix/store/8kmh5aaiadz1vfv1nal7vf3x41b2l92j-pixman-0.46.4/include -fmacro-prefix-map=/nix/store/8kmh5aaiadz1vfv1nal7vf3x41b2l92j-pixman-0.46.4=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-pixman-0.46.4 -isystem /nix/store/p3s3wkz0s0xkgxnrn7x99w1bl6hd8283-libdrm-2.4.134-dev/include -fmacro-prefix-map=/nix/store/p3s3wkz0s0xkgxnrn7x99w1bl6hd8283-libdrm-2.4.134-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libdrm-2.4.134-dev -isystem /nix/store/p3s3wkz0s0xkgxnrn7x99w1bl6hd8283-libdrm-2.4.134-dev/include -fmacro-prefix-map=/nix/store/p3s3wkz0s0xkgxnrn7x99w1bl6hd8283-libdrm-2.4.134-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libdrm-2.4.134-dev -isystem /nix/store/7ifsxb6iqz7f3jkg1kfbcnmr1f0y1n08-seatd-0.9.3-dev/include -fmacro-prefix-map=/nix/store/7ifsxb6iqz7f3jkg1kfbcnmr1f0y1n08-seatd-0.9.3-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-seatd-0.9.3-dev -isystem /nix/store/7ifsxb6iqz7f3jkg1kfbcnmr1f0y1n08-seatd-0.9.3-dev/include -fmacro-prefix-map=/nix/store/7ifsxb6iqz7f3jkg1kfbcnmr1f0y1n08-seatd-0.9.3-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-seatd-0.9.3-dev -isystem /nix/store/vwlb36mv7jbar7y76l7kilvln04xqf6n-fontconfig-2.18.2-dev/include -fmacro-prefix-map=/nix/store/vwlb36mv7jbar7y76l7kilvln04xqf6n-fontconfig-2.18.2-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-fontconfig-2.18.2-dev -isystem /nix/store/vwlb36mv7jbar7y76l7kilvln04xqf6n-fontconfig-2.18.2-dev/include -fmacro-prefix-map=/nix/store/vwlb36mv7jbar7y76l7kilvln04xqf6n-fontconfig-2.18.2-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-fontconfig-2.18.2-dev -isystem /nix/store/z203ci88037mkq16c1kn8gy518m3ab1y-freetype-2.14.3-dev/include -fmacro-prefix-map=/nix/store/z203ci88037mkq16c1kn8gy518m3ab1y-freetype-2.14.3-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-freetype-2.14.3-dev -isystem /nix/store/z203ci88037mkq16c1kn8gy518m3ab1y-freetype-2.14.3-dev/include -fmacro-prefix-map=/nix/store/z203ci88037mkq16c1kn8gy518m3ab1y-freetype-2.14.3-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-freetype-2.14.3-dev -isystem /nix/store/nd34kmibbq6y7qmp78rhw38adsj5ffd0-zlib-1.3.2-dev/include -fmacro-prefix-map=/nix/store/nd34kmibbq6y7qmp78rhw38adsj5ffd0-zlib-1.3.2-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-zlib-1.3.2-dev -isystem /nix/store/nd34kmibbq6y7qmp78rhw38adsj5ffd0-zlib-1.3.2-dev/include -fmacro-prefix-map=/nix/store/nd34kmibbq6y7qmp78rhw38adsj5ffd0-zlib-1.3.2-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-zlib-1.3.2-dev -isystem /nix/store/9vxrnnhc400s1rgq801wqfdxhzpcl1z1-bzip2-1.0.8-dev/include -fmacro-prefix-map=/nix/store/9vxrnnhc400s1rgq801wqfdxhzpcl1z1-bzip2-1.0.8-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-bzip2-1.0.8-dev -isystem /nix/store/9vxrnnhc400s1rgq801wqfdxhzpcl1z1-bzip2-1.0.8-dev/include -fmacro-prefix-map=/nix/store/9vxrnnhc400s1rgq801wqfdxhzpcl1z1-bzip2-1.0.8-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-bzip2-1.0.8-dev -isystem /nix/store/46hh240hlj9si28zra66dyc3nj85lynw-brotli-1.2.0-dev/include -fmacro-prefix-map=/nix/store/46hh240hlj9si28zra66dyc3nj85lynw-brotli-1.2.0-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-brotli-1.2.0-dev -isystem /nix/store/46hh240hlj9si28zra66dyc3nj85lynw-brotli-1.2.0-dev/include -fmacro-prefix-map=/nix/store/46hh240hlj9si28zra66dyc3nj85lynw-brotli-1.2.0-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-brotli-1.2.0-dev -isystem /nix/store/p8m024sxqwg7il6660zqgshrqpsvf43l-libpng-apng-1.6.58-dev/include -fmacro-prefix-map=/nix/store/p8m024sxqwg7il6660zqgshrqpsvf43l-libpng-apng-1.6.58-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libpng-apng-1.6.58-dev -isystem /nix/store/p8m024sxqwg7il6660zqgshrqpsvf43l-libpng-apng-1.6.58-dev/include -fmacro-prefix-map=/nix/store/p8m024sxqwg7il6660zqgshrqpsvf43l-libpng-apng-1.6.58-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libpng-apng-1.6.58-dev -isystem /nix/store/iss09vixlpbq7jwf2y5wkmxvcfydgm3v-expat-2.8.3-dev/include -fmacro-prefix-map=/nix/store/iss09vixlpbq7jwf2y5wkmxvcfydgm3v-expat-2.8.3-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-expat-2.8.3-dev -isystem /nix/store/iss09vixlpbq7jwf2y5wkmxvcfydgm3v-expat-2.8.3-dev/include -fmacro-prefix-map=/nix/store/iss09vixlpbq7jwf2y5wkmxvcfydgm3v-expat-2.8.3-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-expat-2.8.3-dev -isystem /nix/store/knyasnbdxksxz6ilfygnrwa08m9n35m7-libglvnd-1.7.0-dev/include -fmacro-prefix-map=/nix/store/knyasnbdxksxz6ilfygnrwa08m9n35m7-libglvnd-1.7.0-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libglvnd-1.7.0-dev -isystem /nix/store/knyasnbdxksxz6ilfygnrwa08m9n35m7-libglvnd-1.7.0-dev/include -fmacro-prefix-map=/nix/store/knyasnbdxksxz6ilfygnrwa08m9n35m7-libglvnd-1.7.0-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libglvnd-1.7.0-dev -isystem /nix/store/jaw4nr6lwfpv40140zk7prh9q8jap2gz-eglexternalplatform-1.2.1/include -fmacro-prefix-map=/nix/store/jaw4nr6lwfpv40140zk7prh9q8jap2gz-eglexternalplatform-1.2.1=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-eglexternalplatform-1.2.1 -isystem /nix/store/jaw4nr6lwfpv40140zk7prh9q8jap2gz-eglexternalplatform-1.2.1/include -fmacro-prefix-map=/nix/store/jaw4nr6lwfpv40140zk7prh9q8jap2gz-eglexternalplatform-1.2.1=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-eglexternalplatform-1.2.1 -isystem /nix/store/4sh8xds6acpkvb2f1dqh0jsgvgn5p2sy-libx11-1.8.13-dev/include -fmacro-prefix-map=/nix/store/4sh8xds6acpkvb2f1dqh0jsgvgn5p2sy-libx11-1.8.13-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libx11-1.8.13-dev -isystem /nix/store/4sh8xds6acpkvb2f1dqh0jsgvgn5p2sy-libx11-1.8.13-dev/include -fmacro-prefix-map=/nix/store/4sh8xds6acpkvb2f1dqh0jsgvgn5p2sy-libx11-1.8.13-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libx11-1.8.13-dev -isystem /nix/store/y4k7f46xqci803kfbi78sfy09r1a978x-xorgproto-2025.1/include -fmacro-prefix-map=/nix/store/y4k7f46xqci803kfbi78sfy09r1a978x-xorgproto-2025.1=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-xorgproto-2025.1 -isystem /nix/store/y4k7f46xqci803kfbi78sfy09r1a978x-xorgproto-2025.1/include -fmacro-prefix-map=/nix/store/y4k7f46xqci803kfbi78sfy09r1a978x-xorgproto-2025.1=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-xorgproto-2025.1 -isystem /nix/store/g5l3mkk656ccm58gzz0a9kryy2grih01-compiler-rt-libc-21.1.8-dev/include -fmacro-prefix-map=/nix/store/g5l3mkk656ccm58gzz0a9kryy2grih01-compiler-rt-libc-21.1.8-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-compiler-rt-libc-21.1.8-dev -isystem /nix/store/g5l3mkk656ccm58gzz0a9kryy2grih01-compiler-rt-libc-21.1.8-dev/include -fmacro-prefix-map=/nix/store/g5l3mkk656ccm58gzz0a9kryy2grih01-compiler-rt-libc-21.1.8-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-compiler-rt-libc-21.1.8-dev'
+export NIX_CFLAGS_COMPILE
+OBJCOPY_FOR_BUILD='objcopy'
+export OBJCOPY_FOR_BUILD
+RANLIB_FOR_BUILD='ranlib'
+export RANLIB_FOR_BUILD
+DEVENV_DOTFILE='/home/ty/NixOS/Master/flakes/Rust/.devenv'
+export DEVENV_DOTFILE
+_substituteStream_has_warned_replace_deprecation='false'
+declare -a envTargetTargetHooks=()
+STRIP='strip'
+export STRIP
+LD='ld'
+export LD
+DEVENV_TASKS=''
+export DEVENV_TASKS
+__structuredAttrs=''
+export __structuredAttrs
+NIX_STORE='/nix/store'
+export NIX_STORE
+SOURCE_DATE_EPOCH='315532800'
+export SOURCE_DATE_EPOCH
+AS_FOR_BUILD='as'
+export AS_FOR_BUILD
+dontAddDisableDepTrack='1'
+export dontAddDisableDepTrack
+OBJCOPY='objcopy'
+export OBJCOPY
+declare -a pkgsBuildBuild=('/nix/store/w88q44gqd1qg5wmkk7v0h97rpiqvam0l-gcc-wrapper-15.3.0' '/nix/store/rm982p6i9ry7rwq5jn638kdpv0a2331f-binutils-wrapper-2.46' )
+declare -a pkgsBuildHost=('/nix/store/ad0w92xhd7f1gbwzfgpkd0nz1ipijd8h-bash-interactive-5.3p15-dev' '/nix/store/7a60q5dgnv6z96c279rc1nalyiw4mgqn-bash-interactive-5.3p15' '/nix/store/6vv06lcrdpnsdkhz3al5xm1azaz7sizx-rust-analyzer-preview-1.98.0-x86_64-unknown-linux-gnu' '/nix/store/xrgydm47d3f9256z7fwffwrzm4lnk5hk-rust-stable-1.98.0-1.98.0' '/nix/store/w88q44gqd1qg5wmkk7v0h97rpiqvam0l-gcc-wrapper-15.3.0' '/nix/store/rm982p6i9ry7rwq5jn638kdpv0a2331f-binutils-wrapper-2.46' '/nix/store/2y91v9adfb6kyrwzkjix0j9yx78xmyy0-clang-tools-21.1.8' '/nix/store/dvj9bnk0vdbzzhn76wsnzk1dv6c6jbx1-stdenv-linux' '/nix/store/7ydf0dzbsq7w35bxifci2mslm76pw1qf-gnumake-4.4.1' '/nix/store/6jh160z5zby7p11nk8x7z3jdnxmimpjp-ccls-0.20250815.1' '/nix/store/bg2bp1zmii5spb2hkgv5xn6mzva7nx9r-gdb-17.2' '/nix/store/5jhgdsgl541jznvgv2xlhhksnkix2hib-valgrind-3.27.1-dev' '/nix/store/7p6qjr2kqkbd0i3ylndwrxsb0j7m317k-valgrind-3.27.1' '/nix/store/yrr1yqaxyr673b1f9p5lfh4lqp7hpf9j-lld-21.1.8-dev' '/nix/store/76gr5hvm3xh4ipjbqdgym43db8mqv8zj-lld-21.1.8-lib' '/nix/store/5rhnyy8qnwnasmadd83bbrp1agylvwjs-lld-21.1.8' '/nix/store/07izjnizaihn7z0jzaxjgbwvdyyfp7p4-foot-1.27.0' '/nix/store/7svfxf5fpqsn4jjf8r044f65a030f40x-wayland-1.26.0-dev' '/nix/store/vjcwhp0milwa1jqy1inpjxrsh8hjrgwc-wayland-1.26.0' '/nix/store/2nlq43n0gc4s8cbjjxpnfg97kgmk8blh-wayland-protocols-1.49' '/nix/store/1sqzajgcm7nk3knr8y2ygdxgsicrh72x-libxkbcommon-1.13.2-dev' '/nix/store/yk95z4hjlzdk418px0fc797qszccfj5p-libxkbcommon-1.13.2' '/nix/store/ghf184l1525ks9h8dm3nsqpnw1wnq6ws-libinput-1.31.3-dev' '/nix/store/00vmp292cjgwhzp089cszl51xiq8ncrj-systemd-minimal-libs-261.2-dev' '/nix/store/4hlgp6r4j5p6b2b9sxw01cba0x3fjxd6-systemd-minimal-libs-261.2' '/nix/store/y11wm3zhcvjav2vbav9p0ky99xa2wlyv-libinput-1.31.3' '/nix/store/s30pndvs4kh1dk7jxxj4ljn27spyr8fv-dbus-1.16.2-dev' '/nix/store/yn8y98bfwgr9jxcrl1x32h04mshpn9wc-dbus-1.16.2-lib' '/nix/store/2swbxihjql78pnn5kfmhjq5dvp9m744b-dbus-1.16.2' '/nix/store/8kmh5aaiadz1vfv1nal7vf3x41b2l92j-pixman-0.46.4' '/nix/store/v5c40hysv678q0yjwvdi0q97rdmxr9r4-mesa-26.2.1' '/nix/store/p3s3wkz0s0xkgxnrn7x99w1bl6hd8283-libdrm-2.4.134-dev' '/nix/store/00s8a1232vhvgg7jdslifsnqzkl8wxj1-libdrm-2.4.134-bin' '/nix/store/5qg70j0rzbxqlxlzrq87k4ksgzdwrwr6-libdrm-2.4.134' '/nix/store/7ifsxb6iqz7f3jkg1kfbcnmr1f0y1n08-seatd-0.9.3-dev' '/nix/store/h9z78lc5ik5la0b23jjsvb2hfyrvcxvz-seatd-0.9.3-bin' '/nix/store/rcwvn48vi65zr4jzgk0rp3y7czfd1a9m-seatd-0.9.3' '/nix/store/vwlb36mv7jbar7y76l7kilvln04xqf6n-fontconfig-2.18.2-dev' '/nix/store/z203ci88037mkq16c1kn8gy518m3ab1y-freetype-2.14.3-dev' '/nix/store/nd34kmibbq6y7qmp78rhw38adsj5ffd0-zlib-1.3.2-dev' '/nix/store/l3p6y554mkxi4vipnnp8809kxj0g1lyv-zlib-1.3.2' '/nix/store/9vxrnnhc400s1rgq801wqfdxhzpcl1z1-bzip2-1.0.8-dev' '/nix/store/622jkvg8hgffly7dca6iif9drvimingx-bzip2-1.0.8-bin' '/nix/store/xz5xsq0nihfs15fbknz5w0yblg04760q-bzip2-1.0.8' '/nix/store/46hh240hlj9si28zra66dyc3nj85lynw-brotli-1.2.0-dev' '/nix/store/c56x66gbj3qwv3g7dhadcfiq408q2hay-brotli-1.2.0-lib' '/nix/store/34vidkz6jm5pinhhyxi64pj82x70vida-brotli-1.2.0' '/nix/store/p8m024sxqwg7il6660zqgshrqpsvf43l-libpng-apng-1.6.58-dev' '/nix/store/d3f7r44z2px98z479jgf7qdwqn96jgf6-libpng-apng-1.6.58' '/nix/store/dczkv6755chri9gsvacxvqpz9nn2dwld-freetype-2.14.3' '/nix/store/iss09vixlpbq7jwf2y5wkmxvcfydgm3v-expat-2.8.3-dev' '/nix/store/2gkqj0v0msfcagwf5ix199rf1lnwf2a1-expat-2.8.3' '/nix/store/122fcxcqy3ay3jkm3fa2bav0vb8mgdjy-fontconfig-2.18.2-bin' '/nix/store/iv0yvsywa1v35xzdkqz9wdzhg7vshpdd-fontconfig-2.18.2-lib' '/nix/store/v3cjb49fng33cddf41nj18z5idlkj86a-vulkan-loader-1.4.357.0-dev' '/nix/store/lk4614327cn1h9z3m6cvnls95n13m1cj-vulkan-loader-1.4.357.0' '/nix/store/knyasnbdxksxz6ilfygnrwa08m9n35m7-libglvnd-1.7.0-dev' '/nix/store/rarvfpm927fcbd6b9p0crg09w9r3ywb3-libglvnd-1.7.0' '/nix/store/q9bsac1xi1q9fhqkg1pdlk80637v9fkw-egl-wayland-1.1.21-dev' '/nix/store/jaw4nr6lwfpv40140zk7prh9q8jap2gz-eglexternalplatform-1.2.1' '/nix/store/6slvk1x4gashcfg4bgvcc7ywbwzf1isy-egl-wayland-1.1.21' '/nix/store/4sh8xds6acpkvb2f1dqh0jsgvgn5p2sy-libx11-1.8.13-dev' '/nix/store/y4k7f46xqci803kfbi78sfy09r1a978x-xorgproto-2025.1' '/nix/store/3vlnkr6z7hh86rrn087df45s4cfjxy65-libx11-1.8.13' '/nix/store/w021fbcg4z6vxihnp6gb6vijyifl051f-clang-wrapper-21.1.8' '/nix/store/vs80ag6hsr58wv5fn3nlq8qi32x9hwfi-binutils-wrapper-2.46' '/nix/store/7fx93fz9c809w8yjxb0934zw6xcjis58-pkg-config-wrapper-0.29.2' '/nix/store/fpig164lz7fcipbndn61sfd2y2yq363n-patchelf-0.15.2' '/nix/store/7n9ldpw06qbqlnf0iaig26agpn2aazfl-update-autotools-gnu-config-scripts-hook' '/nix/store/0y5xmdb7qfvimjwbq7ibg1xdgkgjwqng-no-broken-symlinks.sh' '/nix/store/cv1d7p48379km6a85h4zp6kr86brh32q-audit-tmpdir.sh' '/nix/store/85clx3b0xkdf58jn161iy80y5223ilbi-compress-man-pages.sh' '/nix/store/p3l1a5y7nllfyrjn2krlwgcc3z0cd3fq-make-symlinks-relative.sh' '/nix/store/5yzw0vhkyszf2d179m0qfkgxmp5wjjx4-move-docs.sh' '/nix/store/fyaryjvghbkpfnsyw97hb3lyb37s1pd6-move-lib64.sh' '/nix/store/kd4xwxjpjxi71jkm6ka0np72if9rm3y0-move-sbin.sh' '/nix/store/pag6l61paj1dc9sv15l7bm5c17xn5kyk-move-systemd-user-units.sh' '/nix/store/cmzya9irvxzlkh7lfy6i82gbp0saxqj3-multiple-outputs.sh' '/nix/store/x8c40nfigps493a07sdr2pm5s9j1cdc0-patch-shebangs.sh' '/nix/store/cickvswrvann041nqxb0rxilc46svw1n-prune-libtool-files.sh' '/nix/store/xyff06pkhki3qy1ls77w10s0v79c9il0-reproducible-builds.sh' '/nix/store/z7k98578dfzi6l3hsvbivzm7hfqlk0zc-set-source-date-epoch-to-latest.sh' '/nix/store/89igyzp72y4ky0qyj4x5r52z84w203ki-strip.sh' )
+RUST_SRC_PATH='/nix/store/2r5h6a715qg11cvv3babc48gmwmmdqzm-rust-src-1.98.0-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library'
+export RUST_SRC_PATH
+declare -a envHostHostHooks=('ccWrapper_addCVars' 'bintoolsWrapper_addLDVars' 'ccWrapper_addCVars' 'bintoolsWrapper_addLDVars' 'pkgConfigWrapper_addPkgConfigPath' )
+strictDeps=''
+export strictDeps
 buildPhase='{ echo "------------------------------------------------------------";
   echo " WARNING: the existence of this path is not guaranteed.";
   echo " It is an internal implementation detail for pkgs.mkShell.";
@@ -97,117 +162,42 @@ buildPhase='{ echo "------------------------------------------------------------
 } >> "$out"
 '
 export buildPhase
-defaultNativeBuildInputs='/nix/store/fpig164lz7fcipbndn61sfd2y2yq363n-patchelf-0.15.2 /nix/store/7n9ldpw06qbqlnf0iaig26agpn2aazfl-update-autotools-gnu-config-scripts-hook /nix/store/0y5xmdb7qfvimjwbq7ibg1xdgkgjwqng-no-broken-symlinks.sh /nix/store/cv1d7p48379km6a85h4zp6kr86brh32q-audit-tmpdir.sh /nix/store/85clx3b0xkdf58jn161iy80y5223ilbi-compress-man-pages.sh /nix/store/p3l1a5y7nllfyrjn2krlwgcc3z0cd3fq-make-symlinks-relative.sh /nix/store/5yzw0vhkyszf2d179m0qfkgxmp5wjjx4-move-docs.sh /nix/store/fyaryjvghbkpfnsyw97hb3lyb37s1pd6-move-lib64.sh /nix/store/kd4xwxjpjxi71jkm6ka0np72if9rm3y0-move-sbin.sh /nix/store/pag6l61paj1dc9sv15l7bm5c17xn5kyk-move-systemd-user-units.sh /nix/store/cmzya9irvxzlkh7lfy6i82gbp0saxqj3-multiple-outputs.sh /nix/store/x8c40nfigps493a07sdr2pm5s9j1cdc0-patch-shebangs.sh /nix/store/cickvswrvann041nqxb0rxilc46svw1n-prune-libtool-files.sh /nix/store/xyff06pkhki3qy1ls77w10s0v79c9il0-reproducible-builds.sh /nix/store/z7k98578dfzi6l3hsvbivzm7hfqlk0zc-set-source-date-epoch-to-latest.sh /nix/store/89igyzp72y4ky0qyj4x5r52z84w203ki-strip.sh /nix/store/w88q44gqd1qg5wmkk7v0h97rpiqvam0l-gcc-wrapper-15.3.0'
-NM_FOR_BUILD='nm'
-export NM_FOR_BUILD
-IN_NIX_SHELL='impure'
-export IN_NIX_SHELL
-NIX_CFLAGS_COMPILE=' -frandom-seed=x41jgj3lvn -isystem /nix/store/ad0w92xhd7f1gbwzfgpkd0nz1ipijd8h-bash-interactive-5.3p15-dev/include -fmacro-prefix-map=/nix/store/ad0w92xhd7f1gbwzfgpkd0nz1ipijd8h-bash-interactive-5.3p15-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-bash-interactive-5.3p15-dev -isystem /nix/store/ad0w92xhd7f1gbwzfgpkd0nz1ipijd8h-bash-interactive-5.3p15-dev/include -fmacro-prefix-map=/nix/store/ad0w92xhd7f1gbwzfgpkd0nz1ipijd8h-bash-interactive-5.3p15-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-bash-interactive-5.3p15-dev -isystem /nix/store/7ydf0dzbsq7w35bxifci2mslm76pw1qf-gnumake-4.4.1/include -fmacro-prefix-map=/nix/store/7ydf0dzbsq7w35bxifci2mslm76pw1qf-gnumake-4.4.1=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gnumake-4.4.1 -isystem /nix/store/7ydf0dzbsq7w35bxifci2mslm76pw1qf-gnumake-4.4.1/include -fmacro-prefix-map=/nix/store/7ydf0dzbsq7w35bxifci2mslm76pw1qf-gnumake-4.4.1=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gnumake-4.4.1 -isystem /nix/store/bg2bp1zmii5spb2hkgv5xn6mzva7nx9r-gdb-17.2/include -fmacro-prefix-map=/nix/store/bg2bp1zmii5spb2hkgv5xn6mzva7nx9r-gdb-17.2=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gdb-17.2 -isystem /nix/store/bg2bp1zmii5spb2hkgv5xn6mzva7nx9r-gdb-17.2/include -fmacro-prefix-map=/nix/store/bg2bp1zmii5spb2hkgv5xn6mzva7nx9r-gdb-17.2=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gdb-17.2 -isystem /nix/store/5jhgdsgl541jznvgv2xlhhksnkix2hib-valgrind-3.27.1-dev/include -fmacro-prefix-map=/nix/store/5jhgdsgl541jznvgv2xlhhksnkix2hib-valgrind-3.27.1-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-valgrind-3.27.1-dev -isystem /nix/store/5jhgdsgl541jznvgv2xlhhksnkix2hib-valgrind-3.27.1-dev/include -fmacro-prefix-map=/nix/store/5jhgdsgl541jznvgv2xlhhksnkix2hib-valgrind-3.27.1-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-valgrind-3.27.1-dev -isystem /nix/store/7svfxf5fpqsn4jjf8r044f65a030f40x-wayland-1.26.0-dev/include -fmacro-prefix-map=/nix/store/7svfxf5fpqsn4jjf8r044f65a030f40x-wayland-1.26.0-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-wayland-1.26.0-dev -isystem /nix/store/7svfxf5fpqsn4jjf8r044f65a030f40x-wayland-1.26.0-dev/include -fmacro-prefix-map=/nix/store/7svfxf5fpqsn4jjf8r044f65a030f40x-wayland-1.26.0-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-wayland-1.26.0-dev -isystem /nix/store/2nlq43n0gc4s8cbjjxpnfg97kgmk8blh-wayland-protocols-1.49/include -fmacro-prefix-map=/nix/store/2nlq43n0gc4s8cbjjxpnfg97kgmk8blh-wayland-protocols-1.49=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-wayland-protocols-1.49 -isystem /nix/store/2nlq43n0gc4s8cbjjxpnfg97kgmk8blh-wayland-protocols-1.49/include -fmacro-prefix-map=/nix/store/2nlq43n0gc4s8cbjjxpnfg97kgmk8blh-wayland-protocols-1.49=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-wayland-protocols-1.49 -isystem /nix/store/1sqzajgcm7nk3knr8y2ygdxgsicrh72x-libxkbcommon-1.13.2-dev/include -fmacro-prefix-map=/nix/store/1sqzajgcm7nk3knr8y2ygdxgsicrh72x-libxkbcommon-1.13.2-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libxkbcommon-1.13.2-dev -isystem /nix/store/1sqzajgcm7nk3knr8y2ygdxgsicrh72x-libxkbcommon-1.13.2-dev/include -fmacro-prefix-map=/nix/store/1sqzajgcm7nk3knr8y2ygdxgsicrh72x-libxkbcommon-1.13.2-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libxkbcommon-1.13.2-dev -isystem /nix/store/ghf184l1525ks9h8dm3nsqpnw1wnq6ws-libinput-1.31.3-dev/include -fmacro-prefix-map=/nix/store/ghf184l1525ks9h8dm3nsqpnw1wnq6ws-libinput-1.31.3-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libinput-1.31.3-dev -isystem /nix/store/ghf184l1525ks9h8dm3nsqpnw1wnq6ws-libinput-1.31.3-dev/include -fmacro-prefix-map=/nix/store/ghf184l1525ks9h8dm3nsqpnw1wnq6ws-libinput-1.31.3-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libinput-1.31.3-dev -isystem /nix/store/00vmp292cjgwhzp089cszl51xiq8ncrj-systemd-minimal-libs-261.2-dev/include -fmacro-prefix-map=/nix/store/00vmp292cjgwhzp089cszl51xiq8ncrj-systemd-minimal-libs-261.2-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-systemd-minimal-libs-261.2-dev -isystem /nix/store/00vmp292cjgwhzp089cszl51xiq8ncrj-systemd-minimal-libs-261.2-dev/include -fmacro-prefix-map=/nix/store/00vmp292cjgwhzp089cszl51xiq8ncrj-systemd-minimal-libs-261.2-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-systemd-minimal-libs-261.2-dev -isystem /nix/store/s30pndvs4kh1dk7jxxj4ljn27spyr8fv-dbus-1.16.2-dev/include -fmacro-prefix-map=/nix/store/s30pndvs4kh1dk7jxxj4ljn27spyr8fv-dbus-1.16.2-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-dbus-1.16.2-dev -isystem /nix/store/s30pndvs4kh1dk7jxxj4ljn27spyr8fv-dbus-1.16.2-dev/include -fmacro-prefix-map=/nix/store/s30pndvs4kh1dk7jxxj4ljn27spyr8fv-dbus-1.16.2-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-dbus-1.16.2-dev -isystem /nix/store/g5l3mkk656ccm58gzz0a9kryy2grih01-compiler-rt-libc-21.1.8-dev/include -fmacro-prefix-map=/nix/store/g5l3mkk656ccm58gzz0a9kryy2grih01-compiler-rt-libc-21.1.8-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-compiler-rt-libc-21.1.8-dev -isystem /nix/store/g5l3mkk656ccm58gzz0a9kryy2grih01-compiler-rt-libc-21.1.8-dev/include -fmacro-prefix-map=/nix/store/g5l3mkk656ccm58gzz0a9kryy2grih01-compiler-rt-libc-21.1.8-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-compiler-rt-libc-21.1.8-dev -isystem /nix/store/ad0w92xhd7f1gbwzfgpkd0nz1ipijd8h-bash-interactive-5.3p15-dev/include -fmacro-prefix-map=/nix/store/ad0w92xhd7f1gbwzfgpkd0nz1ipijd8h-bash-interactive-5.3p15-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-bash-interactive-5.3p15-dev -isystem /nix/store/ad0w92xhd7f1gbwzfgpkd0nz1ipijd8h-bash-interactive-5.3p15-dev/include -fmacro-prefix-map=/nix/store/ad0w92xhd7f1gbwzfgpkd0nz1ipijd8h-bash-interactive-5.3p15-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-bash-interactive-5.3p15-dev -isystem /nix/store/7ydf0dzbsq7w35bxifci2mslm76pw1qf-gnumake-4.4.1/include -fmacro-prefix-map=/nix/store/7ydf0dzbsq7w35bxifci2mslm76pw1qf-gnumake-4.4.1=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gnumake-4.4.1 -isystem /nix/store/7ydf0dzbsq7w35bxifci2mslm76pw1qf-gnumake-4.4.1/include -fmacro-prefix-map=/nix/store/7ydf0dzbsq7w35bxifci2mslm76pw1qf-gnumake-4.4.1=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gnumake-4.4.1 -isystem /nix/store/bg2bp1zmii5spb2hkgv5xn6mzva7nx9r-gdb-17.2/include -fmacro-prefix-map=/nix/store/bg2bp1zmii5spb2hkgv5xn6mzva7nx9r-gdb-17.2=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gdb-17.2 -isystem /nix/store/bg2bp1zmii5spb2hkgv5xn6mzva7nx9r-gdb-17.2/include -fmacro-prefix-map=/nix/store/bg2bp1zmii5spb2hkgv5xn6mzva7nx9r-gdb-17.2=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gdb-17.2 -isystem /nix/store/5jhgdsgl541jznvgv2xlhhksnkix2hib-valgrind-3.27.1-dev/include -fmacro-prefix-map=/nix/store/5jhgdsgl541jznvgv2xlhhksnkix2hib-valgrind-3.27.1-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-valgrind-3.27.1-dev -isystem /nix/store/5jhgdsgl541jznvgv2xlhhksnkix2hib-valgrind-3.27.1-dev/include -fmacro-prefix-map=/nix/store/5jhgdsgl541jznvgv2xlhhksnkix2hib-valgrind-3.27.1-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-valgrind-3.27.1-dev -isystem /nix/store/7svfxf5fpqsn4jjf8r044f65a030f40x-wayland-1.26.0-dev/include -fmacro-prefix-map=/nix/store/7svfxf5fpqsn4jjf8r044f65a030f40x-wayland-1.26.0-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-wayland-1.26.0-dev -isystem /nix/store/7svfxf5fpqsn4jjf8r044f65a030f40x-wayland-1.26.0-dev/include -fmacro-prefix-map=/nix/store/7svfxf5fpqsn4jjf8r044f65a030f40x-wayland-1.26.0-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-wayland-1.26.0-dev -isystem /nix/store/2nlq43n0gc4s8cbjjxpnfg97kgmk8blh-wayland-protocols-1.49/include -fmacro-prefix-map=/nix/store/2nlq43n0gc4s8cbjjxpnfg97kgmk8blh-wayland-protocols-1.49=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-wayland-protocols-1.49 -isystem /nix/store/2nlq43n0gc4s8cbjjxpnfg97kgmk8blh-wayland-protocols-1.49/include -fmacro-prefix-map=/nix/store/2nlq43n0gc4s8cbjjxpnfg97kgmk8blh-wayland-protocols-1.49=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-wayland-protocols-1.49 -isystem /nix/store/1sqzajgcm7nk3knr8y2ygdxgsicrh72x-libxkbcommon-1.13.2-dev/include -fmacro-prefix-map=/nix/store/1sqzajgcm7nk3knr8y2ygdxgsicrh72x-libxkbcommon-1.13.2-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libxkbcommon-1.13.2-dev -isystem /nix/store/1sqzajgcm7nk3knr8y2ygdxgsicrh72x-libxkbcommon-1.13.2-dev/include -fmacro-prefix-map=/nix/store/1sqzajgcm7nk3knr8y2ygdxgsicrh72x-libxkbcommon-1.13.2-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libxkbcommon-1.13.2-dev -isystem /nix/store/ghf184l1525ks9h8dm3nsqpnw1wnq6ws-libinput-1.31.3-dev/include -fmacro-prefix-map=/nix/store/ghf184l1525ks9h8dm3nsqpnw1wnq6ws-libinput-1.31.3-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libinput-1.31.3-dev -isystem /nix/store/ghf184l1525ks9h8dm3nsqpnw1wnq6ws-libinput-1.31.3-dev/include -fmacro-prefix-map=/nix/store/ghf184l1525ks9h8dm3nsqpnw1wnq6ws-libinput-1.31.3-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libinput-1.31.3-dev -isystem /nix/store/00vmp292cjgwhzp089cszl51xiq8ncrj-systemd-minimal-libs-261.2-dev/include -fmacro-prefix-map=/nix/store/00vmp292cjgwhzp089cszl51xiq8ncrj-systemd-minimal-libs-261.2-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-systemd-minimal-libs-261.2-dev -isystem /nix/store/00vmp292cjgwhzp089cszl51xiq8ncrj-systemd-minimal-libs-261.2-dev/include -fmacro-prefix-map=/nix/store/00vmp292cjgwhzp089cszl51xiq8ncrj-systemd-minimal-libs-261.2-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-systemd-minimal-libs-261.2-dev -isystem /nix/store/s30pndvs4kh1dk7jxxj4ljn27spyr8fv-dbus-1.16.2-dev/include -fmacro-prefix-map=/nix/store/s30pndvs4kh1dk7jxxj4ljn27spyr8fv-dbus-1.16.2-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-dbus-1.16.2-dev -isystem /nix/store/s30pndvs4kh1dk7jxxj4ljn27spyr8fv-dbus-1.16.2-dev/include -fmacro-prefix-map=/nix/store/s30pndvs4kh1dk7jxxj4ljn27spyr8fv-dbus-1.16.2-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-dbus-1.16.2-dev -isystem /nix/store/g5l3mkk656ccm58gzz0a9kryy2grih01-compiler-rt-libc-21.1.8-dev/include -fmacro-prefix-map=/nix/store/g5l3mkk656ccm58gzz0a9kryy2grih01-compiler-rt-libc-21.1.8-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-compiler-rt-libc-21.1.8-dev -isystem /nix/store/g5l3mkk656ccm58gzz0a9kryy2grih01-compiler-rt-libc-21.1.8-dev/include -fmacro-prefix-map=/nix/store/g5l3mkk656ccm58gzz0a9kryy2grih01-compiler-rt-libc-21.1.8-dev=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-compiler-rt-libc-21.1.8-dev'
-export NIX_CFLAGS_COMPILE
-NIX_BINTOOLS='/nix/store/vs80ag6hsr58wv5fn3nlq8qi32x9hwfi-binutils-wrapper-2.46'
-export NIX_BINTOOLS
-DEVENV_RUNTIME='/run/user/1000/devenv-0b49da7'
-export DEVENV_RUNTIME
-MACHTYPE='x86_64-pc-linux-gnu'
-SIZE_FOR_BUILD='size'
-export SIZE_FOR_BUILD
-NIX_BINTOOLS_FOR_BUILD='/nix/store/rm982p6i9ry7rwq5jn638kdpv0a2331f-binutils-wrapper-2.46'
-export NIX_BINTOOLS_FOR_BUILD
-system='x86_64-linux'
-export system
-LD_FOR_BUILD='ld'
-export LD_FOR_BUILD
-allowSubstitutes=''
-export allowSubstitutes
-OSTYPE='linux-gnu'
-CXX='clang++'
-export CXX
-declare -a postUnpackHooks=('_updateSourceDateEpochFromSourceRoot' )
-declare -a envHostHostHooks=('ccWrapper_addCVars' 'bintoolsWrapper_addLDVars' 'ccWrapper_addCVars' 'bintoolsWrapper_addLDVars' 'pkgConfigWrapper_addPkgConfigPath' )
-NM='nm'
-export NM
-depsBuildTarget=''
-export depsBuildTarget
-phases='buildPhase'
-export phases
-declare -a unpackCmdHooks=('_defaultUnpack' )
-CC_FOR_BUILD='gcc'
-export CC_FOR_BUILD
-outputMan='out'
-NIX_CC_WRAPPER_TARGET_BUILD_x86_64_unknown_linux_gnu='1'
-export NIX_CC_WRAPPER_TARGET_BUILD_x86_64_unknown_linux_gnu
-initialPath='/nix/store/3qgy8q2j64v2m9jy3a5jmssacbblhd4r-coreutils-9.11 /nix/store/i4kjidyvl8ciwbcwm75g75sriq3knav0-findutils-4.11.0 /nix/store/xw09m9cnc9ayb2j53y2rj8jhm1h7kkxa-diffutils-3.12 /nix/store/4nylac9gazdpsid79qyk0jpqm312b2jx-gnused-4.10 /nix/store/yhr4ps9rdmb55pgqaq246vlh7xfac1dx-gnugrep-3.12 /nix/store/bpy2ps3f0f3gvgvqjwgqriw1j1n840wd-gawk-5.4.1 /nix/store/w2mbg6mcq7k3j088sbwfziy8vsdhyk7v-gnutar-1.35 /nix/store/sd9qcv5s2gxvd6hpp5hk5cixq2bd4jd1-gzip-1.14 /nix/store/622jkvg8hgffly7dca6iif9drvimingx-bzip2-1.0.8-bin /nix/store/hd36xbvbc0vrn9f9idrfwxznri0ax427-gnumake-4.4.1 /nix/store/9ipfvwnqp1q8ijnmi5sxvlx9r8w34lw3-bash-5.3p15 /nix/store/1rcr9yyj9qlgm3dyin1j37xl7q84h15i-patch-2.8 /nix/store/0fb3jrf20z28598alm6g7rrsw6dz2cqj-xz-5.8.3-bin /nix/store/xcab8m6wdrd30l10bw3hkz32yiibynzv-file-5.48'
-declare -a pkgsHostHost=('/nix/store/g5l3mkk656ccm58gzz0a9kryy2grih01-compiler-rt-libc-21.1.8-dev' '/nix/store/ync7h8cyhw4nzw2laba4wra6b8mcn9by-compiler-rt-libc-21.1.8' )
-NIX_STORE='/nix/store'
-export NIX_STORE
-STRIP_FOR_BUILD='strip'
-export STRIP_FOR_BUILD
-NIX_LDFLAGS_FOR_BUILD=' -L/nix/store/ijpixkxqhvlsjmjbgwfh7dr8iz9rn3lz-rust-stable-1.98.0-1.98.0/lib -L/nix/store/2y91v9adfb6kyrwzkjix0j9yx78xmyy0-clang-tools-21.1.8/lib -L/nix/store/bg2bp1zmii5spb2hkgv5xn6mzva7nx9r-gdb-17.2/lib -L/nix/store/vjcwhp0milwa1jqy1inpjxrsh8hjrgwc-wayland-1.26.0/lib -L/nix/store/yk95z4hjlzdk418px0fc797qszccfj5p-libxkbcommon-1.13.2/lib -L/nix/store/4hlgp6r4j5p6b2b9sxw01cba0x3fjxd6-systemd-minimal-libs-261.2/lib -L/nix/store/y11wm3zhcvjav2vbav9p0ky99xa2wlyv-libinput-1.31.3/lib -L/nix/store/yn8y98bfwgr9jxcrl1x32h04mshpn9wc-dbus-1.16.2-lib/lib -L/nix/store/ijpixkxqhvlsjmjbgwfh7dr8iz9rn3lz-rust-stable-1.98.0-1.98.0/lib -L/nix/store/2y91v9adfb6kyrwzkjix0j9yx78xmyy0-clang-tools-21.1.8/lib -L/nix/store/bg2bp1zmii5spb2hkgv5xn6mzva7nx9r-gdb-17.2/lib -L/nix/store/vjcwhp0milwa1jqy1inpjxrsh8hjrgwc-wayland-1.26.0/lib -L/nix/store/yk95z4hjlzdk418px0fc797qszccfj5p-libxkbcommon-1.13.2/lib -L/nix/store/4hlgp6r4j5p6b2b9sxw01cba0x3fjxd6-systemd-minimal-libs-261.2/lib -L/nix/store/y11wm3zhcvjav2vbav9p0ky99xa2wlyv-libinput-1.31.3/lib -L/nix/store/yn8y98bfwgr9jxcrl1x32h04mshpn9wc-dbus-1.16.2-lib/lib -L/nix/store/ijpixkxqhvlsjmjbgwfh7dr8iz9rn3lz-rust-stable-1.98.0-1.98.0/lib -L/nix/store/2y91v9adfb6kyrwzkjix0j9yx78xmyy0-clang-tools-21.1.8/lib -L/nix/store/bg2bp1zmii5spb2hkgv5xn6mzva7nx9r-gdb-17.2/lib -L/nix/store/vjcwhp0milwa1jqy1inpjxrsh8hjrgwc-wayland-1.26.0/lib -L/nix/store/yk95z4hjlzdk418px0fc797qszccfj5p-libxkbcommon-1.13.2/lib -L/nix/store/4hlgp6r4j5p6b2b9sxw01cba0x3fjxd6-systemd-minimal-libs-261.2/lib -L/nix/store/y11wm3zhcvjav2vbav9p0ky99xa2wlyv-libinput-1.31.3/lib -L/nix/store/yn8y98bfwgr9jxcrl1x32h04mshpn9wc-dbus-1.16.2-lib/lib'
-export NIX_LDFLAGS_FOR_BUILD
-RANLIB_FOR_BUILD='ranlib'
-export RANLIB_FOR_BUILD
-defaultBuildInputs=''
-depsTargetTarget=''
-export depsTargetTarget
-propagatedBuildInputs=''
-export propagatedBuildInputs
-OLDPWD=''
-export OLDPWD
-NIX_NO_SELF_RPATH='1'
-declare -a postFixupHooks=('noBrokenSymlinksInAllOutputs' '_makeSymlinksRelative' '_multioutPropagateDev' )
-strictDeps=''
-export strictDeps
-preConfigurePhases=' updateAutotoolsGnuConfigScriptsPhase'
-DEVENV_ROOT='/home/ty/NixOS/Master/flakes/Rust'
-export DEVENV_ROOT
-doCheck=''
-export doCheck
-CARGO_TARGET_X86_64_UNKNOWN_LINUX_GNU_LINKER='/nix/store/j951mws08h0dc2c6fwsfk786zc5lsmi3-devenv-rust-linker'
-export CARGO_TARGET_X86_64_UNKNOWN_LINUX_GNU_LINKER
-dontAddDisableDepTrack='1'
-export dontAddDisableDepTrack
-cmakeFlags=''
-export cmakeFlags
-outputDev='out'
-OBJDUMP_FOR_BUILD='objdump'
-export OBJDUMP_FOR_BUILD
-CC='clang'
-export CC
-declare -a pkgsTargetTarget=()
-DEVENV_STATE='/home/ty/NixOS/Master/flakes/Rust/.devenv/state'
-export DEVENV_STATE
-AR_FOR_BUILD='ar'
-export AR_FOR_BUILD
 STRINGS='strings'
 export STRINGS
-NIX_BINTOOLS_WRAPPER_TARGET_HOST_x86_64_unknown_linux_gnu='1'
-export NIX_BINTOOLS_WRAPPER_TARGET_HOST_x86_64_unknown_linux_gnu
-PKG_CONFIG='pkg-config'
-export PKG_CONFIG
-declare -a envBuildHostHooks=('ccWrapper_addCVars' 'bintoolsWrapper_addLDVars' )
-declare -a preFixupHooks=('_moveToShare' '_multioutDocs' '_multioutDevs' )
-prefix='/nix/store/x41jgj3lvnz0sllib4800341xbp7qrqf-devenv-shell-env'
-stdenv='/nix/store/dvj9bnk0vdbzzhn76wsnzk1dv6c6jbx1-stdenv-linux'
-export stdenv
-NIX_ENFORCE_NO_NATIVE='1'
-export NIX_ENFORCE_NO_NATIVE
-NIX_CC='/nix/store/w021fbcg4z6vxihnp6gb6vijyifl051f-clang-wrapper-21.1.8'
-export NIX_CC
 HOSTTYPE='x86_64'
-configureFlags=''
-export configureFlags
-outputDoc='out'
-declare -a fixupOutputHooks=('if [ -z "${dontPatchELF-}" ]; then patchELF "$prefix"; fi' 'if [[ -z "${noAuditTmpdir-}" && -e "$prefix" ]]; then auditTmpdir "$prefix"; fi' 'if [ -z "${dontGzipMan-}" ]; then compressManPages "$prefix"; fi' '_moveLib64' '_moveSbin' '_moveSystemdUserUnits' 'patchShebangsAuto' '_pruneLibtoolFiles' '_doStrip' )
+NIX_LDFLAGS='-rpath /nix/store/v1grndznp541aklnc3cknd30asw8f6i9-devenv-shell-env/lib  -L/nix/store/xrgydm47d3f9256z7fwffwrzm4lnk5hk-rust-stable-1.98.0-1.98.0/lib -L/nix/store/xrgydm47d3f9256z7fwffwrzm4lnk5hk-rust-stable-1.98.0-1.98.0/lib -L/nix/store/2y91v9adfb6kyrwzkjix0j9yx78xmyy0-clang-tools-21.1.8/lib -L/nix/store/2y91v9adfb6kyrwzkjix0j9yx78xmyy0-clang-tools-21.1.8/lib -L/nix/store/bg2bp1zmii5spb2hkgv5xn6mzva7nx9r-gdb-17.2/lib -L/nix/store/bg2bp1zmii5spb2hkgv5xn6mzva7nx9r-gdb-17.2/lib -L/nix/store/76gr5hvm3xh4ipjbqdgym43db8mqv8zj-lld-21.1.8-lib/lib -L/nix/store/76gr5hvm3xh4ipjbqdgym43db8mqv8zj-lld-21.1.8-lib/lib -L/nix/store/vjcwhp0milwa1jqy1inpjxrsh8hjrgwc-wayland-1.26.0/lib -L/nix/store/vjcwhp0milwa1jqy1inpjxrsh8hjrgwc-wayland-1.26.0/lib -L/nix/store/yk95z4hjlzdk418px0fc797qszccfj5p-libxkbcommon-1.13.2/lib -L/nix/store/yk95z4hjlzdk418px0fc797qszccfj5p-libxkbcommon-1.13.2/lib -L/nix/store/4hlgp6r4j5p6b2b9sxw01cba0x3fjxd6-systemd-minimal-libs-261.2/lib -L/nix/store/4hlgp6r4j5p6b2b9sxw01cba0x3fjxd6-systemd-minimal-libs-261.2/lib -L/nix/store/y11wm3zhcvjav2vbav9p0ky99xa2wlyv-libinput-1.31.3/lib -L/nix/store/y11wm3zhcvjav2vbav9p0ky99xa2wlyv-libinput-1.31.3/lib -L/nix/store/yn8y98bfwgr9jxcrl1x32h04mshpn9wc-dbus-1.16.2-lib/lib -L/nix/store/yn8y98bfwgr9jxcrl1x32h04mshpn9wc-dbus-1.16.2-lib/lib -L/nix/store/8kmh5aaiadz1vfv1nal7vf3x41b2l92j-pixman-0.46.4/lib -L/nix/store/8kmh5aaiadz1vfv1nal7vf3x41b2l92j-pixman-0.46.4/lib -L/nix/store/v5c40hysv678q0yjwvdi0q97rdmxr9r4-mesa-26.2.1/lib -L/nix/store/v5c40hysv678q0yjwvdi0q97rdmxr9r4-mesa-26.2.1/lib -L/nix/store/5qg70j0rzbxqlxlzrq87k4ksgzdwrwr6-libdrm-2.4.134/lib -L/nix/store/5qg70j0rzbxqlxlzrq87k4ksgzdwrwr6-libdrm-2.4.134/lib -L/nix/store/rcwvn48vi65zr4jzgk0rp3y7czfd1a9m-seatd-0.9.3/lib -L/nix/store/rcwvn48vi65zr4jzgk0rp3y7czfd1a9m-seatd-0.9.3/lib -L/nix/store/l3p6y554mkxi4vipnnp8809kxj0g1lyv-zlib-1.3.2/lib -L/nix/store/l3p6y554mkxi4vipnnp8809kxj0g1lyv-zlib-1.3.2/lib -L/nix/store/xz5xsq0nihfs15fbknz5w0yblg04760q-bzip2-1.0.8/lib -L/nix/store/xz5xsq0nihfs15fbknz5w0yblg04760q-bzip2-1.0.8/lib -L/nix/store/c56x66gbj3qwv3g7dhadcfiq408q2hay-brotli-1.2.0-lib/lib -L/nix/store/c56x66gbj3qwv3g7dhadcfiq408q2hay-brotli-1.2.0-lib/lib -L/nix/store/d3f7r44z2px98z479jgf7qdwqn96jgf6-libpng-apng-1.6.58/lib -L/nix/store/d3f7r44z2px98z479jgf7qdwqn96jgf6-libpng-apng-1.6.58/lib -L/nix/store/dczkv6755chri9gsvacxvqpz9nn2dwld-freetype-2.14.3/lib -L/nix/store/dczkv6755chri9gsvacxvqpz9nn2dwld-freetype-2.14.3/lib -L/nix/store/2gkqj0v0msfcagwf5ix199rf1lnwf2a1-expat-2.8.3/lib -L/nix/store/2gkqj0v0msfcagwf5ix199rf1lnwf2a1-expat-2.8.3/lib -L/nix/store/iv0yvsywa1v35xzdkqz9wdzhg7vshpdd-fontconfig-2.18.2-lib/lib -L/nix/store/iv0yvsywa1v35xzdkqz9wdzhg7vshpdd-fontconfig-2.18.2-lib/lib -L/nix/store/lk4614327cn1h9z3m6cvnls95n13m1cj-vulkan-loader-1.4.357.0/lib -L/nix/store/lk4614327cn1h9z3m6cvnls95n13m1cj-vulkan-loader-1.4.357.0/lib -L/nix/store/rarvfpm927fcbd6b9p0crg09w9r3ywb3-libglvnd-1.7.0/lib -L/nix/store/rarvfpm927fcbd6b9p0crg09w9r3ywb3-libglvnd-1.7.0/lib -L/nix/store/6slvk1x4gashcfg4bgvcc7ywbwzf1isy-egl-wayland-1.1.21/lib -L/nix/store/6slvk1x4gashcfg4bgvcc7ywbwzf1isy-egl-wayland-1.1.21/lib -L/nix/store/3vlnkr6z7hh86rrn087df45s4cfjxy65-libx11-1.8.13/lib -L/nix/store/3vlnkr6z7hh86rrn087df45s4cfjxy65-libx11-1.8.13/lib -L/nix/store/xrgydm47d3f9256z7fwffwrzm4lnk5hk-rust-stable-1.98.0-1.98.0/lib -L/nix/store/xrgydm47d3f9256z7fwffwrzm4lnk5hk-rust-stable-1.98.0-1.98.0/lib -L/nix/store/2y91v9adfb6kyrwzkjix0j9yx78xmyy0-clang-tools-21.1.8/lib -L/nix/store/2y91v9adfb6kyrwzkjix0j9yx78xmyy0-clang-tools-21.1.8/lib -L/nix/store/bg2bp1zmii5spb2hkgv5xn6mzva7nx9r-gdb-17.2/lib -L/nix/store/bg2bp1zmii5spb2hkgv5xn6mzva7nx9r-gdb-17.2/lib -L/nix/store/76gr5hvm3xh4ipjbqdgym43db8mqv8zj-lld-21.1.8-lib/lib -L/nix/store/76gr5hvm3xh4ipjbqdgym43db8mqv8zj-lld-21.1.8-lib/lib -L/nix/store/vjcwhp0milwa1jqy1inpjxrsh8hjrgwc-wayland-1.26.0/lib -L/nix/store/vjcwhp0milwa1jqy1inpjxrsh8hjrgwc-wayland-1.26.0/lib -L/nix/store/yk95z4hjlzdk418px0fc797qszccfj5p-libxkbcommon-1.13.2/lib -L/nix/store/yk95z4hjlzdk418px0fc797qszccfj5p-libxkbcommon-1.13.2/lib -L/nix/store/4hlgp6r4j5p6b2b9sxw01cba0x3fjxd6-systemd-minimal-libs-261.2/lib -L/nix/store/4hlgp6r4j5p6b2b9sxw01cba0x3fjxd6-systemd-minimal-libs-261.2/lib -L/nix/store/y11wm3zhcvjav2vbav9p0ky99xa2wlyv-libinput-1.31.3/lib -L/nix/store/y11wm3zhcvjav2vbav9p0ky99xa2wlyv-libinput-1.31.3/lib -L/nix/store/yn8y98bfwgr9jxcrl1x32h04mshpn9wc-dbus-1.16.2-lib/lib -L/nix/store/yn8y98bfwgr9jxcrl1x32h04mshpn9wc-dbus-1.16.2-lib/lib -L/nix/store/8kmh5aaiadz1vfv1nal7vf3x41b2l92j-pixman-0.46.4/lib -L/nix/store/8kmh5aaiadz1vfv1nal7vf3x41b2l92j-pixman-0.46.4/lib -L/nix/store/v5c40hysv678q0yjwvdi0q97rdmxr9r4-mesa-26.2.1/lib -L/nix/store/v5c40hysv678q0yjwvdi0q97rdmxr9r4-mesa-26.2.1/lib -L/nix/store/5qg70j0rzbxqlxlzrq87k4ksgzdwrwr6-libdrm-2.4.134/lib -L/nix/store/5qg70j0rzbxqlxlzrq87k4ksgzdwrwr6-libdrm-2.4.134/lib -L/nix/store/rcwvn48vi65zr4jzgk0rp3y7czfd1a9m-seatd-0.9.3/lib -L/nix/store/rcwvn48vi65zr4jzgk0rp3y7czfd1a9m-seatd-0.9.3/lib -L/nix/store/l3p6y554mkxi4vipnnp8809kxj0g1lyv-zlib-1.3.2/lib -L/nix/store/l3p6y554mkxi4vipnnp8809kxj0g1lyv-zlib-1.3.2/lib -L/nix/store/xz5xsq0nihfs15fbknz5w0yblg04760q-bzip2-1.0.8/lib -L/nix/store/xz5xsq0nihfs15fbknz5w0yblg04760q-bzip2-1.0.8/lib -L/nix/store/c56x66gbj3qwv3g7dhadcfiq408q2hay-brotli-1.2.0-lib/lib -L/nix/store/c56x66gbj3qwv3g7dhadcfiq408q2hay-brotli-1.2.0-lib/lib -L/nix/store/d3f7r44z2px98z479jgf7qdwqn96jgf6-libpng-apng-1.6.58/lib -L/nix/store/d3f7r44z2px98z479jgf7qdwqn96jgf6-libpng-apng-1.6.58/lib -L/nix/store/dczkv6755chri9gsvacxvqpz9nn2dwld-freetype-2.14.3/lib -L/nix/store/dczkv6755chri9gsvacxvqpz9nn2dwld-freetype-2.14.3/lib -L/nix/store/2gkqj0v0msfcagwf5ix199rf1lnwf2a1-expat-2.8.3/lib -L/nix/store/2gkqj0v0msfcagwf5ix199rf1lnwf2a1-expat-2.8.3/lib -L/nix/store/iv0yvsywa1v35xzdkqz9wdzhg7vshpdd-fontconfig-2.18.2-lib/lib -L/nix/store/iv0yvsywa1v35xzdkqz9wdzhg7vshpdd-fontconfig-2.18.2-lib/lib -L/nix/store/lk4614327cn1h9z3m6cvnls95n13m1cj-vulkan-loader-1.4.357.0/lib -L/nix/store/lk4614327cn1h9z3m6cvnls95n13m1cj-vulkan-loader-1.4.357.0/lib -L/nix/store/rarvfpm927fcbd6b9p0crg09w9r3ywb3-libglvnd-1.7.0/lib -L/nix/store/rarvfpm927fcbd6b9p0crg09w9r3ywb3-libglvnd-1.7.0/lib -L/nix/store/6slvk1x4gashcfg4bgvcc7ywbwzf1isy-egl-wayland-1.1.21/lib -L/nix/store/6slvk1x4gashcfg4bgvcc7ywbwzf1isy-egl-wayland-1.1.21/lib -L/nix/store/3vlnkr6z7hh86rrn087df45s4cfjxy65-libx11-1.8.13/lib -L/nix/store/3vlnkr6z7hh86rrn087df45s4cfjxy65-libx11-1.8.13/lib'
+export NIX_LDFLAGS
+OBJDUMP_FOR_BUILD='objdump'
+export OBJDUMP_FOR_BUILD
+PKG_CONFIG_PATH='/nix/store/7svfxf5fpqsn4jjf8r044f65a030f40x-wayland-1.26.0-dev/lib/pkgconfig:/nix/store/2nlq43n0gc4s8cbjjxpnfg97kgmk8blh-wayland-protocols-1.49/lib/pkgconfig:/nix/store/1sqzajgcm7nk3knr8y2ygdxgsicrh72x-libxkbcommon-1.13.2-dev/lib/pkgconfig:/nix/store/ghf184l1525ks9h8dm3nsqpnw1wnq6ws-libinput-1.31.3-dev/lib/pkgconfig:/nix/store/00vmp292cjgwhzp089cszl51xiq8ncrj-systemd-minimal-libs-261.2-dev/lib/pkgconfig:/nix/store/s30pndvs4kh1dk7jxxj4ljn27spyr8fv-dbus-1.16.2-dev/lib/pkgconfig:/nix/store/8kmh5aaiadz1vfv1nal7vf3x41b2l92j-pixman-0.46.4/lib/pkgconfig:/nix/store/v5c40hysv678q0yjwvdi0q97rdmxr9r4-mesa-26.2.1/lib/pkgconfig:/nix/store/p3s3wkz0s0xkgxnrn7x99w1bl6hd8283-libdrm-2.4.134-dev/lib/pkgconfig:/nix/store/7ifsxb6iqz7f3jkg1kfbcnmr1f0y1n08-seatd-0.9.3-dev/lib/pkgconfig:/nix/store/vwlb36mv7jbar7y76l7kilvln04xqf6n-fontconfig-2.18.2-dev/lib/pkgconfig:/nix/store/v3cjb49fng33cddf41nj18z5idlkj86a-vulkan-loader-1.4.357.0-dev/lib/pkgconfig:/nix/store/knyasnbdxksxz6ilfygnrwa08m9n35m7-libglvnd-1.7.0-dev/lib/pkgconfig:/nix/store/q9bsac1xi1q9fhqkg1pdlk80637v9fkw-egl-wayland-1.1.21-dev/lib/pkgconfig:/nix/store/4sh8xds6acpkvb2f1dqh0jsgvgn5p2sy-libx11-1.8.13-dev/lib/pkgconfig:/nix/store/vjcwhp0milwa1jqy1inpjxrsh8hjrgwc-wayland-1.26.0/lib/pkgconfig:/nix/store/2nlq43n0gc4s8cbjjxpnfg97kgmk8blh-wayland-protocols-1.49/lib/pkgconfig:/nix/store/yk95z4hjlzdk418px0fc797qszccfj5p-libxkbcommon-1.13.2/lib/pkgconfig:/nix/store/y11wm3zhcvjav2vbav9p0ky99xa2wlyv-libinput-1.31.3/lib/pkgconfig:/nix/store/4hlgp6r4j5p6b2b9sxw01cba0x3fjxd6-systemd-minimal-libs-261.2/lib/pkgconfig:/nix/store/2swbxihjql78pnn5kfmhjq5dvp9m744b-dbus-1.16.2/lib/pkgconfig:/nix/store/8kmh5aaiadz1vfv1nal7vf3x41b2l92j-pixman-0.46.4/lib/pkgconfig:/nix/store/v5c40hysv678q0yjwvdi0q97rdmxr9r4-mesa-26.2.1/lib/pkgconfig:/nix/store/5qg70j0rzbxqlxlzrq87k4ksgzdwrwr6-libdrm-2.4.134/lib/pkgconfig:/nix/store/rcwvn48vi65zr4jzgk0rp3y7czfd1a9m-seatd-0.9.3/lib/pkgconfig:/nix/store/qdbcjg7j3rxr1bvh1qhldk5aqjz7vlx6-fontconfig-2.18.2/lib/pkgconfig:/nix/store/lk4614327cn1h9z3m6cvnls95n13m1cj-vulkan-loader-1.4.357.0/lib/pkgconfig:/nix/store/rarvfpm927fcbd6b9p0crg09w9r3ywb3-libglvnd-1.7.0/lib/pkgconfig:/nix/store/6slvk1x4gashcfg4bgvcc7ywbwzf1isy-egl-wayland-1.1.21/lib/pkgconfig:/nix/store/3vlnkr6z7hh86rrn087df45s4cfjxy65-libx11-1.8.13/lib/pkgconfig:/nix/store/vjcwhp0milwa1jqy1inpjxrsh8hjrgwc-wayland-1.26.0/share/pkgconfig:/nix/store/2nlq43n0gc4s8cbjjxpnfg97kgmk8blh-wayland-protocols-1.49/share/pkgconfig:/nix/store/yk95z4hjlzdk418px0fc797qszccfj5p-libxkbcommon-1.13.2/share/pkgconfig:/nix/store/k3nyv8b5l50kydf20wasqshv9lmbc0l6-libinput-1.31.3-bin/share/pkgconfig:/nix/store/4hlgp6r4j5p6b2b9sxw01cba0x3fjxd6-systemd-minimal-libs-261.2/share/pkgconfig:/nix/store/2swbxihjql78pnn5kfmhjq5dvp9m744b-dbus-1.16.2/share/pkgconfig:/nix/store/8kmh5aaiadz1vfv1nal7vf3x41b2l92j-pixman-0.46.4/share/pkgconfig:/nix/store/v5c40hysv678q0yjwvdi0q97rdmxr9r4-mesa-26.2.1/share/pkgconfig:/nix/store/5qg70j0rzbxqlxlzrq87k4ksgzdwrwr6-libdrm-2.4.134/share/pkgconfig:/nix/store/h9z78lc5ik5la0b23jjsvb2hfyrvcxvz-seatd-0.9.3-bin/share/pkgconfig:/nix/store/122fcxcqy3ay3jkm3fa2bav0vb8mgdjy-fontconfig-2.18.2-bin/share/pkgconfig:/nix/store/lk4614327cn1h9z3m6cvnls95n13m1cj-vulkan-loader-1.4.357.0/share/pkgconfig:/nix/store/rarvfpm927fcbd6b9p0crg09w9r3ywb3-libglvnd-1.7.0/share/pkgconfig:/nix/store/6slvk1x4gashcfg4bgvcc7ywbwzf1isy-egl-wayland-1.1.21/share/pkgconfig:/nix/store/3vlnkr6z7hh86rrn087df45s4cfjxy65-libx11-1.8.13/share/pkgconfig:/nix/store/ad0w92xhd7f1gbwzfgpkd0nz1ipijd8h-bash-interactive-5.3p15-dev/lib/pkgconfig:/nix/store/5jhgdsgl541jznvgv2xlhhksnkix2hib-valgrind-3.27.1-dev/lib/pkgconfig:/nix/store/00vmp292cjgwhzp089cszl51xiq8ncrj-systemd-minimal-libs-261.2-dev/share/pkgconfig:/nix/store/z203ci88037mkq16c1kn8gy518m3ab1y-freetype-2.14.3-dev/lib/pkgconfig:/nix/store/nd34kmibbq6y7qmp78rhw38adsj5ffd0-zlib-1.3.2-dev/share/pkgconfig:/nix/store/9vxrnnhc400s1rgq801wqfdxhzpcl1z1-bzip2-1.0.8-dev/lib/pkgconfig:/nix/store/46hh240hlj9si28zra66dyc3nj85lynw-brotli-1.2.0-dev/lib/pkgconfig:/nix/store/p8m024sxqwg7il6660zqgshrqpsvf43l-libpng-apng-1.6.58-dev/lib/pkgconfig:/nix/store/iss09vixlpbq7jwf2y5wkmxvcfydgm3v-expat-2.8.3-dev/lib/pkgconfig:/nix/store/q9bsac1xi1q9fhqkg1pdlk80637v9fkw-egl-wayland-1.1.21-dev/share/pkgconfig:/nix/store/jaw4nr6lwfpv40140zk7prh9q8jap2gz-eglexternalplatform-1.2.1/share/pkgconfig:/nix/store/y4k7f46xqci803kfbi78sfy09r1a978x-xorgproto-2025.1/share/pkgconfig'
+export PKG_CONFIG_PATH
 PS4='+ '
-nativeBuildInputs='/nix/store/ad0w92xhd7f1gbwzfgpkd0nz1ipijd8h-bash-interactive-5.3p15-dev /nix/store/6vv06lcrdpnsdkhz3al5xm1azaz7sizx-rust-analyzer-preview-1.98.0-x86_64-unknown-linux-gnu /nix/store/ijpixkxqhvlsjmjbgwfh7dr8iz9rn3lz-rust-stable-1.98.0-1.98.0 /nix/store/2y91v9adfb6kyrwzkjix0j9yx78xmyy0-clang-tools-21.1.8 /nix/store/dvj9bnk0vdbzzhn76wsnzk1dv6c6jbx1-stdenv-linux /nix/store/7ydf0dzbsq7w35bxifci2mslm76pw1qf-gnumake-4.4.1 /nix/store/6jh160z5zby7p11nk8x7z3jdnxmimpjp-ccls-0.20250815.1 /nix/store/bg2bp1zmii5spb2hkgv5xn6mzva7nx9r-gdb-17.2 /nix/store/5jhgdsgl541jznvgv2xlhhksnkix2hib-valgrind-3.27.1-dev /nix/store/7svfxf5fpqsn4jjf8r044f65a030f40x-wayland-1.26.0-dev /nix/store/2nlq43n0gc4s8cbjjxpnfg97kgmk8blh-wayland-protocols-1.49 /nix/store/1sqzajgcm7nk3knr8y2ygdxgsicrh72x-libxkbcommon-1.13.2-dev /nix/store/ghf184l1525ks9h8dm3nsqpnw1wnq6ws-libinput-1.31.3-dev /nix/store/s30pndvs4kh1dk7jxxj4ljn27spyr8fv-dbus-1.16.2-dev /nix/store/w021fbcg4z6vxihnp6gb6vijyifl051f-clang-wrapper-21.1.8 /nix/store/7fx93fz9c809w8yjxb0934zw6xcjis58-pkg-config-wrapper-0.29.2 /nix/store/7fx93fz9c809w8yjxb0934zw6xcjis58-pkg-config-wrapper-0.29.2 /nix/store/00vmp292cjgwhzp089cszl51xiq8ncrj-systemd-minimal-libs-261.2-dev /nix/store/7fx93fz9c809w8yjxb0934zw6xcjis58-pkg-config-wrapper-0.29.2'
-export nativeBuildInputs
-shell='/nix/store/9ipfvwnqp1q8ijnmi5sxvlx9r8w34lw3-bash-5.3p15/bin/bash'
-export shell
-IFS=' 	
-'
-STRINGS_FOR_BUILD='strings'
-export STRINGS_FOR_BUILD
+outputs='out'
+export outputs
 declare -a propagatedTargetDepFiles=('propagated-target-target-deps' )
+NIX_NO_SELF_RPATH='1'
+preConfigurePhases=' updateAutotoolsGnuConfigScriptsPhase'
+declare -a postUnpackHooks=('_updateSourceDateEpochFromSourceRoot' )
+out='/nix/store/v1grndznp541aklnc3cknd30asw8f6i9-devenv-shell-env'
+export out
+declare -a preConfigureHooks=('_multioutConfig' )
+STRIP_FOR_BUILD='strip'
+export STRIP_FOR_BUILD
+declare -a pkgsBuildTarget=()
+OBJDUMP='objdump'
+export OBJDUMP
+OSTYPE='linux-gnu'
+system='x86_64-linux'
+export system
+initialPath='/nix/store/3qgy8q2j64v2m9jy3a5jmssacbblhd4r-coreutils-9.11 /nix/store/i4kjidyvl8ciwbcwm75g75sriq3knav0-findutils-4.11.0 /nix/store/xw09m9cnc9ayb2j53y2rj8jhm1h7kkxa-diffutils-3.12 /nix/store/4nylac9gazdpsid79qyk0jpqm312b2jx-gnused-4.10 /nix/store/yhr4ps9rdmb55pgqaq246vlh7xfac1dx-gnugrep-3.12 /nix/store/bpy2ps3f0f3gvgvqjwgqriw1j1n840wd-gawk-5.4.1 /nix/store/w2mbg6mcq7k3j088sbwfziy8vsdhyk7v-gnutar-1.35 /nix/store/sd9qcv5s2gxvd6hpp5hk5cixq2bd4jd1-gzip-1.14 /nix/store/622jkvg8hgffly7dca6iif9drvimingx-bzip2-1.0.8-bin /nix/store/hd36xbvbc0vrn9f9idrfwxznri0ax427-gnumake-4.4.1 /nix/store/9ipfvwnqp1q8ijnmi5sxvlx9r8w34lw3-bash-5.3p15 /nix/store/1rcr9yyj9qlgm3dyin1j37xl7q84h15i-patch-2.8 /nix/store/0fb3jrf20z28598alm6g7rrsw6dz2cqj-xz-5.8.3-bin /nix/store/xcab8m6wdrd30l10bw3hkz32yiibynzv-file-5.48'
+outputInclude='out'
+depsHostHostPropagated=''
+export depsHostHostPropagated
+patches=''
+export patches
+CONFIG_SHELL='/nix/store/9ipfvwnqp1q8ijnmi5sxvlx9r8w34lw3-bash-5.3p15/bin/bash'
+export CONFIG_SHELL
+outputLib='out'
 shellHook='
 
 
@@ -239,9 +229,9 @@ if [ ! type -p direnv &>/dev/null && -f .envrc ]; then
 fi
 
 mkdir -p "$DEVENV_STATE"
-if [ ! -L "$DEVENV_DOTFILE/profile" ] || [ "$(/nix/store/3qgy8q2j64v2m9jy3a5jmssacbblhd4r-coreutils-9.11/bin/readlink $DEVENV_DOTFILE/profile)" != "/nix/store/jspy1sm5x42jnxdyh216g7rrr2vlh038-devenv-profile" ]
+if [ ! -L "$DEVENV_DOTFILE/profile" ] || [ "$(/nix/store/3qgy8q2j64v2m9jy3a5jmssacbblhd4r-coreutils-9.11/bin/readlink $DEVENV_DOTFILE/profile)" != "/nix/store/750ww0wgnsr78hz23pw861cfpfrv35w1-devenv-profile" ]
 then
-  ln -snf /nix/store/jspy1sm5x42jnxdyh216g7rrr2vlh038-devenv-profile "$DEVENV_DOTFILE/profile"
+  ln -snf /nix/store/750ww0wgnsr78hz23pw861cfpfrv35w1-devenv-profile "$DEVENV_DOTFILE/profile"
 fi
 unset HOST_PATH NIX_BUILD_CORES __structuredAttrs buildInputs buildPhase builder depsBuildBuild depsBuildBuildPropagated depsBuildTarget depsBuildTargetPropagated depsHostHost depsHostHostPropagated depsTargetTarget depsTargetTargetPropagated dontAddDisableDepTrack doCheck doInstallCheck nativeBuildInputs out outputs patches phases preferLocalBuild propagatedBuildInputs propagatedNativeBuildInputs shell shellHook stdenv strictDeps
 
@@ -295,145 +285,73 @@ export PATH="$PATH:${CARGO_HOME:-$HOME/.cargo}/bin"
   fi
 } >&2
 
+echo "🦀 Rust Wayland Compositor Dev Environment Ready"
+echo "   • Run nested inside Hyprland: cargo run"
+
 '
 export shellHook
-OBJCOPY='objcopy'
-export OBJCOPY
-declare -a pkgsBuildHost=('/nix/store/ad0w92xhd7f1gbwzfgpkd0nz1ipijd8h-bash-interactive-5.3p15-dev' '/nix/store/7a60q5dgnv6z96c279rc1nalyiw4mgqn-bash-interactive-5.3p15' '/nix/store/6vv06lcrdpnsdkhz3al5xm1azaz7sizx-rust-analyzer-preview-1.98.0-x86_64-unknown-linux-gnu' '/nix/store/ijpixkxqhvlsjmjbgwfh7dr8iz9rn3lz-rust-stable-1.98.0-1.98.0' '/nix/store/w88q44gqd1qg5wmkk7v0h97rpiqvam0l-gcc-wrapper-15.3.0' '/nix/store/rm982p6i9ry7rwq5jn638kdpv0a2331f-binutils-wrapper-2.46' '/nix/store/2y91v9adfb6kyrwzkjix0j9yx78xmyy0-clang-tools-21.1.8' '/nix/store/dvj9bnk0vdbzzhn76wsnzk1dv6c6jbx1-stdenv-linux' '/nix/store/7ydf0dzbsq7w35bxifci2mslm76pw1qf-gnumake-4.4.1' '/nix/store/6jh160z5zby7p11nk8x7z3jdnxmimpjp-ccls-0.20250815.1' '/nix/store/bg2bp1zmii5spb2hkgv5xn6mzva7nx9r-gdb-17.2' '/nix/store/5jhgdsgl541jznvgv2xlhhksnkix2hib-valgrind-3.27.1-dev' '/nix/store/7p6qjr2kqkbd0i3ylndwrxsb0j7m317k-valgrind-3.27.1' '/nix/store/7svfxf5fpqsn4jjf8r044f65a030f40x-wayland-1.26.0-dev' '/nix/store/vjcwhp0milwa1jqy1inpjxrsh8hjrgwc-wayland-1.26.0' '/nix/store/2nlq43n0gc4s8cbjjxpnfg97kgmk8blh-wayland-protocols-1.49' '/nix/store/1sqzajgcm7nk3knr8y2ygdxgsicrh72x-libxkbcommon-1.13.2-dev' '/nix/store/yk95z4hjlzdk418px0fc797qszccfj5p-libxkbcommon-1.13.2' '/nix/store/ghf184l1525ks9h8dm3nsqpnw1wnq6ws-libinput-1.31.3-dev' '/nix/store/00vmp292cjgwhzp089cszl51xiq8ncrj-systemd-minimal-libs-261.2-dev' '/nix/store/4hlgp6r4j5p6b2b9sxw01cba0x3fjxd6-systemd-minimal-libs-261.2' '/nix/store/y11wm3zhcvjav2vbav9p0ky99xa2wlyv-libinput-1.31.3' '/nix/store/s30pndvs4kh1dk7jxxj4ljn27spyr8fv-dbus-1.16.2-dev' '/nix/store/yn8y98bfwgr9jxcrl1x32h04mshpn9wc-dbus-1.16.2-lib' '/nix/store/2swbxihjql78pnn5kfmhjq5dvp9m744b-dbus-1.16.2' '/nix/store/w021fbcg4z6vxihnp6gb6vijyifl051f-clang-wrapper-21.1.8' '/nix/store/vs80ag6hsr58wv5fn3nlq8qi32x9hwfi-binutils-wrapper-2.46' '/nix/store/7fx93fz9c809w8yjxb0934zw6xcjis58-pkg-config-wrapper-0.29.2' '/nix/store/fpig164lz7fcipbndn61sfd2y2yq363n-patchelf-0.15.2' '/nix/store/7n9ldpw06qbqlnf0iaig26agpn2aazfl-update-autotools-gnu-config-scripts-hook' '/nix/store/0y5xmdb7qfvimjwbq7ibg1xdgkgjwqng-no-broken-symlinks.sh' '/nix/store/cv1d7p48379km6a85h4zp6kr86brh32q-audit-tmpdir.sh' '/nix/store/85clx3b0xkdf58jn161iy80y5223ilbi-compress-man-pages.sh' '/nix/store/p3l1a5y7nllfyrjn2krlwgcc3z0cd3fq-make-symlinks-relative.sh' '/nix/store/5yzw0vhkyszf2d179m0qfkgxmp5wjjx4-move-docs.sh' '/nix/store/fyaryjvghbkpfnsyw97hb3lyb37s1pd6-move-lib64.sh' '/nix/store/kd4xwxjpjxi71jkm6ka0np72if9rm3y0-move-sbin.sh' '/nix/store/pag6l61paj1dc9sv15l7bm5c17xn5kyk-move-systemd-user-units.sh' '/nix/store/cmzya9irvxzlkh7lfy6i82gbp0saxqj3-multiple-outputs.sh' '/nix/store/x8c40nfigps493a07sdr2pm5s9j1cdc0-patch-shebangs.sh' '/nix/store/cickvswrvann041nqxb0rxilc46svw1n-prune-libtool-files.sh' '/nix/store/xyff06pkhki3qy1ls77w10s0v79c9il0-reproducible-builds.sh' '/nix/store/z7k98578dfzi6l3hsvbivzm7hfqlk0zc-set-source-date-epoch-to-latest.sh' '/nix/store/89igyzp72y4ky0qyj4x5r52z84w203ki-strip.sh' )
-LINENO='79'
+depsTargetTarget=''
+export depsTargetTarget
+declare -a envBuildHostHooks=('ccWrapper_addCVars' 'bintoolsWrapper_addLDVars' )
+OPTERR='1'
+defaultBuildInputs=''
 preferLocalBuild='1'
 export preferLocalBuild
-declare -a pkgsBuildBuild=('/nix/store/w88q44gqd1qg5wmkk7v0h97rpiqvam0l-gcc-wrapper-15.3.0' '/nix/store/rm982p6i9ry7rwq5jn638kdpv0a2331f-binutils-wrapper-2.46' )
-CXX_FOR_BUILD='g++'
-export CXX_FOR_BUILD
-PATH='/nix/store/w88q44gqd1qg5wmkk7v0h97rpiqvam0l-gcc-wrapper-15.3.0/bin:/nix/store/4yxdxw3kppr2pbic95p4mri520rkdag2-gcc-15.3.0/bin:/nix/store/axmdd5wlxg1c9dbblvj09pjhkawqxmqx-glibc-2.42-84-bin/bin:/nix/store/3qgy8q2j64v2m9jy3a5jmssacbblhd4r-coreutils-9.11/bin:/nix/store/rm982p6i9ry7rwq5jn638kdpv0a2331f-binutils-wrapper-2.46/bin:/nix/store/5pa1282x1sasbwhmnah6bny1g9pc2lj1-binutils-2.46/bin:/nix/store/7a60q5dgnv6z96c279rc1nalyiw4mgqn-bash-interactive-5.3p15/bin:/nix/store/6vv06lcrdpnsdkhz3al5xm1azaz7sizx-rust-analyzer-preview-1.98.0-x86_64-unknown-linux-gnu/bin:/nix/store/ijpixkxqhvlsjmjbgwfh7dr8iz9rn3lz-rust-stable-1.98.0-1.98.0/bin:/nix/store/2y91v9adfb6kyrwzkjix0j9yx78xmyy0-clang-tools-21.1.8/bin:/nix/store/7ydf0dzbsq7w35bxifci2mslm76pw1qf-gnumake-4.4.1/bin:/nix/store/6jh160z5zby7p11nk8x7z3jdnxmimpjp-ccls-0.20250815.1/bin:/nix/store/bg2bp1zmii5spb2hkgv5xn6mzva7nx9r-gdb-17.2/bin:/nix/store/7p6qjr2kqkbd0i3ylndwrxsb0j7m317k-valgrind-3.27.1/bin:/nix/store/yk95z4hjlzdk418px0fc797qszccfj5p-libxkbcommon-1.13.2/bin:/nix/store/yn8y98bfwgr9jxcrl1x32h04mshpn9wc-dbus-1.16.2-lib/bin:/nix/store/2swbxihjql78pnn5kfmhjq5dvp9m744b-dbus-1.16.2/bin:/nix/store/w021fbcg4z6vxihnp6gb6vijyifl051f-clang-wrapper-21.1.8/bin:/nix/store/603yaax3l2jmc0hfv6g3hgjr1qk5jfxk-clang-21.1.8/bin:/nix/store/vs80ag6hsr58wv5fn3nlq8qi32x9hwfi-binutils-wrapper-2.46/bin:/nix/store/7fx93fz9c809w8yjxb0934zw6xcjis58-pkg-config-wrapper-0.29.2/bin:/nix/store/fpig164lz7fcipbndn61sfd2y2yq363n-patchelf-0.15.2/bin:/nix/store/ync7h8cyhw4nzw2laba4wra6b8mcn9by-compiler-rt-libc-21.1.8/bin:/nix/store/3qgy8q2j64v2m9jy3a5jmssacbblhd4r-coreutils-9.11/bin:/nix/store/i4kjidyvl8ciwbcwm75g75sriq3knav0-findutils-4.11.0/bin:/nix/store/xw09m9cnc9ayb2j53y2rj8jhm1h7kkxa-diffutils-3.12/bin:/nix/store/4nylac9gazdpsid79qyk0jpqm312b2jx-gnused-4.10/bin:/nix/store/yhr4ps9rdmb55pgqaq246vlh7xfac1dx-gnugrep-3.12/bin:/nix/store/bpy2ps3f0f3gvgvqjwgqriw1j1n840wd-gawk-5.4.1/bin:/nix/store/w2mbg6mcq7k3j088sbwfziy8vsdhyk7v-gnutar-1.35/bin:/nix/store/sd9qcv5s2gxvd6hpp5hk5cixq2bd4jd1-gzip-1.14/bin:/nix/store/622jkvg8hgffly7dca6iif9drvimingx-bzip2-1.0.8-bin/bin:/nix/store/hd36xbvbc0vrn9f9idrfwxznri0ax427-gnumake-4.4.1/bin:/nix/store/9ipfvwnqp1q8ijnmi5sxvlx9r8w34lw3-bash-5.3p15/bin:/nix/store/1rcr9yyj9qlgm3dyin1j37xl7q84h15i-patch-2.8/bin:/nix/store/0fb3jrf20z28598alm6g7rrsw6dz2cqj-xz-5.8.3-bin/bin:/nix/store/xcab8m6wdrd30l10bw3hkz32yiibynzv-file-5.48/bin'
-export PATH
-NIX_CC_FOR_BUILD='/nix/store/w88q44gqd1qg5wmkk7v0h97rpiqvam0l-gcc-wrapper-15.3.0'
-export NIX_CC_FOR_BUILD
-STRIP='strip'
-export STRIP
-declare -a pkgsBuildTarget=()
-declare -a pkgsHostTarget=()
-AS_FOR_BUILD='as'
-export AS_FOR_BUILD
-NIX_HARDENING_ENABLE='bindnow format fortify fortify3 libcxxhardeningfast pic relro stackclashprotection stackprotector strictflexarrays1 strictoverflow zerocallusedregs'
-export NIX_HARDENING_ENABLE
-_substituteStream_has_warned_replace_deprecation='false'
+name='devenv-shell-env'
+export name
+outputMan='out'
+depsBuildTargetPropagated=''
+export depsBuildTargetPropagated
+DEVENV_PROFILE='/nix/store/750ww0wgnsr78hz23pw861cfpfrv35w1-devenv-profile'
+export DEVENV_PROFILE
+LD_LIBRARY_PATH='/nix/store/vjcwhp0milwa1jqy1inpjxrsh8hjrgwc-wayland-1.26.0/lib:/nix/store/2nlq43n0gc4s8cbjjxpnfg97kgmk8blh-wayland-protocols-1.49/lib:/nix/store/yk95z4hjlzdk418px0fc797qszccfj5p-libxkbcommon-1.13.2/lib:/nix/store/y11wm3zhcvjav2vbav9p0ky99xa2wlyv-libinput-1.31.3/lib:/nix/store/4hlgp6r4j5p6b2b9sxw01cba0x3fjxd6-systemd-minimal-libs-261.2/lib:/nix/store/yn8y98bfwgr9jxcrl1x32h04mshpn9wc-dbus-1.16.2-lib/lib:/nix/store/8kmh5aaiadz1vfv1nal7vf3x41b2l92j-pixman-0.46.4/lib:/nix/store/v5c40hysv678q0yjwvdi0q97rdmxr9r4-mesa-26.2.1/lib:/nix/store/5qg70j0rzbxqlxlzrq87k4ksgzdwrwr6-libdrm-2.4.134/lib:/nix/store/rcwvn48vi65zr4jzgk0rp3y7czfd1a9m-seatd-0.9.3/lib:/nix/store/iv0yvsywa1v35xzdkqz9wdzhg7vshpdd-fontconfig-2.18.2-lib/lib:/nix/store/lk4614327cn1h9z3m6cvnls95n13m1cj-vulkan-loader-1.4.357.0/lib:/nix/store/rarvfpm927fcbd6b9p0crg09w9r3ywb3-libglvnd-1.7.0/lib:/nix/store/6slvk1x4gashcfg4bgvcc7ywbwzf1isy-egl-wayland-1.1.21/lib:/nix/store/3vlnkr6z7hh86rrn087df45s4cfjxy65-libx11-1.8.13/lib'
+export LD_LIBRARY_PATH
+AR_FOR_BUILD='ar'
+export AR_FOR_BUILD
 BASH='/nix/store/9ipfvwnqp1q8ijnmi5sxvlx9r8w34lw3-bash-5.3p15/bin/bash'
+DEVENV_STATE='/home/ty/NixOS/Master/flakes/Rust/.devenv/state'
+export DEVENV_STATE
+AS='as'
+export AS
 declare -a envBuildTargetHooks=('ccWrapper_addCVars' 'bintoolsWrapper_addLDVars' )
-RUST_SRC_PATH='/nix/store/2r5h6a715qg11cvv3babc48gmwmmdqzm-rust-src-1.98.0-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library'
-export RUST_SRC_PATH
+NIX_LDFLAGS_FOR_BUILD=' -L/nix/store/xrgydm47d3f9256z7fwffwrzm4lnk5hk-rust-stable-1.98.0-1.98.0/lib -L/nix/store/2y91v9adfb6kyrwzkjix0j9yx78xmyy0-clang-tools-21.1.8/lib -L/nix/store/bg2bp1zmii5spb2hkgv5xn6mzva7nx9r-gdb-17.2/lib -L/nix/store/76gr5hvm3xh4ipjbqdgym43db8mqv8zj-lld-21.1.8-lib/lib -L/nix/store/vjcwhp0milwa1jqy1inpjxrsh8hjrgwc-wayland-1.26.0/lib -L/nix/store/yk95z4hjlzdk418px0fc797qszccfj5p-libxkbcommon-1.13.2/lib -L/nix/store/4hlgp6r4j5p6b2b9sxw01cba0x3fjxd6-systemd-minimal-libs-261.2/lib -L/nix/store/y11wm3zhcvjav2vbav9p0ky99xa2wlyv-libinput-1.31.3/lib -L/nix/store/yn8y98bfwgr9jxcrl1x32h04mshpn9wc-dbus-1.16.2-lib/lib -L/nix/store/8kmh5aaiadz1vfv1nal7vf3x41b2l92j-pixman-0.46.4/lib -L/nix/store/v5c40hysv678q0yjwvdi0q97rdmxr9r4-mesa-26.2.1/lib -L/nix/store/5qg70j0rzbxqlxlzrq87k4ksgzdwrwr6-libdrm-2.4.134/lib -L/nix/store/rcwvn48vi65zr4jzgk0rp3y7czfd1a9m-seatd-0.9.3/lib -L/nix/store/l3p6y554mkxi4vipnnp8809kxj0g1lyv-zlib-1.3.2/lib -L/nix/store/xz5xsq0nihfs15fbknz5w0yblg04760q-bzip2-1.0.8/lib -L/nix/store/c56x66gbj3qwv3g7dhadcfiq408q2hay-brotli-1.2.0-lib/lib -L/nix/store/d3f7r44z2px98z479jgf7qdwqn96jgf6-libpng-apng-1.6.58/lib -L/nix/store/dczkv6755chri9gsvacxvqpz9nn2dwld-freetype-2.14.3/lib -L/nix/store/2gkqj0v0msfcagwf5ix199rf1lnwf2a1-expat-2.8.3/lib -L/nix/store/iv0yvsywa1v35xzdkqz9wdzhg7vshpdd-fontconfig-2.18.2-lib/lib -L/nix/store/lk4614327cn1h9z3m6cvnls95n13m1cj-vulkan-loader-1.4.357.0/lib -L/nix/store/rarvfpm927fcbd6b9p0crg09w9r3ywb3-libglvnd-1.7.0/lib -L/nix/store/6slvk1x4gashcfg4bgvcc7ywbwzf1isy-egl-wayland-1.1.21/lib -L/nix/store/3vlnkr6z7hh86rrn087df45s4cfjxy65-libx11-1.8.13/lib -L/nix/store/xrgydm47d3f9256z7fwffwrzm4lnk5hk-rust-stable-1.98.0-1.98.0/lib -L/nix/store/2y91v9adfb6kyrwzkjix0j9yx78xmyy0-clang-tools-21.1.8/lib -L/nix/store/bg2bp1zmii5spb2hkgv5xn6mzva7nx9r-gdb-17.2/lib -L/nix/store/76gr5hvm3xh4ipjbqdgym43db8mqv8zj-lld-21.1.8-lib/lib -L/nix/store/vjcwhp0milwa1jqy1inpjxrsh8hjrgwc-wayland-1.26.0/lib -L/nix/store/yk95z4hjlzdk418px0fc797qszccfj5p-libxkbcommon-1.13.2/lib -L/nix/store/4hlgp6r4j5p6b2b9sxw01cba0x3fjxd6-systemd-minimal-libs-261.2/lib -L/nix/store/y11wm3zhcvjav2vbav9p0ky99xa2wlyv-libinput-1.31.3/lib -L/nix/store/yn8y98bfwgr9jxcrl1x32h04mshpn9wc-dbus-1.16.2-lib/lib -L/nix/store/8kmh5aaiadz1vfv1nal7vf3x41b2l92j-pixman-0.46.4/lib -L/nix/store/v5c40hysv678q0yjwvdi0q97rdmxr9r4-mesa-26.2.1/lib -L/nix/store/5qg70j0rzbxqlxlzrq87k4ksgzdwrwr6-libdrm-2.4.134/lib -L/nix/store/rcwvn48vi65zr4jzgk0rp3y7czfd1a9m-seatd-0.9.3/lib -L/nix/store/l3p6y554mkxi4vipnnp8809kxj0g1lyv-zlib-1.3.2/lib -L/nix/store/xz5xsq0nihfs15fbknz5w0yblg04760q-bzip2-1.0.8/lib -L/nix/store/c56x66gbj3qwv3g7dhadcfiq408q2hay-brotli-1.2.0-lib/lib -L/nix/store/d3f7r44z2px98z479jgf7qdwqn96jgf6-libpng-apng-1.6.58/lib -L/nix/store/dczkv6755chri9gsvacxvqpz9nn2dwld-freetype-2.14.3/lib -L/nix/store/2gkqj0v0msfcagwf5ix199rf1lnwf2a1-expat-2.8.3/lib -L/nix/store/iv0yvsywa1v35xzdkqz9wdzhg7vshpdd-fontconfig-2.18.2-lib/lib -L/nix/store/lk4614327cn1h9z3m6cvnls95n13m1cj-vulkan-loader-1.4.357.0/lib -L/nix/store/rarvfpm927fcbd6b9p0crg09w9r3ywb3-libglvnd-1.7.0/lib -L/nix/store/6slvk1x4gashcfg4bgvcc7ywbwzf1isy-egl-wayland-1.1.21/lib -L/nix/store/3vlnkr6z7hh86rrn087df45s4cfjxy65-libx11-1.8.13/lib -L/nix/store/xrgydm47d3f9256z7fwffwrzm4lnk5hk-rust-stable-1.98.0-1.98.0/lib -L/nix/store/2y91v9adfb6kyrwzkjix0j9yx78xmyy0-clang-tools-21.1.8/lib -L/nix/store/bg2bp1zmii5spb2hkgv5xn6mzva7nx9r-gdb-17.2/lib -L/nix/store/76gr5hvm3xh4ipjbqdgym43db8mqv8zj-lld-21.1.8-lib/lib -L/nix/store/vjcwhp0milwa1jqy1inpjxrsh8hjrgwc-wayland-1.26.0/lib -L/nix/store/yk95z4hjlzdk418px0fc797qszccfj5p-libxkbcommon-1.13.2/lib -L/nix/store/4hlgp6r4j5p6b2b9sxw01cba0x3fjxd6-systemd-minimal-libs-261.2/lib -L/nix/store/y11wm3zhcvjav2vbav9p0ky99xa2wlyv-libinput-1.31.3/lib -L/nix/store/yn8y98bfwgr9jxcrl1x32h04mshpn9wc-dbus-1.16.2-lib/lib -L/nix/store/8kmh5aaiadz1vfv1nal7vf3x41b2l92j-pixman-0.46.4/lib -L/nix/store/v5c40hysv678q0yjwvdi0q97rdmxr9r4-mesa-26.2.1/lib -L/nix/store/5qg70j0rzbxqlxlzrq87k4ksgzdwrwr6-libdrm-2.4.134/lib -L/nix/store/rcwvn48vi65zr4jzgk0rp3y7czfd1a9m-seatd-0.9.3/lib -L/nix/store/l3p6y554mkxi4vipnnp8809kxj0g1lyv-zlib-1.3.2/lib -L/nix/store/xz5xsq0nihfs15fbknz5w0yblg04760q-bzip2-1.0.8/lib -L/nix/store/c56x66gbj3qwv3g7dhadcfiq408q2hay-brotli-1.2.0-lib/lib -L/nix/store/d3f7r44z2px98z479jgf7qdwqn96jgf6-libpng-apng-1.6.58/lib -L/nix/store/dczkv6755chri9gsvacxvqpz9nn2dwld-freetype-2.14.3/lib -L/nix/store/2gkqj0v0msfcagwf5ix199rf1lnwf2a1-expat-2.8.3/lib -L/nix/store/iv0yvsywa1v35xzdkqz9wdzhg7vshpdd-fontconfig-2.18.2-lib/lib -L/nix/store/lk4614327cn1h9z3m6cvnls95n13m1cj-vulkan-loader-1.4.357.0/lib -L/nix/store/rarvfpm927fcbd6b9p0crg09w9r3ywb3-libglvnd-1.7.0/lib -L/nix/store/6slvk1x4gashcfg4bgvcc7ywbwzf1isy-egl-wayland-1.1.21/lib -L/nix/store/3vlnkr6z7hh86rrn087df45s4cfjxy65-libx11-1.8.13/lib'
+export NIX_LDFLAGS_FOR_BUILD
+defaultNativeBuildInputs='/nix/store/fpig164lz7fcipbndn61sfd2y2yq363n-patchelf-0.15.2 /nix/store/7n9ldpw06qbqlnf0iaig26agpn2aazfl-update-autotools-gnu-config-scripts-hook /nix/store/0y5xmdb7qfvimjwbq7ibg1xdgkgjwqng-no-broken-symlinks.sh /nix/store/cv1d7p48379km6a85h4zp6kr86brh32q-audit-tmpdir.sh /nix/store/85clx3b0xkdf58jn161iy80y5223ilbi-compress-man-pages.sh /nix/store/p3l1a5y7nllfyrjn2krlwgcc3z0cd3fq-make-symlinks-relative.sh /nix/store/5yzw0vhkyszf2d179m0qfkgxmp5wjjx4-move-docs.sh /nix/store/fyaryjvghbkpfnsyw97hb3lyb37s1pd6-move-lib64.sh /nix/store/kd4xwxjpjxi71jkm6ka0np72if9rm3y0-move-sbin.sh /nix/store/pag6l61paj1dc9sv15l7bm5c17xn5kyk-move-systemd-user-units.sh /nix/store/cmzya9irvxzlkh7lfy6i82gbp0saxqj3-multiple-outputs.sh /nix/store/x8c40nfigps493a07sdr2pm5s9j1cdc0-patch-shebangs.sh /nix/store/cickvswrvann041nqxb0rxilc46svw1n-prune-libtool-files.sh /nix/store/xyff06pkhki3qy1ls77w10s0v79c9il0-reproducible-builds.sh /nix/store/z7k98578dfzi6l3hsvbivzm7hfqlk0zc-set-source-date-epoch-to-latest.sh /nix/store/89igyzp72y4ky0qyj4x5r52z84w203ki-strip.sh /nix/store/w88q44gqd1qg5wmkk7v0h97rpiqvam0l-gcc-wrapper-15.3.0'
+nativeBuildInputs='/nix/store/ad0w92xhd7f1gbwzfgpkd0nz1ipijd8h-bash-interactive-5.3p15-dev /nix/store/6vv06lcrdpnsdkhz3al5xm1azaz7sizx-rust-analyzer-preview-1.98.0-x86_64-unknown-linux-gnu /nix/store/xrgydm47d3f9256z7fwffwrzm4lnk5hk-rust-stable-1.98.0-1.98.0 /nix/store/2y91v9adfb6kyrwzkjix0j9yx78xmyy0-clang-tools-21.1.8 /nix/store/dvj9bnk0vdbzzhn76wsnzk1dv6c6jbx1-stdenv-linux /nix/store/7ydf0dzbsq7w35bxifci2mslm76pw1qf-gnumake-4.4.1 /nix/store/6jh160z5zby7p11nk8x7z3jdnxmimpjp-ccls-0.20250815.1 /nix/store/bg2bp1zmii5spb2hkgv5xn6mzva7nx9r-gdb-17.2 /nix/store/5jhgdsgl541jznvgv2xlhhksnkix2hib-valgrind-3.27.1-dev /nix/store/yrr1yqaxyr673b1f9p5lfh4lqp7hpf9j-lld-21.1.8-dev /nix/store/bg2bp1zmii5spb2hkgv5xn6mzva7nx9r-gdb-17.2 /nix/store/07izjnizaihn7z0jzaxjgbwvdyyfp7p4-foot-1.27.0 /nix/store/7svfxf5fpqsn4jjf8r044f65a030f40x-wayland-1.26.0-dev /nix/store/2nlq43n0gc4s8cbjjxpnfg97kgmk8blh-wayland-protocols-1.49 /nix/store/1sqzajgcm7nk3knr8y2ygdxgsicrh72x-libxkbcommon-1.13.2-dev /nix/store/ghf184l1525ks9h8dm3nsqpnw1wnq6ws-libinput-1.31.3-dev /nix/store/s30pndvs4kh1dk7jxxj4ljn27spyr8fv-dbus-1.16.2-dev /nix/store/8kmh5aaiadz1vfv1nal7vf3x41b2l92j-pixman-0.46.4 /nix/store/v5c40hysv678q0yjwvdi0q97rdmxr9r4-mesa-26.2.1 /nix/store/p3s3wkz0s0xkgxnrn7x99w1bl6hd8283-libdrm-2.4.134-dev /nix/store/7ifsxb6iqz7f3jkg1kfbcnmr1f0y1n08-seatd-0.9.3-dev /nix/store/vwlb36mv7jbar7y76l7kilvln04xqf6n-fontconfig-2.18.2-dev /nix/store/v3cjb49fng33cddf41nj18z5idlkj86a-vulkan-loader-1.4.357.0-dev /nix/store/knyasnbdxksxz6ilfygnrwa08m9n35m7-libglvnd-1.7.0-dev /nix/store/q9bsac1xi1q9fhqkg1pdlk80637v9fkw-egl-wayland-1.1.21-dev /nix/store/4sh8xds6acpkvb2f1dqh0jsgvgn5p2sy-libx11-1.8.13-dev /nix/store/w021fbcg4z6vxihnp6gb6vijyifl051f-clang-wrapper-21.1.8 /nix/store/7fx93fz9c809w8yjxb0934zw6xcjis58-pkg-config-wrapper-0.29.2 /nix/store/7fx93fz9c809w8yjxb0934zw6xcjis58-pkg-config-wrapper-0.29.2 /nix/store/w021fbcg4z6vxihnp6gb6vijyifl051f-clang-wrapper-21.1.8 /nix/store/00vmp292cjgwhzp089cszl51xiq8ncrj-systemd-minimal-libs-261.2-dev /nix/store/7fx93fz9c809w8yjxb0934zw6xcjis58-pkg-config-wrapper-0.29.2'
+export nativeBuildInputs
+phases='buildPhase'
+export phases
+pkg='/nix/store/w88q44gqd1qg5wmkk7v0h97rpiqvam0l-gcc-wrapper-15.3.0'
 propagatedNativeBuildInputs=''
 export propagatedNativeBuildInputs
-depsBuildBuildPropagated=''
-export depsBuildBuildPropagated
-SOURCE_DATE_EPOCH='315532800'
-export SOURCE_DATE_EPOCH
-OBJCOPY_FOR_BUILD='objcopy'
-export OBJCOPY_FOR_BUILD
-PKG_CONFIG_PATH='/nix/store/ad0w92xhd7f1gbwzfgpkd0nz1ipijd8h-bash-interactive-5.3p15-dev/lib/pkgconfig:/nix/store/5jhgdsgl541jznvgv2xlhhksnkix2hib-valgrind-3.27.1-dev/lib/pkgconfig:/nix/store/7svfxf5fpqsn4jjf8r044f65a030f40x-wayland-1.26.0-dev/lib/pkgconfig:/nix/store/2nlq43n0gc4s8cbjjxpnfg97kgmk8blh-wayland-protocols-1.49/share/pkgconfig:/nix/store/1sqzajgcm7nk3knr8y2ygdxgsicrh72x-libxkbcommon-1.13.2-dev/lib/pkgconfig:/nix/store/ghf184l1525ks9h8dm3nsqpnw1wnq6ws-libinput-1.31.3-dev/lib/pkgconfig:/nix/store/00vmp292cjgwhzp089cszl51xiq8ncrj-systemd-minimal-libs-261.2-dev/lib/pkgconfig:/nix/store/00vmp292cjgwhzp089cszl51xiq8ncrj-systemd-minimal-libs-261.2-dev/share/pkgconfig:/nix/store/s30pndvs4kh1dk7jxxj4ljn27spyr8fv-dbus-1.16.2-dev/lib/pkgconfig'
-export PKG_CONFIG_PATH
-outputDevdoc='REMOVE'
-substituteAllStream ()
+declare -a unpackCmdHooks=('_defaultUnpack' )
+NIX_BUILD_CORES='6'
+export NIX_BUILD_CORES
+declare -a propagatedHostDepFiles=('propagated-host-host-deps' 'propagated-build-inputs' )
+CARGO_TARGET_X86_64_UNKNOWN_LINUX_GNU_LINKER='/nix/store/j951mws08h0dc2c6fwsfk786zc5lsmi3-devenv-rust-linker'
+export CARGO_TARGET_X86_64_UNKNOWN_LINUX_GNU_LINKER
+declare -a pkgsTargetTarget=()
+NIX_BINTOOLS_WRAPPER_TARGET_HOST_x86_64_unknown_linux_gnu='1'
+export NIX_BINTOOLS_WRAPPER_TARGET_HOST_x86_64_unknown_linux_gnu
+buildInputs=''
+export buildInputs
+depsBuildBuild=''
+export depsBuildBuild
+declare -a pkgsHostHost=('/nix/store/g5l3mkk656ccm58gzz0a9kryy2grih01-compiler-rt-libc-21.1.8-dev' '/nix/store/ync7h8cyhw4nzw2laba4wra6b8mcn9by-compiler-rt-libc-21.1.8' )
+READELF_FOR_BUILD='readelf'
+export READELF_FOR_BUILD
+LINENO='79'
+addEnvHooks ()
 {
  
-    local -a args=();
-    _allFlags;
-    substituteStream "$1" "$2" "${args[@]}"
-}
-nixTalkativeLog ()
-{
- 
-    _nixLogWithLevel 4 "$*"
-}
-substituteAll ()
-{
- 
-    local input="$1";
-    local output="$2";
-    local -a args=();
-    _allFlags;
-    substitute "$input" "$output" "${args[@]}"
-}
-_callImplicitHook ()
-{
- 
-    local def="$1";
-    local hookName="$2";
-    if declare -F "$hookName" > /dev/null; then
-        nixTalkativeLog "calling implicit '$hookName' function hook";
-        "$hookName";
-    else
-        if type -p "$hookName" > /dev/null; then
-            nixTalkativeLog "sourcing implicit '$hookName' script hook";
-            source "$hookName";
-        else
-            if [ -n "${!hookName:-}" ]; then
-                nixTalkativeLog "evaling implicit '$hookName' string hook";
-                eval "${!hookName}";
-            else
-                return "$def";
-            fi;
-        fi;
-    fi
-}
-unpackFile ()
-{
- 
-    curSrc="$1";
-    echo "unpacking source archive $curSrc";
-    if ! runOneHook unpackCmd "$curSrc"; then
-        echo "do not know how to unpack source archive $curSrc";
-        exit 1;
-    fi
-}
-_makeSymlinksRelative ()
-{
- 
-    local prefixes;
-    prefixes=();
-    for output in $(getAllOutputNames);
+    local depHostOffset="$1";
+    shift;
+    local pkgHookVarsSlice="${pkgHookVarVars[$depHostOffset + 1]}[@]";
+    local pkgHookVar;
+    for pkgHookVar in "${!pkgHookVarsSlice}";
     do
-        [ ! -e "${!output}" ] && continue;
-        prefixes+=("${!output}");
-    done;
-    find "${prefixes[@]}" -type l -printf '%H\0%p\0' | xargs -0 -n2 -r -P "$NIX_BUILD_CORES" sh -c '
-      output="$1"
-      link="$2"
-
-      linkTarget=$(readlink "$link")
-
-      # only touch links that point inside the same output tree
-      [[ $linkTarget == "$output"/* ]] || exit 0
-
-      if [ ! -e "$linkTarget" ]; then
-        echo "the symlink $link is broken, it points to $linkTarget (which is missing)"
-      fi
-
-      echo "making symlink relative: $link"
-      ln -snrf "$linkTarget" "$link"
-    ' _
-}
-nixErrorLog ()
-{
- 
-    _nixLogWithLevel 0 "$*"
-}
-showPhaseFooter ()
-{
- 
-    local phase="$1";
-    local startTime="$2";
-    local endTime="$3";
-    local delta=$(( endTime - startTime ));
-    (( delta < 30 )) && return;
-    local H=$((delta/3600));
-    local M=$((delta%3600/60));
-    local S=$((delta%60));
-    echo -n "$phase completed in ";
-    (( H > 0 )) && echo -n "$H hours ";
-    (( M > 0 )) && echo -n "$M minutes ";
-    echo "$S seconds"
+        eval "${pkgHookVar}s"'+=("$@")';
+    done
 }
 isScript ()
 {
@@ -450,345 +368,28 @@ isScript ()
         return 1;
     fi
 }
-printPhases ()
+_overrideFirst ()
 {
  
-    definePhases;
-    local phase;
-    for phase in ${phases[*]};
-    do
-        printf '%s\n' "$phase";
-    done
-}
-getTargetRole ()
-{
- 
-    getRole "$targetOffset"
-}
-addToSearchPath ()
-{
- 
-    addToSearchPathWithCustomDelimiter ":" "$@"
-}
-patchELF ()
-{
- 
-    local dir="$1";
-    [ -e "$dir" ] || return 0;
-    echo "shrinking RPATHs of ELF executables and libraries in $dir";
-    local i;
-    while IFS= read -r -d '' i; do
-        if [[ "$i" =~ .build-id ]]; then
-            continue;
-        fi;
-        if ! isELF "$i"; then
-            continue;
-        fi;
-        echo "shrinking $i";
-        patchelf --shrink-rpath "$i" || true;
-    done < <(find "$dir" -type f -print0)
-}
-isMachO ()
-{
- 
-    local fn="$1";
-    local fd;
-    local magic;
-    exec {fd}< "$fn";
-    LANG=C read -r -n 4 -u "$fd" magic;
-    exec {fd}>&-;
-    if [[ "$magic" = $(echo -ne "\xfe\xed\xfa\xcf") || "$magic" = $(echo -ne "\xcf\xfa\xed\xfe") ]]; then
-        return 0;
-    else
-        if [[ "$magic" = $(echo -ne "\xfe\xed\xfa\xce") || "$magic" = $(echo -ne "\xce\xfa\xed\xfe") ]]; then
-            return 0;
-        else
-            if [[ "$magic" = $(echo -ne "\xca\xfe\xba\xbe") || "$magic" = $(echo -ne "\xbe\xba\xfe\xca") ]]; then
-                return 0;
-            else
-                return 1;
-            fi;
-        fi;
+    if [ -z "${!1-}" ]; then
+        _assignFirst "$@";
     fi
 }
-genericBuild ()
+definePhases ()
 {
  
-    export GZIP_NO_TIMESTAMPS=1;
-    if [ -f "${buildCommandPath:-}" ]; then
-        source "$buildCommandPath";
-        return;
-    fi;
-    if [ -n "${buildCommand:-}" ]; then
-        eval "$buildCommand";
-        return;
-    fi;
-    definePhases;
-    for curPhase in ${phases[*]};
-    do
-        runPhase "$curPhase";
-    done
-}
-_assignFirst ()
-{
- 
-    local varName="$1";
-    local _var;
-    local REMOVE=REMOVE;
-    shift;
-    for _var in "$@";
-    do
-        if [ -n "${!_var-}" ]; then
-            eval "${varName}"="${_var}";
-            return;
-        fi;
-    done;
-    echo;
-    echo "error: _assignFirst: could not find a non-empty variable whose name to assign to ${varName}.";
-    echo "       The following variables were all unset or empty:";
-    echo "           $*";
-    if [ -z "${out:-}" ]; then
-        echo '       If you do not want an "out" output in your derivation, make sure to define';
-        echo '       the other specific required outputs. This can be achieved by picking one';
-        echo "       of the above as an output.";
-        echo '       You do not have to remove "out" if you want to have a different default';
-        echo '       output, because the first output is taken as a default.';
-        echo;
-    fi;
-    return 1
-}
-auditTmpdir ()
-{
- 
-    local dir="$1";
-    [ -e "$dir" ] || return 0;
-    echo "checking for references to $TMPDIR/ in $dir...";
-    local tmpdir elf_fifo script_fifo;
-    tmpdir="$(mktemp -d)";
-    elf_fifo="$tmpdir/elf";
-    script_fifo="$tmpdir/script";
-    mkfifo "$elf_fifo" "$script_fifo";
-    ( find "$dir" -type f -not -path '*/.build-id/*' -print0 | while IFS= read -r -d '' file; do
-        if isELF "$file"; then
-            printf '%s\0' "$file" 1>&3;
-        else
-            if isScript "$file"; then
-                filename=${file##*/};
-                dir=${file%/*};
-                if [ -e "$dir/.$filename-wrapped" ]; then
-                    printf '%s\0' "$file" 1>&4;
-                fi;
-            fi;
-        fi;
-    done;
-    exec 3>&- 4>&- ) 3> "$elf_fifo" 4> "$script_fifo" & ( xargs -0 -r -P "$NIX_BUILD_CORES" -n 1 sh -c '
-            if { printf :; patchelf --print-rpath "$1"; } | grep -q -F ":$TMPDIR/"; then
-                echo "RPATH of binary $1 contains a forbidden reference to $TMPDIR/"
-                exit 1
-            fi
-        ' _ < "$elf_fifo" ) & local pid_elf=$!;
-    local pid_script;
-    ( xargs -0 -r -P "$NIX_BUILD_CORES" -n 1 sh -c '
-            if grep -q -F "$TMPDIR/" "$1"; then
-                echo "wrapper script $1 contains a forbidden reference to $TMPDIR/"
-                exit 1
-            fi
-        ' _ < "$script_fifo" ) & local pid_script=$!;
-    wait "$pid_elf" || { 
-        echo "Some binaries contain forbidden references to $TMPDIR/. Check the error above!";
-        exit 1
-    };
-    wait "$pid_script" || { 
-        echo "Some scripts contain forbidden references to $TMPDIR/. Check the error above!";
-        exit 1
-    };
-    rm -r "$tmpdir"
-}
-moveToOutput ()
-{
- 
-    local patt="$1";
-    local dstOut="$2";
-    local output;
-    for output in $(getAllOutputNames);
-    do
-        if [ "${!output}" = "$dstOut" ]; then
-            continue;
-        fi;
-        local srcPath;
-        for srcPath in "${!output}"/$patt;
-        do
-            if [ ! -e "$srcPath" ] && [ ! -L "$srcPath" ]; then
-                continue;
-            fi;
-            if [ "$dstOut" = REMOVE ]; then
-                echo "Removing $srcPath";
-                rm -r "$srcPath";
-            else
-                local dstPath="$dstOut${srcPath#${!output}}";
-                echo "Moving $srcPath to $dstPath";
-                if [ -d "$dstPath" ] && [ -d "$srcPath" ]; then
-                    rmdir "$srcPath" --ignore-fail-on-non-empty;
-                    if [ -d "$srcPath" ]; then
-                        mv -t "$dstPath" "$srcPath"/*;
-                        rmdir "$srcPath";
-                    fi;
-                else
-                    mkdir -p "$(readlink -m "$dstPath/..")";
-                    mv "$srcPath" "$dstPath";
-                fi;
-            fi;
-            local srcParent="$(readlink -m "$srcPath/..")";
-            if [ -n "$(find "$srcParent" -maxdepth 0 -type d -empty 2> /dev/null)" ]; then
-                echo "Removing empty $srcParent/ and (possibly) its parents";
-                rmdir -p --ignore-fail-on-non-empty "$srcParent" 2> /dev/null || true;
-            fi;
-        done;
-    done
-}
-nixLog ()
-{
- 
-    [[ -z ${NIX_LOG_FD-} ]] && return 0;
-    local callerName="${FUNCNAME[1]}";
-    if [[ $callerName == "_callImplicitHook" ]]; then
-        callerName="${hookName:?}";
-    fi;
-    printf "%s: %s\n" "$callerName" "$*" >&"$NIX_LOG_FD"
-}
-_moveLib64 ()
-{
- 
-    if [ "${dontMoveLib64-}" = 1 ]; then
-        return;
-    fi;
-    if [ ! -e "$prefix/lib64" -o -L "$prefix/lib64" ]; then
-        return;
-    fi;
-    echo "moving $prefix/lib64/* to $prefix/lib";
-    mkdir -p $prefix/lib;
-    shopt -s dotglob;
-    for i in $prefix/lib64/*;
-    do
-        mv --no-clobber "$i" $prefix/lib;
-    done;
-    shopt -u dotglob;
-    rmdir $prefix/lib64;
-    ln -s lib $prefix/lib64
-}
-concatTo ()
-{
- 
-    local -;
-    set -o noglob;
-    local -n targetref="$1";
-    shift;
-    local arg default name type;
-    for arg in "$@";
-    do
-        IFS="=" read -r name default <<< "$arg";
-        local -n nameref="$name";
-        if [[ -z "${nameref[*]}" && -n "$default" ]]; then
-            targetref+=("$default");
-        else
-            if type=$(declare -p "$name" 2> /dev/null); then
-                case "${type#* }" in 
-                    -A*)
-                        echo "concatTo(): ERROR: trying to use concatTo on an associative array." 1>&2;
-                        return 1
-                    ;;
-                    -a*)
-                        targetref+=("${nameref[@]}")
-                    ;;
-                    *)
-                        if [[ "$name" = *"Array" ]]; then
-                            nixErrorLog "concatTo(): $name is not declared as array, treating as a singleton. This will become an error in future";
-                            targetref+=(${nameref+"${nameref[@]}"});
-                        else
-                            targetref+=(${nameref-});
-                        fi
-                    ;;
-                esac;
-            fi;
-        fi;
-    done
-}
-addEnvHooks ()
-{
- 
-    local depHostOffset="$1";
-    shift;
-    local pkgHookVarsSlice="${pkgHookVarVars[$depHostOffset + 1]}[@]";
-    local pkgHookVar;
-    for pkgHookVar in "${!pkgHookVarsSlice}";
-    do
-        eval "${pkgHookVar}s"'+=("$@")';
-    done
-}
-dumpVars ()
-{
- 
-    if [[ "${noDumpEnvVars:-0}" != 1 && -d "$NIX_BUILD_TOP" ]]; then
-        local old_umask;
-        old_umask=$(umask);
-        umask 0077;
-        export 2> /dev/null > "$NIX_BUILD_TOP/env-vars";
-        umask "$old_umask";
+    if [ -z "${phases[*]:-}" ]; then
+        phases="${prePhases[*]:-} unpackPhase patchPhase ${preConfigurePhases[*]:-}             configurePhase ${preBuildPhases[*]:-} buildPhase checkPhase             ${preInstallPhases[*]:-} installPhase ${preFixupPhases[*]:-} fixupPhase installCheckPhase             ${preDistPhases[*]:-} distPhase ${postPhases[*]:-}";
     fi
 }
-getTargetRoleWrapper ()
+_allFlags ()
 {
  
-    case $targetOffset in 
-        -1)
-            export NIX_PKG_CONFIG_WRAPPER_TARGET_BUILD_x86_64_unknown_linux_gnu=1
-        ;;
-        0)
-            export NIX_PKG_CONFIG_WRAPPER_TARGET_HOST_x86_64_unknown_linux_gnu=1
-        ;;
-        1)
-            export NIX_PKG_CONFIG_WRAPPER_TARGET_TARGET_x86_64_unknown_linux_gnu=1
-        ;;
-        *)
-            echo "pkg-config-role-hook: used as improper sort of dependency" 1>&2;
-            return 1
-        ;;
-    esac
-}
-pkgConfigWrapper_addPkgConfigPath ()
-{
- 
-    local role_post;
-    getHostRoleEnvHook;
-    addToSearchPath "PKG_CONFIG_PATH${role_post}" "$1/lib/pkgconfig";
-    addToSearchPath "PKG_CONFIG_PATH${role_post}" "$1/share/pkgconfig"
-}
-_doStrip ()
-{
- 
-    local -ra flags=(dontStripHost dontStripTarget);
-    local -ra debugDirs=(stripDebugList stripDebugListTarget);
-    local -ra allDirs=(stripAllList stripAllListTarget);
-    local -ra stripCmds=(STRIP STRIP_FOR_TARGET);
-    local -ra ranlibCmds=(RANLIB RANLIB_FOR_TARGET);
-    stripDebugList=${stripDebugList[*]:-lib lib32 lib64 libexec bin sbin Applications Library/Frameworks};
-    stripDebugListTarget=${stripDebugListTarget[*]:-};
-    stripAllList=${stripAllList[*]:-};
-    stripAllListTarget=${stripAllListTarget[*]:-};
-    local i;
-    for i in ${!stripCmds[@]};
-    do
-        local -n flag="${flags[$i]}";
-        local -n debugDirList="${debugDirs[$i]}";
-        local -n allDirList="${allDirs[$i]}";
-        local -n stripCmd="${stripCmds[$i]}";
-        local -n ranlibCmd="${ranlibCmds[$i]}";
-        if [[ -n "${dontStrip-}" || -n "${flag-}" ]] || ! type -f "${stripCmd-}" 2> /dev/null 1>&2; then
-            continue;
-        fi;
-        stripDirs "$stripCmd" "$ranlibCmd" "$debugDirList" "${stripDebugFlags[*]:--S -p}";
-        stripDirs "$stripCmd" "$ranlibCmd" "$allDirList" "${stripAllFlags[*]:--s -p}";
-    done
+    export system pname name version;
+    while IFS='' read -r varName; do
+        nixTalkativeLog "@${varName}@ -> ${!varName}";
+        args+=("--subst-var" "$varName");
+    done < <(awk 'BEGIN { for (v in ENVIRON) if (v ~ /^[a-z][a-zA-Z0-9_]*$/) print v }')
 }
 concatStringsSep ()
 {
@@ -814,193 +415,6 @@ concatStringsSep ()
         echo -n "${ifs_separated//"$IFS"/"$sep"}";
     fi
 }
-nixVomitLog ()
-{
- 
-    _nixLogWithLevel 7 "$*"
-}
-buildPhase ()
-{
- 
-    runHook preBuild;
-    if [[ -z "${makeFlags-}" && -z "${makefile:-}" && ! ( -e Makefile || -e makefile || -e GNUmakefile ) ]]; then
-        echo "no Makefile or custom buildPhase, doing nothing";
-    else
-        foundMakefile=1;
-        local flagsArray=(${enableParallelBuilding:+-j${NIX_BUILD_CORES}} SHELL="$SHELL");
-        concatTo flagsArray makeFlags makeFlagsArray buildFlags buildFlagsArray;
-        echoCmd 'build flags' "${flagsArray[@]}";
-        make ${makefile:+-f $makefile} "${flagsArray[@]}";
-        unset flagsArray;
-    fi;
-    runHook postBuild
-}
-isELF ()
-{
- 
-    local fn="$1";
-    local fd;
-    local magic;
-    exec {fd}< "$fn";
-    LANG=C read -r -n 4 -u "$fd" magic;
-    exec {fd}>&-;
-    if [ "$magic" = 'ELF' ]; then
-        return 0;
-    else
-        return 1;
-    fi
-}
-patchShebangsAuto ()
-{
- 
-    if [[ -z "${dontPatchShebangs-}" && -e "$prefix" ]]; then
-        if [[ "$output" != out && "$output" = "$outputDev" ]]; then
-            patchShebangs --build "$prefix";
-        else
-            patchShebangs --host "$prefix";
-        fi;
-    fi
-}
-_overrideFirst ()
-{
- 
-    if [ -z "${!1-}" ]; then
-        _assignFirst "$@";
-    fi
-}
-printWords ()
-{
- 
-    (( "$#" > 0 )) || return 0;
-    printf '%s ' "$@"
-}
-runHook ()
-{
- 
-    local hookName="$1";
-    shift;
-    local hooksSlice="${hookName%Hook}Hooks[@]";
-    local hook;
-    for hook in "_callImplicitHook 0 $hookName" ${!hooksSlice+"${!hooksSlice}"};
-    do
-        _logHook "$hookName" "$hook" "$@";
-        _eval "$hook" "$@";
-    done;
-    return 0
-}
-runPhase ()
-{
- 
-    local curPhase="$*";
-    if [[ "$curPhase" = unpackPhase && -n "${dontUnpack:-}" ]]; then
-        return;
-    fi;
-    if [[ "$curPhase" = patchPhase && -n "${dontPatch:-}" ]]; then
-        return;
-    fi;
-    if [[ "$curPhase" = configurePhase && -n "${dontConfigure:-}" ]]; then
-        return;
-    fi;
-    if [[ "$curPhase" = buildPhase && -n "${dontBuild:-}" ]]; then
-        return;
-    fi;
-    if [[ "$curPhase" = checkPhase && -z "${doCheck:-}" ]]; then
-        return;
-    fi;
-    if [[ "$curPhase" = installPhase && -n "${dontInstall:-}" ]]; then
-        return;
-    fi;
-    if [[ "$curPhase" = fixupPhase && -n "${dontFixup:-}" ]]; then
-        return;
-    fi;
-    if [[ "$curPhase" = installCheckPhase && -z "${doInstallCheck:-}" ]]; then
-        return;
-    fi;
-    if [[ "$curPhase" = distPhase && -z "${doDist:-}" ]]; then
-        return;
-    fi;
-    showPhaseHeader "$curPhase";
-    dumpVars;
-    local startTime endTime;
-    startTime=$(date +"%s");
-    eval "${!curPhase:-$curPhase}";
-    endTime=$(date +"%s");
-    showPhaseFooter "$curPhase" "$startTime" "$endTime";
-    if [ "$curPhase" = unpackPhase ]; then
-        [ -n "${sourceRoot:-}" ] && chmod +x -- "${sourceRoot}";
-        cd -- "${sourceRoot:-.}";
-    fi
-}
-updateSourceDateEpoch ()
-{
- 
-    local path="$1";
-    [[ $path == -* ]] && path="./$path";
-    local -a res=($(find "$path" -type f -not -newer "$NIX_BUILD_TOP/.." -printf '%T@ "%p"\0' | sort -n --zero-terminated | tail -n1 --zero-terminated | head -c -1));
-    local time="${res[0]//\.[0-9]*/}";
-    local newestFile="${res[1]}";
-    if [ "${time:-0}" -gt "$SOURCE_DATE_EPOCH" ]; then
-        echo "setting SOURCE_DATE_EPOCH to timestamp $time of file $newestFile";
-        export SOURCE_DATE_EPOCH="$time";
-        local now="$(date +%s)";
-        if [ "$time" -gt $((now - 60)) ]; then
-            echo "warning: file $newestFile may be generated; SOURCE_DATE_EPOCH may be non-deterministic";
-        fi;
-    fi
-}
-_addToEnv ()
-{
- 
-    local depHostOffset depTargetOffset;
-    local pkg;
-    for depHostOffset in "${allPlatOffsets[@]}";
-    do
-        local hookVar="${pkgHookVarVars[depHostOffset + 1]}";
-        local pkgsVar="${pkgAccumVarVars[depHostOffset + 1]}";
-        for depTargetOffset in "${allPlatOffsets[@]}";
-        do
-            (( depHostOffset <= depTargetOffset )) || continue;
-            local hookRef="${hookVar}[$depTargetOffset - $depHostOffset]";
-            if [[ -z "${strictDeps-}" ]]; then
-                local visitedPkgs="";
-                for pkg in "${pkgsBuildBuild[@]}" "${pkgsBuildHost[@]}" "${pkgsBuildTarget[@]}" "${pkgsHostHost[@]}" "${pkgsHostTarget[@]}" "${pkgsTargetTarget[@]}";
-                do
-                    if [[ "$visitedPkgs" = *"$pkg"* ]]; then
-                        continue;
-                    fi;
-                    runHook "${!hookRef}" "$pkg";
-                    visitedPkgs+=" $pkg";
-                done;
-            else
-                local pkgsRef="${pkgsVar}[$depTargetOffset - $depHostOffset]";
-                local pkgsSlice="${!pkgsRef}[@]";
-                for pkg in ${!pkgsSlice+"${!pkgsSlice}"};
-                do
-                    runHook "${!hookRef}" "$pkg";
-                done;
-            fi;
-        done;
-    done
-}
-ccWrapper_addCVars ()
-{
- 
-    local role_post;
-    getHostRoleEnvHook;
-    local found=;
-    if [ -d "$1/include" ]; then
-        export NIX_CFLAGS_COMPILE${role_post}+=" -isystem $1/include";
-        found=1;
-    fi;
-    if [ -d "$1/Library/Frameworks" ]; then
-        export NIX_CFLAGS_COMPILE${role_post}+=" -iframework $1/Library/Frameworks";
-        found=1;
-    fi;
-    if [[ -n "1" && -n ${NIX_STORE:-} && -n $found ]]; then
-        local scrubbed="$NIX_STORE/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-${1#"$NIX_STORE"/*-}";
-        export NIX_CFLAGS_COMPILE${role_post}+=" -fmacro-prefix-map=$1=$scrubbed";
-    fi
-}
 getRole ()
 {
  
@@ -1020,79 +434,41 @@ getRole ()
         ;;
     esac
 }
-installPhase ()
+nixChattyLog ()
 {
  
-    runHook preInstall;
-    if [[ -z "${makeFlags-}" && -z "${makefile:-}" && ! ( -e Makefile || -e makefile || -e GNUmakefile ) ]]; then
-        echo "no Makefile or custom installPhase, doing nothing";
-        runHook postInstall;
-        return;
+    _nixLogWithLevel 5 "$*"
+}
+appendToVar ()
+{
+ 
+    local -n nameref="$1";
+    local useArray type;
+    if [ -n "$__structuredAttrs" ]; then
+        useArray=true;
     else
-        foundMakefile=1;
+        useArray=false;
     fi;
-    if [ -n "$prefix" ]; then
-        mkdir -p "$prefix";
+    if type=$(declare -p "$1" 2> /dev/null); then
+        case "${type#* }" in 
+            -A*)
+                echo "appendToVar(): ERROR: trying to use appendToVar on an associative array, use variable+=([\"X\"]=\"Y\") instead." 1>&2;
+                return 1
+            ;;
+            -a*)
+                useArray=true
+            ;;
+            *)
+                useArray=false
+            ;;
+        esac;
     fi;
-    local flagsArray=(${enableParallelInstalling:+-j${NIX_BUILD_CORES}} SHELL="$SHELL");
-    concatTo flagsArray makeFlags makeFlagsArray installFlags installFlagsArray installTargets=install;
-    echoCmd 'install flags' "${flagsArray[@]}";
-    make ${makefile:+-f $makefile} "${flagsArray[@]}";
-    unset flagsArray;
-    runHook postInstall
-}
-getHostRoleEnvHook ()
-{
- 
-    getRole "$depHostOffset"
-}
-updateAutotoolsGnuConfigScriptsPhase ()
-{
- 
-    if [ -n "${dontUpdateAutotoolsGnuConfigScripts-}" ]; then
-        return;
-    fi;
-    for script in config.sub config.guess;
-    do
-        for f in $(find . -type f -name "$script");
-        do
-            echo "Updating Autotools / GNU config script to a newer upstream version: $f";
-            cp -f "/nix/store/dxagrpxl8wg2z16al3ls3zaci6dvhnnn-gnu-config-2024-01-01/$script" "$f";
-        done;
-    done
-}
-_multioutDocs ()
-{
- 
-    local REMOVE=REMOVE;
-    moveToOutput share/info "${!outputInfo}";
-    moveToOutput share/doc "${!outputDoc}";
-    moveToOutput share/gtk-doc "${!outputDevdoc}";
-    moveToOutput share/devhelp/books "${!outputDevdoc}";
-    moveToOutput share/man "${!outputMan}";
-    moveToOutput share/man/man3 "${!outputDevman}"
-}
-nixDebugLog ()
-{
- 
-    _nixLogWithLevel 6 "$*"
-}
-_multioutDevs ()
-{
- 
-    if [ "$(getAllOutputNames)" = "out" ] || [ -z "${moveToDev-1}" ]; then
-        return;
-    fi;
-    moveToOutput include "${!outputInclude}";
-    moveToOutput lib/pkgconfig "${!outputDev}";
-    moveToOutput share/pkgconfig "${!outputDev}";
-    moveToOutput lib/cmake "${!outputDev}";
-    moveToOutput share/aclocal "${!outputDev}";
-    for f in "${!outputDev}"/{lib,share}/pkgconfig/*.pc;
-    do
-        echo "Patching '$f' includedir to output ${!outputInclude}";
-        sed -i "/^includedir=/s,=\${prefix},=${!outputInclude}," "$f";
-    done
+    shift;
+    if $useArray; then
+        nameref=(${nameref+"${nameref[@]}"} "$@");
+    else
+        nameref="${nameref-} $*";
+    fi
 }
 noBrokenSymlinks ()
 {
@@ -1149,74 +525,743 @@ noBrokenSymlinks ()
     fi;
     return 0
 }
-findInputs ()
+printWords ()
 {
  
-    local -r pkg="$1";
+    (( "$#" > 0 )) || return 0;
+    printf '%s ' "$@"
+}
+getTargetRoleEnvHook ()
+{
+ 
+    getRole "$depTargetOffset"
+}
+concatTo ()
+{
+ 
+    local -;
+    set -o noglob;
+    local -n targetref="$1";
+    shift;
+    local arg default name type;
+    for arg in "$@";
+    do
+        IFS="=" read -r name default <<< "$arg";
+        local -n nameref="$name";
+        if [[ -z "${nameref[*]}" && -n "$default" ]]; then
+            targetref+=("$default");
+        else
+            if type=$(declare -p "$name" 2> /dev/null); then
+                case "${type#* }" in 
+                    -A*)
+                        echo "concatTo(): ERROR: trying to use concatTo on an associative array." 1>&2;
+                        return 1
+                    ;;
+                    -a*)
+                        targetref+=("${nameref[@]}")
+                    ;;
+                    *)
+                        if [[ "$name" = *"Array" ]]; then
+                            nixErrorLog "concatTo(): $name is not declared as array, treating as a singleton. This will become an error in future";
+                            targetref+=(${nameref+"${nameref[@]}"});
+                        else
+                            targetref+=(${nameref-});
+                        fi
+                    ;;
+                esac;
+            fi;
+        fi;
+    done
+}
+activatePackage ()
+{
+ 
+    local pkg="$1";
     local -r hostOffset="$2";
     local -r targetOffset="$3";
     (( hostOffset <= targetOffset )) || exit 1;
-    local varVar="${pkgAccumVarVars[hostOffset + 1]}";
-    local varRef="$varVar[$((targetOffset - hostOffset))]";
-    local var="${!varRef}";
-    unset -v varVar varRef;
-    local varSlice="$var[*]";
-    case " ${!varSlice-} " in 
-        *" $pkg "*)
-            return 0
-        ;;
-    esac;
-    unset -v varSlice;
-    eval "$var"'+=("$pkg")';
-    if ! [ -e "$pkg" ]; then
-        echo "build input $pkg does not exist" 1>&2;
-        exit 1;
+    if [ -f "$pkg" ]; then
+        nixTalkativeLog "sourcing setup hook '$pkg'";
+        source "$pkg";
     fi;
-    function mapOffset () 
-    { 
-        local -r inputOffset="$1";
-        local -n outputOffset="$2";
-        if (( inputOffset <= 0 )); then
-            outputOffset=$((inputOffset + hostOffset));
+    if [[ -z "${strictDeps-}" || "$hostOffset" -le -1 ]]; then
+        addToSearchPath _PATH "$pkg/bin";
+    fi;
+    if (( hostOffset <= -1 )); then
+        addToSearchPath _XDG_DATA_DIRS "$pkg/share";
+    fi;
+    if [[ "$hostOffset" -eq 0 && -d "$pkg/bin" ]]; then
+        addToSearchPath _HOST_PATH "$pkg/bin";
+    fi;
+    if [[ -f "$pkg/nix-support/setup-hook" ]]; then
+        nixTalkativeLog "sourcing setup hook '$pkg/nix-support/setup-hook'";
+        source "$pkg/nix-support/setup-hook";
+    fi
+}
+nixLog ()
+{
+ 
+    [[ -z ${NIX_LOG_FD-} ]] && return 0;
+    local callerName="${FUNCNAME[1]}";
+    if [[ $callerName == "_callImplicitHook" ]]; then
+        callerName="${hookName:?}";
+    fi;
+    printf "%s: %s\n" "$callerName" "$*" >&"$NIX_LOG_FD"
+}
+_eval ()
+{
+ 
+    if declare -F "$1" > /dev/null 2>&1; then
+        "$@";
+    else
+        eval "$1";
+    fi
+}
+ccWrapper_addCVars ()
+{
+ 
+    local role_post;
+    getHostRoleEnvHook;
+    local found=;
+    if [ -d "$1/include" ]; then
+        export NIX_CFLAGS_COMPILE${role_post}+=" -isystem $1/include";
+        found=1;
+    fi;
+    if [ -d "$1/Library/Frameworks" ]; then
+        export NIX_CFLAGS_COMPILE${role_post}+=" -iframework $1/Library/Frameworks";
+        found=1;
+    fi;
+    if [[ -n "1" && -n ${NIX_STORE:-} && -n $found ]]; then
+        local scrubbed="$NIX_STORE/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-${1#"$NIX_STORE"/*-}";
+        export NIX_CFLAGS_COMPILE${role_post}+=" -fmacro-prefix-map=$1=$scrubbed";
+    fi
+}
+stripHash ()
+{
+ 
+    local strippedName casematchOpt=0;
+    strippedName="$(basename -- "$1")";
+    shopt -q nocasematch && casematchOpt=1;
+    shopt -u nocasematch;
+    if [[ "$strippedName" =~ ^[a-z0-9]{32}- ]]; then
+        echo "${strippedName:33}";
+    else
+        echo "$strippedName";
+    fi;
+    if (( casematchOpt )); then
+        shopt -s nocasematch;
+    fi
+}
+_callImplicitHook ()
+{
+ 
+    local def="$1";
+    local hookName="$2";
+    if declare -F "$hookName" > /dev/null; then
+        nixTalkativeLog "calling implicit '$hookName' function hook";
+        "$hookName";
+    else
+        if type -p "$hookName" > /dev/null; then
+            nixTalkativeLog "sourcing implicit '$hookName' script hook";
+            source "$hookName";
         else
-            outputOffset=$((inputOffset - 1 + targetOffset));
-        fi
-    };
-    local relHostOffset;
-    for relHostOffset in "${allPlatOffsets[@]}";
+            if [ -n "${!hookName:-}" ]; then
+                nixTalkativeLog "evaling implicit '$hookName' string hook";
+                eval "${!hookName}";
+            else
+                return "$def";
+            fi;
+        fi;
+    fi
+}
+_multioutDevs ()
+{
+ 
+    if [ "$(getAllOutputNames)" = "out" ] || [ -z "${moveToDev-1}" ]; then
+        return;
+    fi;
+    moveToOutput include "${!outputInclude}";
+    moveToOutput lib/pkgconfig "${!outputDev}";
+    moveToOutput share/pkgconfig "${!outputDev}";
+    moveToOutput lib/cmake "${!outputDev}";
+    moveToOutput share/aclocal "${!outputDev}";
+    for f in "${!outputDev}"/{lib,share}/pkgconfig/*.pc;
     do
-        local files="${propagatedDepFilesVars[relHostOffset + 1]}";
-        local hostOffsetNext;
-        mapOffset "$relHostOffset" hostOffsetNext;
-        (( -1 <= hostOffsetNext && hostOffsetNext <= 1 )) || continue;
-        local relTargetOffset;
-        for relTargetOffset in "${allPlatOffsets[@]}";
+        echo "Patching '$f' includedir to output ${!outputInclude}";
+        sed -i "/^includedir=/s,=\${prefix},=${!outputInclude}," "$f";
+    done
+}
+dumpVars ()
+{
+ 
+    if [[ "${noDumpEnvVars:-0}" != 1 && -d "$NIX_BUILD_TOP" ]]; then
+        local old_umask;
+        old_umask=$(umask);
+        umask 0077;
+        export 2> /dev/null > "$NIX_BUILD_TOP/env-vars";
+        umask "$old_umask";
+    fi
+}
+getTargetRole ()
+{
+ 
+    getRole "$targetOffset"
+}
+recordPropagatedDependencies ()
+{
+ 
+    declare -ra flatVars=(depsBuildBuildPropagated propagatedNativeBuildInputs depsBuildTargetPropagated depsHostHostPropagated propagatedBuildInputs depsTargetTargetPropagated);
+    declare -ra flatFiles=("${propagatedBuildDepFiles[@]}" "${propagatedHostDepFiles[@]}" "${propagatedTargetDepFiles[@]}");
+    local propagatedInputsIndex;
+    for propagatedInputsIndex in "${!flatVars[@]}";
+    do
+        local propagatedInputsSlice="${flatVars[$propagatedInputsIndex]}[@]";
+        local propagatedInputsFile="${flatFiles[$propagatedInputsIndex]}";
+        [[ -n "${!propagatedInputsSlice}" ]] || continue;
+        mkdir -p "${!outputDev}/nix-support";
+        printWords ${!propagatedInputsSlice} > "${!outputDev}/nix-support/$propagatedInputsFile";
+    done
+}
+substituteAll ()
+{
+ 
+    local input="$1";
+    local output="$2";
+    local -a args=();
+    _allFlags;
+    substitute "$input" "$output" "${args[@]}"
+}
+getAllOutputNames ()
+{
+ 
+    if [ -n "$__structuredAttrs" ]; then
+        echo "${!outputs[*]}";
+    else
+        echo "$outputs";
+    fi
+}
+getHostRole ()
+{
+ 
+    getRole "$hostOffset"
+}
+auditTmpdir ()
+{
+ 
+    local dir="$1";
+    [ -e "$dir" ] || return 0;
+    echo "checking for references to $TMPDIR/ in $dir...";
+    local tmpdir elf_fifo script_fifo;
+    tmpdir="$(mktemp -d)";
+    elf_fifo="$tmpdir/elf";
+    script_fifo="$tmpdir/script";
+    mkfifo "$elf_fifo" "$script_fifo";
+    ( find "$dir" -type f -not -path '*/.build-id/*' -print0 | while IFS= read -r -d '' file; do
+        if isELF "$file"; then
+            printf '%s\0' "$file" 1>&3;
+        else
+            if isScript "$file"; then
+                filename=${file##*/};
+                dir=${file%/*};
+                if [ -e "$dir/.$filename-wrapped" ]; then
+                    printf '%s\0' "$file" 1>&4;
+                fi;
+            fi;
+        fi;
+    done;
+    exec 3>&- 4>&- ) 3> "$elf_fifo" 4> "$script_fifo" & ( xargs -0 -r -P "$NIX_BUILD_CORES" -n 1 sh -c '
+            if { printf :; patchelf --print-rpath "$1"; } | grep -q -F ":$TMPDIR/"; then
+                echo "RPATH of binary $1 contains a forbidden reference to $TMPDIR/"
+                exit 1
+            fi
+        ' _ < "$elf_fifo" ) & local pid_elf=$!;
+    local pid_script;
+    ( xargs -0 -r -P "$NIX_BUILD_CORES" -n 1 sh -c '
+            if grep -q -F "$TMPDIR/" "$1"; then
+                echo "wrapper script $1 contains a forbidden reference to $TMPDIR/"
+                exit 1
+            fi
+        ' _ < "$script_fifo" ) & local pid_script=$!;
+    wait "$pid_elf" || { 
+        echo "Some binaries contain forbidden references to $TMPDIR/. Check the error above!";
+        exit 1
+    };
+    wait "$pid_script" || { 
+        echo "Some scripts contain forbidden references to $TMPDIR/. Check the error above!";
+        exit 1
+    };
+    rm -r "$tmpdir"
+}
+installPhase ()
+{
+ 
+    runHook preInstall;
+    if [[ -z "${makeFlags-}" && -z "${makefile:-}" && ! ( -e Makefile || -e makefile || -e GNUmakefile ) ]]; then
+        echo "no Makefile or custom installPhase, doing nothing";
+        runHook postInstall;
+        return;
+    else
+        foundMakefile=1;
+    fi;
+    if [ -n "$prefix" ]; then
+        mkdir -p "$prefix";
+    fi;
+    local flagsArray=(${enableParallelInstalling:+-j${NIX_BUILD_CORES}} SHELL="$SHELL");
+    concatTo flagsArray makeFlags makeFlagsArray installFlags installFlagsArray installTargets=install;
+    echoCmd 'install flags' "${flagsArray[@]}";
+    make ${makefile:+-f $makefile} "${flagsArray[@]}";
+    unset flagsArray;
+    runHook postInstall
+}
+patchShebangsAuto ()
+{
+ 
+    if [[ -z "${dontPatchShebangs-}" && -e "$prefix" ]]; then
+        if [[ "$output" != out && "$output" = "$outputDev" ]]; then
+            patchShebangs --build "$prefix";
+        else
+            patchShebangs --host "$prefix";
+        fi;
+    fi
+}
+_makeSymlinksRelative ()
+{
+ 
+    local prefixes;
+    prefixes=();
+    for output in $(getAllOutputNames);
+    do
+        [ ! -e "${!output}" ] && continue;
+        prefixes+=("${!output}");
+    done;
+    find "${prefixes[@]}" -type l -printf '%H\0%p\0' | xargs -0 -n2 -r -P "$NIX_BUILD_CORES" sh -c '
+      output="$1"
+      link="$2"
+
+      linkTarget=$(readlink "$link")
+
+      # only touch links that point inside the same output tree
+      [[ $linkTarget == "$output"/* ]] || exit 0
+
+      if [ ! -e "$linkTarget" ]; then
+        echo "the symlink $link is broken, it points to $linkTarget (which is missing)"
+      fi
+
+      echo "making symlink relative: $link"
+      ln -snrf "$linkTarget" "$link"
+    ' _
+}
+getHostRoleEnvHook ()
+{
+ 
+    getRole "$depHostOffset"
+}
+_multioutConfig ()
+{
+ 
+    if [ "$(getAllOutputNames)" = "out" ] || [ -z "${setOutputFlags-1}" ]; then
+        return;
+    fi;
+    if [ -z "${shareDocName:-}" ]; then
+        local confScript="${configureScript:-}";
+        if [ -z "$confScript" ] && [ -x ./configure ]; then
+            confScript=./configure;
+        fi;
+        if [ -f "$confScript" ]; then
+            local shareDocName="$(sed -n "s/^PACKAGE_TARNAME='\(.*\)'$/\1/p" < "$confScript")";
+        fi;
+        if [ -z "$shareDocName" ] || echo "$shareDocName" | grep -q '[^a-zA-Z0-9_-]'; then
+            shareDocName="$(echo "$name" | sed 's/-[^a-zA-Z].*//')";
+        fi;
+    fi;
+    prependToVar configureFlags --bindir="${!outputBin}"/bin --sbindir="${!outputBin}"/sbin --includedir="${!outputInclude}"/include --mandir="${!outputMan}"/share/man --infodir="${!outputInfo}"/share/info --docdir="${!outputDoc}"/share/doc/"${shareDocName}" --libdir="${!outputLib}"/lib --libexecdir="${!outputLib}"/libexec --localedir="${!outputLib}"/share/locale;
+    prependToVar installFlags pkgconfigdir="${!outputDev}"/lib/pkgconfig m4datadir="${!outputDev}"/share/aclocal aclocaldir="${!outputDev}"/share/aclocal
+}
+substituteAllInPlace ()
+{
+ 
+    local fileName="$1";
+    shift;
+    substituteAll "$fileName" "$fileName" "$@"
+}
+isELF ()
+{
+ 
+    local fn="$1";
+    local fd;
+    local magic;
+    exec {fd}< "$fn";
+    LANG=C read -r -n 4 -u "$fd" magic;
+    exec {fd}>&-;
+    if [ "$magic" = 'ELF' ]; then
+        return 0;
+    else
+        return 1;
+    fi
+}
+nixNoticeLog ()
+{
+ 
+    _nixLogWithLevel 2 "$*"
+}
+_moveSbin ()
+{
+ 
+    if [ "${dontMoveSbin-}" = 1 ]; then
+        return;
+    fi;
+    if [ ! -e "$prefix/sbin" -o -L "$prefix/sbin" ]; then
+        return;
+    fi;
+    echo "moving $prefix/sbin/* to $prefix/bin";
+    mkdir -p $prefix/bin;
+    shopt -s dotglob;
+    for i in $prefix/sbin/*;
+    do
+        mv "$i" $prefix/bin;
+    done;
+    shopt -u dotglob;
+    rmdir $prefix/sbin;
+    ln -s bin $prefix/sbin
+}
+_defaultUnpack ()
+{
+ 
+    local fn="$1";
+    local destination;
+    if [ -d "$fn" ]; then
+        destination="$(stripHash "$fn")";
+        if [ -e "$destination" ]; then
+            echo "Cannot copy $fn to $destination: destination already exists!";
+            echo "Did you specify two \"srcs\" with the same \"name\"?";
+            return 1;
+        fi;
+        cp -r --preserve=timestamps --reflink=auto -- "$fn" "$destination";
+    else
+        case "$fn" in 
+            *.tar.xz | *.tar.lzma | *.txz)
+                ( XZ_OPT="--threads=$NIX_BUILD_CORES" xz -d < "$fn";
+                true ) | tar xf - --mode=+w --warning=no-timestamp
+            ;;
+            *.tar | *.tar.* | *.tgz | *.tbz2 | *.tbz)
+                tar xf "$fn" --mode=+w --warning=no-timestamp
+            ;;
+            *)
+                return 1
+            ;;
+        esac;
+    fi
+}
+substituteAllStream ()
+{
+ 
+    local -a args=();
+    _allFlags;
+    substituteStream "$1" "$2" "${args[@]}"
+}
+substituteInPlace ()
+{
+ 
+    local -a fileNames=();
+    for arg in "$@";
+    do
+        if [[ "$arg" = "--"* ]]; then
+            break;
+        fi;
+        fileNames+=("$arg");
+        shift;
+    done;
+    if ! [[ "${#fileNames[@]}" -gt 0 ]]; then
+        echo "substituteInPlace called without any files to operate on (files must come before options!)" 1>&2;
+        return 1;
+    fi;
+    for file in "${fileNames[@]}";
+    do
+        substitute "$file" "$file" "$@";
+    done
+}
+moveToOutput ()
+{
+ 
+    local patt="$1";
+    local dstOut="$2";
+    local output;
+    for output in $(getAllOutputNames);
+    do
+        if [ "${!output}" = "$dstOut" ]; then
+            continue;
+        fi;
+        local srcPath;
+        for srcPath in "${!output}"/$patt;
         do
-            (( "$relHostOffset" <= "$relTargetOffset" )) || continue;
-            local fileRef="${files}[$relTargetOffset - $relHostOffset]";
-            local file="${!fileRef}";
-            unset -v fileRef;
-            local targetOffsetNext;
-            mapOffset "$relTargetOffset" targetOffsetNext;
-            (( -1 <= hostOffsetNext && hostOffsetNext <= 1 )) || continue;
-            [[ -f "$pkg/nix-support/$file" ]] || continue;
-            local pkgNext;
-            read -r -d '' pkgNext < "$pkg/nix-support/$file" || true;
-            for pkgNext in $pkgNext;
+            if [ ! -e "$srcPath" ] && [ ! -L "$srcPath" ]; then
+                continue;
+            fi;
+            if [ "$dstOut" = REMOVE ]; then
+                echo "Removing $srcPath";
+                rm -r "$srcPath";
+            else
+                local dstPath="$dstOut${srcPath#${!output}}";
+                echo "Moving $srcPath to $dstPath";
+                if [ -d "$dstPath" ] && [ -d "$srcPath" ]; then
+                    rmdir "$srcPath" --ignore-fail-on-non-empty;
+                    if [ -d "$srcPath" ]; then
+                        mv -t "$dstPath" "$srcPath"/*;
+                        rmdir "$srcPath";
+                    fi;
+                else
+                    mkdir -p "$(readlink -m "$dstPath/..")";
+                    mv "$srcPath" "$dstPath";
+                fi;
+            fi;
+            local srcParent="$(readlink -m "$srcPath/..")";
+            if [ -n "$(find "$srcParent" -maxdepth 0 -type d -empty 2> /dev/null)" ]; then
+                echo "Removing empty $srcParent/ and (possibly) its parents";
+                rmdir -p --ignore-fail-on-non-empty "$srcParent" 2> /dev/null || true;
+            fi;
+        done;
+    done
+}
+nixInfoLog ()
+{
+ 
+    _nixLogWithLevel 3 "$*"
+}
+bintoolsWrapper_addLDVars ()
+{
+ 
+    local role_post;
+    getHostRoleEnvHook;
+    if [[ -d "$1/lib64" && ! -L "$1/lib64" ]]; then
+        export NIX_LDFLAGS${role_post}+=" -L$1/lib64";
+    fi;
+    if [[ -d "$1/lib" ]]; then
+        local -a glob=($1/lib/lib*);
+        if [ "${#glob[*]}" -gt 0 ]; then
+            export NIX_LDFLAGS${role_post}+=" -L$1/lib";
+        fi;
+    fi
+}
+_activatePkgs ()
+{
+ 
+    local hostOffset targetOffset;
+    local pkg;
+    for hostOffset in "${allPlatOffsets[@]}";
+    do
+        local pkgsVar="${pkgAccumVarVars[hostOffset + 1]}";
+        for targetOffset in "${allPlatOffsets[@]}";
+        do
+            (( hostOffset <= targetOffset )) || continue;
+            local pkgsRef="${pkgsVar}[$targetOffset - $hostOffset]";
+            local pkgsSlice="${!pkgsRef}[@]";
+            for pkg in ${!pkgsSlice+"${!pkgsSlice}"};
             do
-                findInputs "$pkgNext" "$hostOffsetNext" "$targetOffsetNext";
+                activatePackage "$pkg" "$hostOffset" "$targetOffset";
             done;
         done;
     done
 }
-_allFlags ()
+distPhase ()
 {
  
-    export system pname name version;
-    while IFS='' read -r varName; do
-        nixTalkativeLog "@${varName}@ -> ${!varName}";
-        args+=("--subst-var" "$varName");
-    done < <(awk 'BEGIN { for (v in ENVIRON) if (v ~ /^[a-z][a-zA-Z0-9_]*$/) print v }')
+    runHook preDist;
+    local flagsArray=();
+    concatTo flagsArray distFlags distFlagsArray distTarget=dist;
+    echo 'dist flags: %q' "${flagsArray[@]}";
+    make ${makefile:+-f $makefile} "${flagsArray[@]}";
+    if [ "${dontCopyDist:-0}" != 1 ]; then
+        mkdir -p "$out/tarballs";
+        cp -pvd ${tarballs[*]:-*.tar.gz} "$out/tarballs";
+    fi;
+    runHook postDist
+}
+pkgConfigWrapper_addPkgConfigPath ()
+{
+ 
+    local role_post;
+    getHostRoleEnvHook;
+    addToSearchPath "PKG_CONFIG_PATH${role_post}" "$1/lib/pkgconfig";
+    addToSearchPath "PKG_CONFIG_PATH${role_post}" "$1/share/pkgconfig"
+}
+nixVomitLog ()
+{
+ 
+    _nixLogWithLevel 7 "$*"
+}
+addToSearchPathWithCustomDelimiter ()
+{
+ 
+    local delimiter="$1";
+    local varName="$2";
+    local dir="$3";
+    if [[ -d "$dir" && "${!varName:+${delimiter}${!varName}${delimiter}}" != *"${delimiter}${dir}${delimiter}"* ]]; then
+        export "${varName}=${!varName:+${!varName}${delimiter}}${dir}";
+    fi
+}
+_logHook ()
+{
+ 
+    if [[ -z ${NIX_LOG_FD-} ]]; then
+        return;
+    fi;
+    local hookKind="$1";
+    local hookExpr="$2";
+    shift 2;
+    if declare -F "$hookExpr" > /dev/null 2>&1; then
+        nixTalkativeLog "calling '$hookKind' function hook '$hookExpr'" "$@";
+    else
+        if type -p "$hookExpr" > /dev/null; then
+            nixTalkativeLog "sourcing '$hookKind' script hook '$hookExpr'";
+        else
+            if [[ "$hookExpr" != "_callImplicitHook"* ]]; then
+                local exprToOutput;
+                if [[ ${NIX_DEBUG:-0} -ge 5 ]]; then
+                    exprToOutput="$hookExpr";
+                else
+                    local hookExprLine;
+                    while IFS= read -r hookExprLine; do
+                        hookExprLine="${hookExprLine#"${hookExprLine%%[![:space:]]*}"}";
+                        if [[ -n "$hookExprLine" ]]; then
+                            exprToOutput+="$hookExprLine\\n ";
+                        fi;
+                    done <<< "$hookExpr";
+                    exprToOutput="${exprToOutput%%\\n }";
+                fi;
+                nixTalkativeLog "evaling '$hookKind' string hook '$exprToOutput'";
+            fi;
+        fi;
+    fi
+}
+addToSearchPath ()
+{
+ 
+    addToSearchPathWithCustomDelimiter ":" "$@"
+}
+_nixLogWithLevel ()
+{
+ 
+    [[ -z ${NIX_LOG_FD-} || ${NIX_DEBUG:-0} -lt ${1:?} ]] && return 0;
+    local logLevel;
+    case "${1:?}" in 
+        0)
+            logLevel=ERROR
+        ;;
+        1)
+            logLevel=WARN
+        ;;
+        2)
+            logLevel=NOTICE
+        ;;
+        3)
+            logLevel=INFO
+        ;;
+        4)
+            logLevel=TALKATIVE
+        ;;
+        5)
+            logLevel=CHATTY
+        ;;
+        6)
+            logLevel=DEBUG
+        ;;
+        7)
+            logLevel=VOMIT
+        ;;
+        *)
+            echo "_nixLogWithLevel: called with invalid log level: ${1:?}" >&"$NIX_LOG_FD";
+            return 1
+        ;;
+    esac;
+    local callerName="${FUNCNAME[2]}";
+    if [[ $callerName == "_callImplicitHook" ]]; then
+        callerName="${hookName:?}";
+    fi;
+    printf "%s: %s: %s\n" "$logLevel" "$callerName" "${2:?}" >&"$NIX_LOG_FD"
+}
+prependToVar ()
+{
+ 
+    local -n nameref="$1";
+    local useArray type;
+    if [ -n "$__structuredAttrs" ]; then
+        useArray=true;
+    else
+        useArray=false;
+    fi;
+    if type=$(declare -p "$1" 2> /dev/null); then
+        case "${type#* }" in 
+            -A*)
+                echo "prependToVar(): ERROR: trying to use prependToVar on an associative array." 1>&2;
+                return 1
+            ;;
+            -a*)
+                useArray=true
+            ;;
+            *)
+                useArray=false
+            ;;
+        esac;
+    fi;
+    shift;
+    if $useArray; then
+        nameref=("$@" ${nameref+"${nameref[@]}"});
+    else
+        nameref="$* ${nameref-}";
+    fi
+}
+buildPhase ()
+{
+ 
+    runHook preBuild;
+    if [[ -z "${makeFlags-}" && -z "${makefile:-}" && ! ( -e Makefile || -e makefile || -e GNUmakefile ) ]]; then
+        echo "no Makefile or custom buildPhase, doing nothing";
+    else
+        foundMakefile=1;
+        local flagsArray=(${enableParallelBuilding:+-j${NIX_BUILD_CORES}} SHELL="$SHELL");
+        concatTo flagsArray makeFlags makeFlagsArray buildFlags buildFlagsArray;
+        echoCmd 'build flags' "${flagsArray[@]}";
+        make ${makefile:+-f $makefile} "${flagsArray[@]}";
+        unset flagsArray;
+    fi;
+    runHook postBuild
+}
+isMachO ()
+{
+ 
+    local fn="$1";
+    local fd;
+    local magic;
+    exec {fd}< "$fn";
+    LANG=C read -r -n 4 -u "$fd" magic;
+    exec {fd}>&-;
+    if [[ "$magic" = $(echo -ne "\xfe\xed\xfa\xcf") || "$magic" = $(echo -ne "\xcf\xfa\xed\xfe") ]]; then
+        return 0;
+    else
+        if [[ "$magic" = $(echo -ne "\xfe\xed\xfa\xce") || "$magic" = $(echo -ne "\xce\xfa\xed\xfe") ]]; then
+            return 0;
+        else
+            if [[ "$magic" = $(echo -ne "\xca\xfe\xba\xbe") || "$magic" = $(echo -ne "\xbe\xba\xfe\xca") ]]; then
+                return 0;
+            else
+                return 1;
+            fi;
+        fi;
+    fi
+}
+runHook ()
+{
+ 
+    local hookName="$1";
+    shift;
+    local hooksSlice="${hookName%Hook}Hooks[@]";
+    local hook;
+    for hook in "_callImplicitHook 0 $hookName" ${!hooksSlice+"${!hooksSlice}"};
+    do
+        _logHook "$hookName" "$hook" "$@";
+        _eval "$hook" "$@";
+    done;
+    return 0
 }
 echoCmd ()
 {
@@ -1225,6 +1270,186 @@ echoCmd ()
     shift;
     printf ' %q' "$@";
     echo
+}
+showPhaseHeader ()
+{
+ 
+    local phase="$1";
+    echo "Running phase: $phase";
+    if [[ -z ${NIX_LOG_FD-} ]]; then
+        return;
+    fi;
+    printf "@nix { \"action\": \"setPhase\", \"phase\": \"%s\" }\n" "$phase" >&"$NIX_LOG_FD"
+}
+mapOffset ()
+{
+ 
+    local -r inputOffset="$1";
+    local -n outputOffset="$2";
+    if (( inputOffset <= 0 )); then
+        outputOffset=$((inputOffset + hostOffset));
+    else
+        outputOffset=$((inputOffset - 1 + targetOffset));
+    fi
+}
+substitute ()
+{
+ 
+    local input="$1";
+    local output="$2";
+    shift 2;
+    if [ ! -f "$input" ]; then
+        echo "substitute(): ERROR: file '$input' does not exist" 1>&2;
+        return 1;
+    fi;
+    local content;
+    consumeEntire content < "$input";
+    if [ -e "$output" ]; then
+        chmod +w "$output";
+    fi;
+    substituteStream content "file '$input'" "$@" > "$output"
+}
+patchELF ()
+{
+ 
+    local dir="$1";
+    [ -e "$dir" ] || return 0;
+    echo "shrinking RPATHs of ELF executables and libraries in $dir";
+    local i;
+    while IFS= read -r -d '' i; do
+        if [[ "$i" =~ .build-id ]]; then
+            continue;
+        fi;
+        if ! isELF "$i"; then
+            continue;
+        fi;
+        echo "shrinking $i";
+        patchelf --shrink-rpath "$i" || true;
+    done < <(find "$dir" -type f -print0)
+}
+_multioutPropagateDev ()
+{
+ 
+    if [ "$(getAllOutputNames)" = "out" ]; then
+        return;
+    fi;
+    local outputFirst;
+    for outputFirst in $(getAllOutputNames);
+    do
+        break;
+    done;
+    local propagaterOutput="$outputDev";
+    if [ -z "$propagaterOutput" ]; then
+        propagaterOutput="$outputFirst";
+    fi;
+    if [ -z "${propagatedBuildOutputs+1}" ]; then
+        local po_dirty="$outputBin $outputInclude $outputLib";
+        set +o pipefail;
+        propagatedBuildOutputs=`echo "$po_dirty"             | tr -s ' ' '\n' | grep -v -F "$propagaterOutput"             | sort -u | tr '\n' ' ' `;
+        set -o pipefail;
+    fi;
+    if [ -z "$propagatedBuildOutputs" ]; then
+        return;
+    fi;
+    mkdir -p "${!propagaterOutput}"/nix-support;
+    for output in $propagatedBuildOutputs;
+    do
+        echo -n " ${!output}" >> "${!propagaterOutput}"/nix-support/propagated-build-inputs;
+    done
+}
+_updateSourceDateEpochFromSourceRoot ()
+{
+ 
+    if [ -n "$sourceRoot" ]; then
+        updateSourceDateEpoch "$sourceRoot";
+    fi
+}
+fixLibtool ()
+{
+ 
+    local search_path;
+    for flag in $NIX_LDFLAGS;
+    do
+        case $flag in 
+            -L*)
+                search_path+=" ${flag#-L}"
+            ;;
+        esac;
+    done;
+    sed -i "$1" -e "s^eval \(sys_lib_search_path=\).*^\1'${search_path:-}'^" -e 's^eval sys_lib_.+search_path=.*^^'
+}
+getTargetRoleWrapper ()
+{
+ 
+    case $targetOffset in 
+        -1)
+            export NIX_PKG_CONFIG_WRAPPER_TARGET_BUILD_x86_64_unknown_linux_gnu=1
+        ;;
+        0)
+            export NIX_PKG_CONFIG_WRAPPER_TARGET_HOST_x86_64_unknown_linux_gnu=1
+        ;;
+        1)
+            export NIX_PKG_CONFIG_WRAPPER_TARGET_TARGET_x86_64_unknown_linux_gnu=1
+        ;;
+        *)
+            echo "pkg-config-role-hook: used as improper sort of dependency" 1>&2;
+            return 1
+        ;;
+    esac
+}
+installCheckPhase ()
+{
+ 
+    runHook preInstallCheck;
+    if [[ -z "${foundMakefile:-}" ]]; then
+        echo "no Makefile or custom installCheckPhase, doing nothing";
+    else
+        if [[ -z "${installCheckTarget:-}" ]] && ! make -n ${makefile:+-f $makefile} "${installCheckTarget:-installcheck}" > /dev/null 2>&1; then
+            echo "no installcheck target in ${makefile:-Makefile}, doing nothing";
+        else
+            local flagsArray=(${enableParallelChecking:+-j${NIX_BUILD_CORES}} SHELL="$SHELL");
+            concatTo flagsArray makeFlags makeFlagsArray installCheckFlags installCheckFlagsArray installCheckTarget=installcheck;
+            echoCmd 'installcheck flags' "${flagsArray[@]}";
+            make ${makefile:+-f $makefile} "${flagsArray[@]}";
+            unset flagsArray;
+        fi;
+    fi;
+    runHook postInstallCheck
+}
+nixTalkativeLog ()
+{
+ 
+    _nixLogWithLevel 4 "$*"
+}
+patchPhase ()
+{
+ 
+    runHook prePatch;
+    local -a patchesArray;
+    concatTo patchesArray patches;
+    local -a flagsArray;
+    concatTo flagsArray patchFlags=-p1;
+    for i in "${patchesArray[@]}";
+    do
+        echo "applying patch $i";
+        local uncompress=cat;
+        case "$i" in 
+            *.gz)
+                uncompress="gzip -d"
+            ;;
+            *.bz2)
+                uncompress="bzip2 -d"
+            ;;
+            *.xz)
+                uncompress="xz -d"
+            ;;
+            *.lzma)
+                uncompress="lzma -d"
+            ;;
+        esac;
+        $uncompress < "$i" 2>&1 | patch "${flagsArray[@]}";
+    done;
+    runHook postPatch
 }
 patchShebangs ()
 {
@@ -1327,310 +1552,50 @@ patchShebangs ()
         fi;
     done < <(find "$@" -type f -perm -0100 -print0)
 }
-consumeEntire ()
+_multioutDocs ()
 {
  
-    if IFS='' read -r -d '' "$1"; then
-        echo "consumeEntire(): ERROR: Input null bytes, won't process" 1>&2;
-        return 1;
-    fi
+    local REMOVE=REMOVE;
+    moveToOutput share/info "${!outputInfo}";
+    moveToOutput share/doc "${!outputDoc}";
+    moveToOutput share/gtk-doc "${!outputDevdoc}";
+    moveToOutput share/devhelp/books "${!outputDevdoc}";
+    moveToOutput share/man "${!outputMan}";
+    moveToOutput share/man/man3 "${!outputDevman}"
 }
-_multioutPropagateDev ()
+_addToEnv ()
 {
  
-    if [ "$(getAllOutputNames)" = "out" ]; then
-        return;
-    fi;
-    local outputFirst;
-    for outputFirst in $(getAllOutputNames);
+    local depHostOffset depTargetOffset;
+    local pkg;
+    for depHostOffset in "${allPlatOffsets[@]}";
     do
-        break;
-    done;
-    local propagaterOutput="$outputDev";
-    if [ -z "$propagaterOutput" ]; then
-        propagaterOutput="$outputFirst";
-    fi;
-    if [ -z "${propagatedBuildOutputs+1}" ]; then
-        local po_dirty="$outputBin $outputInclude $outputLib";
-        set +o pipefail;
-        propagatedBuildOutputs=`echo "$po_dirty"             | tr -s ' ' '\n' | grep -v -F "$propagaterOutput"             | sort -u | tr '\n' ' ' `;
-        set -o pipefail;
-    fi;
-    if [ -z "$propagatedBuildOutputs" ]; then
-        return;
-    fi;
-    mkdir -p "${!propagaterOutput}"/nix-support;
-    for output in $propagatedBuildOutputs;
-    do
-        echo -n " ${!output}" >> "${!propagaterOutput}"/nix-support/propagated-build-inputs;
-    done
-}
-exitHandler ()
-{
- 
-    exitCode="$?";
-    set +e;
-    if [ -n "${showBuildStats:-}" ]; then
-        read -r -d '' -a buildTimes < <(times);
-        echo "build times:";
-        echo "user time for the shell             ${buildTimes[0]}";
-        echo "system time for the shell           ${buildTimes[1]}";
-        echo "user time for all child processes   ${buildTimes[2]}";
-        echo "system time for all child processes ${buildTimes[3]}";
-    fi;
-    if (( "$exitCode" != 0 )); then
-        runHook failureHook;
-        if [ -n "${succeedOnFailure:-}" ]; then
-            echo "build failed with exit code $exitCode (ignored)";
-            mkdir -p "$out/nix-support";
-            printf "%s" "$exitCode" > "$out/nix-support/failed";
-            exit 0;
-        fi;
-    else
-        runHook exitHook;
-    fi;
-    return "$exitCode"
-}
-substituteInPlace ()
-{
- 
-    local -a fileNames=();
-    for arg in "$@";
-    do
-        if [[ "$arg" = "--"* ]]; then
-            break;
-        fi;
-        fileNames+=("$arg");
-        shift;
-    done;
-    if ! [[ "${#fileNames[@]}" -gt 0 ]]; then
-        echo "substituteInPlace called without any files to operate on (files must come before options!)" 1>&2;
-        return 1;
-    fi;
-    for file in "${fileNames[@]}";
-    do
-        substitute "$file" "$file" "$@";
-    done
-}
-getAllOutputNames ()
-{
- 
-    if [ -n "$__structuredAttrs" ]; then
-        echo "${!outputs[*]}";
-    else
-        echo "$outputs";
-    fi
-}
-_moveSbin ()
-{
- 
-    if [ "${dontMoveSbin-}" = 1 ]; then
-        return;
-    fi;
-    if [ ! -e "$prefix/sbin" -o -L "$prefix/sbin" ]; then
-        return;
-    fi;
-    echo "moving $prefix/sbin/* to $prefix/bin";
-    mkdir -p $prefix/bin;
-    shopt -s dotglob;
-    for i in $prefix/sbin/*;
-    do
-        mv "$i" $prefix/bin;
-    done;
-    shopt -u dotglob;
-    rmdir $prefix/sbin;
-    ln -s bin $prefix/sbin
-}
-definePhases ()
-{
- 
-    if [ -z "${phases[*]:-}" ]; then
-        phases="${prePhases[*]:-} unpackPhase patchPhase ${preConfigurePhases[*]:-}             configurePhase ${preBuildPhases[*]:-} buildPhase checkPhase             ${preInstallPhases[*]:-} installPhase ${preFixupPhases[*]:-} fixupPhase installCheckPhase             ${preDistPhases[*]:-} distPhase ${postPhases[*]:-}";
-    fi
-}
-nixWarnLog ()
-{
- 
-    _nixLogWithLevel 1 "$*"
-}
-_multioutConfig ()
-{
- 
-    if [ "$(getAllOutputNames)" = "out" ] || [ -z "${setOutputFlags-1}" ]; then
-        return;
-    fi;
-    if [ -z "${shareDocName:-}" ]; then
-        local confScript="${configureScript:-}";
-        if [ -z "$confScript" ] && [ -x ./configure ]; then
-            confScript=./configure;
-        fi;
-        if [ -f "$confScript" ]; then
-            local shareDocName="$(sed -n "s/^PACKAGE_TARNAME='\(.*\)'$/\1/p" < "$confScript")";
-        fi;
-        if [ -z "$shareDocName" ] || echo "$shareDocName" | grep -q '[^a-zA-Z0-9_-]'; then
-            shareDocName="$(echo "$name" | sed 's/-[^a-zA-Z].*//')";
-        fi;
-    fi;
-    prependToVar configureFlags --bindir="${!outputBin}"/bin --sbindir="${!outputBin}"/sbin --includedir="${!outputInclude}"/include --mandir="${!outputMan}"/share/man --infodir="${!outputInfo}"/share/info --docdir="${!outputDoc}"/share/doc/"${shareDocName}" --libdir="${!outputLib}"/lib --libexecdir="${!outputLib}"/libexec --localedir="${!outputLib}"/share/locale;
-    prependToVar installFlags pkgconfigdir="${!outputDev}"/lib/pkgconfig m4datadir="${!outputDev}"/share/aclocal aclocaldir="${!outputDev}"/share/aclocal
-}
-getHostRole ()
-{
- 
-    getRole "$hostOffset"
-}
-stripHash ()
-{
- 
-    local strippedName casematchOpt=0;
-    strippedName="$(basename -- "$1")";
-    shopt -q nocasematch && casematchOpt=1;
-    shopt -u nocasematch;
-    if [[ "$strippedName" =~ ^[a-z0-9]{32}- ]]; then
-        echo "${strippedName:33}";
-    else
-        echo "$strippedName";
-    fi;
-    if (( casematchOpt )); then
-        shopt -s nocasematch;
-    fi
-}
-substitute ()
-{
- 
-    local input="$1";
-    local output="$2";
-    shift 2;
-    if [ ! -f "$input" ]; then
-        echo "substitute(): ERROR: file '$input' does not exist" 1>&2;
-        return 1;
-    fi;
-    local content;
-    consumeEntire content < "$input";
-    if [ -e "$output" ]; then
-        chmod +w "$output";
-    fi;
-    substituteStream content "file '$input'" "$@" > "$output"
-}
-_logHook ()
-{
- 
-    if [[ -z ${NIX_LOG_FD-} ]]; then
-        return;
-    fi;
-    local hookKind="$1";
-    local hookExpr="$2";
-    shift 2;
-    if declare -F "$hookExpr" > /dev/null 2>&1; then
-        nixTalkativeLog "calling '$hookKind' function hook '$hookExpr'" "$@";
-    else
-        if type -p "$hookExpr" > /dev/null; then
-            nixTalkativeLog "sourcing '$hookKind' script hook '$hookExpr'";
-        else
-            if [[ "$hookExpr" != "_callImplicitHook"* ]]; then
-                local exprToOutput;
-                if [[ ${NIX_DEBUG:-0} -ge 5 ]]; then
-                    exprToOutput="$hookExpr";
-                else
-                    local hookExprLine;
-                    while IFS= read -r hookExprLine; do
-                        hookExprLine="${hookExprLine#"${hookExprLine%%[![:space:]]*}"}";
-                        if [[ -n "$hookExprLine" ]]; then
-                            exprToOutput+="$hookExprLine\\n ";
-                        fi;
-                    done <<< "$hookExpr";
-                    exprToOutput="${exprToOutput%%\\n }";
-                fi;
-                nixTalkativeLog "evaling '$hookKind' string hook '$exprToOutput'";
+        local hookVar="${pkgHookVarVars[depHostOffset + 1]}";
+        local pkgsVar="${pkgAccumVarVars[depHostOffset + 1]}";
+        for depTargetOffset in "${allPlatOffsets[@]}";
+        do
+            (( depHostOffset <= depTargetOffset )) || continue;
+            local hookRef="${hookVar}[$depTargetOffset - $depHostOffset]";
+            if [[ -z "${strictDeps-}" ]]; then
+                local visitedPkgs="";
+                for pkg in "${pkgsBuildBuild[@]}" "${pkgsBuildHost[@]}" "${pkgsBuildTarget[@]}" "${pkgsHostHost[@]}" "${pkgsHostTarget[@]}" "${pkgsTargetTarget[@]}";
+                do
+                    if [[ "$visitedPkgs" = *"$pkg"* ]]; then
+                        continue;
+                    fi;
+                    runHook "${!hookRef}" "$pkg";
+                    visitedPkgs+=" $pkg";
+                done;
+            else
+                local pkgsRef="${pkgsVar}[$depTargetOffset - $depHostOffset]";
+                local pkgsSlice="${!pkgsRef}[@]";
+                for pkg in ${!pkgsSlice+"${!pkgsSlice}"};
+                do
+                    runHook "${!hookRef}" "$pkg";
+                done;
             fi;
-        fi;
-    fi
-}
-patchPhase ()
-{
- 
-    runHook prePatch;
-    local -a patchesArray;
-    concatTo patchesArray patches;
-    local -a flagsArray;
-    concatTo flagsArray patchFlags=-p1;
-    for i in "${patchesArray[@]}";
-    do
-        echo "applying patch $i";
-        local uncompress=cat;
-        case "$i" in 
-            *.gz)
-                uncompress="gzip -d"
-            ;;
-            *.bz2)
-                uncompress="bzip2 -d"
-            ;;
-            *.xz)
-                uncompress="xz -d"
-            ;;
-            *.lzma)
-                uncompress="lzma -d"
-            ;;
-        esac;
-        $uncompress < "$i" 2>&1 | patch "${flagsArray[@]}";
-    done;
-    runHook postPatch
-}
-distPhase ()
-{
- 
-    runHook preDist;
-    local flagsArray=();
-    concatTo flagsArray distFlags distFlagsArray distTarget=dist;
-    echo 'dist flags: %q' "${flagsArray[@]}";
-    make ${makefile:+-f $makefile} "${flagsArray[@]}";
-    if [ "${dontCopyDist:-0}" != 1 ]; then
-        mkdir -p "$out/tarballs";
-        cp -pvd ${tarballs[*]:-*.tar.gz} "$out/tarballs";
-    fi;
-    runHook postDist
-}
-getTargetRoleEnvHook ()
-{
- 
-    getRole "$depTargetOffset"
-}
-fixLibtool ()
-{
- 
-    local search_path;
-    for flag in $NIX_LDFLAGS;
-    do
-        case $flag in 
-            -L*)
-                search_path+=" ${flag#-L}"
-            ;;
-        esac;
-    done;
-    sed -i "$1" -e "s^eval \(sys_lib_search_path=\).*^\1'${search_path:-}'^" -e 's^eval sys_lib_.+search_path=.*^^'
-}
-substituteAllInPlace ()
-{
- 
-    local fileName="$1";
-    shift;
-    substituteAll "$fileName" "$fileName" "$@"
-}
-nixInfoLog ()
-{
- 
-    _nixLogWithLevel 3 "$*"
-}
-printLines ()
-{
- 
-    (( "$#" > 0 )) || return 0;
-    printf '%s\n' "$@"
-}
-nixChattyLog ()
-{
- 
-    _nixLogWithLevel 5 "$*"
+        done;
+    done
 }
 _pruneLibtoolFiles ()
 {
@@ -1640,47 +1605,25 @@ _pruneLibtoolFiles ()
     fi;
     find "$prefix" -type f -name '*.la' -exec grep -q '^# Generated by .*libtool' {} \; -exec grep -q "^old_library=''" {} \; -exec sed -i {} -e "/^dependency_libs='[^']/ c dependency_libs='' #pruned" \;
 }
-compressManPages ()
+_moveLib64 ()
 {
  
-    local dir="$1";
-    if [ -L "$dir"/share ] || [ -L "$dir"/share/man ] || [ ! -d "$dir/share/man" ]; then
+    if [ "${dontMoveLib64-}" = 1 ]; then
         return;
     fi;
-    echo "gzipping man pages under $dir/share/man/";
-    find "$dir"/share/man/ -type f -a '!' -regex '.*\.\(bz2\|gz\|xz\)$' -print0 | xargs -0 -n1 -P "$NIX_BUILD_CORES" gzip -n -f;
-    find "$dir"/share/man/ -type l -a '!' -regex '.*\.\(bz2\|gz\|xz\)$' -print0 | sort -z | while IFS= read -r -d '' f; do
-        local target;
-        target="$(readlink -f "$f")";
-        if [ -f "$target".gz ]; then
-            ln -sf "$target".gz "$f".gz && rm "$f";
-        fi;
-    done
-}
-activatePackage ()
-{
- 
-    local pkg="$1";
-    local -r hostOffset="$2";
-    local -r targetOffset="$3";
-    (( hostOffset <= targetOffset )) || exit 1;
-    if [ -f "$pkg" ]; then
-        nixTalkativeLog "sourcing setup hook '$pkg'";
-        source "$pkg";
+    if [ ! -e "$prefix/lib64" -o -L "$prefix/lib64" ]; then
+        return;
     fi;
-    if [[ -z "${strictDeps-}" || "$hostOffset" -le -1 ]]; then
-        addToSearchPath _PATH "$pkg/bin";
-    fi;
-    if (( hostOffset <= -1 )); then
-        addToSearchPath _XDG_DATA_DIRS "$pkg/share";
-    fi;
-    if [[ "$hostOffset" -eq 0 && -d "$pkg/bin" ]]; then
-        addToSearchPath _HOST_PATH "$pkg/bin";
-    fi;
-    if [[ -f "$pkg/nix-support/setup-hook" ]]; then
-        nixTalkativeLog "sourcing setup hook '$pkg/nix-support/setup-hook'";
-        source "$pkg/nix-support/setup-hook";
-    fi
+    echo "moving $prefix/lib64/* to $prefix/lib";
+    mkdir -p $prefix/lib;
+    shopt -s dotglob;
+    for i in $prefix/lib64/*;
+    do
+        mv --no-clobber "$i" $prefix/lib;
+    done;
+    shopt -u dotglob;
+    rmdir $prefix/lib64;
+    ln -s lib $prefix/lib64
 }
 checkPhase ()
 {
@@ -1711,212 +1654,72 @@ checkPhase ()
     fi;
     runHook postCheck
 }
-recordPropagatedDependencies ()
+_addRpathPrefix ()
 {
  
-    declare -ra flatVars=(depsBuildBuildPropagated propagatedNativeBuildInputs depsBuildTargetPropagated depsHostHostPropagated propagatedBuildInputs depsTargetTargetPropagated);
-    declare -ra flatFiles=("${propagatedBuildDepFiles[@]}" "${propagatedHostDepFiles[@]}" "${propagatedTargetDepFiles[@]}");
-    local propagatedInputsIndex;
-    for propagatedInputsIndex in "${!flatVars[@]}";
-    do
-        local propagatedInputsSlice="${flatVars[$propagatedInputsIndex]}[@]";
-        local propagatedInputsFile="${flatFiles[$propagatedInputsIndex]}";
-        [[ -n "${!propagatedInputsSlice}" ]] || continue;
-        mkdir -p "${!outputDev}/nix-support";
-        printWords ${!propagatedInputsSlice} > "${!outputDev}/nix-support/$propagatedInputsFile";
-    done
-}
-_eval ()
-{
- 
-    if declare -F "$1" > /dev/null 2>&1; then
-        "$@";
-    else
-        eval "$1";
+    if [ "${NIX_NO_SELF_RPATH:-0}" != 1 ]; then
+        export NIX_LDFLAGS="-rpath $1/lib ${NIX_LDFLAGS-}";
     fi
 }
-_activatePkgs ()
+findInputs ()
 {
  
-    local hostOffset targetOffset;
-    local pkg;
-    for hostOffset in "${allPlatOffsets[@]}";
+    local -r pkg="$1";
+    local -r hostOffset="$2";
+    local -r targetOffset="$3";
+    (( hostOffset <= targetOffset )) || exit 1;
+    local varVar="${pkgAccumVarVars[hostOffset + 1]}";
+    local varRef="$varVar[$((targetOffset - hostOffset))]";
+    local var="${!varRef}";
+    unset -v varVar varRef;
+    local varSlice="$var[*]";
+    case " ${!varSlice-} " in 
+        *" $pkg "*)
+            return 0
+        ;;
+    esac;
+    unset -v varSlice;
+    eval "$var"'+=("$pkg")';
+    if ! [ -e "$pkg" ]; then
+        echo "build input $pkg does not exist" 1>&2;
+        exit 1;
+    fi;
+    function mapOffset () 
+    { 
+        local -r inputOffset="$1";
+        local -n outputOffset="$2";
+        if (( inputOffset <= 0 )); then
+            outputOffset=$((inputOffset + hostOffset));
+        else
+            outputOffset=$((inputOffset - 1 + targetOffset));
+        fi
+    };
+    local relHostOffset;
+    for relHostOffset in "${allPlatOffsets[@]}";
     do
-        local pkgsVar="${pkgAccumVarVars[hostOffset + 1]}";
-        for targetOffset in "${allPlatOffsets[@]}";
+        local files="${propagatedDepFilesVars[relHostOffset + 1]}";
+        local hostOffsetNext;
+        mapOffset "$relHostOffset" hostOffsetNext;
+        (( -1 <= hostOffsetNext && hostOffsetNext <= 1 )) || continue;
+        local relTargetOffset;
+        for relTargetOffset in "${allPlatOffsets[@]}";
         do
-            (( hostOffset <= targetOffset )) || continue;
-            local pkgsRef="${pkgsVar}[$targetOffset - $hostOffset]";
-            local pkgsSlice="${!pkgsRef}[@]";
-            for pkg in ${!pkgsSlice+"${!pkgsSlice}"};
+            (( "$relHostOffset" <= "$relTargetOffset" )) || continue;
+            local fileRef="${files}[$relTargetOffset - $relHostOffset]";
+            local file="${!fileRef}";
+            unset -v fileRef;
+            local targetOffsetNext;
+            mapOffset "$relTargetOffset" targetOffsetNext;
+            (( -1 <= hostOffsetNext && hostOffsetNext <= 1 )) || continue;
+            [[ -f "$pkg/nix-support/$file" ]] || continue;
+            local pkgNext;
+            read -r -d '' pkgNext < "$pkg/nix-support/$file" || true;
+            for pkgNext in $pkgNext;
             do
-                activatePackage "$pkg" "$hostOffset" "$targetOffset";
+                findInputs "$pkgNext" "$hostOffsetNext" "$targetOffsetNext";
             done;
         done;
     done
-}
-installCheckPhase ()
-{
- 
-    runHook preInstallCheck;
-    if [[ -z "${foundMakefile:-}" ]]; then
-        echo "no Makefile or custom installCheckPhase, doing nothing";
-    else
-        if [[ -z "${installCheckTarget:-}" ]] && ! make -n ${makefile:+-f $makefile} "${installCheckTarget:-installcheck}" > /dev/null 2>&1; then
-            echo "no installcheck target in ${makefile:-Makefile}, doing nothing";
-        else
-            local flagsArray=(${enableParallelChecking:+-j${NIX_BUILD_CORES}} SHELL="$SHELL");
-            concatTo flagsArray makeFlags makeFlagsArray installCheckFlags installCheckFlagsArray installCheckTarget=installcheck;
-            echoCmd 'installcheck flags' "${flagsArray[@]}";
-            make ${makefile:+-f $makefile} "${flagsArray[@]}";
-            unset flagsArray;
-        fi;
-    fi;
-    runHook postInstallCheck
-}
-_moveToShare ()
-{
- 
-    if [ -n "$__structuredAttrs" ]; then
-        if [ -z "${forceShare-}" ]; then
-            forceShare=(man doc info);
-        fi;
-    else
-        forceShare=(${forceShare:-man doc info});
-    fi;
-    if [[ -z "$out" ]]; then
-        return;
-    fi;
-    for d in "${forceShare[@]}";
-    do
-        if [ -d "$out/$d" ]; then
-            if [ -d "$out/share/$d" ]; then
-                echo "both $d/ and share/$d/ exist!";
-            else
-                echo "moving $out/$d to $out/share/$d";
-                mkdir -p $out/share;
-                mv $out/$d $out/share/;
-            fi;
-        fi;
-    done
-}
-noBrokenSymlinksInAllOutputs ()
-{
- 
-    if [[ -z ${dontCheckForBrokenSymlinks-} ]]; then
-        for output in $(getAllOutputNames);
-        do
-            noBrokenSymlinks "${!output}";
-        done;
-    fi
-}
-addToSearchPathWithCustomDelimiter ()
-{
- 
-    local delimiter="$1";
-    local varName="$2";
-    local dir="$3";
-    if [[ -d "$dir" && "${!varName:+${delimiter}${!varName}${delimiter}}" != *"${delimiter}${dir}${delimiter}"* ]]; then
-        export "${varName}=${!varName:+${!varName}${delimiter}}${dir}";
-    fi
-}
-bintoolsWrapper_addLDVars ()
-{
- 
-    local role_post;
-    getHostRoleEnvHook;
-    if [[ -d "$1/lib64" && ! -L "$1/lib64" ]]; then
-        export NIX_LDFLAGS${role_post}+=" -L$1/lib64";
-    fi;
-    if [[ -d "$1/lib" ]]; then
-        local -a glob=($1/lib/lib*);
-        if [ "${#glob[*]}" -gt 0 ]; then
-            export NIX_LDFLAGS${role_post}+=" -L$1/lib";
-        fi;
-    fi
-}
-prependToVar ()
-{
- 
-    local -n nameref="$1";
-    local useArray type;
-    if [ -n "$__structuredAttrs" ]; then
-        useArray=true;
-    else
-        useArray=false;
-    fi;
-    if type=$(declare -p "$1" 2> /dev/null); then
-        case "${type#* }" in 
-            -A*)
-                echo "prependToVar(): ERROR: trying to use prependToVar on an associative array." 1>&2;
-                return 1
-            ;;
-            -a*)
-                useArray=true
-            ;;
-            *)
-                useArray=false
-            ;;
-        esac;
-    fi;
-    shift;
-    if $useArray; then
-        nameref=("$@" ${nameref+"${nameref[@]}"});
-    else
-        nameref="$* ${nameref-}";
-    fi
-}
-mapOffset ()
-{
- 
-    local -r inputOffset="$1";
-    local -n outputOffset="$2";
-    if (( inputOffset <= 0 )); then
-        outputOffset=$((inputOffset + hostOffset));
-    else
-        outputOffset=$((inputOffset - 1 + targetOffset));
-    fi
-}
-showPhaseHeader ()
-{
- 
-    local phase="$1";
-    echo "Running phase: $phase";
-    if [[ -z ${NIX_LOG_FD-} ]]; then
-        return;
-    fi;
-    printf "@nix { \"action\": \"setPhase\", \"phase\": \"%s\" }\n" "$phase" >&"$NIX_LOG_FD"
-}
-appendToVar ()
-{
- 
-    local -n nameref="$1";
-    local useArray type;
-    if [ -n "$__structuredAttrs" ]; then
-        useArray=true;
-    else
-        useArray=false;
-    fi;
-    if type=$(declare -p "$1" 2> /dev/null); then
-        case "${type#* }" in 
-            -A*)
-                echo "appendToVar(): ERROR: trying to use appendToVar on an associative array, use variable+=([\"X\"]=\"Y\") instead." 1>&2;
-                return 1
-            ;;
-            -a*)
-                useArray=true
-            ;;
-            *)
-                useArray=false
-            ;;
-        esac;
-    fi;
-    shift;
-    if $useArray; then
-        nameref=(${nameref+"${nameref[@]}"} "$@");
-    else
-        nameref="${nameref-} $*";
-    fi
 }
 fixupPhase ()
 {
@@ -1956,6 +1759,383 @@ fixupPhase ()
         printWords "${propagatedUserEnvPkgs[@]}" > "${!outputBin}/nix-support/propagated-user-env-packages";
     fi;
     runHook postFixup
+}
+nixWarnLog ()
+{
+ 
+    _nixLogWithLevel 1 "$*"
+}
+noBrokenSymlinksInAllOutputs ()
+{
+ 
+    if [[ -z ${dontCheckForBrokenSymlinks-} ]]; then
+        for output in $(getAllOutputNames);
+        do
+            noBrokenSymlinks "${!output}";
+        done;
+    fi
+}
+nixErrorLog ()
+{
+ 
+    _nixLogWithLevel 0 "$*"
+}
+runPhase ()
+{
+ 
+    local curPhase="$*";
+    if [[ "$curPhase" = unpackPhase && -n "${dontUnpack:-}" ]]; then
+        return;
+    fi;
+    if [[ "$curPhase" = patchPhase && -n "${dontPatch:-}" ]]; then
+        return;
+    fi;
+    if [[ "$curPhase" = configurePhase && -n "${dontConfigure:-}" ]]; then
+        return;
+    fi;
+    if [[ "$curPhase" = buildPhase && -n "${dontBuild:-}" ]]; then
+        return;
+    fi;
+    if [[ "$curPhase" = checkPhase && -z "${doCheck:-}" ]]; then
+        return;
+    fi;
+    if [[ "$curPhase" = installPhase && -n "${dontInstall:-}" ]]; then
+        return;
+    fi;
+    if [[ "$curPhase" = fixupPhase && -n "${dontFixup:-}" ]]; then
+        return;
+    fi;
+    if [[ "$curPhase" = installCheckPhase && -z "${doInstallCheck:-}" ]]; then
+        return;
+    fi;
+    if [[ "$curPhase" = distPhase && -z "${doDist:-}" ]]; then
+        return;
+    fi;
+    showPhaseHeader "$curPhase";
+    dumpVars;
+    local startTime endTime;
+    startTime=$(date +"%s");
+    eval "${!curPhase:-$curPhase}";
+    endTime=$(date +"%s");
+    showPhaseFooter "$curPhase" "$startTime" "$endTime";
+    if [ "$curPhase" = unpackPhase ]; then
+        [ -n "${sourceRoot:-}" ] && chmod +x -- "${sourceRoot}";
+        cd -- "${sourceRoot:-.}";
+    fi
+}
+showPhaseFooter ()
+{
+ 
+    local phase="$1";
+    local startTime="$2";
+    local endTime="$3";
+    local delta=$(( endTime - startTime ));
+    (( delta < 30 )) && return;
+    local H=$((delta/3600));
+    local M=$((delta%3600/60));
+    local S=$((delta%60));
+    echo -n "$phase completed in ";
+    (( H > 0 )) && echo -n "$H hours ";
+    (( M > 0 )) && echo -n "$M minutes ";
+    echo "$S seconds"
+}
+unpackFile ()
+{
+ 
+    curSrc="$1";
+    echo "unpacking source archive $curSrc";
+    if ! runOneHook unpackCmd "$curSrc"; then
+        echo "do not know how to unpack source archive $curSrc";
+        exit 1;
+    fi
+}
+exitHandler ()
+{
+ 
+    exitCode="$?";
+    set +e;
+    if [ -n "${showBuildStats:-}" ]; then
+        read -r -d '' -a buildTimes < <(times);
+        echo "build times:";
+        echo "user time for the shell             ${buildTimes[0]}";
+        echo "system time for the shell           ${buildTimes[1]}";
+        echo "user time for all child processes   ${buildTimes[2]}";
+        echo "system time for all child processes ${buildTimes[3]}";
+    fi;
+    if (( "$exitCode" != 0 )); then
+        runHook failureHook;
+        if [ -n "${succeedOnFailure:-}" ]; then
+            echo "build failed with exit code $exitCode (ignored)";
+            mkdir -p "$out/nix-support";
+            printf "%s" "$exitCode" > "$out/nix-support/failed";
+            exit 0;
+        fi;
+    else
+        runHook exitHook;
+    fi;
+    return "$exitCode"
+}
+_doStrip ()
+{
+ 
+    local -ra flags=(dontStripHost dontStripTarget);
+    local -ra debugDirs=(stripDebugList stripDebugListTarget);
+    local -ra allDirs=(stripAllList stripAllListTarget);
+    local -ra stripCmds=(STRIP STRIP_FOR_TARGET);
+    local -ra ranlibCmds=(RANLIB RANLIB_FOR_TARGET);
+    stripDebugList=${stripDebugList[*]:-lib lib32 lib64 libexec bin sbin Applications Library/Frameworks};
+    stripDebugListTarget=${stripDebugListTarget[*]:-};
+    stripAllList=${stripAllList[*]:-};
+    stripAllListTarget=${stripAllListTarget[*]:-};
+    local i;
+    for i in ${!stripCmds[@]};
+    do
+        local -n flag="${flags[$i]}";
+        local -n debugDirList="${debugDirs[$i]}";
+        local -n allDirList="${allDirs[$i]}";
+        local -n stripCmd="${stripCmds[$i]}";
+        local -n ranlibCmd="${ranlibCmds[$i]}";
+        if [[ -n "${dontStrip-}" || -n "${flag-}" ]] || ! type -f "${stripCmd-}" 2> /dev/null 1>&2; then
+            continue;
+        fi;
+        stripDirs "$stripCmd" "$ranlibCmd" "$debugDirList" "${stripDebugFlags[*]:--S -p}";
+        stripDirs "$stripCmd" "$ranlibCmd" "$allDirList" "${stripAllFlags[*]:--s -p}";
+    done
+}
+printLines ()
+{
+ 
+    (( "$#" > 0 )) || return 0;
+    printf '%s\n' "$@"
+}
+updateSourceDateEpoch ()
+{
+ 
+    local path="$1";
+    [[ $path == -* ]] && path="./$path";
+    local -a res=($(find "$path" -type f -not -newer "$NIX_BUILD_TOP/.." -printf '%T@ "%p"\0' | sort -n --zero-terminated | tail -n1 --zero-terminated | head -c -1));
+    local time="${res[0]//\.[0-9]*/}";
+    local newestFile="${res[1]}";
+    if [ "${time:-0}" -gt "$SOURCE_DATE_EPOCH" ]; then
+        echo "setting SOURCE_DATE_EPOCH to timestamp $time of file $newestFile";
+        export SOURCE_DATE_EPOCH="$time";
+        local now="$(date +%s)";
+        if [ "$time" -gt $((now - 60)) ]; then
+            echo "warning: file $newestFile may be generated; SOURCE_DATE_EPOCH may be non-deterministic";
+        fi;
+    fi
+}
+runOneHook ()
+{
+ 
+    local hookName="$1";
+    shift;
+    local hooksSlice="${hookName%Hook}Hooks[@]";
+    local hook ret=1;
+    for hook in "_callImplicitHook 1 $hookName" ${!hooksSlice+"${!hooksSlice}"};
+    do
+        _logHook "$hookName" "$hook" "$@";
+        if _eval "$hook" "$@"; then
+            ret=0;
+            break;
+        fi;
+    done;
+    return "$ret"
+}
+compressManPages ()
+{
+ 
+    local dir="$1";
+    if [ -L "$dir"/share ] || [ -L "$dir"/share/man ] || [ ! -d "$dir/share/man" ]; then
+        return;
+    fi;
+    echo "gzipping man pages under $dir/share/man/";
+    find "$dir"/share/man/ -type f -a '!' -regex '.*\.\(bz2\|gz\|xz\)$' -print0 | xargs -0 -n1 -P "$NIX_BUILD_CORES" gzip -n -f;
+    find "$dir"/share/man/ -type l -a '!' -regex '.*\.\(bz2\|gz\|xz\)$' -print0 | sort -z | while IFS= read -r -d '' f; do
+        local target;
+        target="$(readlink -f "$f")";
+        if [ -f "$target".gz ]; then
+            ln -sf "$target".gz "$f".gz && rm "$f";
+        fi;
+    done
+}
+unpackPhase ()
+{
+ 
+    runHook preUnpack;
+    if [ -z "${srcs:-}" ]; then
+        if [ -z "${src:-}" ]; then
+            echo 'variable $src or $srcs should point to the source';
+            exit 1;
+        fi;
+        srcs="$src";
+    fi;
+    local -a srcsArray;
+    concatTo srcsArray srcs;
+    local dirsBefore="";
+    for i in *;
+    do
+        if [ -d "$i" ]; then
+            dirsBefore="$dirsBefore $i ";
+        fi;
+    done;
+    for i in "${srcsArray[@]}";
+    do
+        unpackFile "$i";
+    done;
+    : "${sourceRoot=}";
+    if [ -n "${setSourceRoot:-}" ]; then
+        runOneHook setSourceRoot;
+    else
+        if [ -z "$sourceRoot" ]; then
+            for i in *;
+            do
+                if [ -d "$i" ]; then
+                    case $dirsBefore in 
+                        *\ $i\ *)
+
+                        ;;
+                        *)
+                            if [ -n "$sourceRoot" ]; then
+                                echo "unpacker produced multiple directories";
+                                exit 1;
+                            fi;
+                            sourceRoot="$i"
+                        ;;
+                    esac;
+                fi;
+            done;
+        fi;
+    fi;
+    if [ -z "$sourceRoot" ]; then
+        echo "unpacker appears to have produced no directories";
+        exit 1;
+    fi;
+    echo "source root is $sourceRoot";
+    if [ "${dontMakeSourcesWritable:-0}" != 1 ]; then
+        chmod -R u+w -- "$sourceRoot";
+    fi;
+    runHook postUnpack
+}
+printPhases ()
+{
+ 
+    definePhases;
+    local phase;
+    for phase in ${phases[*]};
+    do
+        printf '%s\n' "$phase";
+    done
+}
+_assignFirst ()
+{
+ 
+    local varName="$1";
+    local _var;
+    local REMOVE=REMOVE;
+    shift;
+    for _var in "$@";
+    do
+        if [ -n "${!_var-}" ]; then
+            eval "${varName}"="${_var}";
+            return;
+        fi;
+    done;
+    echo;
+    echo "error: _assignFirst: could not find a non-empty variable whose name to assign to ${varName}.";
+    echo "       The following variables were all unset or empty:";
+    echo "           $*";
+    if [ -z "${out:-}" ]; then
+        echo '       If you do not want an "out" output in your derivation, make sure to define';
+        echo '       the other specific required outputs. This can be achieved by picking one';
+        echo "       of the above as an output.";
+        echo '       You do not have to remove "out" if you want to have a different default';
+        echo '       output, because the first output is taken as a default.';
+        echo;
+    fi;
+    return 1
+}
+updateAutotoolsGnuConfigScriptsPhase ()
+{
+ 
+    if [ -n "${dontUpdateAutotoolsGnuConfigScripts-}" ]; then
+        return;
+    fi;
+    for script in config.sub config.guess;
+    do
+        for f in $(find . -type f -name "$script");
+        do
+            echo "Updating Autotools / GNU config script to a newer upstream version: $f";
+            cp -f "/nix/store/dxagrpxl8wg2z16al3ls3zaci6dvhnnn-gnu-config-2024-01-01/$script" "$f";
+        done;
+    done
+}
+consumeEntire ()
+{
+ 
+    if IFS='' read -r -d '' "$1"; then
+        echo "consumeEntire(): ERROR: Input null bytes, won't process" 1>&2;
+        return 1;
+    fi
+}
+absolutizeIcdLibraryPath ()
+{
+ 
+    local jsonFile="$1";
+    local libPath="$2";
+    if [[ -z "$jsonFile" || -z "$libPath" ]]; then
+        nixErrorLog "absolutizeIcdLibraryPath: expected <json-file> <library-prefix>";
+        return 1;
+    fi;
+    if [[ ! -f "$jsonFile" ]]; then
+        nixErrorLog "absolutizeIcdLibraryPath: JSON file not found: $jsonFile";
+        return 1;
+    fi;
+    /nix/store/xvd6920kffyyshg7mbw5wvfk6lg9wfkl-jq-1.8.2-bin/bin/jq --arg lib "$libPath" '.ICD.library_path |= $lib + .' "$jsonFile" | /nix/store/6p0w21y60l65cbfadzdck0zi78bvgfd5-moreutils-0.70/bin/sponge "$jsonFile"
+}
+_moveToShare ()
+{
+ 
+    if [ -n "$__structuredAttrs" ]; then
+        if [ -z "${forceShare-}" ]; then
+            forceShare=(man doc info);
+        fi;
+    else
+        forceShare=(${forceShare:-man doc info});
+    fi;
+    if [[ -z "$out" ]]; then
+        return;
+    fi;
+    for d in "${forceShare[@]}";
+    do
+        if [ -d "$out/$d" ]; then
+            if [ -d "$out/share/$d" ]; then
+                echo "both $d/ and share/$d/ exist!";
+            else
+                echo "moving $out/$d to $out/share/$d";
+                mkdir -p $out/share;
+                mv $out/$d $out/share/;
+            fi;
+        fi;
+    done
+}
+genericBuild ()
+{
+ 
+    export GZIP_NO_TIMESTAMPS=1;
+    if [ -f "${buildCommandPath:-}" ]; then
+        source "$buildCommandPath";
+        return;
+    fi;
+    if [ -n "${buildCommand:-}" ]; then
+        eval "$buildCommand";
+        return;
+    fi;
+    definePhases;
+    for curPhase in ${phases[*]};
+    do
+        runPhase "$curPhase";
+    done
 }
 substituteStream ()
 {
@@ -2018,91 +2198,31 @@ substituteStream ()
     done;
     printf "%s" "${!var}"
 }
-_defaultUnpack ()
+_moveSystemdUserUnits ()
 {
  
-    local fn="$1";
-    local destination;
-    if [ -d "$fn" ]; then
-        destination="$(stripHash "$fn")";
-        if [ -e "$destination" ]; then
-            echo "Cannot copy $fn to $destination: destination already exists!";
-            echo "Did you specify two \"srcs\" with the same \"name\"?";
-            return 1;
-        fi;
-        cp -r --preserve=timestamps --reflink=auto -- "$fn" "$destination";
-    else
-        case "$fn" in 
-            *.tar.xz | *.tar.lzma | *.txz)
-                ( XZ_OPT="--threads=$NIX_BUILD_CORES" xz -d < "$fn";
-                true ) | tar xf - --mode=+w --warning=no-timestamp
-            ;;
-            *.tar | *.tar.* | *.tgz | *.tbz2 | *.tbz)
-                tar xf "$fn" --mode=+w --warning=no-timestamp
-            ;;
-            *)
-                return 1
-            ;;
-        esac;
-    fi
+    if [ "${dontMoveSystemdUserUnits:-0}" = 1 ]; then
+        return;
+    fi;
+    if [ ! -e "${prefix:?}/lib/systemd/user" ]; then
+        return;
+    fi;
+    local source="$prefix/lib/systemd/user";
+    local target="$prefix/share/systemd/user";
+    echo "moving $source/* to $target";
+    mkdir -p "$target";
+    ( shopt -s dotglob;
+    for i in "$source"/*;
+    do
+        mv "$i" "$target";
+    done );
+    rmdir "$source";
+    ln -s "$target" "$source"
 }
-unpackPhase ()
+nixDebugLog ()
 {
  
-    runHook preUnpack;
-    if [ -z "${srcs:-}" ]; then
-        if [ -z "${src:-}" ]; then
-            echo 'variable $src or $srcs should point to the source';
-            exit 1;
-        fi;
-        srcs="$src";
-    fi;
-    local -a srcsArray;
-    concatTo srcsArray srcs;
-    local dirsBefore="";
-    for i in *;
-    do
-        if [ -d "$i" ]; then
-            dirsBefore="$dirsBefore $i ";
-        fi;
-    done;
-    for i in "${srcsArray[@]}";
-    do
-        unpackFile "$i";
-    done;
-    : "${sourceRoot=}";
-    if [ -n "${setSourceRoot:-}" ]; then
-        runOneHook setSourceRoot;
-    else
-        if [ -z "$sourceRoot" ]; then
-            for i in *;
-            do
-                if [ -d "$i" ]; then
-                    case $dirsBefore in 
-                        *\ $i\ *)
-
-                        ;;
-                        *)
-                            if [ -n "$sourceRoot" ]; then
-                                echo "unpacker produced multiple directories";
-                                exit 1;
-                            fi;
-                            sourceRoot="$i"
-                        ;;
-                    esac;
-                fi;
-            done;
-        fi;
-    fi;
-    if [ -z "$sourceRoot" ]; then
-        echo "unpacker appears to have produced no directories";
-        exit 1;
-    fi;
-    echo "source root is $sourceRoot";
-    if [ "${dontMakeSourcesWritable:-0}" != 1 ]; then
-        chmod -R u+w -- "$sourceRoot";
-    fi;
-    runHook postUnpack
+    _nixLogWithLevel 6 "$*"
 }
 configurePhase ()
 {
@@ -2158,103 +2278,29 @@ configurePhase ()
     fi;
     runHook postConfigure
 }
-_moveSystemdUserUnits ()
+fixupEglExternalPlatformIcdJsonHook ()
 {
  
-    if [ "${dontMoveSystemdUserUnits:-0}" = 1 ]; then
-        return;
-    fi;
-    if [ ! -e "${prefix:?}/lib/systemd/user" ]; then
-        return;
-    fi;
-    local source="$prefix/lib/systemd/user";
-    local target="$prefix/share/systemd/user";
-    echo "moving $source/* to $target";
-    mkdir -p "$target";
-    ( shopt -s dotglob;
-    for i in "$source"/*;
-    do
-        mv "$i" "$target";
-    done );
-    rmdir "$source";
-    ln -s "$target" "$source"
-}
-nixNoticeLog ()
-{
- 
-    _nixLogWithLevel 2 "$*"
-}
-_updateSourceDateEpochFromSourceRoot ()
-{
- 
-    if [ -n "$sourceRoot" ]; then
-        updateSourceDateEpoch "$sourceRoot";
-    fi
-}
-runOneHook ()
-{
- 
-    local hookName="$1";
-    shift;
-    local hooksSlice="${hookName%Hook}Hooks[@]";
-    local hook ret=1;
-    for hook in "_callImplicitHook 1 $hookName" ${!hooksSlice+"${!hooksSlice}"};
-    do
-        _logHook "$hookName" "$hook" "$@";
-        if _eval "$hook" "$@"; then
-            ret=0;
-            break;
-        fi;
-    done;
-    return "$ret"
-}
-_addRpathPrefix ()
-{
- 
-    if [ "${NIX_NO_SELF_RPATH:-0}" != 1 ]; then
-        export NIX_LDFLAGS="-rpath $1/lib ${NIX_LDFLAGS-}";
-    fi
-}
-_nixLogWithLevel ()
-{
- 
-    [[ -z ${NIX_LOG_FD-} || ${NIX_DEBUG:-0} -lt ${1:?} ]] && return 0;
-    local logLevel;
-    case "${1:?}" in 
-        0)
-            logLevel=ERROR
-        ;;
-        1)
-            logLevel=WARN
-        ;;
-        2)
-            logLevel=NOTICE
-        ;;
-        3)
-            logLevel=INFO
-        ;;
-        4)
-            logLevel=TALKATIVE
-        ;;
-        5)
-            logLevel=CHATTY
-        ;;
-        6)
-            logLevel=DEBUG
-        ;;
-        7)
-            logLevel=VOMIT
+    case "${absolutizeEglExternalPlatformIcdJson-}" in 
+        1 | true | yes)
+
         ;;
         *)
-            echo "_nixLogWithLevel: called with invalid log level: ${1:?}" >&"$NIX_LOG_FD";
-            return 1
+            return 0
         ;;
     esac;
-    local callerName="${FUNCNAME[2]}";
-    if [[ $callerName == "_callImplicitHook" ]]; then
-        callerName="${hookName:?}";
+    local jsonDir="$prefix/share/egl/egl_external_platform.d";
+    if [[ ! -d "$jsonDir" ]]; then
+        return 0;
     fi;
-    printf "%s: %s: %s\n" "$logLevel" "$callerName" "${2:?}" >&"$NIX_LOG_FD"
+    local f;
+    for f in "$jsonDir"/*.json;
+    do
+        if [[ ! -e "$f" ]]; then
+            continue;
+        fi;
+        absolutizeIcdLibraryPath "$f" "$prefix/lib/";
+    done
 }
 stripDirs ()
 {

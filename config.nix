@@ -162,6 +162,20 @@
         owner = "ty";
         mode = "0444";
       };
+      "bw_client_id" = {
+        owner = "ty";
+        mode = "0444";
+      };
+      "bw_client_secret" = {
+        owner = "ty";
+        mode = "0444";
+      };
+    };
+    templates = {
+      "bitwarden-env".content = ''
+        BW_CLIENTID="${config.sops.placeholder.bw_client_id}"
+        BW_CLIENTSECRET="${config.sops.placeholder.bw_client_secret}"
+      '';
     };
   };
   
@@ -294,6 +308,7 @@
       PROTON_ENABLE_WAYLAND = "1";
       PROTON_ENABLE_NVAPI = "1";
       ENABLE_GAMESCOPE_WSI = "1";
+      STEAM_EXTRA_COMPAT_TOOLS_PATHS = "$HOME/.steam/root/compatibilitytools.d";
       HYPRCURSOR_SIZE = "24";
       XCURSOR_SIZE = "24";
       EDITOR = "nvf";
@@ -321,7 +336,8 @@
       pkgs.valgrind
       pkgs.hyprpolkitagent
       pkgs.watchman
-      pkgs.pinentry-gnome3
+      pkgs.pinentry-qt
+      pkgs.noctalia-shell
       pkgs.waybar
       pkgs.mako
       pkgs.wofi
@@ -330,20 +346,21 @@
       pkgs.hyprpaper
       pkgs.bitwarden-desktop
       pkgs.vesktop
-      pkgs.telegram-desktop
       pkgs.pavucontrol
       pkgs.pipewire
       pkgs.pulseaudio
       pkgs.pulseaudio-ctl
       pkgs.qalculate-gtk
-      pkgs.steam-run
       pkgs.lutris
+      pkgs.steam-run
+      pkgs.protonup-ng
       pkgs.winetricks
       pkgs.wine
       pkgs.wine-staging
+      pkgs.wineWow64Packages.staging
+      pkgs.gnutls
       pkgs.xinit
       pkgs.obs-studio
-      #CLI-Tools.
       pkgs.ttyd
       pkgs.git
       pkgs.gh
@@ -357,7 +374,6 @@
       pkgs.sops
       pkgs.age
       pkgs.rofi-rbw-wayland
-      pkgs.tg
       pkgs.mpd
       pkgs.mpv
       pkgs.imv
@@ -390,7 +406,6 @@
       pkgs.easyeffects
       pkgs.quickshell
       pkgs.kdePackages.qtdeclarative
-      # Formatters.
       pkgs.nixfmt
       pkgs.jq
     ]
