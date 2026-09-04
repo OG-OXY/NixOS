@@ -1,6 +1,7 @@
 #config.nix
 {
   pkgs,
+  config,
   lib,
   inputs,
   self,
@@ -74,7 +75,7 @@
     };
     pam.services = {
       login = {
-        enableGnomeKeyring = true;
+        enableGnomeKeyring = false;
         enableKwallet = false;
       };
     };
@@ -112,6 +113,26 @@
       enable = true;
       wifi.backend = "iwd";
       dns = "dnsmasq";
+      ensureProfiles = {
+        environmentFiles = [ config.sops.secrets.WIFI_HOME_PSK.path ];
+        profiles = {
+          "home-wifi" = {
+            connection = {
+              id = "WIFI";
+              type = "wifi";
+              autoconnect = true;
+            };
+            wifi = {
+              ssid = "JOSH3881";
+              mode = "infrastructure";
+            };
+            wifi-security = {
+              key-mgmt = "wpa-psk";
+              psk = "$WIFI_HOME_PSK"; # References the sops secret variable
+            };
+          };
+        };
+      };
     };
     firewall = {
       allowedTCPPorts = [ 22 ];
@@ -134,6 +155,10 @@
         mode = "0444";
       };
       "GOOGLE_API_KEY" = {
+        owner = "ty";
+        mode = "0444";
+      };
+      "WIFI_HOME_PSK" = {
         owner = "ty";
         mode = "0444";
       };
@@ -365,6 +390,8 @@
       pkgs.aria2
       pkgs.monero-cli
       pkgs.easyeffects
+      pkgs.quickshell
+      pkgs.kdePackages.qtdeclarative
       # Formatters.
       pkgs.nixfmt
       pkgs.jq
@@ -464,7 +491,7 @@
     greetd.enable = true;
     kmscon.enable = true;
     tailscale.enable = true;
-    gnome.gnome-keyring.enable = true;
+    gnome.gnome-keyring.enable = false;
     power-profiles-daemon.enable = true;
     hardware.openrgb = {
       enable = true;
