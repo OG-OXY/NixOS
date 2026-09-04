@@ -247,8 +247,6 @@
       defaultFonts = {
         monospace = [
           "JetBrainsMono Nerd Font"
-          "Font Awesome 6 Free"
-          "Font Awesome 6 Brands"
           "FiraCode Nerd Font"
           "Inter"
         ];

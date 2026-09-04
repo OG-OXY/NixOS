@@ -4,8 +4,8 @@ scan_timeout = 0
 command_timeout = 0
 
 [character]
-success_symbol = "[❯](bold blue)"
-error_symbol = "[❯](bold red)"
+success_symbol = "[❯](bold blue) "
+error_symbol = "[❯](bold red) "
 disabled = false
 
 [directory]
@@ -17,7 +17,7 @@ fish_style_pwd_dir_length = 1
 [git_branch]
 disabled = true
 only_attached = false
-symbol = "🌿 "
+symbol = "🌿"
 style = "bold purple"
 format = "on [$symbol$branch]($style) "
 
@@ -41,12 +41,12 @@ detect_folders = [".jj"]
 when = "test -d .jj"
 style = "bold purple"
 format = "on [$symbol$output]($style) "
-symbol = "🌿 "
+symbol = "🌿"
 ignore_timeout = true
 
 #[custom.jj-]
 #command = '''jj log -r @ --no-graph -T 'local_bookmarks.join(", ")' '''
-#symbol  = "🌿 "
+#symbol  = "🌿"
 #style   = "bold purple"
 #format  = "on [$symbol$output]($style) "
 #when    = "test -d .jj"
@@ -54,21 +54,21 @@ ignore_timeout = true
 
 # Python language indicator
 [python]
-symbol = "🐍 "
+symbol = "🐍"
 style = "bold yellow"
 disabled = false
 format = "via [$symbol$version]($style) "
 
 # Rust language indicator
 [rust]
-symbol = "🦀 "
+symbol = "🦀"
 style = "bold red"
 disabled = false
 format = "via [$symbol$version]($style) "
 
 [nix_shell]
 disabled = false
-symbol = "❄️ "
+symbol = "❄️"
 style = "bold blue"
 format = "via [$symbol$state$name]($style) "
 
