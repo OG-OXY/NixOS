@@ -10,7 +10,7 @@
     defaultCacheTtl = 28800; # 8 hours
     maxCacheTtl = 86400; # 24 hours
     pinentry = {
-      package = pkgs.pinentry-gnome3;
+      package = pkgs.pinentry-qt;
     };
     extraConfig = ''
       allow-loopback-pinentry
