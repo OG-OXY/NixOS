@@ -14,36 +14,24 @@
           echo (set_color green)"✨ Done! Check 'git status' to see your uncommitted files."(set_color normal)
         '';
       };
-      j = {
-        description = "tell jj to grab secrets from secretspec.";
-        body = ''
-          secretspec run -- jj $argv
-        '';
-      };
-      gh = {
-        description = "tell github-cli to grab secrets from secretspec";
-        body = ''
-          secretspec run -- gh $argv
-        '';
-      };
+      #j = {
+      #  description = "tell jj to grab secrets from secretspec.";
+      #  body = ''
+      #    secretspec run -- jj $argv
+      #  '';
+      #};
+      #gh = {
+      #  description = "tell github-cli to grab secrets from secretspec";
+      #  body = ''
+      #    secretspec run -- gh $argv
+      #  '';
+      #};
       ss = {
         description = "For Grabbing secrets.";
         body = ''
           secretspec run -- $argv
         '';
       };
-      #steamrun = {
-      #  description = "Start GameScope with optimized settings with full steamdeck experience";
-        #body = ''
-        #  env __NV_PRIME_RENDER_OFFLOAD=1 \
-        #     __GLX_VENDOR_LIBRARY_NAME=nvidia \
-        #      ENABLE_GAMESCOPE_WSI=1 \
-        #      gamescope --backend wayland --adaptive-sync -w 1920 -h 1080 -W 2560 -H 1440 -r 236 -f -e -- steam -gamepadui $argv
-        #'';
-      #  body = ''
-      #    gamescope --backend wayland -W 1920 -H 1080 -r 240 -f -e -- steam -gamepadui $argv
-      #  '';
-      #};
       pci = {
         description = "Ls and Grep PCI ID's";
         body = ''

@@ -20,8 +20,8 @@
         revision = "1.0"
 
         [profiles.default]
-        GITHUB_TOKEN = { description = "Global GitHub Access token" }
-        GOOGLE_API_KEY = { description = "Google API Key for Aider" }
+        #GITHUB_TOKEN = { description = "Global GitHub Access token" }
+        #GOOGLE_API_KEY = { description = "Google API Key for Aider" }
       '';
       ".config/tealdeer/config.toml".source = ./config/tealdeer/config.toml;
     };
@@ -31,7 +31,7 @@
     configFile = {
       "secretspec/config.toml".text = ''
         [defaults]
-        provider = "keyring"
+        provider = "bw"
         profile = "default"
       '';
     };
@@ -42,7 +42,7 @@
 
   systemd.user = {
     sessionVariables = {
-      GITHUB_TOKEN = "$(cat /run/user/1000/secrets/github_token 2>/dev/null)";
+      #GITHUB_TOKEN = "$(cat /run/user/1000/secrets/github_token 2>/dev/null)";
     };
     services = {
       #waybar = {

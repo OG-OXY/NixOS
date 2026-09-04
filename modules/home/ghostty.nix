@@ -13,6 +13,7 @@
       adjust-cell-width = "-10%";
       cursor-style = "block";
       shell-integration-features = "no-cursor";
+      scrollback-limit = 100000000;
       font-family = "JetBrainsMono Nerd Font Bold";
       font-family-bold = "JetBrainsMono Nerd Font ExtraBold";
       font-family-italic = "JetBrainsMono Nerd Font Bold Italic";

@@ -44,7 +44,7 @@ end
 
 function __devenv_reload_apply
     # Source new environment if a reload is pending
-    if test -f "/tmp/devenv-reload-65409.sh"
+    if test -f "/tmp/devenv-reload-14525.sh"
         # Shell out to bash to handle the env diff (bash syntax).
         # The bash subprocess inherits our current environment, reverses
         # the previous diff, sources the new devenv env, computes a new
@@ -190,8 +190,8 @@ else
 fi
 
 # Source new devenv environment
-source "/tmp/devenv-reload-65409.sh" >"$_devenv_reload_out" 2>"$_devenv_reload_out"
-rm -f "/tmp/devenv-reload-65409.sh"
+source "/tmp/devenv-reload-14525.sh" >"$_devenv_reload_out" 2>"$_devenv_reload_out"
+rm -f "/tmp/devenv-reload-14525.sh"
 unset _devenv_reload_out
 
 # Compute new diff
