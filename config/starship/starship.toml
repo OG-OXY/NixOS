@@ -2,10 +2,11 @@ format = '[Ty](bold green)[@](bold red)[NixOS](bold blue)[:](bold red)$directory
 
 scan_timeout = 0
 command_timeout = 0
+add_newline = false
 
 [character]
-success_symbol = "[❯](bold blue)"
-error_symbol = "[❯](bold red)"
+success_symbol = "[❯](bold blue) "
+error_symbol = "[❯](bold red) "
 disabled = false
 
 [directory]
@@ -36,7 +37,7 @@ format = '([\[$all_status$ahead_behind\]]($style) )'
 style = "bold red"
 
 [custom.jj]
-command = '''jj log -r @ --no-graph -T 'local_bookmarks.join(", ")' '''
+command = '''jj log -r @ --no-graph -T 'local_bookmarks.join(", ")''''
 detect_folders = [".jj"]
 symbol = "🌿 "
 style = "bold purple"
@@ -55,22 +56,23 @@ ignore_timeout = true
 
 # Python language indicator
 [python]
-symbol = "🐍 "
+symbol = "🐍"
 style = "bold yellow"
 disabled = false
 format = "via [$symbol$version]($style) "
 
 # Rust language indicator
 [rust]
-symbol = "🦀 "
+symbol = "🦀"
 style = "bold red"
 disabled = false
 format = "via [$symbol$version]($style) "
 
-[nix_shell]
-disabled = false
-format = "via [❄️ $state $name]($style) "
-style = "bold blue"
+#[nix_shell]
+#disabled = false
+#symbol = "❄️"
+#format = "via [$symbol$state$name]($style)"
+#style = "bold blue"
 
 [status]
 disabled = false
