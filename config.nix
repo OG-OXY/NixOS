@@ -176,6 +176,10 @@
         BW_CLIENTID="${config.sops.placeholder.bw_client_id}"
         BW_CLIENTSECRET="${config.sops.placeholder.bw_client_secret}"
       '';
+      "api-keys.env".content = ''
+        export GOOGLE_API_KEY="${config.sops.placeholder.GOOGLE_API_KEY}"
+        export GITHUB_TOKEN="${config.sops.placeholder.GITHUB_TOKEN}"
+      '';
     };
   };
   

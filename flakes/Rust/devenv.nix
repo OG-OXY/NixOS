@@ -4,23 +4,23 @@ let
   # Determine libgbm package cleanly depending on Nixpkgs version
   gbmPkg = pkgs.mesa-libgbm or pkgs.libgbm or pkgs.mesa;
 
-  runtimeLibs = with pkgs; [
-    wayland
-    wayland-protocols
-    libxkbcommon
-    libinput
-    udev
-    dbus
-    pixman
-    mesa
+  runtimeLibs = [
     gbmPkg        # Explicitly provides libgbm.so
-    libdrm
-    seatd
-    fontconfig
-    vulkan-loader
-    libglvnd
-    egl-wayland
-    xorg.libX11
+    pkgs.wayland
+    pkgs.wayland-protocols
+    pkgs.libxkbcommon
+    pkgs.libinput
+    pkgs.udev
+    pkgs.dbus
+    pkgs.pixman
+    pkgs.mesa
+    pkgs.libdrm
+    pkgs.seatd
+    pkgs.fontconfig
+    pkgs.vulkan-loader
+    pkgs.libglvnd
+    pkgs.egl-wayland
+    pkgs.xorg.libX11
   ];
 
   rustLinkFlags = pkgs.lib.concatMapStrings (path: " -L native=${path}/lib") runtimeLibs;
@@ -40,12 +40,13 @@ in
     ];
   };
 
-  packages = with pkgs; [
-    pkg-config
-    clang
-    lld
-    gdb
-    foot
+  packages = [
+    pkgs.pkg-config
+    pkgs.bacon
+    pkgs.clang
+    pkgs.lld
+    pkgs.gdb
+    pkgs.foot
   ] ++ runtimeLibs;
 
   enterShell = ''
