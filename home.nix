@@ -1,6 +1,7 @@
 #home.nix
 {
   pkgs,
+  config,  
   ...
 }:
 {
@@ -29,6 +30,8 @@
 
   xdg = {
     configFile = {
+      "niri/config.kdl".source = config.lib.file.mkOutOfStoreSymlink "/home/ty/NixOS/Master/config/niri/config.kdl";
+      "hypr/hyprland.lua".source = config.lib.file.mkOutOfStoreSymlink "/home/ty/NixOS/Master/config/hypr/hyprland.lua";
       "secretspec/config.toml".text = ''
         [defaults]
         provider = "bw"

@@ -129,6 +129,22 @@
         "type": "github"
       }
     },
+    "delicious": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1551634300,
+        "narHash": "sha256-XNejbRzPWzfsoPd5NkbOoibA5n7nm1CoNH+BO4w5tiA=",
+        "owner": "stuomas",
+        "repo": "delicious-sddm-theme",
+        "rev": "fc98a56db6a61521cb2c55f2c50416f01f565ef7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "stuomas",
+        "repo": "delicious-sddm-theme",
+        "type": "github"
+      }
+    },
     "firefox-gnome-theme": {
       "flake": false,
       "locked": {
@@ -548,6 +564,7 @@
     "root": {
       "inputs": {
         "chaotic": "chaotic",
+        "delicious": "delicious",
         "flake-parts": "flake-parts",
         "home-manager": "home-manager_2",
         "import-tree": "import-tree",

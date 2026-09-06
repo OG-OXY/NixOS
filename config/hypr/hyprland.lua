@@ -12,6 +12,7 @@ local Menu = "pkill wofi && 2>/dev/null || wofi --show drun"
 local Run = "pkill wofi && 2>/dev/null || wofi --show run"
 local Browser = "zen-beta"
 local Discord = "vesktop"
+--local Keyring = "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP PAM_KWALLET5_LOGIN PAM_KWALLET6_LOGIN"
 local Monitor1 = "desc:ASUSTek COMPUTER INC ROG PG258Q #ASP9OUVfHcfd"
 local Monitor2 = "desc:Dell Inc. DELL P2720D K6RX299P10LS"
 
@@ -36,6 +37,9 @@ hl.monitor({
 hl.on("hyprland.start", function()
   hl.exec_cmd(Terminal)
   hl.exec_cmd(Browser)
+  hl.exec_cmd(Discord)
+  --hl.exec_cmd(Vault)
+  --hl.exec_cmd(Keyring)
 end)
 
 ---- ENVIRONMENT -----
@@ -55,10 +59,11 @@ hl.config({
   },
 })
 
--- hl.permission("/usr/(bin|local/bin)/grim", "screencopy", "allow")
+hl.permission({ binary = "/usr/(bin|local/bin)/grim", type = "screencopy", mode = "allow" })
 hl.permission({ binary = "/usr/(lib|libexec|lib64)/xdg-desktop-portal-hyprland", type = "screencopy", mode = "allow" })
 hl.permission({ binary = "/usr/(bin|local/bin)/hyprpm", type = "plugin", mode = "allow" })
 hl.permission({ binary = "/usr/(bin|local/bin)/hyprshot", type = "screencopy", mode = "allow" })
+hl.permission({ binary = "/usr/(bin|local/bin)/woomer", type = "screencopy", mode = "allow" })
 
 -- Refer to https://wiki.hypr.land/Configuring/Basics/Variables/
 hl.config({
@@ -73,7 +78,7 @@ hl.config({
     -- Set to true to enable resizing windows by clicking and dragging on borders and gaps
     resize_on_border = true,
     allow_tearing = false,
-    layout = "dwindle",
+    layout = "scrolling",
   },
   decoration = {
     rounding = 10,
@@ -110,23 +115,48 @@ hl.curve("quick", { type = "bezier", points = { { 0.15, 0 }, { 0.1, 1 } } })
 -- Default springs
 
 hl.curve("easy", { type = "spring", mass = 1, stiffness = 71.2633, dampening = 15.8273644 })
-hl.animation({ leaf = "global", enabled = true, speed = 10, bezier = "default" })
-hl.animation({ leaf = "border", enabled = true, speed = 5.39, bezier = "easeOutQuint" })
-hl.animation({ leaf = "windows", enabled = true, speed = 4.79, spring = "easy" })
-hl.animation({ leaf = "windowsIn", enabled = true, speed = 4.1, spring = "easy", style = "popin 87%" })
-hl.animation({ leaf = "windowsOut", enabled = true, speed = 1.49, bezier = "linear", style = "popin 87%" })
-hl.animation({ leaf = "fadeIn", enabled = true, speed = 1.73, bezier = "almostLinear" })
-hl.animation({ leaf = "fadeOut", enabled = true, speed = 1.46, bezier = "almostLinear" })
-hl.animation({ leaf = "fade", enabled = true, speed = 3.03, bezier = "quick" })
-hl.animation({ leaf = "layers", enabled = true, speed = 3.81, bezier = "easeOutQuint" })
-hl.animation({ leaf = "layersIn", enabled = true, speed = 4, bezier = "easeOutQuint", style = "fade" })
-hl.animation({ leaf = "layersOut", enabled = true, speed = 1.5, bezier = "linear", style = "fade" })
-hl.animation({ leaf = "fadeLayersIn", enabled = true, speed = 1.79, bezier = "almostLinear" })
-hl.animation({ leaf = "fadeLayersOut", enabled = true, speed = 1.39, bezier = "almostLinear" })
-hl.animation({ leaf = "workspaces", enabled = true, speed = 1.94, bezier = "almostLinear", style = "fade" })
-hl.animation({ leaf = "workspacesIn", enabled = true, speed = 1.21, bezier = "almostLinear", style = "fade" })
-hl.animation({ leaf = "workspacesOut", enabled = true, speed = 1.94, bezier = "almostLinear", style = "fade" })
-hl.animation({ leaf = "zoomFactor", enabled = true, speed = 7, bezier = "quick" })
+
+local animations = {
+  { leaf = "global",        enabled = true, speed = 10,   bezier = "default" },
+  { leaf = "border",        enabled = true, speed = 5.39, bezier = "easeOutQuint" },
+  { leaf = "windows",       enabled = true, speed = 4.79, bezier = "easeOutQuint" },
+  { leaf = "windowsIn",     enabled = true, speed = 4.1,  bezier = "easeOutQuint", style = "popin" },
+  { leaf = "windowsOut",    enabled = true, speed = 1.49, bezier = "almostLinear" },
+  { leaf = "fadeIn",        enabled = true, speed = 1.73, bezier = "easeOutQuint" },
+  { leaf = "fadeOut",       enabled = true, speed = 1.46, bezier = "almostLinear" },
+  { leaf = "fade",          enabled = true, speed = 3.03, bezier = "quick" },
+  { leaf = "layers",        enabled = true, speed = 3.81, bezier = "easeOutQuint" },
+  { leaf = "layersIn",      enabled = true, speed = 4,    bezier = "easeOutQuint", style = "fade" },
+  { leaf = "layersOut",     enabled = true, speed = 1.5,  bezier = "almostLinear", style = "fade" },
+  { leaf = "fadeLayersIn",  enabled = true, speed = 1.79, bezier = "easeOutQuint" },
+  { leaf = "fadeLayersOut", enabled = true, speed = 1.39, bezier = "almostLinear" },
+  { leaf = "workspaces",    enabled = true, speed = 1.94, bezier = "almostLinear" },
+  { leaf = "workspacesIn",  enabled = true, speed = 1.21, bezier = "almostLinear" },
+  { leaf = "workspacesOut", enabled = true, speed = 1.94, bezier = "almostLinear" },
+  { leaf = "zoomFactor",    enabled = true, speed = 7,    bezier = "quick" }
+}
+
+for _, anim in ipairs(animations) do
+  hl.animation(anim)
+end
+
+--hl.animation({ leaf = "global", enabled = true, speed = 10, bezier = "default" })
+--hl.animation({ leaf = "border", enabled = true, speed = 5.39, bezier = "easeOutQuint" })
+--hl.animation({ leaf = "windows", enabled = true, speed = 4.79, spring = "easy" })
+--hl.animation({ leaf = "windowsIn", enabled = true, speed = 4.1, spring = "easy", style = "popin 87%" })
+--hl.animation({ leaf = "windowsOut", enabled = true, speed = 1.49, bezier = "linear", style = "popin 87%" })
+--hl.animation({ leaf = "fadeIn", enabled = true, speed = 1.73, bezier = "almostLinear" })
+--hl.animation({ leaf = "fadeOut", enabled = true, speed = 1.46, bezier = "almostLinear" })
+--hl.animation({ leaf = "fade", enabled = true, speed = 3.03, bezier = "quick" })
+--hl.animation({ leaf = "layers", enabled = true, speed = 3.81, bezier = "easeOutQuint" })
+--hl.animation({ leaf = "layersIn", enabled = true, speed = 4, bezier = "easeOutQuint", style = "fade" })
+--hl.animation({ leaf = "layersOut", enabled = true, speed = 1.5, bezier = "linear", style = "fade" })
+--hl.animation({ leaf = "fadeLayersIn", enabled = true, speed = 1.79, bezier = "almostLinear" })
+--hl.animation({ leaf = "fadeLayersOut", enabled = true, speed = 1.39, bezier = "almostLinear" })
+--hl.animation({ leaf = "workspaces", enabled = true, speed = 1.94, bezier = "almostLinear", style = "fade" })
+--hl.animation({ leaf = "workspacesIn", enabled = true, speed = 1.21, bezier = "almostLinear", style = "fade" })
+--hl.animation({ leaf = "workspacesOut", enabled = true, speed = 1.94, bezier = "almostLinear", style = "fade" })
+--hl.animation({ leaf = "zoomFactor", enabled = true, speed = 7, bezier = "quick" })
 
 -- Ref https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/
 
@@ -175,7 +205,7 @@ hl.config({
 
 hl.config({
   misc = {
-    force_default_wallpaper = 0, -- Set to 0 or 1 to disable the anime mascot wallpapers
+    force_default_wallpaper = 0,  -- Set to 0 or 1 to disable the anime mascot wallpapers
     disable_hyprland_logo = true, -- If true disables anime wallpaper
   },
 })
@@ -224,7 +254,7 @@ local next_layout_map = {
   monocle = "dwindle",
 }
 
-hl.bind(mainMod .. " + L", function()
+hl.bind(mainMod .. " + TAB", function()
   -- 1. Read current active layout dynamically
   local current = hl.get_config("general.layout")
 
@@ -280,10 +310,15 @@ for i = 1, 5 do
 end
 
 -- Move focus with mainMod + arrow keys
-hl.bind(mainMod .. " + left", hl.dsp.focus({ direction = "left" }))
-hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))
-hl.bind(mainMod .. " + up", hl.dsp.focus({ direction = "up" }))
-hl.bind(mainMod .. " + down", hl.dsp.focus({ direction = "down" }))
+hl.bind(mainMod .. " + H", hl.dsp.focus({ direction = "left" }))
+hl.bind(mainMod .. " + L", hl.dsp.focus({ constraint = "visible", direction = "right" }))
+--hl.bind(mainMod .. " + H", hl.dsp.focus({ direction = "left" }))
+--hl.bind(mainMod .. " + L", hl.dsp.focus({ direction = "right" }))
+
+hl.bind(mainMod .. " + SHIFT + K", hl.dsp.focus({ direction = "up" }))
+hl.bind(mainMod .. " + SHIFT + J", hl.dsp.focus({ direction = "down" }))
+hl.bind(mainMod .. " + K", hl.dsp.layout("cyclenext"))
+hl.bind(mainMod .. " + J", hl.dsp.layout("cycleprev"))
 
 -- Example special workspace (scratchpad)
 hl.bind(mainMod .. " + CTRL + S", hl.dsp.workspace.toggle_special("magic"))
@@ -293,8 +328,8 @@ hl.bind(mainMod .. " + CTRL + SHIFT + S", hl.dsp.window.move({ workspace = "spec
 hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
 hl.bind(mainMod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
 
-hl.bind(mainMod .. " + SHIFT + mouse_down", hl.dsp.focus({ workspace = "m+1" }))
-hl.bind(mainMod .. " + SHIFT + mouse_up", hl.dsp.focus({ workspace = "m-1" }))
+--hl.bind(mainMod .. " + SHIFT + mouse_down", hl.dsp.focus({ workspace = "m+1" }))
+--hl.bind(mainMod .. " + SHIFT + mouse_up", hl.dsp.focus({ workspace = "m-1" }))
 
 -- Move/resize windows with mainMod + LMB/RMB and dragging
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })

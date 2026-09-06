@@ -30,7 +30,10 @@
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    #woomer.url = "github:coffeeispower/woomer";
+    delicious = {
+      url = "github:stuomas/delicious-sddm-theme";
+      flake = false;
+    };
     nvf.url = "path:./flakes/NVF";
     llm-agents.url = "path:./flakes/LLM-Agents";
   };
@@ -45,7 +48,7 @@
     sops,
     stylix,
     ...
-  } @ inputs: {
+  }@inputs: {
     nixosConfigurations."nixos" = nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs self;};
       modules = [
@@ -60,18 +63,28 @@
                 "electron-39.8.10"
               ];
             };
-            #overlays = [
-              #  (
-              #    final: prev: let
-              #     stable = import nixpkgs-stable {
-              #       inherit (prev) system;
-              #       config = prev.config;
-              #     };
-              #   in {
-                  #package = packagename.stable
-              #   }
-              # )
-              #];
+            overlays = [
+              (final: prev:
+              let
+                stable = import nixpkgs-stable {
+                  inherit (prev) system;
+                  config = prev.config;
+                };
+              in {
+                #package = packagename.stable
+                delicious-sddm-theme = prev.stdenv.mkDerivation {
+                  pname = "delicious-sddm-theme";
+                  version = "1.0";
+                  src = inputs.delicious;
+                  buildInputs = [ prev.qt5.qtgraphicaleffects ];
+                  dontWrapQtApps = true;
+                  installPhase = ''
+                    mkdir -p $out/share/sddm/themes/delicious
+                    cp -r * $out/share/sddm/themes/delicious/
+                  '';
+                };
+              })
+            ];
           };
           hardware.enableRedistributableFirmware = true;
         }
