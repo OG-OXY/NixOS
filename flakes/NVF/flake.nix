@@ -175,17 +175,34 @@
                   lsp = {
                     enable = true;
                     formatOnSave = false;
-                    servers.lua-language-server = {
-                      settings = {
-                        Lua = {
-                          workspace = {
-                            checkThirdParty = false;
-                            library = [
-                              "${pkgs.hyprland}/share/hypr/stubs"
-                            ];
+                    servers = {
+                      lua-language-server = {
+                        settings = {
+                          Lua = {
+                            workspace = {
+                              checkThirdParty = false;
+                              library = [
+                                "${pkgs.hyprland}/share/hypr/stubs"
+                              ];
+                            };
+                            diagnostics = {
+                              globals = [ "hl" ];
+                            };
                           };
-                          diagnostics = {
-                            globals = [ "hl" ];
+                        };
+                      };
+                      lemminx = {
+                        settings = {
+                          xml = {
+                            catalogs = [
+                              "${pkgs.gtk3}/share/xml/gtkbuilder/catalog.xml"
+                            ];
+                            fileAssociations = [
+                              {
+                                systemId = "${pkgs.gtk3}/share/xml/gtkbuilder/gtkbuilder.dtd";
+                                pattern = "*.xml";
+                              }
+                            ];
                           };
                         };
                       };

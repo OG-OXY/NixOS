@@ -9,6 +9,7 @@
     ./modules/home/scripts.nix
     ./modules/home/zoxide.nix
     ./modules/home/yazi.nix
+    ./modules/home/hyprland-permissions.nix
     ./modules/home/hyprpaper.nix
     ./modules/home/git.nix
     ./modules/home/github-cli.nix

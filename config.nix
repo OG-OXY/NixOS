@@ -206,6 +206,27 @@
     };
   };
   
+  xdg.portal = {
+    enable = true;
+    extraPortals = [
+      pkgs.xdg-desktop-portal-hyprland
+      pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal-gnome
+    ];
+    config = {
+      common = {
+        default = [ "gtk" ];
+      };
+      hyprland = {
+        default = [ "hyprland" "gtk" ];
+      };
+      niri = {
+        default = [ "gnome" "gtk" ];
+      };
+    };
+    #configPackages = [ pkgs.gnome-session ];
+  };
+
   # Install PKGS with system parameters.
   programs = {
     hyprland = {
@@ -217,11 +238,13 @@
       enable = true;
       waylandCompositors.niri = {
         prettyName = "Niri";
+        comment = "Niri Scrollable Tiling Compositor";
         binPath = "${pkgs.niri}/bin/niri";
       };
     };
     niri = {
       enable = true;
+      package = pkgs.niri;
     };
     direnv = {
       enable = true;
@@ -336,6 +359,7 @@
       PROTON_ENABLE_NVAPI = "1";
       ENABLE_GAMESCOPE_WSI = "1";
       STEAM_EXTRA_COMPAT_TOOLS_PATHS = "$HOME/.steam/root/compatibilitytools.d";
+      WLR_NO_HARDWARE_CURSORS = "0";
       HYPRCURSOR_SIZE = "24";
       XCURSOR_SIZE = "24";
       EDITOR = "nvf";
@@ -433,10 +457,16 @@
       pkgs.aria2
       pkgs.monero-cli
       pkgs.easyeffects
+      pkgs.delicious-sddm-theme
       pkgs.quickshell
       pkgs.kdePackages.qtdeclarative
+      pkgs.kdePackages.qtsvg
+      pkgs.kdePackages.qt5compat
+      pkgs.kdePackages.kwin
+      pkgs.xwayland-satellite
       pkgs.nixfmt
       pkgs.jq
+      pkgs.sway
     ]
     ++ [
       inputs.zen-browser.packages.${pkgs.system}.default
@@ -447,14 +477,20 @@
       #pkgs.cudaPackages.cudatoolkit
     ];
     etc = {
+      "greetd/sway-config".text = lib.mkForce ''
+        exec regreet
+        output "ASUSTek COMPUTER INC ROG PG258Q ASP9OUVfHcfd" mode 1920x1080@240 pos 0 0
+        output "Dell Inc. DELL P2720D K6RX299P10LS" mode 2560x1440@59 pos 1920 -180
+        seat * hide_cursor 3000
+      '';
     };
   };
 
-  xdg.portal = {
-    enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
-    config.common.default = "*";
-  };
+  #xdg.portal = {
+  #  enable = true;
+  #  extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
+  #  config.common.default = "*";
+  #};
 
   hardware = {
     i2c.enable = true;
@@ -485,52 +521,79 @@
     displayManager = {
       regreet = {
         enable = true;
-        cageArgs = [
+        cageArgs = lib.mkForce [
           "-s"
-          "-m clone"
+          "-m"
+          "last"
         ];
         settings = {
           background = {
-            path = "/etc/nixos/wallpaper.png";
-            fit = "Cover";
+            path = lib.mkForce "/etc/nixos/wallpaper.png";
+            fit = lib.mkForce "Cover";
           };
-          #theme = {
-          #  package = "";
-          #  name = "";
-          #};
-          #iconTheme = {
-          #  package = "";
-          #  name = "";
-          #};
-          #cursorTheme = {
-          #  package = "";
-          #  name = "";
-          #};
-          #GTK = {
-          #  theme_name = "Adwaita-dark";
-          #  icon_theme_name = "Adwaita";
-          #  cursor_theme_name = "";
-          #  font_name = lib.mkDefault "Inter 11";
-          #};
+          theme = {
+            package = lib.mkForce pkgs.gnome-themes-extra;
+            name = lib.mkForce "Adwaita-dark";
+          };
+          iconTheme = {
+            package = lib.mkForce pkgs.adwaita-icon-theme;
+            name = lib.mkForce "Adwaita";
+          };
+          cursorTheme = {
+            package = lib.mkForce pkgs.bibata-cursors;
+            name = lib.mkForce "Bibata-Modern-Classic";
+          };
+          GTK = {
+            theme_name = lib.mkForce "Adwaita-dark";
+            icon_theme_name = lib.mkForce "Adwaita";
+            cursor_theme_name = lib.mkForce "Bibata-Modern-Classic";
+            font_name = lib.mkForce "Inter 11";
+          };
           commands = {
-            reboot = [
+            reboot = lib.mkForce [
               "doas"
               "reboot"
               "now"
             ];
-            shutdown = [
+            shutdown = lib.mkForce [
               "doas"
-              "shutdown"
-              "now"
+              "poweroff"
             ];
           };
           #extraCss = ''
           #'';
         };
       };
+      #sddm = {
+      #  enable = true;
+      #  wayland.enable = true;
+      #  # Uses Qt6 for a crisp native Wayland greeter
+      #  package = pkgs.kdePackages.sddm; 
+      #  theme = "delicious"; # Or leave default / custom theme
+      #  settings = {
+      #    Theme = {
+      #      Current = "delicious";
+      #      ThemeDir = "run/current-system/sw/share/sddm/themes";
+      #    };
+      #    Wayland = {
+      #      CompositorCommand = "${pkgs.kdePackages.kwin}/bin/kwin_wayland --no-lockscreen --no-global-shortcuts";
+      #    };
+      #    #General = {
+      #    #  InputMethod = "";
+      #    #};
+      #  };
+      #};
     };
+    greetd = {
+      enable = true;
+      settings = {
+        default-session = lib.mkForce {
+          command = lib.mkForce "${pkgs.sway}/bin/sway --config /etc/greetd/sway-config";
+          user = lib.mkForce "greetd";
+        };
+      };
+    }; 
     dbus.enable = true;
-    greetd.enable = true;
     kmscon.enable = true;
     tailscale.enable = true;
     gnome.gnome-keyring.enable = false;
@@ -636,6 +699,9 @@
     services = {
       ollama.wantedBy = pkgs.lib.mkForce [ ];
       llama-cpp.wantedBy = pkgs.lib.mkForce [ ];
+      sddm.environment = {
+        WLR_NO_HARDWARE_CURSORS = "0";
+      };
     };
     user.services = {
       waybar = {
