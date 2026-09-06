@@ -256,8 +256,6 @@
                         })
                       end, {})
                     '';
-                    aurora-custom-theme = ''
-                    '';
                     smart-write-commands = ''
                       local function smart_write(extra_cmd)
                         if vim.bo.filetype ~= "nix" then
@@ -307,10 +305,10 @@
                           "core.dirman" = {
                             config = {
                               workspaces = {
-                                notes = "~/Documents/Notes";
-                                sync = "~/.norg_sync";
+                                notes = "~/Notes";
+                                sync = "~/.sync";
                               };
-                              default_workspace = "Notes";
+                              default_workspace = "notes";
                             };
                             "core.completion" = {
                               config = {

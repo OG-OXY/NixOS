@@ -114,11 +114,11 @@
       wifi.backend = "iwd";
       dns = "dnsmasq";
       ensureProfiles = {
-        environmentFiles = [ config.sops.secrets.WIFI_HOME_PSK.path ];
+        environmentFiles = [ config.sops.secrets."WIFI_HOME_PSK".path ];
         profiles = {
-          "home-wifi" = {
+          "Home-WIFI" = {
             connection = {
-              id = "WIFI";
+              id = "Home-WIFI";
               type = "wifi";
               autoconnect = true;
             };
@@ -127,6 +127,7 @@
               mode = "infrastructure";
             };
             wifi-security = {
+              auth-alg = "open";
               key-mgmt = "wpa-psk";
               psk = "$WIFI_HOME_PSK"; # References the sops secret variable
             };
@@ -152,34 +153,56 @@
     secrets = {
       "GITHUB_TOKEN" = {
         owner = "ty";
-        mode = "0444";
+        group = "users";
+        mode = "0400";
       };
       "GOOGLE_API_KEY" = {
         owner = "ty";
-        mode = "0444";
+        group = "users";
+        mode = "0400";
+      };
+      "GEMINI_API_KEY" = {
+        owner = "ty";
+        group = "users";
+        mode = "0400";
       };
       "WIFI_HOME_PSK" = {
         owner = "ty";
-        mode = "0444";
+        group = "users";
+        mode = "0400";
       };
       "bw_client_id" = {
         owner = "ty";
-        mode = "0444";
+        group = "users";
+        mode = "0400";
       };
       "bw_client_secret" = {
         owner = "ty";
-        mode = "0444";
+        group = "users";
+        mode = "0400";
       };
     };
     templates = {
-      "bitwarden-env".content = ''
-        BW_CLIENTID="${config.sops.placeholder.bw_client_id}"
-        BW_CLIENTSECRET="${config.sops.placeholder.bw_client_secret}"
-      '';
-      "api-keys.env".content = ''
-        export GOOGLE_API_KEY="${config.sops.placeholder.GOOGLE_API_KEY}"
-        export GITHUB_TOKEN="${config.sops.placeholder.GITHUB_TOKEN}"
-      '';
+      "secrets.env" = {
+        owner = "ty";
+        group = "users";
+        mode = "0400";
+        content = ''
+          GITHUB_TOKEN=${config.sops.placeholder.GITHUB_TOKEN}
+          GOOGLE_API_KEY=${config.sops.placeholder.GOOGLE_API_KEY}
+          GEMINI_API_KEY=${config.sops.placeholder.GOOGLE_API_KEY}
+          BW_CLIENTID=${config.sops.placeholder.bw_client_id}
+          BW_CLIENTSECRET=${config.sops.placeholder.bw_client_secret}
+        '';
+      };
+      "WIFI_PSK.env" = {
+        owner = "root";
+        group = "root";
+        mode = "0400";
+        content = ''
+          WIFI_HOME_PSK=${config.sops.placeholder.WIFI_HOME_PSK}
+        '';
+      };
     };
   };
   
@@ -378,10 +401,12 @@
       pkgs.sops
       pkgs.age
       pkgs.rofi-rbw-wayland
-      pkgs.mpd
-      pkgs.mpv
-      pkgs.imv
+      pkgs.ffmpeg-full
+      pkgs.obs-studio
       pkgs.hyprshot
+      pkgs.mpv
+      pkgs.mpd
+      pkgs.imv
       pkgs.hyprpicker
       pkgs.btop
       pkgs.tree
@@ -620,6 +645,24 @@
         };
         serviceConfig = {
           ExecStartPre = "${pkgs.glib}/bin/gdbus wait --system net.hadess.PowerProfiles";
+        };
+      };
+      sops-import = {
+        description = "Import sops-rendered environment variables into systemd user session";
+        wantedBy = [ "graphical-session.target" "default.target" ];
+        after = [ "sops-nix.service" ];
+        serviceConfig = {
+          Type = "oneshot";
+          RemainAfterExit = true;
+          ExecStart = pkgs.writeShellScript "sops-import-script" ''
+            if [ -f /run/secrets/rendered/secrets.env ]; then
+              set -a
+              source /run/secrets/rendered/secrets.env
+              set +a
+              ${pkgs.systemd}/bin/systemctl --user import-environment $(${pkgs.coreutils}/bin/cut -d= -f1 /run/secrets/rendered/secrets.env)
+              ${pkgs.dbus}/bin/dbus-update-activation-environment --systemd --all
+            fi
+          '';
         };
       };
       rbw-autounlock = {
