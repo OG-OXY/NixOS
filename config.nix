@@ -245,7 +245,7 @@
           #hyprland = {
           #  prettyName = "Hyprland";
           #  comment = "An Intelligent Wayland Compositor Managed by UWSM.";
-          #  binPath = "${pkgs.uwsm}/bin/uwsm start hyprland-uwsm.desktop";
+          #  binPath = "${pkgs.hyprland}/bin/hyprland";
           #};
       };
     };
@@ -737,6 +737,7 @@
           Conflicts = [ "wayland-session@niri.target" ];
         };
         serviceConfig = {
+          ExecStartPre = "${pkgs.glib}/bin/gdbus wait --system net.hadess.PowerProfiles";
           ExecStart = "${pkgs.waybar}/bin/waybar";
           Restart = "on-failure";
         };
