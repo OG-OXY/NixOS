@@ -12,6 +12,7 @@ local Menu = "pkill wofi && 2>/dev/null || wofi --show drun"
 local Run = "pkill wofi && 2>/dev/null || wofi --show run"
 local Browser = "zen-beta"
 local Discord = "vesktop"
+local SShot = "hyprshot -m region -o ~/Media/Pictures/sshot/ -f \"$(date +'%Y-%m-%d_%H-%M-%S').png\""
 --local Keyring = "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP PAM_KWALLET5_LOGIN PAM_KWALLET6_LOGIN"
 local Monitor1 = "desc:ASUSTek COMPUTER INC ROG PG258Q #ASP9OUVfHcfd"
 local Monitor2 = "desc:Dell Inc. DELL P2720D K6RX299P10LS"
@@ -55,7 +56,7 @@ hl.env("HYPRCURSOR_SIZE", "24")
 -- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Permissions/
 hl.config({
   ecosystem = {
-    enforce_permissions = true,
+    enforce_permissions = false,
   },
 })
 
@@ -276,6 +277,7 @@ hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(Run))
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(Browser))
 hl.bind(mainMod .. " + V", hl.dsp.exec_cmd(Discord))
 hl.bind(mainMod .. " + SHIFT + V", hl.dsp.exec_cmd("rofi-rbw"))
+hl.bind("Print", hl.dsp.exec_cmd(SShot))
 hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("rofi-rbw --action type --clear 30"))
 hl.bind(mainMod .. " + SHIFT + P", hl.dsp.exec_cmd("rofi-rbw --action type --target password --clear 30"))
 hl.bind(mainMod .. " + Tab", hl.dsp.focus({ window = "cyclenext" }))

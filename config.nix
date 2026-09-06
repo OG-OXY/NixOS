@@ -236,10 +236,17 @@
     };
     uwsm = {
       enable = true;
-      waylandCompositors.niri = {
-        prettyName = "Niri";
-        comment = "Niri Scrollable Tiling Compositor";
-        binPath = "${pkgs.niri}/bin/niri";
+      waylandCompositors = {
+        niri = {
+          prettyName = "Niri";
+          comment = "Niri Scrollable Tiling Compositor Managed by UWSM.";
+          binPath = "${pkgs.niri}/bin/niri";
+        };
+          #hyprland = {
+          #  prettyName = "Hyprland";
+          #  comment = "An Intelligent Wayland Compositor Managed by UWSM.";
+          #  binPath = "${pkgs.uwsm}/bin/uwsm start hyprland-uwsm.desktop";
+          #};
       };
     };
     niri = {
@@ -452,6 +459,7 @@
       pkgs.bun
       pkgs.devenv
       pkgs.starship
+      pkgs.fastfetch
       pkgs.atuin
       pkgs.libnotify
       pkgs.aria2
@@ -463,6 +471,7 @@
       pkgs.kdePackages.qtsvg
       pkgs.kdePackages.qt5compat
       pkgs.kdePackages.kwin
+      pkgs.noctalia-shell
       pkgs.xwayland-satellite
       pkgs.nixfmt
       pkgs.jq
@@ -704,15 +713,43 @@
       };
     };
     user.services = {
-      waybar = {
+      noctalia-shell = {
+        enable = true;
+        description = "Noctalia Shell for UWSM Managed Niri compositor";
+        wantedBy = [ "wayland-session@niri.target" ];
         unitConfig = {
-          After = [ "graphical-session.target" ];
-          Requires = [ "dbus.socket" ];
+          After = [ "wayland-session@niri.target" "dbus.socket" ];
+          PartOf = [ "wayland-session@niri.target" ];
+          Conflicts = [ "wayland-session@hyprland.target" ];
         };
         serviceConfig = {
-          ExecStartPre = "${pkgs.glib}/bin/gdbus wait --system net.hadess.PowerProfiles";
+          ExecStart = "${pkgs.noctalia-shell}/bin/noctalia-shell";
+          Restart = "on-failure";
         };
       };
+      waybar = {
+        enable = true;
+        description = "Waybar for UWSM Managed Hyprland";
+        wantedBy = [ "wayland-session@hyprland.target" ];
+        unitConfig = {
+          PartOf = [ "wayland-session@hyprland.target" ];
+          After = [ "wayland-session@hyprland.target" ];
+          Conflicts = [ "wayland-session@niri.target" ];
+        };
+        serviceConfig = {
+          ExecStart = "${pkgs.waybar}/bin/waybar";
+          Restart = "on-failure";
+        };
+      };
+      #waybar = {
+      #  unitConfig = {
+      #    After = [ "graphical-session.target" ];
+      #    Requires = [ "dbus.socket" ];
+      #  };
+      #  serviceConfig = {
+      #    ExecStartPre = "${pkgs.glib}/bin/gdbus wait --system net.hadess.PowerProfiles";
+      #  };
+      #};
       sops-import = {
         description = "Import sops-rendered environment variables into systemd user session";
         wantedBy = [ "graphical-session.target" "default.target" ];
@@ -733,10 +770,10 @@
       };
       rbw-autounlock = {
         description = "Securely unlock Bitwarden Vault on Hyprland Startup";
-        wantedBy = [ "wayland-session@Hyprland-uwsm.target"];
+        wantedBy = [ "graphical-session.target" "default.target" ];
         unitConfig = {
-          After = [ "wayland-session@Hyprland-uwsm.target" "dbus.socket" ];
-          PartOf = [ "wayland-session@Hyprland-uwsm.target" ];
+          After = [ "graphical-session.target" "dbus.socket" ];
+          #PartOf = [ "wayland-session@hyprland-uwsm.target" ];
           #After = [ "graphical-session.target" ];
           #PartOf = [ "graphical-session.target" ];
         };
