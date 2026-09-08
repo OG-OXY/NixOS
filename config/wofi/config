@@ -1,0 +1,15 @@
+hide_scroll=true
+
+show=drun
+allow_images=true
+image_size=24
+
+location=center
+
+insensitive=true
+prompt=Search...
+
+width=600
+height=450
+
+normal_window=true

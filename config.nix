@@ -94,10 +94,10 @@
         "video"
         "render"
         "input"
+        "uinput"
         "audio"
         "seat"
         "seatd"
-        "docker"
         "libvirtd"
         "vboxusers"
         "wireshark"
@@ -475,6 +475,7 @@
       pkgs.xwayland-satellite
       pkgs.nixfmt
       pkgs.jq
+      pkgs.warpd
       pkgs.sway
     ]
     ++ [
@@ -502,6 +503,7 @@
   #};
 
   hardware = {
+    uinput.enable = true;
     i2c.enable = true;
     keyboard.qmk.enable = true;
     bluetooth = {
