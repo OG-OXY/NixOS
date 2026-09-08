@@ -41,7 +41,7 @@ output "desc:Dell Inc. DELL P2720D K6RX299P10LS" {
 }
 
 layout {
-    gaps 2
+    gaps 0
     center-focused-column "never"
     preset-column-widths {
         proportion 0.33333
@@ -51,12 +51,23 @@ layout {
     default-column-width { proportion 0.5; }
     
     focus-ring {
-        width 7
+        width 0
         active-color "rgba(33, 204, 255, 0.93)"
         inactive-color "rgba(89, 89, 89, 0.67)"
     }
     border {
-        off
+        on
+        width 7
+        // Comment Out All Color Settings For Original Yellow-Orange Borders
+        // Most Orange Borders
+        active-color "rgba(255, 115, 0, 0.93)"
+        inactive-color "rgba(89, 89, 89, 0.67)"
+        // Nice Orange Borders
+        //active-color "rgba(255, 140, 0, 0.93)"
+        //inactive-color "rgba(89, 89, 89, 0.67)"
+        // Red Borders
+        //active-color "rgba(255, 60, 60, 0.93)"
+        //inactive-color "rgba(89, 89, 89, 0.67)"
     }
     struts {
         top 0
@@ -93,11 +104,20 @@ window-rule {
 binds {
     // Core Program Launchers & Actions
     Mod+Return { spawn "ghostty"; }
-    Mod+D { spawn "sh" "-c" "pkill wofi || wofi --show drun"; }
+    Mod+R { spawn "sh" "-c" "pkill wofi || wofi --show run"; }
+    Mod+D { spawn-sh "noctalia-shell ipc call launcher toggle"; }
+    //Mod+D { spawn "noctalia-shell" "toggle-menu"; }
+    //Mod+D { spawn "sh" "-c" "pkill wofi || wofi --show drun"; }
     Mod+B { spawn "zen-beta"; }
     Mod+V { spawn "vesktop"; }
     Mod+Q repeat=false { close-window; }
+    
+    // Show Keybinds
     Mod+Shift+Slash { show-hotkey-overlay; }
+  
+    // Column Splitting & Window Consumption (VI Integration)
+    Mod+BracketLeft { consume-or-expel-window-left; }
+    Mod+BracketRight { consume-or-expel-window-right; }
 
     // VI Movement & Focus (H/J/K/L)
     Mod+H { focus-column-left; }
@@ -152,8 +172,8 @@ binds {
     Mod+Ctrl+9 { move-column-to-workspace 9; }
 
     // Layout Controls & Sizing
-    Mod+R { switch-preset-column-width; }
-    Mod+Shift+R { switch-preset-column-width-back; }
+    Mod+Shift+R { switch-preset-column-width; }
+    //Mod+Shift+R { switch-preset-column-width-back; }
     Mod+F { maximize-column; }
     Mod+Shift+F { fullscreen-window; }
     Mod+M { maximize-window-to-edges; }
