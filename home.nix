@@ -38,6 +38,7 @@
       "waybar/mediaplayer.py".source = config.lib.file.mkOutOfStoreSymlink "/home/ty/NixOS/Master/config/waybar/mediaplayer.py";
       "waybar/power_menu.xml".source = config.lib.file.mkOutOfStoreSymlink "/home/ty/NixOS/Master/config/waybar/power_menu.xml";
       "waybar/style.css".source = config.lib.file.mkOutOfStoreSymlink "/home/ty/NixOS/Master/config/waybar/style.css";
+      "yazi/yazi.toml".source = config.lib.file.mkOutOfStoreSymlink "/home/ty/NixOS/Master/config/yazi/yazi.toml";
       "secretspec/config.toml".text = ''
         [defaults]
         provider = "bw"
@@ -102,17 +103,17 @@
     };
   };
 
-  imports = [
-    ./homeModules.nix
-  ];
-
   programs = {
-    waybar = {
-      enable = true;
-      systemd.enable = true;
-    };
+    #waybar = {
+    #  enable = true;
+    #  systemd.enable = true;
+    #};
     herdr.enable = true;
     devenv.enable = true;
     home-manager.enable = true;
   };
+  
+  imports = [
+    ./homeModules.nix
+  ];
 }

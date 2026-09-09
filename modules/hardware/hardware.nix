@@ -140,6 +140,7 @@
       ];
     };
     "/home/ty/Ventoy" = {
+      enable = false;
       device = "/dev/disk/by-label/Ventoy";
       fsType = "exfat";
       options = [

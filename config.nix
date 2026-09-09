@@ -99,6 +99,7 @@
         "seat"
         "seatd"
         "libvirtd"
+        "kvm"
         "vboxusers"
         "wireshark"
         "tcpdump"
@@ -216,6 +217,8 @@
     config = {
       common = {
         default = [ "gtk" ];
+        # Go Back To How Defaults Worked In <=1.7
+        #default = "*";
       };
       hyprland = {
         default = [ "hyprland" "gtk" ];
@@ -227,13 +230,60 @@
     #configPackages = [ pkgs.gnome-session ];
   };
 
-  # Install PKGS with system parameters.
+  # Install PKGS With System Parameters.
   programs = {
-    hyprland = {
+    # Custom NixOS Modules I WROTE MYSELF
+    wlr-which-key = {
       enable = true;
-      withUWSM = true;
-      xwayland.enable = true;
+      settings = {
+        anchor = "center";
+        font = "JetBrainsMono NFM 12";
+      };
+      menus = {
+        apps = [
+          {
+            key = "t";
+            desc = "Ghostty";
+            cmd = "${pkgs.ghostty}/bin/ghostty";
+          }
+          {
+            key = "z";
+            desc = "Zen-Browser";
+            cmd = "${inputs.zen-browser.packages.${pkgs.system}.default}/bin/zen-beta";
+          }
+          {
+            key = "v";
+            desc = "Vesktop";
+            cmd = "${pkgs.vesktop}/bin/vesktop";
+          }
+          {
+            key = "b";
+            desc = "Bitwarden";
+            cmd = "${pkgs.bitwarden-desktop}/bin/bitwarden";
+          }
+          {
+            key = "e";
+            desc = "EasyEffects";
+            cmd = "${pkgs.easyeffects}/bin/easyeffects";
+          }
+        ];
+      };
     };
+    warpd = {
+      enable = true;
+      settings = {
+        hint_activation_key = "A-M-h";
+        grid_activation_key = "A-M-g";
+        speed = 400;
+        hint_chars = "arstgmneio";
+      };
+    };
+    # Native NixOS Modules
+    #hyprland = {
+    #  enable = true;
+    #  withUWSM = true;
+    #  xwayland.enable = true;
+    #};
     uwsm = {
       enable = true;
       waylandCompositors = {
@@ -257,8 +307,6 @@
       enable = true;
       nix-direnv.enable = true;
     };
-    fish.enable = true;
-    zoxide.enable = true;
     gamemode = {
       enable = true;
       enableRenice = true;
@@ -266,14 +314,12 @@
         general = {
           renice = 20;
         };
-
         # Warning: GPU optimisations have the potential to damage hardware
         gpu = {
           apply_gpu_optimisations = "accept-responsibility";
           gpu_device = "NVIDIA";
           nv_powermode = "prefer-maximum-performance";
         };
-
         custom = {
           start = "${pkgs.libnotify}/bin/notify-send 'GameMode started'";
           end = "${pkgs.libnotify}/bin/notify-send 'GameMode ended'";
@@ -302,6 +348,8 @@
         pkgs.proton-ge-bin
       ];
     };
+    fish.enable = true;
+    zoxide.enable = true;
     virt-manager.enable = true;
     nano.enable = false;
   };
@@ -395,13 +443,12 @@
       pkgs.hyprpolkitagent
       pkgs.watchman
       pkgs.pinentry-qt
-      pkgs.noctalia-shell
-      pkgs.waybar
-      pkgs.mako
+      #pkgs.waybar
+      #pkgs.mako
       pkgs.wofi
       pkgs.ghostty
       pkgs.yazi
-      pkgs.hyprpaper
+      #pkgs.hyprpaper
       pkgs.bitwarden-desktop
       pkgs.vesktop
       pkgs.pavucontrol
@@ -465,7 +512,7 @@
       pkgs.aria2
       pkgs.monero-cli
       pkgs.easyeffects
-      pkgs.delicious-sddm-theme
+      #pkgs.delicious-sddm-theme
       pkgs.quickshell
       pkgs.kdePackages.qtdeclarative
       pkgs.kdePackages.qtsvg
@@ -475,14 +522,17 @@
       pkgs.xwayland-satellite
       pkgs.nixfmt
       pkgs.jq
-      pkgs.warpd
-      pkgs.sway
+      #pkgs.sway
+      pkgs.ventoy
+      pkgs._7zz
+      pkgs.poppler-utils
+      pkgs.imagemagick
+      pkgs.resvg
     ]
     ++ [
       inputs.zen-browser.packages.${pkgs.system}.default
       inputs.nvf.packages.${pkgs.system}.default
       inputs.llm-agents.packages.${pkgs.system}.default
-      #inputs.woomer.packages.${pkgs.system}.default
       #pkgs.cudaPackages.cuda_nvcc
       #pkgs.cudaPackages.cudatoolkit
     ];
@@ -495,12 +545,6 @@
       '';
     };
   };
-
-  #xdg.portal = {
-  #  enable = true;
-  #  extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
-  #  config.common.default = "*";
-  #};
 
   hardware = {
     uinput.enable = true;
@@ -530,6 +574,7 @@
       '';
     };
     displayManager = {
+      # BROKEN ASS MODULE HENCE THE MKFORCE GARBAGE.
       regreet = {
         enable = true;
         cageArgs = lib.mkForce [
@@ -575,6 +620,7 @@
           #'';
         };
       };
+      # SDDM Is Fucking Dogshit Enough Said.
       #sddm = {
       #  enable = true;
       #  wayland.enable = true;
@@ -598,9 +644,10 @@
     greetd = {
       enable = true;
       settings = {
-        default-session = lib.mkForce {
-          command = lib.mkForce "${pkgs.sway}/bin/sway --config /etc/greetd/sway-config";
-          user = lib.mkForce "greetd";
+        # lib.mkForce's Are Because Broken ASS Regreet Module Default Setting Weights.
+        default-session = {
+          command = "${pkgs.regreet}/bin/regreet";
+          user = "greetd";
         };
       };
     }; 
@@ -708,52 +755,18 @@
       hybrid-sleep.enable = false;
     };
     services = {
+      # Override To Make These Started Manually.
       ollama.wantedBy = pkgs.lib.mkForce [ ];
       llama-cpp.wantedBy = pkgs.lib.mkForce [ ];
-      sddm.environment = {
-        WLR_NO_HARDWARE_CURSORS = "0";
-      };
+      # Old No Longer Using SDDM. Was A Test.
+      #sddm.environment = {
+      #  WLR_NO_HARDWARE_CURSORS = "0";
+      #};
     };
     user.services = {
-      noctalia-shell = {
-        enable = true;
-        description = "Noctalia Shell for UWSM Managed Niri compositor";
-        wantedBy = [ "wayland-session@niri.target" ];
-        unitConfig = {
-          After = [ "wayland-session@niri.target" "dbus.socket" ];
-          PartOf = [ "wayland-session@niri.target" ];
-          Conflicts = [ "wayland-session@hyprland.target" ];
-        };
-        serviceConfig = {
-          ExecStart = "${pkgs.noctalia-shell}/bin/noctalia-shell";
-          Restart = "on-failure";
-        };
-      };
-      waybar = {
-        enable = true;
-        description = "Waybar for UWSM Managed Hyprland";
-        wantedBy = [ "wayland-session@hyprland.target" ];
-        unitConfig = {
-          PartOf = [ "wayland-session@hyprland.target" ];
-          After = [ "wayland-session@hyprland.target" ];
-          Conflicts = [ "wayland-session@niri.target" ];
-        };
-        serviceConfig = {
-          ExecStartPre = "${pkgs.glib}/bin/gdbus wait --system net.hadess.PowerProfiles";
-          ExecStart = "${pkgs.waybar}/bin/waybar";
-          Restart = "on-failure";
-        };
-      };
-      #waybar = {
-      #  unitConfig = {
-      #    After = [ "graphical-session.target" ];
-      #    Requires = [ "dbus.socket" ];
-      #  };
-      #  serviceConfig = {
-      #    ExecStartPre = "${pkgs.glib}/bin/gdbus wait --system net.hadess.PowerProfiles";
-      #  };
-      #};
+      # Injects SOPS Keys Into Environment On Boot.
       sops-import = {
+        enable = true;
         description = "Import sops-rendered environment variables into systemd user session";
         wantedBy = [ "graphical-session.target" "default.target" ];
         after = [ "sops-nix.service" ];
@@ -771,25 +784,98 @@
           '';
         };
       };
-      rbw-autounlock = {
-        description = "Securely unlock Bitwarden Vault on Hyprland Startup";
-        wantedBy = [ "graphical-session.target" "default.target" ];
+      # Noctalia-Shell Systemd Service For Niri That Is Supposed To Not Start For Hyprland.
+      niri-bar = {
+        enable = true;
+        description = "Noctalia Shell for UWSM Managed Niri compositor";
+        wantedBy = [ "niri.target" ];
         unitConfig = {
-          After = [ "graphical-session.target" "dbus.socket" ];
-          #PartOf = [ "wayland-session@hyprland-uwsm.target" ];
-          #After = [ "graphical-session.target" ];
-          #PartOf = [ "graphical-session.target" ];
+          After = [ "niri.target" "dbus.socket" ];
+          PartOf = [ "niri.target" ];
+          Conflicts = [ "hyprland.target" ];
         };
         serviceConfig = {
-          Type = "oneshot";
-          #Environment = [
-          #  "WAYLAND_DISPLAY=wayland-0"
-          #  "DISPLAY=:0"
-          #];
-          ExecStart = "${pkgs.rbw}/bin/rbw unlock";
-          RemainAfterExit = false;
+          ExecStart = "${pkgs.noctalia-shell}/bin/noctalia-shell";
+          Restart = "on-failure";
         };
       };
+      # Not Sure If This Works Either
+      #noctalia-shell = {
+      #  enable = true;
+      #  description = "Noctalia Shell for UWSM Managed Niri compositor";
+      #  wantedBy = [ "wayland-session@niri.target" ];
+      #  unitConfig = {
+      #    After = [ "wayland-session@niri.target" "dbus.socket" ];
+      #    PartOf = [ "wayland-session@niri.target" ];
+      #    Conflicts = [ "wayland-session@hyprland.target" ];
+      #  };
+      #  serviceConfig = {
+      #    ExecStart = "${pkgs.noctalia-shell}/bin/noctalia-shell";
+      #    Restart = "on-failure";
+      #  };
+      #};
+      # Hopefully This Creates Intended Effect And Doesnt Launch With Niri But Does For Hyprland.
+      waybar = {
+        enable = false;
+        description = "Waybar for UWSM Managed Hyprland";
+        wantedBy = [ "hyprland.target" ];
+        unitConfig = {
+          PartOf = [ "hyprland.target" ];
+          After = [ "hyprland.target" ];
+          Conflicts = [ "niri.target" ];
+        };
+        serviceConfig = {
+          ExecStartPre = "${pkgs.glib}/bin/gdbus wait --system net.hadess.PowerProfiles";
+          ExecStart = "${pkgs.waybar}/bin/waybar";
+          Restart = "on-failure";
+        };
+      };
+      # Didnt Create Intended Effect.
+      #waybar = {
+      #  enable = true;
+      #  description = "Waybar for UWSM Managed Hyprland";
+      #  wantedBy = [ "wayland-session@hyprland.target" ];
+      #  unitConfig = {
+      #    PartOf = [ "wayland-session@hyprland.target" ];
+      #    After = [ "wayland-session@hyprland.target" ];
+      #    Conflicts = [ "wayland-session@niri.target" ];
+      #  };
+      #  serviceConfig = {
+      #    ExecStartPre = "${pkgs.glib}/bin/gdbus wait --system net.hadess.PowerProfiles";
+      #    ExecStart = "${pkgs.waybar}/bin/waybar";
+      #    Restart = "on-failure";
+      #  };
+      #};
+      # Works For Sure, Original Service For Hyprland.
+      #waybar = {
+      #  unitConfig = {
+      #    After = [ "graphical-session.target" ];
+      #    Requires = [ "dbus.socket" ];
+      #  };
+      #  serviceConfig = {
+      #    ExecStartPre = "${pkgs.glib}/bin/gdbus wait --system net.hadess.PowerProfiles";
+      #  };
+      #};
+      # Doesnt Work Probably Not Needed Anyways With SOPS + AGE Now.
+      #rbw-autounlock = {
+      #  description = "Securely unlock Bitwarden Vault on Hyprland Startup";
+      #  wantedBy = [ "graphical-session.target" "default.target" ];
+      #  unitConfig = {
+      #    After = [ "graphical-session.target" "dbus.socket" ];
+      #    #PartOf = [ "wayland-session@hyprland-uwsm.target" ];
+      #    #After = [ "graphical-session.target" ];
+      #    #PartOf = [ "graphical-session.target" ];
+      #  };
+      #  serviceConfig = {
+      #    Type = "oneshot";
+      #    #Environment = [
+      #    #  "WAYLAND_DISPLAY=wayland-0"
+      #    #  "DISPLAY=:0"
+      #    #];
+      #    ExecStart = "${pkgs.rbw}/bin/rbw unlock";
+      #    RemainAfterExit = false;
+      #  };
+      #};
     };
   };
 

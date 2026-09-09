@@ -4,7 +4,7 @@
 }:
 {
   programs.tmux = {
-    enable = true;
+    enable = false;
     clock24 = true;
     baseIndex = 1;
     escapeTime = 10;
