@@ -1,8 +1,9 @@
+# This file is for hyprland permissions, it adjusts for the dynamic changing of binaries paths that im trying to grant access.
 { ... }:
 
 {
   wayland.windowManager.hyprland = {
-    enable = true;
+    enable = false;
     package = null; # Prevents Home Manager from double-installing the binary package
     settings = {
       permission = [

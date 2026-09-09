@@ -7,6 +7,7 @@
 !home.nix
 !homeModules.nix
 !systemModules.nix
+!nixosModules.nix
 !modules/
 !hosts/
 !flakes/
