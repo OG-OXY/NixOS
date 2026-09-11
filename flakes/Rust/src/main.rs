@@ -6,9 +6,7 @@ use smithay::reexports::wayland_server::protocol::wl_buffer::WlBuffer;
 use smithay::reexports::wayland_server::protocol::wl_surface::WlSurface;
 use smithay::reexports::wayland_server::{Client, Display};
 use smithay::wayland::buffer::BufferHandler;
-use smithay::wayland::compositor::{
-    CompositorClientState, CompositorHandler, CompositorState,
-};
+use smithay::wayland::compositor::{CompositorClientState, CompositorHandler, CompositorState};
 use smithay::wayland::shm::{ShmHandler, ShmState};
 
 #[derive(Default)]
