@@ -40,7 +40,7 @@
         efiSupport = true;
         useOSProber = true;
         device = "nodev";
-        configurationLimit = 30;
+        configurationLimit = 10;
         default = "3";
       };
       efi = {
@@ -94,6 +94,10 @@
       "vm.dirty_ratio" = 10;
       "fs.inotify.max_user_watches" = 524288;
     };
+    extraModprobeConfig = ''
+      options iwlwifi 11n_disable=1
+      options iwlwifi power_save=0
+    '';
     binfmt.emulatedSystems = [ "aarch64-linux" ];
   };
 

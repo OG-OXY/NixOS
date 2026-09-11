@@ -12,20 +12,6 @@
     ./systemModules.nix
   ];
 
-  # Bootloader + GRUB parameters.
-  boot.loader = {
-    efi = {
-      canTouchEfiVariables = true;
-    };
-    grub = {
-      enable = true;
-      device = "nodev";
-      efiSupport = true;
-      useOSProber = true;
-      configurationLimit = 30;
-    };
-  };
-
   # NIX-PKG-Manager parameters.
   nix = {
     settings = {
@@ -40,7 +26,7 @@
     # Garbage collection.
     gc = {
       automatic = true;
-      dates = "weekly";
+      dates = "daily";
       options = "--delete-older-than 5d";
     };
   };
@@ -107,7 +93,7 @@
     };
   };
 
-  # Networking PKGS + parameters.
+  # Networking PKGS + Parameters
   networking = {
     hostName = "nixos";
     networkmanager = {
@@ -125,11 +111,13 @@
             };
             wifi = {
               ssid = "JOSH3881";
+              bssid = "7C:9A:54:AF:D7:22";
+              interface-name = "wlan0";
               mode = "infrastructure";
               band = "bg";
+              powersave = 2;
             };
             wifi-security = {
-              auth-alg = "open";
               key-mgmt = "wpa-psk";
               psk = "$WIFI_HOME_PSK"; #SOPS secret
             };
@@ -147,7 +135,18 @@
       allowedTCPPorts = [ 22 ];
       trustedInterfaces = [ "tailscale0" ];
     };
-    wireless.enable = false;
+    wireless = {
+      enable = false;
+      #iwd = {
+      #  enable = true;
+      #  settings = {
+      #    General = {
+      #      BandModifier5GHz = 0.0;
+      #      "BandModifier2.4GHz" = 10.0;
+      #    };
+      #  };
+      #};
+    };
   };
 
   sops = {

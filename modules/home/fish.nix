@@ -38,6 +38,13 @@
           lspci | grep $argv
         '';
       };
+      sysclean = {
+        description = "Clear Nix Generations and Boot";
+        body = ''
+          sudo nix-env --delete-generations +5 --profile /nix/var/nix/profiles/system
+          sudo nh clean all --keep 5
+        '';
+      };
     };
 
     shellAbbrs = {
@@ -68,6 +75,9 @@
       nhsu = "nh os switch . --upgrade";
       nb = "nix-backup";
       nub = "nix-upgrade-backup";
+      nhc = "sudo nh clean all --keep 5";
+      dfb = "df -h /boot";
+      dfr = "df -h /";
       ts = "doas tailscale up";
       pcig = "lspci | grep \'|\'";
       btc = "bluetoothctl connect D6:88:C3:AC:1B:0C";
