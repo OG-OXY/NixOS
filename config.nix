@@ -256,11 +256,6 @@
             desc = "Quadrant Mode (Grids)";
             cmd = "${pkgs.warpd}/bin/warpd --grid";
           }
-          {
-            key = "h";
-            desc = "Hint Mode (Click Target)";
-            cmd = "${pkgs.warpd}/bin/warpd --hint";
-          }
         ];
         apps = [
           {
