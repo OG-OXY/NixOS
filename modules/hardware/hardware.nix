@@ -139,16 +139,16 @@
         "x-systemd.device-timeout=5s"
       ];
     };
-    "/home/ty/Ventoy" = {
-      enable = false;
-      device = "/dev/disk/by-label/Ventoy";
-      fsType = "exfat";
-      options = [
-        "defaults"
-        "nofail"
-        "x-systemd.automount"
-        "x-systemd.device-timeout=5s"
-      ];
-    };
+    #"/home/ty/Ventoy" = {
+    #  enable = false;
+    #  device = "/dev/disk/by-label/Ventoy";
+    #  fsType = "exfat";
+    #  options = [
+    #    "defaults"
+    #    "nofail"
+    #    "x-systemd.automount"
+    #    "x-systemd.device-timeout=5s"
+    #  ];
+    #};
   };
 }
