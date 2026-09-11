@@ -104,13 +104,14 @@ window-rule {
 binds {
     // Core Program Launchers & Actions
     Mod+Space { spawn "apps"; }
+    Mod+W { spawn "warp"; }
     Mod+Return { spawn "ghostty"; }
     Mod+R { spawn "sh" "-c" "pkill wofi || wofi --show run"; }
     Mod+D { spawn-sh "noctalia-shell ipc call launcher toggle"; }
     //Mod+D { spawn "noctalia-shell" "toggle-menu"; }
     //Mod+D { spawn "sh" "-c" "pkill wofi || wofi --show drun"; }
-    Mod+B { spawn "zen-beta"; }
-    Mod+V { spawn "vesktop"; }
+    //Mod+B { spawn "zen-beta"; }
+    //Mod+V { spawn "vesktop"; }
     Mod+Q repeat=false { close-window; }
     
     // Show Keybinds
@@ -181,7 +182,7 @@ binds {
     Mod+Ctrl+F { expand-column-to-available-width; }
     Mod+C { center-column; }
     Mod+Shift+V { toggle-window-floating; }
-    Mod+W { toggle-column-tabbed-display; }
+    Mod+T { toggle-column-tabbed-display; }
 
     Mod+Minus { set-column-width "-10%"; }
     Mod+Equal { set-column-width "+10%"; }

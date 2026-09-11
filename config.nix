@@ -240,6 +240,28 @@
         font = "JetBrainsMono NFM 12";
       };
       menus = {
+        warp = [
+          {
+            key = "h";
+            desc = "Hint Mode (Click Target)";
+            cmd = "${pkgs.warpd}/bin/warpd --hint";
+          }
+          {
+            key = "w";
+            desc = "Normal Mode (Vim h/j/k/l)";
+            cmd = "${pkgs.warpd}/bin/warpd --normal";
+          }
+          {
+            key = "q";
+            desc = "Quadrant Mode (Grids)";
+            cmd = "${pkgs.warpd}/bin/warpd --grid";
+          }
+          {
+            key = "h";
+            desc = "Hint Mode (Click Target)";
+            cmd = "${pkgs.warpd}/bin/warpd --hint";
+          }
+        ];
         apps = [
           {
             key = "t";
@@ -272,10 +294,15 @@
     warpd = {
       enable = true;
       settings = {
+        left_click = "space";
+        right_click = "r";
+        middle_click = "v";
+        drag = "d";
+        exit = "q";
         hint_activation_key = "A-M-h";
         grid_activation_key = "A-M-g";
-        speed = 400;
-        hint_chars = "arstgmneio";
+        speed = 500;
+        hint_chars = "astgmneio";
       };
     };
     # Native NixOS Modules
