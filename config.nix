@@ -126,11 +126,18 @@
             wifi = {
               ssid = "JOSH3881";
               mode = "infrastructure";
+              band = "bg";
             };
             wifi-security = {
               auth-alg = "open";
               key-mgmt = "wpa-psk";
-              psk = "$WIFI_HOME_PSK"; # References the sops secret variable
+              psk = "$WIFI_HOME_PSK"; #SOPS secret
+            };
+            ipv4 = {
+              method = "auto";
+            };
+            ipv6 = {
+              method = "auto";
             };
           };
         };
@@ -467,7 +474,7 @@
       pkgs.pinentry-qt
       #pkgs.waybar
       #pkgs.mako
-      pkgs.wofi
+      #pkgs.wofi
       pkgs.ghostty
       pkgs.yazi
       #pkgs.hyprpaper
@@ -678,11 +685,11 @@
     tailscale.enable = true;
     gnome.gnome-keyring.enable = false;
     power-profiles-daemon.enable = true;
-    hardware.openrgb = {
-      enable = true;
-      package = pkgs.openrgb-with-all-plugins;
-      motherboard = "amd";
-    };
+    #hardware.openrgb = {
+    #  enable = true;
+    #  package = pkgs.openrgb-with-all-plugins;
+    #  motherboard = "amd";
+    #};
     logind.settings = {
       Login = {
         IdleAction = "ignore";
