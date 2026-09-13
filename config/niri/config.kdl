@@ -105,9 +105,9 @@ binds {
     // Core Program Launchers & Actions
     Mod+Space { spawn "apps"; }
     Mod+W { spawn "warp"; }
-    Mod+Return { spawn "ghostty"; }
-    Mod+R { spawn "sh" "-c" "pkill wofi || wofi --show run"; }
     Mod+D { spawn-sh "noctalia-shell ipc call launcher toggle"; }
+    Mod+Return { spawn "ghostty"; }
+    //Mod+R { spawn "sh" "-c" "pkill wofi || wofi --show run"; }
     //Mod+D { spawn "noctalia-shell" "toggle-menu"; }
     //Mod+D { spawn "sh" "-c" "pkill wofi || wofi --show drun"; }
     //Mod+B { spawn "zen-beta"; }
@@ -174,20 +174,21 @@ binds {
     Mod+Ctrl+9 { move-column-to-workspace 9; }
 
     // Layout Controls & Sizing
-    Mod+Shift+R { switch-preset-column-width; }
-    //Mod+Shift+R { switch-preset-column-width-back; }
+    //Mod+T { switch-preset-column-width; }
+    Mod+R repeat=false { toggle-overview; }
     Mod+F { maximize-column; }
     Mod+Shift+F { fullscreen-window; }
     Mod+M { maximize-window-to-edges; }
-    Mod+Ctrl+F { expand-column-to-available-width; }
+    Mod+Shift+T { expand-column-to-available-width; }
     Mod+C { center-column; }
     Mod+Shift+V { toggle-window-floating; }
     Mod+T { toggle-column-tabbed-display; }
 
-    Mod+Minus { set-column-width "-10%"; }
-    Mod+Equal { set-column-width "+10%"; }
-    Mod+Shift+Minus { set-window-height "-10%"; }
-    Mod+Shift+Equal { set-window-height "+10%"; }
+    // Granular Column & Window Sizing (Home-row adjacent)
+    Mod+Comma { set-column-width "-10%"; }
+    Mod+Period { set-column-width "+10%"; }
+    Mod+Shift+Comma { set-window-height "-10%"; }
+    Mod+Shift+Period { set-window-height "+10%"; }
 
     // Mouse Controls & Scrolling
     Mod+WheelScrollDown cooldown-ms=150 { focus-workspace-down; }
@@ -218,4 +219,12 @@ binds {
     Mod+Shift+E { quit; }
     Ctrl+Alt+Delete { quit; }
     Mod+Shift+P { power-off-monitors; }
+    // Old unused keybinds i throw here.
+    //Mod+R { spawn "sh" "-c" "pkill wofi || wofi --show run"; }
+    //Mod+D { spawn "noctalia-shell" "toggle-menu"; }
+    //Mod+D { spawn "sh" "-c" "pkill wofi || wofi --show drun"; }
+    //Mod+B { spawn "zen-beta"; }
+    //Mod+V { spawn "vesktop"; }
+    //Mod+Shift+R { switch-preset-column-width-back; }
+    //Mod+T { switch-preset-column-width; }
 }
