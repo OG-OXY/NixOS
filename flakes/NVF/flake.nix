@@ -55,6 +55,7 @@
                     termguicolors = true;
                     number = true;
                     relativenumber = true;
+                    conceallevel = 1;
                     foldlevel = 99;
                     foldlevelstart = 99;
                     clipboard = "unnamedplus";
@@ -298,10 +299,34 @@
                       vim.api.nvim_create_autocmd("BufWritePost", {
                         pattern = "*.norg",
                         callback = function()
-                          vim.cmd("Neorg export to-file " .. vim.fn.expand("%:r") .. ".md")
+                          local filepath = vim.fn.expand("%:p")
+                          if filepath:match("/Notes/") and not filepath:match("/Notes/Vault/") then
+                            local target = filepath:gsub("/Notes/", "/Notes/Vault/"):gsub("%.norg$", ".md")
+                            vim.cmd("Neorg export to-file " .. target)
+                          end
                         end,
                       })
                     '';
+                    #neorg-auto-export = ''
+                    #  vim.api.nvim_create_autocmd("BufWritePost", {
+                    #    pattern = "*.norg",
+                    #    callback = function()
+                    #      local filepath = vim.fn.expand("%:p")
+                    #      if filepath:match("/.sync/") then
+                    #        local target = filepath:gsub("%.norg$", ".md")
+                    #        vim.cmd("Neorg export to-file " .. target)
+                    #      end
+                    #    end,
+                    #  })
+                    #'';
+        #neorg-auto-export = ''
+        #  vim.api.nvim_create_autocmd("BufWritePost", {
+        #   pattern = "*.norg",
+                    #   callback = function()
+                    #     vim.cmd("Neorg export to-file " .. vim.fn.expand("%:r") .. ".md")
+                    #   end,
+            # })
+                    #'';
                     treesitter-auto-start = ''
                       vim.api.nvim_create_autocmd("FileType", {
                         pattern = "*",
@@ -323,19 +348,32 @@
                             config = {
                               workspaces = {
                                 notes = "~/Notes";
-                                sync = "~/.sync";
+                                sync = "~/Notes/Vault";
                               };
                               default_workspace = "notes";
                             };
-                            "core.completion" = {
-                              config = {
-                                engine = "blink";
-                              };
-                            };
-                            "core.export" = { };
-                            "core.export.markdown" = { };
                           };
+                          "core.completion" = {
+                            config = {
+                              engine = "blink-cmp";
+                            };
+                          };
+                          "core.export" = { };
+                          "core.export.markdown" = { };
                         };
+                      };
+                    };
+                    obsidian = {
+                      enable = true;
+                      setupOpts = {
+                        legacy_commands = false;
+                        workspaces = [
+                          {
+                            name = "vault";
+                            path = "~/Notes/Vault";
+                          }
+                        ];
+                        ui.enable = true;
                       };
                     };
                   };

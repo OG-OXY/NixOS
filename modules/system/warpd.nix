@@ -46,6 +46,10 @@ in
     # Automatically add users to the 'input' group for Wayland uinput access
     users.groups.input.members = lib.optional (config.users.users ? ty) "ty";
     # Generate ~/.config/warpd/config at login/session initialization
-    environment.etc."xdg/warpd/config".source = configFile;
+    #environment.etc."xdg/warpd/config".source = configFile;
+    systemd.tmpfiles.rules = [
+      "d /home/ty/.config/warpd 0755 ty users -"
+      "L+ /home/ty/.config/warpd/config - - - - ${configFile}"
+    ];
   };
 }

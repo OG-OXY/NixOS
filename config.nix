@@ -268,14 +268,14 @@
       menus = {
         warp = [
           {
-            key = "h";
-            desc = "Hint Mode (Click Target)";
-            cmd = "${pkgs.warpd}/bin/warpd --hint";
-          }
-          {
             key = "w";
             desc = "Normal Mode (Vim h/j/k/l)";
             cmd = "${pkgs.warpd}/bin/warpd --normal";
+          }
+          {
+            key = "h";
+            desc = "Hint Mode (Click Target)";
+            cmd = "${pkgs.warpd}/bin/warpd --hint";
           }
           {
             key = "q";
@@ -293,6 +293,11 @@
             key = "z";
             desc = "Zen-Browser";
             cmd = "${inputs.zen-browser.packages.${pkgs.system}.default}/bin/zen-beta";
+          }
+          {
+            key = "o";
+            desc = "Obsidian";
+            cmd = "${pkgs.obsidian}/bin/obsidian";
           }
           {
             key = "v";
@@ -315,15 +320,14 @@
     warpd = {
       enable = true;
       settings = {
-        left_click = "space";
-        right_click = "r";
-        middle_click = "v";
-        drag = "d";
-        exit = "q";
-        hint_activation_key = "A-M-h";
-        grid_activation_key = "A-M-g";
+        buttons = "space m n";
+        #hint_exit = "";
+        #grid_exit = "";
+        #hint_activation_key = "A-M-h";
+        #grid_activation_key = "A-M-g";
         speed = 500;
-        hint_chars = "astgmneio";
+        cursor_color = "0000f6";
+        #hint_chars = "asfqwcbnyui";
       };
     };
     # Native NixOS Modules
@@ -579,6 +583,7 @@
       # Wifi Monitor Tools
       pkgs.iw
       pkgs.wavemon
+      pkgs.obsidian
     ]
     ++ [
       inputs.zen-browser.packages.${pkgs.system}.default
