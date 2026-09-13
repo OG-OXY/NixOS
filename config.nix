@@ -81,9 +81,10 @@
         "render"
         "input"
         "uinput"
+        "plugdev"
         "audio"
-        "seat"
-        "seatd"
+        "gamemode"
+        "i2c"
         "libvirtd"
         "kvm"
         "vboxusers"
@@ -96,12 +97,25 @@
   # Networking PKGS + Parameters
   networking = {
     hostName = "nixos";
+    nameservers = [ 
+      "1.1.1.1"
+      "1.0.0.1"
+      "9.9.9.9"
+    ];
     networkmanager = {
       enable = true;
-      wifi.backend = "iwd";
+      wifi = {
+        backend = "iwd";
+        powersave = false;
+      };
       dns = "dnsmasq";
+      #insertNameservers = [
+      #  "1.1.1.1"
+      #  "1.0.0.1"
+      #  "9.9.9.9"
+      #];
       ensureProfiles = {
-        environmentFiles = [ config.sops.secrets."WIFI_HOME_PSK".path ];
+        environmentFiles = [ config.sops.templates."WIFI_PSK.env".path ];
         profiles = {
           "Home-WIFI" = {
             connection = {
@@ -119,13 +133,16 @@
             };
             wifi-security = {
               key-mgmt = "wpa-psk";
-              psk = "$WIFI_HOME_PSK"; #SOPS secret
+              psk = "$WIFI_PSK"; #SOPS secret
             };
             ipv4 = {
               method = "auto";
+              ignore-auto-dns = true;
             };
             ipv6 = {
+              addr-gen-mode = "default";
               method = "auto";
+              ignore-auto-dns = true;
             };
           };
         };
@@ -137,15 +154,18 @@
     };
     wireless = {
       enable = false;
-      #iwd = {
-      #  enable = true;
-      #  settings = {
-      #    General = {
-      #      BandModifier5GHz = 0.0;
-      #      "BandModifier2.4GHz" = 10.0;
-      #    };
-      #  };
-      #};
+      iwd = {
+        enable = true;
+        settings = {
+          General = {
+            EnableNetworkConfiguration = false;
+          };
+          Rank = {
+            BandModifier5GHz = 0.0;
+            "BandModifier2.4GHz" = 10.0;
+          };
+        };
+      };
     };
   };
 
@@ -173,9 +193,9 @@
         group = "users";
         mode = "0400";
       };
-      "WIFI_HOME_PSK" = {
-        owner = "ty";
-        group = "users";
+      "WIFI_PSK" = {
+        owner = "root";
+        group = "root";
         mode = "0400";
       };
       "bw_client_id" = {
@@ -207,7 +227,7 @@
         group = "root";
         mode = "0400";
         content = ''
-          WIFI_HOME_PSK=${config.sops.placeholder.WIFI_HOME_PSK}
+          WIFI_PSK=${config.sops.placeholder.WIFI_PSK}
         '';
       };
     };
@@ -509,11 +529,11 @@
       pkgs.rofi-rbw-wayland
       pkgs.ffmpeg-full
       pkgs.obs-studio
-      pkgs.hyprshot
+      #pkgs.hyprshot
       pkgs.mpv
       pkgs.mpd
       pkgs.imv
-      pkgs.hyprpicker
+      #pkgs.hyprpicker
       pkgs.btop
       pkgs.tree
       pkgs.dysk
@@ -556,6 +576,9 @@
       pkgs.poppler-utils
       pkgs.imagemagick
       pkgs.resvg
+      # Wifi Monitor Tools
+      pkgs.iw
+      pkgs.wavemon
     ]
     ++ [
       inputs.zen-browser.packages.${pkgs.system}.default
@@ -565,6 +588,13 @@
       #pkgs.cudaPackages.cudatoolkit
     ];
     etc = {
+      "NetworkManager/dnsmasq.d/fallback-dns.conf".text = ''
+        no-resolv
+        server=1.1.1.1
+        server=1.0.0.1
+        server=9.9.9.9
+        all-servers
+      '';
       "greetd/sway-config".text = lib.mkForce ''
         exec regreet
         output "ASUSTek COMPUTER INC ROG PG258Q ASP9OUVfHcfd" mode 1920x1080@240 pos 0 0
@@ -951,7 +981,7 @@
       };
     };
   };
-
+  
   # Time zone.
   time.timeZone = "America/New_York";
 
