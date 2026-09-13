@@ -104,6 +104,8 @@
       if type -q direnv
           direnv hook fish | source
       end
+      zoxide init fish | source
+      atuin init fish | source
     '';
 
     plugins =
