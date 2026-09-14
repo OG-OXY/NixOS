@@ -11,6 +11,6 @@ smithay = { version = "0.4.4", features = [
   "wayland_frontend"
 ] }
 
-calloop = "0.13"
+calloop = "0.14"
 tracing = "0.1"
 tracing-subscriber = "0.3"
