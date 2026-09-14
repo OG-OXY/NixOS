@@ -1,6 +1,8 @@
 use smithay::backend::renderer::glow::GlowRenderer;
 use smithay::delegate_compositor;
 use smithay::delegate_shm;
+use smithay::delegate_seat;
+use smithay::input::{SeatHandler, SeatState};
 use smithay::reexports::wayland_server::backend::ClientData;
 use smithay::reexports::wayland_server::protocol::wl_buffer::WlBuffer;
 use smithay::reexports::wayland_server::protocol::wl_surface::WlSurface;
@@ -19,6 +21,7 @@ impl ClientData for CustomClientData {}
 pub struct SmallWmState {
     pub compositor_state: CompositorState,
     pub shm_state: ShmState,
+    pub seat_state: SeatState<SmallWmState>,
 }
 
 impl CompositorHandler for SmallWmState {
@@ -46,6 +49,20 @@ impl ShmHandler for SmallWmState {
     }
 }
 
+impl SeatHandler for SmallWmState {
+    type KeyboardFocus = WlSurface;
+    type PointerFocus = WlSurface;
+    type TouchFocus = WlSurface;
+
+    fn seat_state(&mut self) -> &mut SeatState<Self> {
+        &mut self.seat_state
+    }
+
+    fn focus_changed(&mut self, _seat: &smithay::input::Seat<Self>, _focus: Option<&WlSurface>) {}
+    fn cursor_image(&mut self, _seat: &smithay::input::Seat<Self>, _image: smithay::input::pointer::CursorImageStatus) {}
+}
+
+delegate_seat!(SmallWmState);
 delegate_compositor!(SmallWmState);
 delegate_shm!(SmallWmState);
 
@@ -55,13 +72,13 @@ fn main() {
 
     let compositor_state = CompositorState::new::<SmallWmState>(&dh);
     let shm_state = ShmState::new::<SmallWmState>(&dh, vec![]);
+    let seat_state = SeatState::new();
 
     let _state = SmallWmState {
         compositor_state,
         shm_state,
+        seat_state,
     };
-
-    let _ = std::mem::size_of::<GlowRenderer>();
 
     println!("Smithay setup initialized successfully.");
 }
