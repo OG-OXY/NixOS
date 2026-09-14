@@ -1,4 +1,5 @@
-use smithay::backend::renderer::glow::GlowRenderer;
+mod window;
+
 use smithay::delegate_compositor;
 use smithay::delegate_shm;
 use smithay::delegate_seat;
@@ -6,7 +7,7 @@ use smithay::input::{SeatHandler, SeatState};
 use smithay::reexports::wayland_server::backend::ClientData;
 use smithay::reexports::wayland_server::protocol::wl_buffer::WlBuffer;
 use smithay::reexports::wayland_server::protocol::wl_surface::WlSurface;
-use smithay::reexports::wayland_server::{Client, Display};
+use smithay::reexports::wayland_server::Client;
 use smithay::wayland::buffer::BufferHandler;
 use smithay::wayland::compositor::{CompositorClientState, CompositorHandler, CompositorState};
 use smithay::wayland::shm::{ShmHandler, ShmState};
@@ -67,18 +68,5 @@ delegate_compositor!(SmallWmState);
 delegate_shm!(SmallWmState);
 
 fn main() {
-    let display: Display<SmallWmState> = Display::new().unwrap();
-    let dh = display.handle();
-
-    let compositor_state = CompositorState::new::<SmallWmState>(&dh);
-    let shm_state = ShmState::new::<SmallWmState>(&dh, vec![]);
-    let seat_state = SeatState::new();
-
-    let _state = SmallWmState {
-        compositor_state,
-        shm_state,
-        seat_state,
-    };
-
-    println!("Smithay setup initialized successfully.");
+    window::run_window();
 }
