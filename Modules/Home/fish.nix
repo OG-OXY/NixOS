@@ -81,6 +81,8 @@
       ts = "doas tailscale up";
       pcig = "lspci | grep \'|\'";
       btc = "bluetoothctl connect D6:88:C3:AC:1B:0C";
+      tm = "tmux";
+      tma = "tmux attach";
     };
 
     interactiveShellInit = ''
