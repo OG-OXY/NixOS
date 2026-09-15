@@ -8,10 +8,11 @@
 !homeModules.nix
 !systemModules.nix
 !nixosModules.nix
-!modules/
-!hosts/
-!flakes/
-!config/
+!Config/
+!Develop/
+!Flakes/
+!Hosts/
+!Modules/
 
 .aider*
 *.bak
@@ -22,5 +23,5 @@ secrets/
 result
 result-*
 
-flakes/Rust/target/
-flakes/Rust/.devenv
+Develop/Rust/target/
+Develop/Rust/.devenv

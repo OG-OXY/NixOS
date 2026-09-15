@@ -30,8 +30,8 @@
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nvf.url = "path:./modules/flakes/NVF";
-    llm-agents.url = "path:./modules/flakes/LLM-Agents";
+    nvf.url = "path:./Flakes/NVF";
+    llm-agents.url = "path:./Flakes/LLM-Agents";
   };
 
   outputs = inputs:

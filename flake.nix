@@ -34,8 +34,8 @@
       url = "github:stuomas/delicious-sddm-theme";
       flake = false;
     };
-    nvf.url = "path:./flakes/NVF";
-    llm-agents.url = "path:./flakes/LLM-Agents";
+    nvf.url = "path:./Flakes/NVF";
+    llm-agents.url = "path:./Flakes/LLM-Agents";
   };
   outputs = {
     self,
@@ -100,8 +100,8 @@
             useUserPackages = true;
             backupFileExtension = ".bak";
             users = {
-              root = import ./modules/home/root-home.nix;
-              ty = import ./modules/home/ty-home.nix;
+              root = import ./Modules/Home/root-home.nix;
+              ty = import ./Modules/Home/ty-home.nix;
             };
             extraSpecialArgs = {inherit inputs self;};
           };

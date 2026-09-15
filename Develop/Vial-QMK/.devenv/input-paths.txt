@@ -1,0 +1,7 @@
+/home/ty/NixOS/Master/develop/Vial-QMK/.devenv/bootstrap/bootstrapLib.nix
+/home/ty/NixOS/Master/develop/Vial-QMK/.devenv/bootstrap/default.nix
+/home/ty/NixOS/Master/develop/Vial-QMK/.devenv/bootstrap/resolve-lock.nix
+/home/ty/NixOS/Master/develop/Vial-QMK/devenv.local.nix
+/home/ty/NixOS/Master/develop/Vial-QMK/devenv.lock
+/home/ty/NixOS/Master/develop/Vial-QMK/devenv.nix
+/home/ty/NixOS/Master/develop/Vial-QMK/devenv.yaml
