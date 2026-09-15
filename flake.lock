@@ -1,21 +1,5 @@
 {
   "nodes": {
-    "anvil": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1789280924,
-        "narHash": "sha256-9zYFSdwBkuADMTR06KJ35C+vswDrLa87vGI9Far83xE=",
-        "owner": "Smithay",
-        "repo": "smithay",
-        "rev": "22571baa20d34d71092942dbb520c4e3fbbd6263",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Smithay",
-        "repo": "smithay",
-        "type": "github"
-      }
-    },
     "base16": {
       "inputs": {
         "fromYaml": "fromYaml"
@@ -579,7 +563,6 @@
     },
     "root": {
       "inputs": {
-        "anvil": "anvil",
         "chaotic": "chaotic",
         "delicious": "delicious",
         "flake-parts": "flake-parts",

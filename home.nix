@@ -108,7 +108,7 @@
     #  enable = true;
     #  systemd.enable = true;
     #};
-    herdr.enable = true;
+    #herdr.enable = true;
     devenv.enable = true;
     home-manager.enable = true;
   };

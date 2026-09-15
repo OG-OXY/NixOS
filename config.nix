@@ -285,9 +285,19 @@
         ];
         apps = [
           {
-            key = "t";
+            key = "g";
             desc = "Ghostty";
             cmd = "${pkgs.ghostty}/bin/ghostty";
+          }
+          {
+            key = "t";
+            desc = "Tmux";
+            cmd = "${pkgs.ghostty}/bin/ghostty -e ${pkgs.fish}/bin/fish -i -C 'tmux new-session -A -s main'";
+          }
+          {
+            key = "y";
+            desc = "Yazi";
+            cmd = "${pkgs.ghostty}/bin/ghostty -e ${pkgs.fish}/bin/fish -i -C 'y'";
           }
           {
             key = "z";
@@ -556,8 +566,6 @@
       pkgs.wget2
       pkgs.fzf
       pkgs.ripgrep
-      pkgs.herdr
-      pkgs.llama-cpp
       pkgs.aider-chat
       pkgs.fd
       pkgs.bun
@@ -593,7 +601,7 @@
     ++ [
       inputs.zen-browser.packages.${pkgs.system}.default
       inputs.nvf.packages.${pkgs.system}.default
-      inputs.llm-agents.packages.${pkgs.system}.default
+      #inputs.llm-agents.packages.${pkgs.system}.default
       #pkgs.cudaPackages.cuda_nvcc
       #pkgs.cudaPackages.cudatoolkit
     ];
@@ -771,42 +779,42 @@
         PermitRootLogin = "no";
       };
     };
-    ollama = {
-      enable = true;
-      package = (pkgs.ollama-cuda.override { }).overrideAttrs (oldAttrs: {
-        cmakeFlags = (oldAttrs.cmakeFlags or [ ]) ++ [
-          "-DCMAKE_CUDA_ARCHITECTURES=61"
-        ];
-      });
-      environmentVariables = {
-        CUDA_VISIBLE_DEVICES = "0";
-        OLLAMA_GPU_OVERHEAD = "512";
-      };
-    };
-    llama-cpp = {
-      enable = true;
-      settings = {
-        hf-repo = "Qwen/Qwen2.5-Coder-32B-Instruct-GGUF";
-        hf-file = "qwen2.5-coder-32b-instruct-q4_k_m.gguf";
-        host = "0.0.0.0";
-        port = 8012;
-        jinja = true;
-        flash-attn = "on";
-        ctx-size = 32768;
-        cache-type-k = "q8_0";
-        cache-type-v = "q8_0";
-        n-gpu-layers = 40;
-      };
-      package =
-        (pkgs.llama-cpp.override {
-          cudaSupport = true;
-        }).overrideAttrs
-          (oldAttrs: {
-            cmakeFlags = (oldAttrs.cmakeFlags or [ ]) ++ [
-              "-DCMAKE_CUDA_ARCHITECTURES=61"
-            ];
-          });
-    };
+    #ollama = {
+    #  enable = true;
+    #  package = (pkgs.ollama-cuda.override { }).overrideAttrs (oldAttrs: {
+    #    cmakeFlags = (oldAttrs.cmakeFlags or [ ]) ++ [
+    #      "-DCMAKE_CUDA_ARCHITECTURES=61"
+    #    ];
+    #  });
+    #  environmentVariables = {
+    #    CUDA_VISIBLE_DEVICES = "0";
+    #    OLLAMA_GPU_OVERHEAD = "512";
+    #  };
+    #};
+    #llama-cpp = {
+    #  enable = true;
+    #  settings = {
+    #    hf-repo = "Qwen/Qwen2.5-Coder-32B-Instruct-GGUF";
+    #    hf-file = "qwen2.5-coder-32b-instruct-q4_k_m.gguf";
+    #    host = "0.0.0.0";
+    #    port = 8012;
+    #    jinja = true;
+    #    flash-attn = "on";
+    #    ctx-size = 32768;
+    #    cache-type-k = "q8_0";
+    #    cache-type-v = "q8_0";
+    #    n-gpu-layers = 40;
+    #  };
+    #  package =
+    #    (pkgs.llama-cpp.override {
+    #      cudaSupport = true;
+    #    }).overrideAttrs
+    #      (oldAttrs: {
+    #        cmakeFlags = (oldAttrs.cmakeFlags or [ ]) ++ [
+    #          "-DCMAKE_CUDA_ARCHITECTURES=61"
+    #        ];
+    #      });
+    #};
     pulseaudio.enable = false;
     resolved.enable = false;
     libinput.enable = false;
@@ -823,9 +831,9 @@
       hybrid-sleep.enable = false;
     };
     services = {
-      # Override To Make These Started Manually.
-      ollama.wantedBy = pkgs.lib.mkForce [ ];
-      llama-cpp.wantedBy = pkgs.lib.mkForce [ ];
+      # Override Ollama and Llama-CPP Started Manually.
+      #ollama.wantedBy = pkgs.lib.mkForce [ ];
+      #llama-cpp.wantedBy = pkgs.lib.mkForce [ ];
       # Old No Longer Using SDDM. Was A Test.
       #sddm.environment = {
       #  WLR_NO_HARDWARE_CURSORS = "0";

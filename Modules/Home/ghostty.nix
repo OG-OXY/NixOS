@@ -7,6 +7,7 @@
     enable = true;
     enableFishIntegration = true;
     settings = {
+      confirm-close-surface = false;
       theme = "Aurora";
       background-opacity = 1.0;
       adjust-cell-height = "-10%";
