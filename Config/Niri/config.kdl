@@ -101,6 +101,13 @@ window-rule {
     open-floating true
 }
 
+recent-windows {
+  binds {
+    Mod+R { next-window scope="output"; }
+    Mod+E { previous-window scope="output"; }
+  }
+}
+
 binds {
     // Core Program Launchers & Actions
     Mod+Space { spawn "apps"; }
@@ -112,7 +119,7 @@ binds {
     //Mod+D { spawn "sh" "-c" "pkill wofi || wofi --show drun"; }
     //Mod+B { spawn "zen-beta"; }
     //Mod+V { spawn "vesktop"; }
-    Mod+Q repeat=false { close-window; }
+    Mod+C repeat=false { close-window; }
     
     // Show Keybinds
     Mod+Shift+Slash { show-hotkey-overlay; }
@@ -151,7 +158,7 @@ binds {
     Mod+Ctrl+I { move-column-to-workspace-up; }
     Mod+Shift+U { move-workspace-down; }
     Mod+Shift+I { move-workspace-up; }
-    Mod+Tab { focus-workspace-previous; }
+    Mod+P { focus-workspace-previous; }
 
     Mod+1 { focus-workspace 1; }
     Mod+2 { focus-workspace 2; }
@@ -175,13 +182,13 @@ binds {
 
     // Layout Controls & Sizing
     //Mod+T { switch-preset-column-width; }
-    Mod+R repeat=false { toggle-overview; }
+    Mod+Q repeat=false { toggle-overview; }
     Mod+F { maximize-column; }
-    Mod+Shift+F { fullscreen-window; }
-    Mod+M { maximize-window-to-edges; }
+    //Mod+Shift+F { fullscreen-window; }
+    //Mod+M { maximize-window-to-edges; }
     Mod+Shift+T { expand-column-to-available-width; }
-    Mod+C { center-column; }
-    Mod+Shift+V { toggle-window-floating; }
+    Mod+X { center-column; }
+    Mod+Shift+F { toggle-window-floating; }
     Mod+T { toggle-column-tabbed-display; }
 
     // Granular Column & Window Sizing (Home-row adjacent)

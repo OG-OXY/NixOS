@@ -13,7 +13,13 @@
       auto_sync = true;
       show_preview = true;
       exit_mode = "return-original";
-      word_jump_mode = "emacs";
+      keymap_cursor = {
+        emacs = "blink-block";
+        vim_normal = "steady-block";
+      };
+      keymap_mode = "vim-insert";
+      word_jump_mode = "subl";
+      word_chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
       show_numeric_shortcuts = true;
       show_help = true;
       show_tabs = true;
