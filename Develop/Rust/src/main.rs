@@ -85,12 +85,7 @@ impl XdgShellHandler for SmallWmState {
     }
 
     fn new_popup(&mut self, _surface: PopupSurface, _positioner: PositionerState) {}
-    fn grab(
-        &mut self,
-        _surface: smithay::wayland::shell::xdg::PopupSurface,
-        _seat: smithay::reexports::wayland_server::protocol::wl_seat::WlSeat,
-        _serial: smithay::utils::Serial,
-    ) {}
+    fn grab(&mut self, _surface: smithay::wayland::shell::xdg::PopupSurface, _seat: smithay::reexports::wayland_server::protocol::wl_seat::WlSeat, _serial: smithay::utils::Serial) {}
     fn reposition_request(&mut self, _surface: PopupSurface, _positioner: PositionerState, _token: u32) {}
 }
 
