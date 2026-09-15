@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 
 let
   # Determine libgbm package cleanly depending on Nixpkgs version
@@ -10,6 +10,7 @@ let
     pkgs.wayland-protocols
     pkgs.libxkbcommon
     pkgs.libinput
+    pkgs.libdisplay-info
     pkgs.udev
     pkgs.dbus
     pkgs.pixman
@@ -54,7 +55,7 @@ in
     export LIBRARY_PATH="${libPath}"
     export LD_LIBRARY_PATH="${libPath}"
     export PKG_CONFIG_PATH="${pkgs.lib.makeSearchPathOutput "dev" "lib/pkgconfig" runtimeLibs}:${pkgs.lib.makeSearchPathOutput "out" "lib/pkgconfig" runtimeLibs}:${pkgs.lib.makeSearchPath "share/pkgconfig" runtimeLibs}"
-
+    
     echo "🦀 Rust Wayland Compositor Dev Environment Ready"
   '';
 }
