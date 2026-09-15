@@ -218,6 +218,8 @@
 
                     rust.enable = true;
                     clang.enable = true;
+                    cmake.enable = true;
+                    go.enable = true;
 
                     nix = {
                       enable = true;
