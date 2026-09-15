@@ -1,0 +1,6 @@
+inputs:
+  nixpkgs:
+    url: github:nixos/nixpkgs/nixos-unstable
+
+systems:
+  - x86_64-linux

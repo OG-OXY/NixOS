@@ -1,23 +1,23 @@
 #homeModules.nix
 {...}: {
   imports = [
-    ./modules/home/ai-chat.nix
-    ./modules/home/atuin.nix
-    ./modules/home/ghostty.nix
-    ./modules/home/tmux.nix
-    ./modules/home/fish.nix
-    ./modules/home/scripts.nix
-    ./modules/home/zoxide.nix
-    ./modules/home/yazi.nix
-    ./modules/home/hyprland-permissions.nix
-    ./modules/home/hyprpaper.nix
-    ./modules/home/git.nix
-    ./modules/home/github-cli.nix
-    ./modules/home/jujutsu.nix
-    ./modules/home/ssh.nix
-    ./modules/home/gpg.nix
-    ./modules/home/rbw.nix
-    ./modules/home/fastfetch.nix
-    ./modules/home/luarc.nix
+    ./Modules/Home/ai-chat.nix
+    ./Modules/Home/atuin.nix
+    ./Modules/Home/ghostty.nix
+    ./Modules/Home/tmux.nix
+    ./Modules/Home/fish.nix
+    ./Modules/Home/scripts.nix
+    ./Modules/Home/zoxide.nix
+    ./Modules/Home/yazi.nix
+    ./Modules/Home/hyprland-permissions.nix
+    ./Modules/Home/hyprpaper.nix
+    ./Modules/Home/git.nix
+    ./Modules/Home/github-cli.nix
+    ./Modules/Home/jujutsu.nix
+    ./Modules/Home/ssh.nix
+    ./Modules/Home/gpg.nix
+    ./Modules/Home/rbw.nix
+    ./Modules/Home/fastfetch.nix
+    ./Modules/Home/luarc.nix
   ];
 }

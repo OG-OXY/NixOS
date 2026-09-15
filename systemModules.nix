@@ -4,8 +4,8 @@
 }:
 {
   imports = [
-    ./modules/hardware/hardware.nix
-    ./modules/hardware/nvidia.nix
+    ./Modules/Hardware/hardware.nix
+    ./Modules/Hardware/nvidia.nix
     ./nixosModules.nix
   ];
 }
