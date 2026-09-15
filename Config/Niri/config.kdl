@@ -112,6 +112,7 @@ binds {
     // Core Program Launchers & Actions
     Mod+Space { spawn "apps"; }
     Mod+W { spawn "warp"; }
+    // Note: could make this a which-key bind called Launcher to save mod+D and set this to Mod+space d
     Mod+D { spawn-sh "noctalia-shell ipc call launcher toggle"; }
     Mod+Return { spawn "ghostty"; }
     //Mod+R { spawn "sh" "-c" "pkill wofi || wofi --show run"; }
