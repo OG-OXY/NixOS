@@ -14,3 +14,6 @@ smithay = { version = "0.4.4", features = [
 calloop = "0.14"
 tracing = "0.1"
 tracing-subscriber = "0.3"
+
+[patch.crates-io]
+libdisplay-info-sys = { git = "https://github.com/Smithay/libdisplay-info-rs.git" }
