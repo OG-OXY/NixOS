@@ -2337,8 +2337,3 @@ dependencies = [
  "quote",
  "syn 2.0.119",
 ]
-
-[[patch.unused]]
-name = "libdisplay-info-sys"
-version = "0.3.0"
-source = "git+https://github.com/Smithay/libdisplay-info-rs.git#6a05eb0b56b5e9d4072479cb14c6cdbd5a83ebe6"
