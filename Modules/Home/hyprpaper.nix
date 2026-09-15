@@ -2,7 +2,7 @@
   ...
 }:
 let
-  wallpaperDir = ../../config/theme/wpapers;
+  wallpaperDir = ../../Config/Theme/Wpapers;
 
   wallpapers = map (file: "${wallpaperDir}/${file}") (
     builtins.attrNames (builtins.readDir wallpaperDir)

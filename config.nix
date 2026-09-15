@@ -468,6 +468,8 @@
     variables = {
       CPATH = "/run/current-system/sw/include";
       LIBRARY_PATH = "/run/current-system/sw/lib";
+      XCURSOR_THEME = "Saturn";
+      XCURSOR_SIZE = "32";
       #VST_PATH = "$HOME/.vst:$HOME/.wine/drive_c/Program Files/Steinburg/VstPlugins";
       #VST3_PATH = "$HOME/.vst3:$HOME/.wine/drive_c/Program Files/Common Files/VST3";
     };
@@ -487,8 +489,9 @@
       ENABLE_GAMESCOPE_WSI = "1";
       STEAM_EXTRA_COMPAT_TOOLS_PATHS = "$HOME/.steam/root/compatibilitytools.d";
       WLR_NO_HARDWARE_CURSORS = "0";
-      HYPRCURSOR_SIZE = "24";
-      XCURSOR_SIZE = "24";
+      #HYPRCURSOR_SIZE = "32";
+      XCURSOR_THEME = "Saturn";
+      XCURSOR_SIZE = "32";
       EDITOR = "nvf";
       VISUAL = "nvf";
       SSH_AUTH_SOCK = "/home/ty/.bitwarden-ssh-agent.sock";
@@ -661,11 +664,11 @@
         # Force specific primary monitor if auto-detection picks the wrong one
           monitor = "ASUSTek COMPUTER INC ROG PG258Q #ASP9OUVfHcfd"; 
           cursor = {
-            #theme = "your-cursor-theme-name";
-            size = 24;
+            theme = "Saturn";
+            size = 32;
           };
           appearance = {
-            wallpaper = "/home/ty/NixOS/Master/Config/Theme/wpapers/gruvbox-rainbow-nix.png";
+            wallpaper = "/home/ty/NixOS/Master/Config/Theme/Wpapers/gruvbox-rainbow-nix.png";
             blur = true;
           };
         };
@@ -737,6 +740,7 @@
       #  };
       #};
     };
+    #desktopManager.xterm.enable = false;
     greetd = {
       enable = true;
       settings = {
