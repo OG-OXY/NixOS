@@ -285,6 +285,11 @@
         ];
         apps = [
           {
+            key = "l";
+            desc = "Launcher";
+            cmd = "${pkgs.noctalia-shell}/bin/noctalia-shell ipc call launcher toggle";
+          }
+          {
             key = "g";
             desc = "Ghostty";
             cmd = "${pkgs.ghostty}/bin/ghostty";
@@ -650,52 +655,67 @@
       '';
     };
     displayManager = {
-      # BROKEN ASS MODULE HENCE THE MKFORCE GARBAGE.
-      regreet = {
+      noctalia-greeter = {
         enable = true;
-        cageArgs = lib.mkForce [
-          "-s"
-          "-m"
-          "last"
-        ];
         settings = {
-          background = {
-            path = lib.mkForce "/etc/nixos/wallpaper.png";
-            fit = lib.mkForce "Cover";
+        # Force specific primary monitor if auto-detection picks the wrong one
+          monitor = "ASUSTek COMPUTER INC ROG PG258Q #ASP9OUVfHcfd"; 
+          cursor = {
+            #theme = "your-cursor-theme-name";
+            size = 24;
           };
-          theme = {
-            package = lib.mkForce pkgs.gnome-themes-extra;
-            name = lib.mkForce "Adwaita-dark";
+          appearance = {
+            wallpaper = "/home/ty/NixOS/Master/Config/Theme/wpapers/gruvbox-rainbow-nix.png";
+            blur = true;
           };
-          iconTheme = {
-            package = lib.mkForce pkgs.adwaita-icon-theme;
-            name = lib.mkForce "Adwaita";
-          };
-          cursorTheme = {
-            package = lib.mkForce pkgs.bibata-cursors;
-            name = lib.mkForce "Bibata-Modern-Classic";
-          };
-          GTK = {
-            theme_name = lib.mkForce "Adwaita-dark";
-            icon_theme_name = lib.mkForce "Adwaita";
-            cursor_theme_name = lib.mkForce "Bibata-Modern-Classic";
-            font_name = lib.mkForce "Inter 11";
-          };
-          commands = {
-            reboot = lib.mkForce [
-              "doas"
-              "reboot"
-              "now"
-            ];
-            shutdown = lib.mkForce [
-              "doas"
-              "poweroff"
-            ];
-          };
-          #extraCss = ''
-          #'';
         };
       };
+      # BROKEN ASS MODULE HENCE THE MKFORCE GARBAGE.
+      #regreet = {
+      #  enable = true;
+      #  cageArgs = lib.mkForce [
+      #    "-s"
+      #    "-m"
+      #    "last"
+      #  ];
+      #  settings = {
+      #    background = {
+      #      path = lib.mkForce "/etc/nixos/wallpaper.png";
+      #      fit = lib.mkForce "Cover";
+      #    };
+      #    theme = {
+      #      package = lib.mkForce pkgs.gnome-themes-extra;
+      #      name = lib.mkForce "Adwaita-dark";
+      #    };
+      #    iconTheme = {
+      #      package = lib.mkForce pkgs.adwaita-icon-theme;
+      #      name = lib.mkForce "Adwaita";
+      #    };
+      #    cursorTheme = {
+      #      package = lib.mkForce pkgs.bibata-cursors;
+      #      name = lib.mkForce "Bibata-Modern-Classic";
+      #    };
+      #    GTK = {
+      #      theme_name = lib.mkForce "Adwaita-dark";
+      #      icon_theme_name = lib.mkForce "Adwaita";
+      #      cursor_theme_name = lib.mkForce "Bibata-Modern-Classic";
+      #      font_name = lib.mkForce "Inter 11";
+      #    };
+      #    commands = {
+      #      reboot = lib.mkForce [
+      #        "doas"
+      #        "reboot"
+      #        "now"
+      #      ];
+      #      shutdown = lib.mkForce [
+      #        "doas"
+      #        "poweroff"
+      #      ];
+      #    };
+      #    #extraCss = ''
+      #    #'';
+      #  };
+      #};
       # SDDM Is Fucking Dogshit Enough Said.
       #sddm = {
       #  enable = true;
@@ -722,7 +742,7 @@
       settings = {
         # lib.mkForce's Are Because Broken ASS Regreet Module Default Setting Weights.
         default-session = {
-          command = "${pkgs.regreet}/bin/regreet";
+          command = "${pkgs.noctalia-greeter}/bin/noctalia-greeter";
           user = "greetd";
         };
       };
