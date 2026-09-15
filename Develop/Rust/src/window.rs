@@ -4,6 +4,7 @@ use smithay::backend::renderer::Frame;
 use smithay::backend::renderer::Renderer;
 use smithay::backend::winit::{self, WinitEvent};
 use smithay::input::SeatState;
+use smithay::reexports::ash::vk::Queue;
 use smithay::reexports::calloop::EventLoop;
 use smithay::reexports::wayland_server::Display;
 use smithay::utils::{Rectangle, Transform};
@@ -78,6 +79,7 @@ pub fn run_window() {
                         &mut *renderer,
                         wl_surface,
                     );
+
                 }
 
                 if let Ok(mut frame) = renderer.render(size, Transform::Normal) {
