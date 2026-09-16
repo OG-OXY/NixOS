@@ -605,6 +605,8 @@
       pkgs.iw
       pkgs.wavemon
       pkgs.obsidian
+      # Config dump.
+      pkgs.repomix
     ]
     ++ [
       inputs.zen-browser.packages.${pkgs.system}.default

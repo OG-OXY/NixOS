@@ -346,6 +346,9 @@
                         load = {
                           "core.defaults" = { };
                           "core.concealer" = { };
+                          "core.completion" = { };
+                          "core.export" = { };
+                          "core.export.markdown" = { };
                           "core.dirman" = {
                             config = {
                               workspaces = {
@@ -355,13 +358,6 @@
                               default_workspace = "notes";
                             };
                           };
-                          "core.completion" = {
-                            config = {
-                              engine = "blink-cmp";
-                            };
-                          };
-                          "core.export" = { };
-                          "core.export.markdown" = { };
                         };
                       };
                     };
