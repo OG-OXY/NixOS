@@ -117,6 +117,7 @@ binds {
     // Core Program Launchers & Actions
     Mod+Space { spawn "apps"; }
     Mod+W { spawn "warp"; }
+    
     // Layout Controls & Sizing
     Mod+X { center-column; }
     Mod+F { maximize-column; }
@@ -126,8 +127,10 @@ binds {
     Mod+C repeat=false { close-window; }
     
     // Column Splitting & Window Consumption (VI Integration)
-    Mod+BracketLeft { consume-or-expel-window-left; }
-    Mod+BracketRight { consume-or-expel-window-right; }
+    //Mod+BracketLeft { consume-or-expel-window-left; }
+    //Mod+BracketRight { consume-or-expel-window-right; }
+    Mod+Y { consume-window-into-column; }
+    Mod+P { expel-window-from-column; }
 
     // VI Movement & Focus (H/J/K/L)
     Mod+H { focus-column-left; }
@@ -159,7 +162,7 @@ binds {
     Mod+Ctrl+I { move-column-to-workspace-up; }
     Mod+Shift+U { move-workspace-down; }
     Mod+Shift+I { move-workspace-up; }
-    Mod+P { focus-workspace-previous; }
+    Mod+O { focus-workspace-previous; }
 
     Mod+1 { focus-workspace 1; }
     Mod+2 { focus-workspace 2; }
