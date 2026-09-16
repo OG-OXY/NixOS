@@ -56,8 +56,11 @@
       gc = "git commit -m \"\"";
       gp = "git push -u origin master";
       gpf = "git push -u --force origin master";
+      jd = "jj diff";
       jbs = "jj bookmark set master -r @";
-      jdc = "jj describe -m \"\"";
+      jdc = "jj describe -m \"";
+      jc = "jj commit -m \"";
+      jmc = "jj new @ origin@master";
       jgp = "jj git push --all --allow-empty-description";
       yz = "yazi";
       nv = "nvf";
