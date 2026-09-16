@@ -2,7 +2,8 @@
 
 spawn-at-startup "uwsm" "finalize"
 spawn-at-startup "noctalia-shell"
-spawn-at-startup "ghostty"
+spawn-at-startup "ghostty" "-e" "fish" "-i" "-C" "tmux new-session -A -s main"
+//spawn-at-startup "ghostty"
 spawn-at-startup "zen-beta"
 spawn-at-startup "vesktop"
 
