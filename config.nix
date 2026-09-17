@@ -324,6 +324,11 @@
             cmd = "${pkgs.noctalia-shell}/bin/noctalia-shell ipc call launcher toggle";
           }
           {
+            key = "h";
+            desc = "Herdr";
+            cmd = "${pkgs.ghostty}/bin/ghostty -e ${pkgs.herdr}/bin/herdr";
+          }
+          {
             key = "g";
             desc = "Ghostty";
             cmd = "${pkgs.ghostty}/bin/ghostty";
@@ -555,6 +560,7 @@
       pkgs.xwayland-satellite
       pkgs.noctalia-shell
       pkgs.ghostty
+      pkgs.herdr
       pkgs.yazi
       pkgs.bitwarden-desktop
       pkgs.vesktop
