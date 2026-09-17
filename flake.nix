@@ -4,12 +4,12 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-26.05";
-    flake-parts.url = "github:hercules-ci/flake-parts";
-    import-tree.url = "github:denful/import-tree";
-    wrappers = {
-      url = "github:BirdeeHub/nix-wrapper-modules";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    #flake-parts.url = "github:hercules-ci/flake-parts";
+    #import-tree.url = "github:denful/import-tree";
+    #wrappers = {
+    #  url = "github:BirdeeHub/nix-wrapper-modules";
+    #  inputs.nixpkgs.follows = "nixpkgs";
+    #};
     chaotic = {
       url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -30,10 +30,10 @@
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    delicious = {
-      url = "github:stuomas/delicious-sddm-theme";
-      flake = false;
-    };
+    #delicious = {
+    #  url = "github:stuomas/delicious-sddm-theme";
+    #  flake = false;
+    #};
     nvf.url = "path:./Flakes/NVF";
     llm-agents.url = "path:./Flakes/LLM-Agents";
   };
@@ -41,8 +41,8 @@
     self,
     nixpkgs,
     nixpkgs-stable,
-    flake-parts,
-    wrappers,
+    #flake-parts,
+    #wrappers,
     chaotic,
     home-manager,
     sops,
@@ -73,17 +73,17 @@
                 };
               in {
                 #package = packagename.stable
-                delicious-sddm-theme = prev.stdenv.mkDerivation {
-                  pname = "delicious-sddm-theme";
-                  version = "1.0";
-                  src = inputs.delicious;
-                  buildInputs = [ prev.qt5.qtgraphicaleffects ];
-                  dontWrapQtApps = true;
-                  installPhase = ''
-                    mkdir -p $out/share/sddm/themes/delicious
-                    cp -r * $out/share/sddm/themes/delicious/
-                  '';
-                };
+                    #delicious-sddm-theme = prev.stdenv.mkDerivation {
+                    #  pname = "delicious-sddm-theme";
+                    #  version = "1.0";
+                    #  src = inputs.delicious;
+                    #  buildInputs = [ prev.qt5.qtgraphicaleffects ];
+                    #  dontWrapQtApps = true;
+                    #  installPhase = ''
+                    #    mkdir -p $out/share/sddm/themes/delicious
+                    #    cp -r * $out/share/sddm/themes/delicious/
+                    #  '';
+                    #};
               })
             ];
           };
