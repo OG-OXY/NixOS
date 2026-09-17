@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  config,
   modulesPath,
   ...
 }:
@@ -54,10 +55,10 @@
     initrd = {
       kernelModules = [
         "amdgpu"
-        "nvidia"
-        "nvidia_modeset"
-        "nvidia_uvm"
-        "nvidia_drm"
+        #"nvidia"
+        #"nvidia_modeset"
+        #"nvidia_uvm"
+        #"nvidia_drm"
       ];
       availableKernelModules = [
         "xhci_pci"
@@ -75,7 +76,9 @@
       "i2c-dev"
       "i2c-piix4"
     ];
-    extraModulePackages = [ ];
+    extraModulePackages = [ 
+      config.hardware.nvidia.package
+    ];
     kernelParams = [
       "quiet"
       "splash"

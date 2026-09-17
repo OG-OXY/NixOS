@@ -69,6 +69,7 @@
       bind -r L resize-pane -R 5
 
       # 8. Wayland Clipboard Integration for Copy Mode
+      bind y copy-mode
       bind-key -T copy-mode-vi v send-keys -X begin-selection
       bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "${pkgs.wl-clipboard}/bin/wl-copy"
 
