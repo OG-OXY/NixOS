@@ -21,6 +21,6 @@ in
   # Superior tmpfiles approach
   systemd.tmpfiles.rules = [
     "d /home/ty/.config/herdr 0755 ty users -"
-    "L+ /home/ty/.config/herdr/config.toml - - - - ${herdrConfig}"
+    "C /home/ty/.config/herdr/config.toml - - - - ${herdrConfig}"
   ];
 }

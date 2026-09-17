@@ -625,7 +625,6 @@
       pkgs.monero-cli
       pkgs.easyeffects
       #pkgs.delicious-sddm-theme
-      pkgs.papirus-icon-theme
       pkgs.quickshell
       pkgs.kdePackages.qtdeclarative
       pkgs.kdePackages.qtsvg
