@@ -45,6 +45,12 @@
           sudo nh clean all --keep 5
         '';
       };
+      #jj = {
+      #  description = "Jujutsu";
+      #  body = ''
+      #    command jj $argv
+      #  '';
+      #};
     };
 
     shellAbbrs = {
@@ -95,7 +101,7 @@
       set -g fish_color_param 2255ff  # your preferred deep blue
       
       # High-contrast custom palette for the rest
-      set -g fish_color_normal e0e0e0           # Clean bright foreground
+      set -g fish_color_normal ffaa22 #e0e0e0           # Clean bright foreground
       set -g fish_color_quote ff6655            # Fiery red-orange for strings
       set -g fish_color_redirection 00e5ff      # Bright Niri cyan for IO redirects
       set -g fish_color_end ff79c6              # Hot pink/magenta for end separators
