@@ -90,6 +90,37 @@
       tma = "tmux attach";
     };
 
+    shellInit = ''
+      set -g fish_color_command ffaa22 # your preferred fiery orange/yellow
+      set -g fish_color_param 2255ff  # your preferred deep blue
+      
+      # High-contrast custom palette for the rest
+      set -g fish_color_normal e0e0e0           # Clean bright foreground
+      set -g fish_color_quote ff6655            # Fiery red-orange for strings
+      set -g fish_color_redirection 00e5ff      # Bright Niri cyan for IO redirects
+      set -g fish_color_end ff79c6              # Hot pink/magenta for end separators
+      set -g fish_color_error ff4433            # Bright red for errors
+      set -g fish_color_comment 555555          # Deep gray for comments
+      set -g fish_color_match --background=2255ff # Deep blue background for matched text
+      set -g fish_color_selection white --bold --background=555555
+      set -g fish_color_search_match bryellow --background=555555
+      set -g fish_color_operator cc33ff         # Magenta for operators
+      set -g fish_color_escape ffcc44           # Bright orange-yellow for escapes
+      set -g fish_color_autosuggestion 555555   # Subtle dark gray for autosuggestions
+      set -g fish_color_cwd 55ff77              # Vibrant green for working directory
+      set -g fish_color_cwd_root ff4433         # Warning red for root cwd
+      set -g fish_color_user brgreen            # Bright green for user
+      set -g fish_color_host normal             # Default for host
+      set -g fish_color_status ff4433           # Red status indicator
+      set -g fish_color_valid_path --underline  # Underlined valid paths
+      
+      # Pager menus
+      set -g fish_pager_color_prefix white --bold
+      set -g fish_pager_color_completion normal
+      set -g fish_pager_color_description ffcc44 --dim
+      set -g fish_pager_color_progress brwhite --background=00e5ff
+    '';
+
     interactiveShellInit = ''
       set -g fish_greeting "Welcome to NixOS!"
       set -g fish_handle_reflow 1
