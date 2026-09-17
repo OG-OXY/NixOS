@@ -236,21 +236,21 @@
   xdg.portal = {
     enable = true;
     extraPortals = [
-      pkgs.xdg-desktop-portal-hyprland
+      #pkgs.xdg-desktop-portal-hyprland
       pkgs.xdg-desktop-portal-gtk
-      pkgs.xdg-desktop-portal-gnome
+      pkgs.xdg-desktop-portal-wlr
     ];
-    config = {
+    config = lib.mkForce {
       common = {
         default = [ "gtk" ];
         # Go Back To How Defaults Worked In <=1.7
         #default = "*";
       };
-      hyprland = {
-        default = [ "hyprland" "gtk" ];
-      };
+      #hyprland = {
+      #  default = [ "hyprland" "gtk" ];
+      #};
       niri = {
-        default = [ "gnome" "gtk" ];
+        default = [ "wlr" "gtk" ];
       };
     };
     #configPackages = [ pkgs.gnome-session ];
@@ -515,15 +515,13 @@
       pkgs.pkg-config
       pkgs.gdb
       pkgs.valgrind
-      pkgs.hyprpolkitagent
+      pkgs.polkit_gnome
       pkgs.watchman
       pkgs.pinentry-qt
-      #pkgs.waybar
-      #pkgs.mako
-      #pkgs.wofi
+      pkgs.xwayland-satellite
+      pkgs.noctalia-shell
       pkgs.ghostty
       pkgs.yazi
-      #pkgs.hyprpaper
       pkgs.bitwarden-desktop
       pkgs.vesktop
       pkgs.pavucontrol
@@ -556,11 +554,9 @@
       pkgs.rofi-rbw-wayland
       pkgs.ffmpeg-full
       pkgs.obs-studio
-      #pkgs.hyprshot
       pkgs.mpv
       pkgs.mpd
       pkgs.imv
-      #pkgs.hyprpicker
       pkgs.btop
       pkgs.tree
       pkgs.dysk
@@ -574,6 +570,10 @@
       pkgs.wget2
       pkgs.fzf
       pkgs.ripgrep
+      pkgs._7zz
+      pkgs.poppler-utils
+      pkgs.imagemagick
+      pkgs.resvg
       pkgs.aider-chat
       pkgs.fd
       pkgs.bun
@@ -586,29 +586,35 @@
       pkgs.monero-cli
       pkgs.easyeffects
       #pkgs.delicious-sddm-theme
+      pkgs.papirus-icon-theme
       pkgs.quickshell
       pkgs.kdePackages.qtdeclarative
       pkgs.kdePackages.qtsvg
       pkgs.kdePackages.qt5compat
       pkgs.kdePackages.kwin
-      pkgs.noctalia-shell
       pkgs.xwayland-satellite
       pkgs.nixfmt
       pkgs.jq
       #pkgs.sway
       pkgs.ventoy
-      pkgs._7zz
-      pkgs.poppler-utils
-      pkgs.imagemagick
-      pkgs.resvg
-      pkgs.qpwgraph
+      # Audio Wiring
+      #pkgs.qpwgraph
       pkgs.helvum
       # Wifi Monitor Tools
       pkgs.iw
       pkgs.wavemon
       pkgs.obsidian
-      # Config dump.
+      # Nix Config to XML
       pkgs.repomix
+      # Disabled PKGS
+      # Hyprland Ecosystem
+      #pkgs.hyprpolkitagent
+      #pkgs.waybar
+      #pkgs.mako
+      #pkgs.wofi
+      #pkgs.hyprshot
+      #pkgs.hyprpicker
+      #pkgs.hyprpaper
     ]
     ++ [
       inputs.zen-browser.packages.${pkgs.system}.default
@@ -871,7 +877,7 @@
       # Injects SOPS Keys Into Environment On Boot.
       sops-import = {
         enable = true;
-        description = "Import sops-rendered environment variables into systemd user session";
+        description = "Import SOPS-Rendered Environment Variables Into User Session";
         wantedBy = [ "graphical-session.target" "default.target" ];
         after = [ "sops-nix.service" ];
         serviceConfig = {
@@ -888,21 +894,36 @@
           '';
         };
       };
-      # Noctalia-Shell Systemd Service For Niri That Is Supposed To Not Start For Hyprland.
-      niri-bar = {
-        enable = true;
-        description = "Noctalia Shell for UWSM Managed Niri compositor";
-        wantedBy = [ "niri.target" ];
-        unitConfig = {
-          After = [ "niri.target" "dbus.socket" ];
-          PartOf = [ "niri.target" ];
-          Conflicts = [ "hyprland.target" ];
-        };
+      noctalia-shell = {
+        description = "Noctalia Shell Bar Daemon";
+        wantedBy = [ "graphical-session.target" ];
+        wants = [ "graphical-session.target" ];
+        after = [ "graphical-session.target" "dbus.socket" ];
+        requires = [ "dbus.socket" ];
         serviceConfig = {
+          Type = "simple";
           ExecStart = "${pkgs.noctalia-shell}/bin/noctalia-shell";
           Restart = "on-failure";
+          RestartSec = 1;
+          TimeoutStopSec = 10;
+          Environment = "PATH=/run/current-system/sw/bin:/etc/profiles/per-user/%u/bin";
         };
       };
+      # Noctalia-Shell Systemd Service For Niri That Is Supposed To Not Start For Hyprland.
+      #niri-bar = {
+      #  enable = true;
+      #  description = "Noctalia Shell for UWSM Managed Niri compositor";
+      #  wantedBy = [ "niri.target" ];
+      #  unitConfig = {
+      #    After = [ "niri.target" "dbus.socket" ];
+      #    PartOf = [ "niri.target" ];
+      #    Conflicts = [ "hyprland.target" ];
+      #  };
+      #  serviceConfig = {
+      #    ExecStart = "${pkgs.noctalia-shell}/bin/noctalia-shell";
+      #    Restart = "on-failure";
+      #  };
+      #};
       # Not Sure If This Works Either
       #noctalia-shell = {
       #  enable = true;
