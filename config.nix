@@ -601,6 +601,8 @@
       pkgs.poppler-utils
       pkgs.imagemagick
       pkgs.resvg
+      pkgs.qpwgraph
+      pkgs.helvum
       # Wifi Monitor Tools
       pkgs.iw
       pkgs.wavemon
