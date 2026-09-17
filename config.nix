@@ -256,6 +256,18 @@
     #configPackages = [ pkgs.gnome-session ];
   };
 
+  #stylix = {
+  #  enable = true;
+  #  image = ./Config/Theme/Wpapers/gruvbox-rainbow-nix.png;
+  #  #base16Scheme = "${inputs.base16-schemes}/base16/nord.yaml";
+  #  targets = {
+  #    fish.enable = false;
+  #    console.enable = false;
+  #    gtk.enable = true;
+  #    qt.enable = true;
+  #  };
+  #};
+  
   # Install PKGS With System Parameters.
   programs = {
     # Custom NixOS Modules I WROTE MYSELF
