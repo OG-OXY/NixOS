@@ -641,7 +641,6 @@
       # Wifi Monitor Tools
       pkgs.iw
       pkgs.wavemon
-      pkgs.obsidian
       # Nix Config to XML
       pkgs.repomix
       # Disabled PKGS
