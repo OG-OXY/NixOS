@@ -53,24 +53,24 @@ ignore_timeout = true
 #disabled = false
 
 # Python language indicator
-[python]
-symbol = "🐍"
-style = "bold yellow"
-disabled = false
-format = "via [$symbol$version]($style) "
-
-# Rust language indicator
-[rust]
-symbol = "🦀"
-style = "bold red"
-disabled = false
-format = "via [$symbol$version]($style) "
-
-[nix_shell]
-disabled = false
-symbol = "❄️"
-style = "bold blue"
-format = "via [$symbol$state$name]($style) "
+#[python]
+#symbol = "🐍"
+#style = "bold yellow"
+#disabled = false
+#format = "via [$symbol$version]($style) "
+#
+## Rust language indicator
+#[rust]
+#symbol = "🦀"
+#style = "bold red"
+#disabled = false
+#format = "via [$symbol$version]($style) "
+#
+#[nix_shell]
+#disabled = false
+#symbol = "❄️"
+#style = "bold blue"
+#format = "via [$symbol$state$name]($style) "
 
 [status]
 disabled = false

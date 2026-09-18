@@ -24,6 +24,6 @@ in
   systemd.tmpfiles.rules = [
     "d /home/ty/.config/fish 0755 ty users -"
     "d /home/ty/.config/fish/conf.d 0755 ty users -"
-    "C /home/ty/.config/fish/conf.d/copy-buffer.fish 0644 ty users - ${fishBinding}"
+    "C+ /home/ty/.config/fish/conf.d/copy-buffer.fish 0644 ty users - ${fishBinding}"
   ];
 }
