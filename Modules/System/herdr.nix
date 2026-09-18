@@ -5,6 +5,21 @@
 }:
 let
   herdrConfig = pkgs.writeText "herdr-config.toml" ''
+    onboarding = false
+    
+
+    [theme]
+    name = "terminal"
+
+    [ui]
+    status_indicators = "symbols"
+
+    [ui.sound]
+    enabled = true
+    
+    [ui.toast]
+    delivery = "herdr"
+
     [keys]
     prefix = "ctrl+space"
   '';
@@ -21,6 +36,6 @@ in
   # Superior tmpfiles approach
   systemd.tmpfiles.rules = [
     "d /home/ty/.config/herdr 0755 ty users -"
-    "C /home/ty/.config/herdr/config.toml 0644 ty users - ${herdrConfig}"
+    "L+ /home/ty/.config/herdr/config.toml 0644 ty users - ${herdrConfig}"
   ];
 }
