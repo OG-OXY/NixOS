@@ -1,9 +1,7 @@
 // ~/.config/niri/config.kdl
 
 spawn-at-startup "uwsm" "finalize"
-//spawn-at-startup "noctalia-shell"
-spawn-at-startup "ghostty" "-e" "fish" "-i" "-C" "tmux new-session -A -s main"
-//spawn-at-startup "ghostty"
+spawn-at-startup "ghostty" "-e" "herdr"
 spawn-at-startup "zen-beta"
 spawn-at-startup "vesktop"
 
@@ -128,8 +126,7 @@ binds {
     Mod+C repeat=false { close-window; }
     
     // Column Splitting & Window Consumption (VI Integration)
-    //Mod+BracketLeft { consume-or-expel-window-left; }
-    //Mod+BracketRight { consume-or-expel-window-right; }
+ 
     Mod+Y { consume-window-into-column; }
     Mod+P { expel-window-from-column; }
 
@@ -222,12 +219,16 @@ binds {
     Ctrl+Alt+Delete { quit; }
     Mod+Shift+P { power-off-monitors; }
     
-    // Old/unused Binds.
+    // Old/unused Binds And Code
+    //spawn-at-startup "ghostty" "-e" "fish" "-i" "-C" "tmux new-session -A -s main"
+    //spawn-at-startup "ghostty"
     //Mod+R { spawn "sh" "-c" "pkill wofi || wofi --show run"; }
     //Mod+D { spawn "noctalia-shell" "toggle-menu"; }
     //Mod+D { spawn "sh" "-c" "pkill wofi || wofi --show drun"; }
     //Mod+B { spawn "zen-beta"; }
     //Mod+V { spawn "vesktop"; }
+    //Mod+BracketLeft { consume-or-expel-window-left; }
+    //Mod+BracketRight { consume-or-expel-window-right; }
     //Mod+Shift+R { switch-preset-column-width-back; }
     // Fucking Useless Shit.
     //Mod+Shift+T { expand-column-to-available-width; }
