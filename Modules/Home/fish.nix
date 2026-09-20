@@ -131,7 +131,7 @@
       set -g fish_greeting "Welcome to NixOS!"
       set -g fish_handle_reflow 1
       set -U fish_ambiguous_width 1
-      set -U fish_emoji_width 2
+      set -U fish_emoji_width 3
       #fish_vi_key_bindings
 
       if test "$USER" = "root"
