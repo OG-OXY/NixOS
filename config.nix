@@ -459,6 +459,7 @@
         pkgs.proton-ge-bin
       ];
     };
+    nix-index-database.comma.enable = true;
     fish.enable = true;
     zoxide.enable = true;
     virt-manager.enable = true;
