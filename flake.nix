@@ -34,6 +34,10 @@
       url = "github:tinted-theming/schemes";
       flake = false;
     };
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     #delicious = {
     #  url = "github:stuomas/delicious-sddm-theme";
     #  flake = false;
@@ -49,6 +53,7 @@
     #wrappers,
     chaotic,
     home-manager,
+    nix-index-database,
     sops,
     stylix,
     ...
@@ -95,6 +100,7 @@
         }
         ./config.nix
         chaotic.nixosModules.default
+        nix-index-database.nixosModules.default
         sops.nixosModules.sops
         stylix.nixosModules.stylix
         home-manager.nixosModules.home-manager
