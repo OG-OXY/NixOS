@@ -4,12 +4,8 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-26.05";
-    #flake-parts.url = "github:hercules-ci/flake-parts";
-    #import-tree.url = "github:denful/import-tree";
-    #wrappers = {
-    #  url = "github:BirdeeHub/nix-wrapper-modules";
-    #  inputs.nixpkgs.follows = "nixpkgs";
-    #};
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    import-tree.url = "github:denful/import-tree";
     chaotic = {
       url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -49,8 +45,8 @@
     self,
     nixpkgs,
     nixpkgs-stable,
-    #flake-parts,
-    #wrappers,
+    flake-parts,
+    import-tree,
     chaotic,
     home-manager,
     nix-index-database,
