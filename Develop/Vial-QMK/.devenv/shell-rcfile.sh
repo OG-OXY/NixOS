@@ -130,7 +130,7 @@ _devenv_before_file=$(mktemp)
 __devenv_capture_env > "$_devenv_before_file"
 
 # Source the devenv environment
-source "/home/ty/NixOS/Master/develop/Vial-QMK/.devenv/shell-env.sh"
+source "/home/ty/NixOS/Master/Develop/Vial-QMK/.devenv/shell-env.sh"
 
 # Compute and store the initial diff in _DEVENV_DIFF env var
 __devenv_compute_diff "$_devenv_before_file"
@@ -147,6 +147,6 @@ if [ ! -x "/run/current-system/sw/bin/fish" ] && ! command -v "/run/current-syst
     echo "devenv: add fish to your devenv.nix packages or set SHELL to an absolute path" >&2
     exit 1
 fi
-exec "/run/current-system/sw/bin/fish" -i -C "source /home/ty/NixOS/Master/develop/Vial-QMK/.devenv/devenv.fish"
+exec "/run/current-system/sw/bin/fish" -i -C "source /home/ty/NixOS/Master/Develop/Vial-QMK/.devenv/devenv.fish"
 echo "devenv: error: failed to exec into /run/current-system/sw/bin/fish" >&2
 exit 1

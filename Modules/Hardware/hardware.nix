@@ -41,7 +41,7 @@
         efiSupport = true;
         useOSProber = true;
         device = "nodev";
-        configurationLimit = 10;
+        configurationLimit = 15;
         default = "3";
       };
       efi = {
