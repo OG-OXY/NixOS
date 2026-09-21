@@ -91,7 +91,8 @@
       dfr = "df -h /";
       ts = "doas tailscale up";
       pcig = "lspci | grep \'|\'";
-      btc = "bluetoothctl connect D6:88:C3:AC:1B:0C";
+      btcsw = "sudo bluetoothctl connect 54:D4:96:53:E4:41";
+      btcs = "sudo bluetoothctl connect D6:88:C3:AC:1B:0C";
       tm = "tmux";
       tma = "tmux attach";
     };

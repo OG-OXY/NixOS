@@ -27,7 +27,7 @@
     gc = {
       automatic = true;
       dates = "daily";
-      options = "--delete-older-than 5d";
+      options = "--delete-older-than 3d";
     };
   };
 
@@ -384,7 +384,7 @@
         #grid_exit = "";
         #hint_activation_key = "A-M-h";
         #grid_activation_key = "A-M-g";
-        speed = 500;
+        speed = 400;
         cursor_color = "0000f6";
         #hint_chars = "asfqwcbnyui";
       };
@@ -634,8 +634,10 @@
       pkgs.xwayland-satellite
       pkgs.nixfmt
       pkgs.jq
-      #pkgs.sway
       pkgs.ventoy
+      #pkgs.sway
+      # For Dendritic Test-VM
+      pkgs.xhost
       # Audio Wiring
       #pkgs.qpwgraph
       pkgs.helvum
