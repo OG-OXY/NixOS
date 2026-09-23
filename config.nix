@@ -568,6 +568,7 @@
       pkgs.pipewire
       pkgs.pulseaudio
       pkgs.pulseaudio-ctl
+      pkgs.blueman
       pkgs.qalculate-gtk
       pkgs.lutris
       pkgs.steam-run
