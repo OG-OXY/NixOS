@@ -22,6 +22,8 @@ let
 
     [keys]
     prefix = "ctrl+space"
+    previous_tab "prefix+shift+h"
+    next_tab = "prefix+shift+l"
   '';
 in
 {

@@ -1,6 +1,5 @@
 {
   description = "NVF Neovim IDE Flake";
-
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nvf = {
@@ -17,7 +16,6 @@
     }:
     
     let
-      
       supportedSystems = [
         "x86_64-linux"
         "aarch64-linux"
@@ -70,6 +68,7 @@
                     transparent = false;
                   };
 
+                  dashboard.alpha.enable = true;
                   statusline.lualine.enable = true;
 
                   visuals = {
@@ -80,24 +79,53 @@
                     nvim-cursorline.enable = true;
                   };
 
-                  dashboard.alpha.enable = true;
-                  filetree.neo-tree.enable = true;
-                  telescope.enable = true;
-
                   git = {
                     enable = true;
-                    gitsigns.enable = true;
+                    gitsigns = {
+                      enable = true;
+                      mappings = {
+                        stageHunk = "<leader>gsh";
+                        undoStageHunk = "<leader>guh";
+                        resetHunk = "<leader>grh";
+                        previewHunk = "<leader>gph";
+                        #previewHunkInline = "<leader>gpH";
+                        
+                        # Navigation
+                        nextHunk = "]h";
+                        previousHunk = "[h";
+
+                        # Diffing and Blame
+                        diffThis = "<leader>gd";
+                        blameLine = "<leader>gb";
+                      };
+                    };
+                    git-conflict = {
+                      enable = true;
+                      mappings = {
+                        ours = "<leader>gco";
+                        theirs = "<leader>gct";
+                        both = "<leader>gcb";
+                        none = "<leader>gcn";
+                      };
+                    };
                   };
 
-                  autopairs.nvim-autopairs.enable = true;
-                  utility.motion.hop.enable = true;
-                  binds.whichKey.enable = true;
+                  utility.motion.hop = {
+                    enable = true;
+                    mappings = {
+                      hop = "<leader>s";
+                    };
+                  };
 
                   terminal.toggleterm = {
                     enable = true;
                     setupOpts.direction = "float";
                   };
 
+                  binds.whichKey.enable = true;
+                  filetree.neo-tree.enable = true;
+                  telescope.enable = true;
+                  autopairs.nvim-autopairs.enable = true;
                   tabline.nvimBufferline.enable = true;
                   autocomplete.blink-cmp.enable = true;
                   snippets.luasnip.enable = true;
@@ -309,26 +337,6 @@
                         end,
                       })
                     '';
-                    #neorg-auto-export = ''
-                    #  vim.api.nvim_create_autocmd("BufWritePost", {
-                    #    pattern = "*.norg",
-                    #    callback = function()
-                    #      local filepath = vim.fn.expand("%:p")
-                    #      if filepath:match("/.sync/") then
-                    #        local target = filepath:gsub("%.norg$", ".md")
-                    #        vim.cmd("Neorg export to-file " .. target)
-                    #      end
-                    #    end,
-                    #  })
-                    #'';
-        #neorg-auto-export = ''
-        #  vim.api.nvim_create_autocmd("BufWritePost", {
-        #   pattern = "*.norg",
-                    #   callback = function()
-                    #     vim.cmd("Neorg export to-file " .. vim.fn.expand("%:r") .. ".md")
-                    #   end,
-            # })
-                    #'';
                     treesitter-auto-start = ''
                       vim.api.nvim_create_autocmd("FileType", {
                         pattern = "*",
