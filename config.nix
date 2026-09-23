@@ -912,12 +912,9 @@
       hybrid-sleep.enable = false;
     };
     services = {
-      # Override Ollama and Llama-CPP Started Manually.
+      # Override Ollama And Llama-CPP To Be Started Manually.
       #ollama.wantedBy = pkgs.lib.mkForce [ ];
       #llama-cpp.wantedBy = pkgs.lib.mkForce [ ];
-      # Old No Longer Using SDDM. Was A Test.
-      #sddm.environment = {
-      #  WLR_NO_HARDWARE_CURSORS = "0";
       #};
     };
     user.services = {
@@ -956,36 +953,6 @@
           Environment = "PATH=/run/current-system/sw/bin:/etc/profiles/per-user/%u/bin";
         };
       };
-      # Noctalia-Shell Systemd Service For Niri That Is Supposed To Not Start For Hyprland.
-      #niri-bar = {
-      #  enable = true;
-      #  description = "Noctalia Shell for UWSM Managed Niri compositor";
-      #  wantedBy = [ "niri.target" ];
-      #  unitConfig = {
-      #    After = [ "niri.target" "dbus.socket" ];
-      #    PartOf = [ "niri.target" ];
-      #    Conflicts = [ "hyprland.target" ];
-      #  };
-      #  serviceConfig = {
-      #    ExecStart = "${pkgs.noctalia-shell}/bin/noctalia-shell";
-      #    Restart = "on-failure";
-      #  };
-      #};
-      # Not Sure If This Works Either
-      #noctalia-shell = {
-      #  enable = true;
-      #  description = "Noctalia Shell for UWSM Managed Niri compositor";
-      #  wantedBy = [ "wayland-session@niri.target" ];
-      #  unitConfig = {
-      #    After = [ "wayland-session@niri.target" "dbus.socket" ];
-      #    PartOf = [ "wayland-session@niri.target" ];
-      #    Conflicts = [ "wayland-session@hyprland.target" ];
-      #  };
-      #  serviceConfig = {
-      #    ExecStart = "${pkgs.noctalia-shell}/bin/noctalia-shell";
-      #    Restart = "on-failure";
-      #  };
-      #};
       # Hopefully This Creates Intended Effect And Doesnt Launch With Niri But Does For Hyprland.
       waybar = {
         enable = false;
@@ -1002,22 +969,6 @@
           Restart = "on-failure";
         };
       };
-      # Didnt Create Intended Effect.
-      #waybar = {
-      #  enable = true;
-      #  description = "Waybar for UWSM Managed Hyprland";
-      #  wantedBy = [ "wayland-session@hyprland.target" ];
-      #  unitConfig = {
-      #    PartOf = [ "wayland-session@hyprland.target" ];
-      #    After = [ "wayland-session@hyprland.target" ];
-      #    Conflicts = [ "wayland-session@niri.target" ];
-      #  };
-      #  serviceConfig = {
-      #    ExecStartPre = "${pkgs.glib}/bin/gdbus wait --system net.hadess.PowerProfiles";
-      #    ExecStart = "${pkgs.waybar}/bin/waybar";
-      #    Restart = "on-failure";
-      #  };
-      #};
       # Works For Sure, Original Service For Hyprland.
       #waybar = {
       #  unitConfig = {
@@ -1026,26 +977,6 @@
       #  };
       #  serviceConfig = {
       #    ExecStartPre = "${pkgs.glib}/bin/gdbus wait --system net.hadess.PowerProfiles";
-      #  };
-      #};
-      # Doesnt Work Probably Not Needed Anyways With SOPS + AGE Now.
-      #rbw-autounlock = {
-      #  description = "Securely unlock Bitwarden Vault on Hyprland Startup";
-      #  wantedBy = [ "graphical-session.target" "default.target" ];
-      #  unitConfig = {
-      #    After = [ "graphical-session.target" "dbus.socket" ];
-      #    #PartOf = [ "wayland-session@hyprland-uwsm.target" ];
-      #    #After = [ "graphical-session.target" ];
-      #    #PartOf = [ "graphical-session.target" ];
-      #  };
-      #  serviceConfig = {
-      #    Type = "oneshot";
-      #    #Environment = [
-      #    #  "WAYLAND_DISPLAY=wayland-0"
-      #    #  "DISPLAY=:0"
-      #    #];
-      #    ExecStart = "${pkgs.rbw}/bin/rbw unlock";
-      #    RemainAfterExit = false;
       #  };
       #};
     };
