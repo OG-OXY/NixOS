@@ -1,11 +1,14 @@
 #flake.nix
 {
   description = "System Flake";
+  
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-26.05";
     flake-parts.url = "github:hercules-ci/flake-parts";
     import-tree.url = "github:denful/import-tree";
+    nvf.url = "path:./Flakes/NVF";
+    llm-agents.url = "path:./Flakes/LLM-Agents";
     chaotic = {
       url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -22,97 +25,19 @@
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    stylix = {
-      url = "github:nix-community/stylix";
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     base16-schemes = {
       url = "github:tinted-theming/schemes";
       flake = false;
     };
-    nix-index-database = {
-      url = "github:nix-community/nix-index-database";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    #delicious = {
-    #  url = "github:stuomas/delicious-sddm-theme";
-    #  flake = false;
+    #stylix = {
+    #  url = "github:nix-community/stylix";
+    #  inputs.nixpkgs.follows = "nixpkgs";
     #};
-    nvf.url = "path:./Flakes/NVF";
-    llm-agents.url = "path:./Flakes/LLM-Agents";
   };
-  outputs = {
-    self,
-    nixpkgs,
-    nixpkgs-stable,
-    flake-parts,
-    import-tree,
-    chaotic,
-    home-manager,
-    nix-index-database,
-    sops,
-    stylix,
-    ...
-  }@inputs: {
-    nixosConfigurations."nixos" = nixpkgs.lib.nixosSystem {
-      specialArgs = {inherit inputs self;};
-      modules = [
-        {
-          nixpkgs = {
-            hostPlatform = "x86_64-linux";
-            config = {
-              allowUnfree = true;
-              cudaSupport = true;
-              cudaCapabilities = ["6.1"];
-              permittedInsecurePackages = [
-                "electron-39.8.10"
-                "ventoy-1.1.17"
-              ];
-            };
-            overlays = [
-              (final: prev:
-              let
-                stable = import nixpkgs-stable {
-                  inherit (prev) system;
-                  config = prev.config;
-                };
-              in {
-                #package = packagename.stable
-                    #delicious-sddm-theme = prev.stdenv.mkDerivation {
-                    #  pname = "delicious-sddm-theme";
-                    #  version = "1.0";
-                    #  src = inputs.delicious;
-                    #  buildInputs = [ prev.qt5.qtgraphicaleffects ];
-                    #  dontWrapQtApps = true;
-                    #  installPhase = ''
-                    #    mkdir -p $out/share/sddm/themes/delicious
-                    #    cp -r * $out/share/sddm/themes/delicious/
-                    #  '';
-                    #};
-              })
-            ];
-          };
-          hardware.enableRedistributableFirmware = true;
-        }
-        ./config.nix
-        chaotic.nixosModules.default
-        nix-index-database.nixosModules.default
-        sops.nixosModules.sops
-        stylix.nixosModules.stylix
-        home-manager.nixosModules.home-manager
-        {
-          home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            backupFileExtension = ".bak";
-            users = {
-              root = import ./Modules/Home/root-home.nix;
-              ty = import ./Modules/Home/ty-home.nix;
-            };
-            extraSpecialArgs = {inherit inputs self;};
-          };
-        }
-      ];
-    };
-  };
+  
+  outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./Imports);
 }

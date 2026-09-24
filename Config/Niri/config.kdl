@@ -4,11 +4,15 @@ spawn-at-startup "uwsm" "finalize"
 spawn-at-startup "ghostty" "-e" "herdr"
 spawn-at-startup "zen-beta"
 spawn-at-startup "vesktop"
+spawn-at-startup "obsidian"
 
 environment {
-    LIBVA_DRIVER_NAME "nvidia"
+    //LIBVA_DRIVER_NAME "nvidia"
     __GLX_VENDOR_LIBRARY_NAME "nvidia"
-    NVD_BACKEND "direct"
+    // OBS DEBUGGING
+    //NVD_BACKEND "direct"
+    GBM_BACKEND "nvidia-drm"
+    //
     ELECTRON_OZONE_PLATFORM_HINT "auto"
     XCURSOR_THEME "Saturn"
     XCURSOR_SIZE "32"
@@ -46,6 +50,7 @@ output "desc:Dell Inc. DELL P2720D K6RX299P10LS" {
 
 layout {
     gaps 0
+    background-color "transparent"
     center-focused-column "never"
     preset-column-widths {
         proportion 0.33333
@@ -81,28 +86,28 @@ layout {
     }
 }
 
-prefer-no-csd
-
-screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+overview {
+  backdrop-color "#ff7300"
+  workspace-shadow {
+    on
+    //off
+  }
+}
 
 animations {
     slowdown 1.0
 }
 
 window-rule {
-    geometry-corner-radius 0
-    clip-to-geometry true
-}
-
-window-rule {
     match app-id="^$" title="^$"
     open-floating true
-    block-out-from "screen-capture"
-}
-
-window-rule {
-    match app-id=r#"firefox$"# title="^Picture-in-Picture$"
-    open-floating true
+    geometry-corner-radius 0
+    clip-to-geometry true
+    //block-out-from "screen-capture"
+    background-effect {
+      blur true
+      xray false
+    }
 }
 
 recent-windows {
@@ -112,11 +117,15 @@ recent-windows {
   }
 }
 
+prefer-no-csd
+screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+
 binds {
     // Core Program Launchers & Actions
     Mod+Space { spawn "apps"; }
     Mod+W { spawn "warp"; }
-    
+    Mod+D { spawn-sh "niri msg action set-dynamic-cast-window --id $(niri msg --json focused-window | jq .id)"; }
+
     // Layout Controls & Sizing
     Mod+X { center-column; }
     Mod+F { maximize-column; }
@@ -235,4 +244,10 @@ binds {
     //Mod+Shift+F { fullscreen-window; }
     //Mod+M { maximize-window-to-edges; }
     //Mod+T { switch-preset-column-width; }
+}
+
+debug {
+    //render-drm-device "/dev/dri/renderD128"
+    //force-pipewire-invalid-modifier
+    //honor-xdg-activation-with-invalid-serial
 }
