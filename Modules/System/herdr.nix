@@ -22,8 +22,8 @@ let
 
     [keys]
     prefix = "ctrl+space"
-    previous_tab "prefix+shift+h"
-    next_tab = "prefix+shift+l"
+    #previous_tab "prefix+shift+h"
+    #next_tab = "prefix+shift+l"
   '';
 in
 {
@@ -39,6 +39,6 @@ in
   systemd.tmpfiles.rules = [
     "d /home/ty/.config/herdr 0755 ty users -"
     #should probably use C+ instead ("+" means force so that even if theres a file already there it still writed to config)
-    "L+ /home/ty/.config/herdr/config.toml 0644 ty users - ${herdrConfig}"
+    "C+ /home/ty/.config/herdr/config.toml 0644 ty users - ${herdrConfig}"
   ];
 }

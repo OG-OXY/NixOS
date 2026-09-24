@@ -61,7 +61,7 @@
     };
     pam.services = {
       login = {
-        enableGnomeKeyring = false;
+        #enableGnomeKeyring = false;
         enableKwallet = false;
       };
     };
@@ -109,11 +109,6 @@
         powersave = false;
       };
       dns = "dnsmasq";
-      #insertNameservers = [
-      #  "1.1.1.1"
-      #  "1.0.0.1"
-      #  "9.9.9.9"
-      #];
       ensureProfiles = {
         environmentFiles = [ config.sops.templates."WIFI_PSK.env".path ];
         profiles = {
@@ -235,25 +230,51 @@
   
   xdg.portal = {
     enable = true;
+    #wlr = {
+      #enable = false;
+      #settings = {
+      #  screencast = {
+      #    output_name = "";
+      #    max_fps = 60;
+      #    chooser_type = "simple";
+      #    chooser_cmd = "slurp -f %o -or";
+      #    force_linear = true;
+      #  };
+      #};
+    #};
+    configPackages = [ pkgs.niri ];
     extraPortals = [
-      #pkgs.xdg-desktop-portal-hyprland
+      pkgs.xdg-desktop-portal-gnome
       pkgs.xdg-desktop-portal-gtk
-      pkgs.xdg-desktop-portal-wlr
+    #  #pkgs.xdg-desktop-portal-wlr
     ];
-    config = lib.mkForce {
+    config = {
       common = {
         default = [ "gtk" ];
-        # Go Back To How Defaults Worked In <=1.7
-        #default = "*";
+    #    # Go Back To How Defaults Worked In <=1.7
+    #    #default = "*";
       };
-      #hyprland = {
-      #  default = [ "hyprland" "gtk" ];
+      #niri = lib.mkForce {
+      #  default = [ "wlr" "gtk" ];
+      #  "org.freedesktop.impl.portal.Screencast" = [ "wlr" ];
+      #  "org.freedesktop.impl.portal.Screenshot" = [ "wlr" ];
+      #  "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
       #};
       niri = {
-        default = [ "wlr" "gtk" ];
+        default = [ "gnome" "gtk" ];
+        "org.freedesktop.impl.portal.Screencast" = [ "gnome" ];
+        "org.freedesktop.impl.portal.Screenshot" = [ "gnome" ];
+        "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
+        #"org.freedesktop.impl.portal.Access" = [ "gtk" ];
+      };
+      "niri:GNOME" = {
+        default = [ "gnome" "gtk" ];
+        "org.freedesktop.impl.portal.Screencast" = [ "gnome" ];
+        "org.freedesktop.impl.portal.Screenshot" = [ "gnome" ];
+        "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
+        #"org.freedesktop.impl.portal.Access" = [ "gtk" ];
       };
     };
-    #configPackages = [ pkgs.gnome-session ];
   };
 
   console = {
@@ -333,11 +354,11 @@
             desc = "Ghostty";
             cmd = "${pkgs.ghostty}/bin/ghostty";
           }
-          {
-            key = "t";
-            desc = "Tmux";
-            cmd = "${pkgs.ghostty}/bin/ghostty -e ${pkgs.fish}/bin/fish -i -C 'tmux new-session -A -s main'";
-          }
+          #{
+          #  key = "t";
+          #  desc = "Tmux";
+          #  cmd = "${pkgs.ghostty}/bin/ghostty -e ${pkgs.fish}/bin/fish -i -C 'tmux new-session -A -s main'";
+          #}
           {
             key = "y";
             desc = "Yazi";
@@ -362,6 +383,11 @@
             key = "v";
             desc = "Vesktop";
             cmd = "${pkgs.vesktop}/bin/vesktop";
+          }
+          {
+            key = "s";
+            desc = "OBS-Studio";
+            cmd = "${pkgs.obs-studio}/bin/obs";
           }
           {
             key = "b";
@@ -390,11 +416,7 @@
       };
     };
     # Native NixOS Modules
-    #hyprland = {
-    #  enable = true;
-    #  withUWSM = true;
-    #  xwayland.enable = true;
-    #};
+    niri.enable = true;
     uwsm = {
       enable = true;
       waylandCompositors = {
@@ -403,16 +425,7 @@
           comment = "Niri Scrollable Tiling Compositor Managed by UWSM.";
           binPath = "${pkgs.niri}/bin/niri";
         };
-          #hyprland = {
-          #  prettyName = "Hyprland";
-          #  comment = "An Intelligent Wayland Compositor Managed by UWSM.";
-          #  binPath = "${pkgs.hyprland}/bin/hyprland";
-          #};
       };
-    };
-    niri = {
-      enable = true;
-      package = pkgs.niri;
     };
     direnv = {
       enable = true;
@@ -457,6 +470,23 @@
       };
       extraCompatPackages = [
         pkgs.proton-ge-bin
+      ];
+    };
+    obs-studio = {
+      enable = true;
+      #package = (
+      #  pkgs.obs-studio.override {
+      #    cudaSupport = true;
+      #  }
+      #);
+      plugins = let
+        obs = pkgs.obs-studio-plugins;
+      in [
+        obs.wlrobs                  # Wayland direct screen capture (fallback for wl roots)
+        obs.obs-pipewire-audio-capture # Direct PipeWire application audio routing
+        obs.obs-vkcapture           # Vulkan/OpenGL game capture hook
+        obs.obs-gstreamer           # GStreamer pipeline support
+        obs.obs-vaapi               # Hardware encoding support (AMD/Intel)
       ];
     };
     nix-index-database.comma.enable = true;
@@ -514,14 +544,18 @@
       #VST3_PATH = "$HOME/.vst3:$HOME/.wine/drive_c/Program Files/Common Files/VST3";
     };
     sessionVariables = {
+      ### OBS DEBUG START
+      #XDG_CURRENT_DESKTOP = "niri";
+      #PIPEWIRE_NODE = "1";
+      #OBS_USE_EGL = "1";
+      ### Commented Out For OBS
+      #LIBVA_DRIVER_NAME = "nvidia";
+      #NVD_BACKEND = "direct";
+      ### OBS DEBUG END
       NIXOS_OZONE_WL = "1";
       ELECTRON_OZONE_PLATFORM_HINT = "auto";
-      #AQ_DRM_DEVICES = "/dev/dri/by-path/pci-0000:01:00.0-card";
-      LIBVA_DRIVER_NAME = "nvidia";
       XDG_SESSION_TYPE = "wayland";
       GBM_BACKEND = "nvidia-drm";
-      #__GLX_VENDOR_LIBRARY_NAME = "nvidia";
-      NVD_BACKEND = "direct";
       QT_QPA_PLATFORM = "wayland;xcb";
       SDL_VIDEO_DRIVER = "wayland,x11";
       PROTON_ENABLE_WAYLAND = "1";
@@ -529,7 +563,6 @@
       ENABLE_GAMESCOPE_WSI = "1";
       STEAM_EXTRA_COMPAT_TOOLS_PATHS = "$HOME/.steam/root/compatibilitytools.d";
       WLR_NO_HARDWARE_CURSORS = "0";
-      #HYPRCURSOR_SIZE = "32";
       XCURSOR_THEME = "Saturn";
       XCURSOR_SIZE = "32";
       EDITOR = "nvf";
@@ -546,8 +579,15 @@
       CLAUDE_CODE_ATTRIBUTION_HEADER = "0";
       CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC = "1";
       NODE_OPTIONS = "--dns-result-order=ipv4first";
+      #__GLX_VENDOR_LIBRARY_NAME = "nvidia";
+      #AQ_DRM_DEVICES = "/dev/dri/by-path/pci-0000:01:00.0-card";
     };
-    systemPackages = [
+    systemPackages = let
+      Cuda = pkgs.cudaPackages;
+      Kde = pkgs.kdePackages;
+      Gst = pkgs.gst_all_1;
+    in
+    [
       pkgs.stdenv.cc
       pkgs.binutils
       pkgs.gnumake
@@ -560,6 +600,7 @@
       pkgs.pinentry-qt
       pkgs.xwayland-satellite
       pkgs.noctalia-shell
+      pkgs.nautilus
       pkgs.ghostty
       pkgs.yazi
       pkgs.bitwarden-desktop
@@ -579,7 +620,6 @@
       pkgs.wineWow64Packages.staging
       pkgs.gnutls
       pkgs.xinit
-      pkgs.obs-studio
       pkgs.ttyd
       pkgs.git
       pkgs.gh
@@ -594,7 +634,6 @@
       pkgs.age
       pkgs.rofi-rbw-wayland
       pkgs.ffmpeg-full
-      pkgs.obs-studio
       pkgs.mpv
       pkgs.mpd
       pkgs.imv
@@ -626,17 +665,20 @@
       pkgs.aria2
       pkgs.monero-cli
       pkgs.easyeffects
-      #pkgs.delicious-sddm-theme
       pkgs.quickshell
-      pkgs.kdePackages.qtdeclarative
-      pkgs.kdePackages.qtsvg
-      pkgs.kdePackages.qt5compat
-      pkgs.kdePackages.kwin
-      pkgs.xwayland-satellite
+      Kde.qtdeclarative
+      Kde.qtsvg
+      Kde.qt5compat
+      Kde.kwin
       pkgs.nixfmt
       pkgs.jq
       pkgs.ventoy
-      #pkgs.sway
+      pkgs.wl-screenrec
+      Gst.gstreamer
+      Gst.gst-plugins-base
+      Gst.gst-plugins-good
+      Gst.gst-plugins-bad
+      Gst.gst-plugins-ugly
       # For Dendritic Test-VM
       pkgs.xhost
       # Audio Wiring
@@ -648,6 +690,8 @@
       # Nix Config to XML
       pkgs.repomix
       # Disabled PKGS
+      #pkgs.sway
+      #pkgs.delicious-sddm-theme
       # Hyprland Ecosystem
       #pkgs.hyprpolkitagent
       #pkgs.waybar
@@ -661,8 +705,8 @@
       inputs.zen-browser.packages.${pkgs.system}.default
       inputs.nvf.packages.${pkgs.system}.default
       #inputs.llm-agents.packages.${pkgs.system}.default
-      #pkgs.cudaPackages.cuda_nvcc
-      #pkgs.cudaPackages.cudatoolkit
+      Cuda.cuda_nvcc
+      Cuda.cudatoolkit
     ];
     etc = {
       "NetworkManager/dnsmasq.d/fallback-dns.conf".text = ''
@@ -678,6 +722,14 @@
         output "Dell Inc. DELL P2720D K6RX299P10LS" mode 2560x1440@59 pos 1920 -180
         seat * hide_cursor 3000
       '';
+      # OBS DEBUGGING
+      #"xdg/xdg-desktop-portal-wlr/config".text = ''
+      #  [screencast]
+      #  output_name =
+      #  chooser_type = simple
+      #  chooser_cmd = ${pkgs.slurp}/bin/slurp -f %o -or
+      #  force_linear = true
+      #'';
     };
   };
 
@@ -712,7 +764,7 @@
       noctalia-greeter = {
         enable = true;
         settings = {
-        # Force specific primary monitor if auto-detection picks the wrong one
+          # Force specific primary monitor if auto-detection picks the wrong one
           monitor = "ASUSTek COMPUTER INC ROG PG258Q #ASP9OUVfHcfd"; 
           cursor = {
             theme = "Saturn";
@@ -724,72 +776,6 @@
           };
         };
       };
-      # BROKEN ASS MODULE HENCE THE MKFORCE GARBAGE.
-      #regreet = {
-      #  enable = true;
-      #  cageArgs = lib.mkForce [
-      #    "-s"
-      #    "-m"
-      #    "last"
-      #  ];
-      #  settings = {
-      #    background = {
-      #      path = lib.mkForce "/etc/nixos/wallpaper.png";
-      #      fit = lib.mkForce "Cover";
-      #    };
-      #    theme = {
-      #      package = lib.mkForce pkgs.gnome-themes-extra;
-      #      name = lib.mkForce "Adwaita-dark";
-      #    };
-      #    iconTheme = {
-      #      package = lib.mkForce pkgs.adwaita-icon-theme;
-      #      name = lib.mkForce "Adwaita";
-      #    };
-      #    cursorTheme = {
-      #      package = lib.mkForce pkgs.bibata-cursors;
-      #      name = lib.mkForce "Bibata-Modern-Classic";
-      #    };
-      #    GTK = {
-      #      theme_name = lib.mkForce "Adwaita-dark";
-      #      icon_theme_name = lib.mkForce "Adwaita";
-      #      cursor_theme_name = lib.mkForce "Bibata-Modern-Classic";
-      #      font_name = lib.mkForce "Inter 11";
-      #    };
-      #    commands = {
-      #      reboot = lib.mkForce [
-      #        "doas"
-      #        "reboot"
-      #        "now"
-      #      ];
-      #      shutdown = lib.mkForce [
-      #        "doas"
-      #        "poweroff"
-      #      ];
-      #    };
-      #    #extraCss = ''
-      #    #'';
-      #  };
-      #};
-      # SDDM Is Fucking Dogshit Enough Said.
-      #sddm = {
-      #  enable = true;
-      #  wayland.enable = true;
-      #  # Uses Qt6 for a crisp native Wayland greeter
-      #  package = pkgs.kdePackages.sddm; 
-      #  theme = "delicious"; # Or leave default / custom theme
-      #  settings = {
-      #    Theme = {
-      #      Current = "delicious";
-      #      ThemeDir = "run/current-system/sw/share/sddm/themes";
-      #    };
-      #    Wayland = {
-      #      CompositorCommand = "${pkgs.kdePackages.kwin}/bin/kwin_wayland --no-lockscreen --no-global-shortcuts";
-      #    };
-      #    #General = {
-      #    #  InputMethod = "";
-      #    #};
-      #  };
-      #};
     };
     #desktopManager.xterm.enable = false;
     greetd = {
@@ -895,7 +881,7 @@
     dbus.enable = true;
     tailscale.enable = true;
     power-profiles-daemon.enable = true;
-    gnome.gnome-keyring.enable = false;
+    gnome.gnome-keyring.enable = true;
     pulseaudio.enable = false;
     resolved.enable = false;
     libinput.enable = false;
@@ -917,68 +903,58 @@
       #llama-cpp.wantedBy = pkgs.lib.mkForce [ ];
       #};
     };
-    user.services = {
-      # Injects SOPS Keys Into Environment On Boot.
-      sops-import = {
-        enable = true;
-        description = "Import SOPS-Rendered Environment Variables Into User Session";
-        wantedBy = [ "graphical-session.target" "default.target" ];
-        after = [ "sops-nix.service" ];
-        serviceConfig = {
-          Type = "oneshot";
-          RemainAfterExit = true;
-          ExecStart = pkgs.writeShellScript "sops-import-script" ''
-            if [ -f /run/secrets/rendered/secrets.env ]; then
-              set -a
-              source /run/secrets/rendered/secrets.env
-              set +a
-              ${pkgs.systemd}/bin/systemctl --user import-environment $(${pkgs.coreutils}/bin/cut -d= -f1 /run/secrets/rendered/secrets.env)
-              ${pkgs.dbus}/bin/dbus-update-activation-environment --systemd --all
-            fi
-          '';
-        };
+    user = {
+      settings.Manager = {
+        "XDG_CURRENT_DESKTOP" = "niri";
+        "XDG_SESSION_TYPE" = "wayland";
+        "NIXOS_OZONE_WL" = "1";
       };
-      noctalia-shell = {
-        description = "Noctalia Shell Bar Daemon";
-        wantedBy = [ "graphical-session.target" ];
-        wants = [ "graphical-session.target" ];
-        after = [ "graphical-session.target" "dbus.socket" ];
-        requires = [ "dbus.socket" ];
-        serviceConfig = {
-          Type = "simple";
-          ExecStart = "${pkgs.noctalia-shell}/bin/noctalia-shell";
-          Restart = "on-failure";
-          RestartSec = 1;
-          TimeoutStopSec = 10;
-          Environment = "PATH=/run/current-system/sw/bin:/etc/profiles/per-user/%u/bin";
+      services = {
+        # Injects SOPS Keys Into Environment On Boot.
+        sops-import = {
+          enable = true;
+          description = "Import SOPS-Rendered Environment Variables Into User Session";
+          wantedBy = [ "graphical-session.target" "default.target" ];
+          after = [ "sops-nix.service" ];
+          serviceConfig = {
+            Type = "oneshot";
+            RemainAfterExit = true;
+            ExecStart = pkgs.writeShellScript "sops-import-script" ''
+              if [ -f /run/secrets/rendered/secrets.env ]; then
+                set -a
+                source /run/secrets/rendered/secrets.env
+                set +a
+                ${pkgs.systemd}/bin/systemctl --user import-environment $(${pkgs.coreutils}/bin/cut -d= -f1 /run/secrets/rendered/secrets.env)
+                ${pkgs.dbus}/bin/dbus-update-activation-environment --systemd --all
+              fi
+            '';
+          };
         };
-      };
-      # Hopefully This Creates Intended Effect And Doesnt Launch With Niri But Does For Hyprland.
-      waybar = {
-        enable = false;
-        description = "Waybar for UWSM Managed Hyprland";
-        wantedBy = [ "hyprland.target" ];
-        unitConfig = {
-          PartOf = [ "hyprland.target" ];
-          After = [ "hyprland.target" ];
-          Conflicts = [ "niri.target" ];
+        noctalia-shell = {
+          description = "Noctalia Shell Bar Daemon";
+          wantedBy = [ "graphical-session.target" ];
+          wants = [ "graphical-session.target" ];
+          after = [ "graphical-session.target" "dbus.socket" ];
+          requires = [ "dbus.socket" ];
+          serviceConfig = {
+            Type = "simple";
+            ExecStart = "${pkgs.noctalia-shell}/bin/noctalia-shell";
+            Restart = "on-failure";
+            RestartSec = 1;
+            TimeoutStopSec = 10;
+            Environment = "PATH=/run/current-system/sw/bin:/etc/profiles/per-user/%u/bin";
+          };
         };
-        serviceConfig = {
-          ExecStartPre = "${pkgs.glib}/bin/gdbus wait --system net.hadess.PowerProfiles";
-          ExecStart = "${pkgs.waybar}/bin/waybar";
-          Restart = "on-failure";
-        };
-      };
-      # Works For Sure, Original Service For Hyprland.
-      #waybar = {
-      #  unitConfig = {
-      #    After = [ "graphical-session.target" ];
-      #    Requires = [ "dbus.socket" ];
-      #  };
-      #  serviceConfig = {
-      #    ExecStartPre = "${pkgs.glib}/bin/gdbus wait --system net.hadess.PowerProfiles";
-      #  };
-      #};
+        # Works For Sure, Original Service For Hyprland.
+        #waybar = {
+        #  unitConfig = {
+        #    After = [ "graphical-session.target" ];
+        #    Requires = [ "dbus.socket" ];
+        #  };
+        #  serviceConfig = {
+        #    ExecStartPre = "${pkgs.glib}/bin/gdbus wait --system net.hadess.PowerProfiles";
+        #  };
+      };#};
     };
   };
 

@@ -75,9 +75,11 @@
       "vfio_pci"
       "i2c-dev"
       "i2c-piix4"
+      "v4l2loopback"
     ];
     extraModulePackages = [ 
       config.hardware.nvidia.package
+      config.boot.kernelPackages.v4l2loopback
     ];
     kernelParams = [
       "quiet"
@@ -100,6 +102,7 @@
     extraModprobeConfig = ''
       options iwlwifi 11n_disable=1
       options iwlwifi power_save=0
+      #options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
     '';
     binfmt.emulatedSystems = [ "aarch64-linux" ];
   };
