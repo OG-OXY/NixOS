@@ -230,29 +230,17 @@
   
   xdg.portal = {
     enable = true;
-    #wlr = {
-      #enable = false;
-      #settings = {
-      #  screencast = {
-      #    output_name = "";
-      #    max_fps = 60;
-      #    chooser_type = "simple";
-      #    chooser_cmd = "slurp -f %o -or";
-      #    force_linear = true;
-      #  };
-      #};
-    #};
     configPackages = [ pkgs.niri ];
     extraPortals = [
       pkgs.xdg-desktop-portal-gnome
       pkgs.xdg-desktop-portal-gtk
-    #  #pkgs.xdg-desktop-portal-wlr
+      pkgs.xdg-desktop-portal-wlr
     ];
     config = {
       common = {
-        default = [ "gtk" ];
-    #    # Go Back To How Defaults Worked In <=1.7
-    #    #default = "*";
+        default = lib.mkForce [ "gtk" ];
+        # Go Back To How Defaults Worked In <=1.7
+        #default = "*";
       };
       #niri = lib.mkForce {
       #  default = [ "wlr" "gtk" ];
@@ -261,13 +249,13 @@
       #  "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
       #};
       niri = {
-        default = [ "gnome" "gtk" ];
-        "org.freedesktop.impl.portal.Screencast" = [ "gnome" ];
-        "org.freedesktop.impl.portal.Screenshot" = [ "gnome" ];
-        "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
+        default = lib.mkForce [ "wlr" "gnome" "gtk" ];
+        "org.freedesktop.impl.portal.Screencast" = lib.mkForce [ "wlr" ];
+        "org.freedesktop.impl.portal.Screenshot" = lib.mkForce [ "wlr" ];
+        "org.freedesktop.impl.portal.FileChooser" = lib.mkForce [ "gtk" ];
         #"org.freedesktop.impl.portal.Access" = [ "gtk" ];
       };
-      "niri:GNOME" = {
+      "GNOME" = {
         default = [ "gnome" "gtk" ];
         "org.freedesktop.impl.portal.Screencast" = [ "gnome" ];
         "org.freedesktop.impl.portal.Screenshot" = [ "gnome" ];
@@ -490,6 +478,7 @@
       ];
     };
     nix-index-database.comma.enable = true;
+    gpu-screen-recorder.enable = true;
     fish.enable = true;
     zoxide.enable = true;
     virt-manager.enable = true;
@@ -545,7 +534,7 @@
     };
     sessionVariables = {
       ### OBS DEBUG START
-      #XDG_CURRENT_DESKTOP = "niri";
+      XDG_CURRENT_DESKTOP = "niri";
       #PIPEWIRE_NODE = "1";
       #OBS_USE_EGL = "1";
       ### Commented Out For OBS
@@ -586,6 +575,9 @@
       Cuda = pkgs.cudaPackages;
       Kde = pkgs.kdePackages;
       Gst = pkgs.gst_all_1;
+      Gsr = pkgs.gpu-screen-recorder.override {
+        ffmpeg = pkgs.ffmpeg_6; # Uses NVENC API 13.0 compatible headers
+      };
     in
     [
       pkgs.stdenv.cc
@@ -600,13 +592,14 @@
       pkgs.pinentry-qt
       pkgs.xwayland-satellite
       pkgs.noctalia-shell
-      pkgs.nautilus
       pkgs.ghostty
       pkgs.yazi
       pkgs.bitwarden-desktop
       pkgs.vesktop
       pkgs.pavucontrol
       pkgs.pipewire
+      pkgs.slurp
+      pkgs.grim
       pkgs.pulseaudio
       pkgs.pulseaudio-ctl
       pkgs.blueman
@@ -679,6 +672,7 @@
       Gst.gst-plugins-good
       Gst.gst-plugins-bad
       Gst.gst-plugins-ugly
+      Gsr
       # For Dendritic Test-VM
       pkgs.xhost
       # Audio Wiring
