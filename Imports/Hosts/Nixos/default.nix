@@ -51,6 +51,6 @@
           extraSpecialArgs = {inherit inputs self;};
         };
       }
-    ];
+    ] ++ (builtins.attrValues self.nixosModules);
   };
 }
