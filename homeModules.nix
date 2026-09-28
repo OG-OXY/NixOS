@@ -7,7 +7,6 @@
     ./Modules/Home/tmux.nix
     ./Modules/Home/fish.nix
     ./Modules/Home/scripts.nix
-    ./Modules/Home/zoxide.nix
     ./Modules/Home/yazi.nix
     ./Modules/Home/hyprland-permissions.nix
     ./Modules/Home/hyprpaper.nix
