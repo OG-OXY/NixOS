@@ -477,6 +477,7 @@
       pkgs.noctalia-shell
       pkgs.ghostty
       pkgs.yazi
+      pkgs.obsidian
       pkgs.bitwarden-desktop
       pkgs.vesktop
       pkgs.pavucontrol
