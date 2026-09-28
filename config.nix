@@ -8,9 +8,6 @@
   ...
 }:
 {
-  imports = [
-  ];
-
   # NIX-PKG-Manager parameters.
   nix = {
     settings = {
