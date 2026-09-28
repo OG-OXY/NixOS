@@ -425,18 +425,9 @@
     variables = {
       CPATH = "/run/current-system/sw/include";
       LIBRARY_PATH = "/run/current-system/sw/lib";
-      #VST_PATH = "$HOME/.vst:$HOME/.wine/drive_c/Program Files/Steinburg/VstPlugins";
-      #VST3_PATH = "$HOME/.vst3:$HOME/.wine/drive_c/Program Files/Common Files/VST3";
     };
     sessionVariables = {
-      ### OBS DEBUG START
       XDG_CURRENT_DESKTOP = "niri";
-      #PIPEWIRE_NODE = "1";
-      #OBS_USE_EGL = "1";
-      ### Commented Out For OBS
-      #LIBVA_DRIVER_NAME = "nvidia";
-      #NVD_BACKEND = "direct";
-      ### OBS DEBUG END
       NIXOS_OZONE_WL = "1";
       ELECTRON_OZONE_PLATFORM_HINT = "auto";
       XDG_SESSION_TYPE = "wayland";
@@ -462,8 +453,6 @@
       CLAUDE_CODE_ATTRIBUTION_HEADER = "0";
       CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC = "1";
       NODE_OPTIONS = "--dns-result-order=ipv4first";
-      #__GLX_VENDOR_LIBRARY_NAME = "nvidia";
-      #AQ_DRM_DEVICES = "/dev/dri/by-path/pci-0000:01:00.0-card";
     };
     systemPackages = let
       Cuda = pkgs.cudaPackages;
@@ -558,6 +547,7 @@
       Kde.kwin
       pkgs.nixfmt
       pkgs.jq
+      pkgs.bat
       pkgs.ventoy
       pkgs.wl-screenrec
       Gst.gstreamer
@@ -901,4 +891,13 @@
       ln -s ${self} $out/src
     '';
   };
+  # Old Code
+  ### OBS-Debugging
+  #PIPEWIRE_NODE = "1";
+  #OBS_USE_EGL = "1";
+  # Commented Out For OBS
+  #LIBVA_DRIVER_NAME = "nvidia";
+  ###NVD_BACKEND = "direct";
+  #__GLX_VENDOR_LIBRARY_NAME = "nvidia";
+  #AQ_DRM_DEVICES = "/dev/dri/by-path/pci-0000:01:00.0-card";
 }
