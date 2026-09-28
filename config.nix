@@ -9,7 +9,6 @@
 }:
 {
   imports = [
-    ./systemModules.nix
   ];
 
   # NIX-PKG-Manager parameters.
