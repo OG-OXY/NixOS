@@ -374,7 +374,6 @@
     nix-index-database.comma.enable = true;
     gpu-screen-recorder.enable = true;
     fish.enable = true;
-    zoxide.enable = true;
     virt-manager.enable = true;
     nano.enable = false;
   };
