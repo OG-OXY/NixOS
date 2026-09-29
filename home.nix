@@ -31,14 +31,6 @@
   xdg = {
     configFile = {
       "niri/config.kdl".source = config.lib.file.mkOutOfStoreSymlink "/home/ty/NixOS/Master/Config/Niri/config.kdl";
-      "hypr/hyprland.lua".source = config.lib.file.mkOutOfStoreSymlink "/home/ty/NixOS/Master/Config/Hypr/hyprland.lua";
-      "wofi/config".source = config.lib.file.mkOutOfStoreSymlink "/home/ty/NixOS/Master/Config/Wofi/config";
-      "wofi/style.css".source = config.lib.file.mkOutOfStoreSymlink "/home/ty/NixOS/Master/Config/Wofi/style.css";
-      "waybar/config.jsonc".source = config.lib.file.mkOutOfStoreSymlink "/home/ty/NixOS/Master/Config/Waybar/config.jsonc";
-      "waybar/mediaplayer.py".source = config.lib.file.mkOutOfStoreSymlink "/home/ty/NixOS/Master/Config/Waybar/mediaplayer.py";
-      "waybar/power_menu.xml".source = config.lib.file.mkOutOfStoreSymlink "/home/ty/NixOS/Master/Config/Waybar/power_menu.xml";
-      "waybar/style.css".source = config.lib.file.mkOutOfStoreSymlink "/home/ty/NixOS/Master/Config/Waybar/style.css";
-      "yazi/yazi.toml".source = config.lib.file.mkOutOfStoreSymlink "/home/ty/NixOS/Master/Config/Yazi/yazi.toml";
       "secretspec/config.toml".text = ''
         [defaults]
         provider = "bw"
@@ -52,22 +44,9 @@
 
   systemd.user = {
     sessionVariables = {
-      #GITHUB_TOKEN = "$(cat /run/user/1000/secrets/github_token 2>/dev/null)";
+      #    
     };
     services = {
-      #waybar = {
-      #  Unit = {
-      #    After = [ "graphical-session.target" ];
-      #    Requires = [ "dbus.socket" ];
-      #  };
-      #  Service = {
-      #    ExecStartPre = "${pkgs.glib}/bin/gdbus wait --system net.hadess.PowerProfiles";
-      #    Restart = "on-failure";
-      #  };
-      #  Install = {
-      #    WantedBy = [ "graphical-session.target" ];
-      #  };
-      #};
       easyeffects = {
         Unit = {
           Description = "EasyEffects Audio Limiter & EQ";
@@ -81,34 +60,10 @@
           WantedBy = [ "graphical-session.target" ];
         };
       };
-      #rbw-autounlock = {
-      #  Unit =  {
-      #    Description = "Securely unlock Bitwarden Vault on Hyprland Startup";
-      #    After = [ "graphical-session.target" ];
-      #    PartOf = [ "graphical-session.target" ];
-      #  };
-      #  Service = {
-      #    Type = "oneshot";
-      #    Environment = [
-      #      "WAYLAND_DISPLAY=wayland-0"
-      #      "DISPLAY=:0"
-      #    ];
-      #    ExecStart = "${pkgs.rbw}/bin/rbw unlock";
-      #    RemainAfterExit = false;
-      #  };
-      #  Install = {
-      #    WantedBy = [ "graphical-session.target" ];
-      #  };
-      #};
     };
   };
 
   programs = {
-    #waybar = {
-    #  enable = true;
-    #  systemd.enable = true;
-    #};
-    #herdr.enable = true;
     devenv.enable = true;
     home-manager.enable = true;
   };

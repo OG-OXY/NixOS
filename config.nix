@@ -245,17 +245,17 @@
       #  "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
       #};
       niri = {
-        default = lib.mkForce [ "wlr" "gnome" "gtk" ];
-        "org.freedesktop.impl.portal.Screencast" = lib.mkForce [ "wlr" ];
+        default = lib.mkForce [ "wlr" "gtk" ];
+        "org.freedesktop.impl.portal.ScreenCast" = lib.mkForce [ "wlr" ];
         "org.freedesktop.impl.portal.Screenshot" = lib.mkForce [ "wlr" ];
         "org.freedesktop.impl.portal.FileChooser" = lib.mkForce [ "gtk" ];
         #"org.freedesktop.impl.portal.Access" = [ "gtk" ];
       };
-      "GNOME" = {
-        default = [ "gnome" "gtk" ];
-        "org.freedesktop.impl.portal.Screencast" = [ "gnome" ];
-        "org.freedesktop.impl.portal.Screenshot" = [ "gnome" ];
-        "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
+      "niri:GNOME" = {
+        default = lib.mkForce [ "gnome" "gtk" ];
+        "org.freedesktop.impl.portal.ScreenCast" = lib.mkForce [ "gnome" ];
+        "org.freedesktop.impl.portal.Screenshot" = lib.mkForce [ "gnome" ];
+        "org.freedesktop.impl.portal.FileChooser" = lib.mkForce [ "gtk" ];
         #"org.freedesktop.impl.portal.Access" = [ "gtk" ];
       };
     };
@@ -422,10 +422,11 @@
       LIBRARY_PATH = "/run/current-system/sw/lib";
     };
     sessionVariables = {
-      XDG_CURRENT_DESKTOP = "niri";
+      XDG_CURRENT_DESKTOP = "niri:GNOME";
       NIXOS_OZONE_WL = "1";
       ELECTRON_OZONE_PLATFORM_HINT = "auto";
       XDG_SESSION_TYPE = "wayland";
+      GDK_BACKEND = "wayland,x11";
       GBM_BACKEND = "nvidia-drm";
       QT_QPA_PLATFORM = "wayland;xcb";
       SDL_VIDEO_DRIVER = "wayland,x11";
@@ -545,6 +546,7 @@
       pkgs.bat
       pkgs.ventoy
       pkgs.wl-screenrec
+      pkgs.lolcat
       Gst.gstreamer
       Gst.gst-plugins-base
       Gst.gst-plugins-good
