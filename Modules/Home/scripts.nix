@@ -5,14 +5,6 @@
 }:
 {
   home.packages = [
-    #(pkgs.writeScriptBin "regreet-wrapped" ''
-    #  #!/usr/bin/env bash
-    #  set -e \
-    #  (sleep 0.5 ${pkgs.wlr-randr}/bin/wlr-randr \
-    #  --output "ASUSTek COMPUTER INC ROG PG258Q #ASP9OUVfHcfd" --mode 1920x1080@240Hz --pos 0,0 \
-    #  --output "Dell Inc. DELL P2720D K6RX299P10LS" --mode 2560x1440@60Hz --pos 1920,-180 ) &
-    #  exec ${pkgs.regreet}/bin/regreet
-    #'')
     (pkgs.writeScriptBin "nix-upgrade-backup" ''
       #!/usr/bin/env bash
       set -e
@@ -28,7 +20,7 @@
       fi
 
       # Jump directly into your active configuration directory
-      cd "$HOME/NixOS/nixos"
+      cd "$HOME/NixOS/Master"
 
       echo "🔄 Fetching latest channel inputs and updating flake.lock..."
       nix flake update
@@ -64,11 +56,11 @@
       # 1. Safety backup directory.
       BACKUP_DIR="$HOME/.nix-backup/$(date +%Y-%m-%d_%H-%M)"
       echo "📦 Compiling configuration snapshot to $BACKUP_DIR..."
-      mkdir -p "$BACKUP_DIR/.config" "$BACKUP_DIR/.local/bin" "$BACKUP_DIR/NixOS/nixos"
+      mkdir -p "$BACKUP_DIR/.config" "$BACKUP_DIR/.local/bin" "$BACKUP_DIR/NixOS/Master"
 
       # Core directory copying routines
       [ -d "$HOME/.local/bin" ] && cp -R $HOME/.local/bin/* "$BACKUP_DIR/.local/bin/" 2>/dev/null || true
-      [ -d "$HOME/NixOS/nixos" ] && cp -R $HOME/NixOS/nixos/* "$BACKUP_DIR/NixOS/nixos/" 2>/dev/null || true
+      [ -d "$HOME/NixOS/Master" ] && cp -R $HOME/NixOS/Master/* "$BACKUP_DIR/NixOS/Master/" 2>/dev/null || true
       [ -d "$HOME/.config" ] && cp -R $HOME/.config/* "$BACKUP_DIR/.config/" 2>/dev/null || true
 
       echo "✨ SYSTEM UPGRADE AND BACKUP SEQUENCE COMPLETED"
@@ -88,11 +80,11 @@
       # 1. Safety backup directory.
       BACKUP_DIR="$HOME/.nix-backup/$(date +%Y-%m-%d_%H-%M)"
       echo "📦 Compiling configuration snapshot to $BACKUP_DIR..."
-      mkdir -p "$BACKUP_DIR/.config" "$BACKUP_DIR/.local/bin" "$BACKUP_DIR/NixOS/nixos"
+      mkdir -p "$BACKUP_DIR/.config" "$BACKUP_DIR/.local/bin" "$BACKUP_DIR/NixOS/Master"
 
       # Core directory copying routines
       [ -d "$HOME/.local/bin" ] && cp -R $HOME/.local/bin/* "$BACKUP_DIR/.local/bin/" 2>/dev/null || true
-      [ -d "$HOME/NixOS/nixos" ] && cp -R $HOME/NixOS/nixos/* "$BACKUP_DIR/NixOS/nixos/" 2>/dev/null || true
+      [ -d "$HOME/NixOS/Master" ] && cp -R $HOME/NixOS/Master/* "$BACKUP_DIR/NixOS/Master/" 2>/dev/null || true
       [ -d "$HOME/.config" ] && cp -R $HOME/.config/* "$BACKUP_DIR/.config/" 2>/dev/null || true
 
       echo "✨ STANDALONE BACKUP SEQUENCE COMPLETED SUCCESSFULLY"
