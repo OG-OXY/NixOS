@@ -17,5 +17,4 @@ result-*
 .direnv
 .devenv
 .DS_Store
-Develop/Rust/target/
-Develop/Rust/.devenv
+**/momsweb/
