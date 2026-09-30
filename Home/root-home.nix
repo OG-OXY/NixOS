@@ -8,11 +8,11 @@
     homeDirectory = "/root";
   };
 
-  imports = [ ../../home.nix ];
+  imports = [ ../home.nix ];
 
   programs.starship = {
     enable = true;
     enableFishIntegration = true;
-    settings = lib.importTOML ../../Config/Starship/starship-root.toml;
+    settings = lib.importTOML ../Config/Starship/starship-root.toml;
   };
 }

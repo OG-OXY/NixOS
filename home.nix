@@ -64,7 +64,6 @@
   };
 
   programs = {
-    devenv.enable = true;
     home-manager.enable = true;
   };
   

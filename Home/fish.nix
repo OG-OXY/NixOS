@@ -7,27 +7,15 @@
         description = "Safely undo the last Git commit but keep file changes.";
         body = ''
           if not git rev-parse --is-inside-work-tree >/dev/null 2>&1
-            echo (set_color red)"❌ Error: Not a git repository!"(set_color normal)
-            return 1
+              echo (set_color red)"❌ Error: Not a git repository!"(set_color normal)
+              return 1
           end
-          echo (set_color yellow)"⏪ Undoing last commit safely (keeping modifications)..."(set_color normal)       git reset --soft HEAD~1
-          echo (set_color green)"✨ Done! Check 'git status' to see your uncommitted files."(set_color normal)
+              echo (set_color yellow)"⏪ Undoing last commit safely (keeping modifications)..."(set_color normal)       git reset --soft HEAD~1
+              echo (set_color green)"✨ Done! Check 'git status' to see your uncommitted files."(set_color normal)
         '';
       };
-      #j = {
-      #  description = "tell jj to grab secrets from secretspec.";
-      #  body = ''
-      #    secretspec run -- jj $argv
-      #  '';
-      #};
-      #gh = {
-      #  description = "tell github-cli to grab secrets from secretspec";
-      #  body = ''
-      #    secretspec run -- gh $argv
-      #  '';
-      #};
       ss = {
-        description = "For Grabbing secrets.";
+        description = "Run Secretspec To Grab Secrets";
         body = ''
           secretspec run -- $argv
         '';
@@ -45,12 +33,6 @@
           sudo nh clean all --keep 5
         '';
       };
-      #jj = {
-      #  description = "Jujutsu";
-      #  body = ''
-      #    command jj $argv
-      #  '';
-      #};
     };
 
     shellAbbrs = {
@@ -76,25 +58,24 @@
       v = "vis";
       sv = "sudoedit vis";
       sy = "doas yazi";
-      nrs = "sudo nixos-rebuild switch --flake .#nixos";
-      nrsu = "sudo nixos-rebuild switch --upgrade --flake .#nixos";
-      nrt = "sudo nixos-rebuild test --flake .#nixos";
-      nrtu = "sudo nixos-rebuild test --upgrade --flake .#nixos";
-      nrvm = "sudo nixos-rebuild build-vm --flake .#nixos";
+      nrs = "doas nixos-rebuild switch --flake .#nixos";
+      nrsu = "doas nixos-rebuild switch --upgrade --flake .#nixos";
+      nrt = "doas nixos-rebuild test --flake .#nixos";
+      nrtu = "doas nixos-rebuild test --upgrade --flake .#nixos";
+      nrvm = "doas nixos-rebuild build-vm --flake .#nixos";
       vm = "./result/bin/run-nixos-vm";
       nhs = "nh os switch .";
       nhsu = "nh os switch . --upgrade";
       nb = "nix-backup";
       nub = "nix-upgrade-backup";
-      nhc = "sudo nh clean all --keep 5";
+      nck = "doas nh clean all --keep 5";
+      nc = "doas nh clean all";
       dfb = "df -h /boot";
       dfr = "df -h /";
       ts = "doas tailscale up";
       pcig = "lspci | grep \'|\'";
-      btcsw = "sudo bluetoothctl connect 54:D4:96:53:E4:41";
-      btcs = "sudo bluetoothctl connect D6:88:C3:AC:1B:0C";
-      tm = "tmux";
-      tma = "tmux attach";
+      btcsw = "doas bluetoothctl connect 54:D4:96:53:E4:41";
+      btcs = "doas bluetoothctl connect D6:88:C3:AC:1B:0C";
     };
 
     shellInit = ''
@@ -133,22 +114,18 @@
       set -g fish_handle_reflow 1
       set -U fish_ambiguous_width 1
       set -U fish_emoji_width 3
-      #fish_vi_key_bindings
 
       if test "$USER" = "root"
           fastfetch 2>/dev/null
-        else
+          set -gx ATUIN_CONFIG_DIR "/root/.config/atuin"
+      else
+          set -gx ATUIN_CONFIG_DIR "$HOME/.config/atuin"
           fastfetch
-      end
-      starship init fish | source
-      if test "$USER" = "root"
-        set -gx ATUIN_CONFIG_DIR "/root/.config/atuin"
-          else
-        set -gx ATUIN_CONFIG_DIR "$HOME/.config/atuin"
       end
       if type -q direnv
           direnv hook fish | source
       end
+      starship init fish | source
       zoxide init fish | source
       atuin init fish | source
     '';
