@@ -84,11 +84,10 @@
                     gitsigns = {
                       enable = true;
                       mappings = {
-                        stageHunk = "<leader>gsh";
-                        undoStageHunk = "<leader>guh";
-                        resetHunk = "<leader>grh";
-                        previewHunk = "<leader>gph";
-                        #previewHunkInline = "<leader>gpH";
+                        stageHunk = "<leader>gs";
+                        undoStageHunk = "<leader>gu";
+                        resetHunk = "<leader>gr";
+                        previewHunk = "<leader>gp";
                         
                         # Navigation
                         nextHunk = "]h";
@@ -97,6 +96,8 @@
                         # Diffing and Blame
                         diffThis = "<leader>gd";
                         blameLine = "<leader>gb";
+                        toggleBlame = "<leader>gtb";
+                        toggleDeleted = "<leader>gtd";
                       };
                     };
                     git-conflict = {
@@ -306,19 +307,24 @@
                     '';
                     smart-write-commands = ''
                       local function smart_write(extra_cmd)
-                        if vim.bo.filetype ~= "nix" then
-                          pcall(vim.lsp.buf.format, { async = false })
-                        end
-                        vim.cmd('write')
-                        if extra_cmd then
-                          vim.cmd(extra_cmd)
-                        end
-                      end
+      		        local buftype = vim.bo.buftype
+      		        local filename = vim.api.nvim_buf_get_name(0)
+      		        
+      		        -- Only write and format if it's a real file buffer
+      		        if buftype == "" and filename ~= "" then
+      		          pcall(vim.lsp.buf.format, { async = false })
+      		          vim.cmd('write')
+      		        end
 
-                      vim.api.nvim_create_user_command('W', function() smart_write() end, {})
-                      vim.api.nvim_create_user_command('Wq', function() smart_write('quit') end, {})
-                      vim.api.nvim_create_user_command('WQ', function() smart_write('quit') end, {})
-                    '';
+      		        if extra_cmd then
+      		          vim.cmd(extra_cmd)
+      		        end
+      		      end
+
+      		      vim.api.nvim_create_user_command('W', function() smart_write() end, {})
+      		      vim.api.nvim_create_user_command('Wq', function() smart_write('quit') end, {})
+      		      vim.api.nvim_create_user_command('WQ', function() smart_write('quit') end, {})
+		    '';
                     buffer-quit-autosave = ''
                       vim.api.nvim_create_autocmd({ "FocusLost", "BufLeave" }, {
                         pattern = "*",
@@ -344,6 +350,23 @@
                           pcall(vim.treesitter.start)
                         end,
                       })
+                    '';
+                    gitsigns-keymaps = ''
+                      -- Clear out the conflicting default gitsigns keymaps if they persist
+                      vim.keymap.del('n', '<leader>hS', { silent = true })
+                      vim.keymap.del('n', '<leader>hD', { silent = true })
+                      vim.keymap.del('n', '<leader>hR', { silent = true })
+                      vim.keymap.set("n", "<leader>gtc", "<cmd>Gitsigns toggle_current_line_blame<CR>", { desc = "Toggle line blame" })
+                      local status, wk = pcall(require, "which-key")
+                      if status then
+                        -- Newer which-key v3+ syntax
+                        pcall(function()
+                          wk.add({
+                            { "<leader>h", hidden = true },
+                            { "<leader>gcc", hidden = true },
+                          })
+                        end)
+                      end
                     '';
                   };
 
