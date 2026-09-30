@@ -305,26 +305,28 @@
                         })
                       end, {})
                     '';
-                    smart-write-commands = ''
+                    write-commands = ''
                       local function smart_write(extra_cmd)
-      		        local buftype = vim.bo.buftype
-      		        local filename = vim.api.nvim_buf_get_name(0)
-      		        
-      		        -- Only write and format if it's a real file buffer
-      		        if buftype == "" and filename ~= "" then
-      		          pcall(vim.lsp.buf.format, { async = false })
-      		          vim.cmd('write')
-      		        end
+                        local buftype = vim.bo.buftype
+                        local filename = vim.api.nvim_buf_get_name(0)
+                        local modifiable = vim.bo.modifiable
+                        local readonly = vim.bo.readonly
 
-      		        if extra_cmd then
-      		          vim.cmd(extra_cmd)
-      		        end
-      		      end
+                        -- Only write if it's a completely normal, modifiable, saved-path file buffer
+                        if buftype == "" and filename ~= "" and modifiable and not readonly then
+                          pcall(vim.lsp.buf.format, { async = false })
+                          vim.cmd('write')
+                        end
 
-      		      vim.api.nvim_create_user_command('W', function() smart_write() end, {})
-      		      vim.api.nvim_create_user_command('Wq', function() smart_write('quit') end, {})
-      		      vim.api.nvim_create_user_command('WQ', function() smart_write('quit') end, {})
-		    '';
+                        if extra_cmd then
+                          vim.cmd(extra_cmd)
+                        end
+                      end
+
+                      vim.api.nvim_create_user_command('W', function() smart_write() end, {})
+                      vim.api.nvim_create_user_command('Wq', function() smart_write('quit') end, {})
+                      vim.api.nvim_create_user_command('WQ', function() smart_write('quit') end, {})
+                    '';
                     buffer-quit-autosave = ''
                       vim.api.nvim_create_autocmd({ "FocusLost", "BufLeave" }, {
                         pattern = "*",
