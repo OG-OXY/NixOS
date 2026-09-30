@@ -2,6 +2,7 @@
 **/.devenv
 **/target/
 *~
+_*
 config-dump*
 .aider*
 *.bak
