@@ -45,8 +45,8 @@
           useUserPackages = true;
           backupFileExtension = ".bak";
           users = {
-            root = import ../../../Modules/Home/root-home.nix;
-            ty = import ../../../Modules/Home/ty-home.nix;
+            root = import ../../../Home/root-home.nix;
+            ty = import ../../../Home/ty-home.nix;
           };
           extraSpecialArgs = {inherit inputs self;};
         };

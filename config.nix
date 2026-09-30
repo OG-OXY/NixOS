@@ -541,6 +541,7 @@
       Kde.qtsvg
       Kde.qt5compat
       Kde.kwin
+      pkgs.devenv
       pkgs.nixfmt
       pkgs.jq
       pkgs.bat
