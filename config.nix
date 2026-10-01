@@ -232,6 +232,14 @@
       pkgs.xdg-desktop-portal-gtk
       pkgs.xdg-desktop-portal-wlr
     ];
+    wlr = {
+      enable = true;
+      settings = {
+        screencast = {
+          force_linear = true;
+        };
+      };
+    };
     config = {
       common = {
         default = lib.mkForce [ "gtk" ];
@@ -430,6 +438,9 @@
       GBM_BACKEND = "nvidia-drm";
       QT_QPA_PLATFORM = "wayland;xcb";
       SDL_VIDEO_DRIVER = "wayland,x11";
+      #PIPEWIRE_NODE = "2";
+      #OBS_USE_EGL = "0";
+      #WLR_RENDERER = "vulkan"; 
       PROTON_ENABLE_WAYLAND = "1";
       PROTON_ENABLE_NVAPI = "1";
       ENABLE_GAMESCOPE_WSI = "1";
@@ -457,6 +468,10 @@
       Gsr = pkgs.gpu-screen-recorder.override {
         ffmpeg = pkgs.ffmpeg_6; # Uses NVENC API 13.0 compatible headers
       };
+      #ffmpeg-full = pkgs.ffmpeg-full.override {
+      #  ffmpeg = pkgs.ffmpeg_6;
+      #  withUnfree = true;
+      #};
     in
     [
       pkgs.stdenv.cc
@@ -504,7 +519,7 @@
       pkgs.sops
       pkgs.age
       pkgs.rofi-rbw-wayland
-      pkgs.ffmpeg-full
+      pkgs.ffmpeg_6-full
       pkgs.mpv
       pkgs.mpd
       pkgs.imv
@@ -779,11 +794,11 @@
       #};
     };
     user = {
-      settings.Manager = {
-        "XDG_CURRENT_DESKTOP" = "niri";
-        "XDG_SESSION_TYPE" = "wayland";
-        "NIXOS_OZONE_WL" = "1";
-      };
+      #settings.Manager = {
+      #  "XDG_CURRENT_DESKTOP" = "niri:GNOME";
+      #  "XDG_SESSION_TYPE" = "wayland";
+      #  "NIXOS_OZONE_WL" = "1";
+      #};
       services = {
         # Injects SOPS Keys Into Environment On Boot.
         sops-import = {
