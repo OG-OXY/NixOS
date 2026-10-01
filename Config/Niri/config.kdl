@@ -247,5 +247,4 @@ binds {
 debug {
     //render-drm-device "/dev/dri/renderD128"
     //force-pipewire-invalid-modifier
-    //honor-xdg-activation-with-invalid-serial
 }

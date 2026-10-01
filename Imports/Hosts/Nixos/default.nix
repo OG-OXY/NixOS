@@ -24,10 +24,10 @@
             let
                 stable = import inputs.nixpkgs-stable {
                 inherit (prev) system;
-                _config = prev.config;
+                config = prev.config;
               };
             in {
-                #package = packagename.stable
+                hello = stable.hello;
             })
           ];
         };

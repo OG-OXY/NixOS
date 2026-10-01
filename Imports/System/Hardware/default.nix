@@ -100,7 +100,7 @@
       extraModprobeConfig = ''
         options iwlwifi 11n_disable=1
         options iwlwifi power_save=0
-        #options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
+        options v4l2loopback exclusive_caps=1 card_label="Virtual Screen Capture"
       '';
       binfmt.emulatedSystems = [ "aarch64-linux" ];
     };
@@ -158,6 +158,8 @@
       #    "x-systemd.device-timeout=5s"
       #  ];
       #};
+      # extraModprobeConfig
+      #options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
     };
   };
 }
