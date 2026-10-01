@@ -1,0 +1,35 @@
+{
+  inputs,
+  ...
+}:
+{
+  flake.nixosModules.rusty-clip = { pkgs, ... }:
+  let
+      rustyClip = inputs.rusty-clip.packages.${pkgs.system}.default;
+      #rustyClip = pkgs.rustPlatform.buildRustPackage {
+      #  pname = "rusty-clip";
+      #  version = "0.1.0";
+      #  # Point this to the absolute path of your local rusty-clip source directory
+      #  src = /home/ty/NixOS/Master/Develop/Rust/rusty-clip;
+      #  # Nix will automatically fetch/cache dependencies. 
+      #  # If cargoLock isn't provided, you must generate a Cargo.lock via `cargo generate-lockfile`.
+      #  cargoLock.lockFile = /home/ty/NixOS/Master/Develop/Rust/rusty-clip/Cargo.lock;
+      #};
+  in
+  {
+    # Make rusty-clip globally available in PATH
+    environment.systemPackages = [ rustyClip ];
+
+    # Systemd user service pointing straight to the built package binary
+    systemd.user.services.rusty-clip = {
+      description = "Rusty-Clip Persistent Wayland Clipboard Daemon";
+      wantedBy = [ "graphical-session.target" ];
+      partOf = [ "graphical-session.target" ];
+      serviceConfig = {
+        ExecStart = "${rustyClip}/bin/rusty-clip daemon";
+        Restart = "on-failure";
+        RestartSec = "1s";
+      };
+    };
+  };
+}

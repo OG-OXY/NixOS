@@ -835,6 +835,16 @@
             Environment = "PATH=/run/current-system/sw/bin:/etc/profiles/per-user/%u/bin";
           };
         };
+        #rusty-clip = {
+        #  description = "Rusty-Clip Persistent Wayland Clipboard Daemon";
+        #  wantedBy = [ "graphical-session.target" ];
+        #  partOf = [ "graphical-session.target" ];
+        #  serviceConfig = {
+        #    ExecStart = "%h/.local/bin/rusty-clip daemon";
+        #    Restart = "on-failure";
+        #    RestartSec = "1s";
+        #  };
+        #};
         # Works For Sure, Original Service For Hyprland.
         #waybar = {
         #  unitConfig = {

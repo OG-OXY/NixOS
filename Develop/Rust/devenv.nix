@@ -1,11 +1,11 @@
-{ pkgs, inputs, ... }:
+{ pkgs, ... }:
 
 let
-  # Determine libgbm package cleanly depending on Nixpkgs version
   gbmPkg = pkgs.mesa-libgbm or pkgs.libgbm or pkgs.mesa;
 
+  # Combined superset of runtime libraries for both the window manager and system daemons
   runtimeLibs = [
-    gbmPkg        # Explicitly provides libgbm.so
+    gbmPkg
     pkgs.wayland
     pkgs.wayland-protocols
     pkgs.libxkbcommon
@@ -55,7 +55,6 @@ in
     export LIBRARY_PATH="${libPath}"
     export LD_LIBRARY_PATH="${libPath}"
     export PKG_CONFIG_PATH="${pkgs.lib.makeSearchPathOutput "dev" "lib/pkgconfig" runtimeLibs}:${pkgs.lib.makeSearchPathOutput "out" "lib/pkgconfig" runtimeLibs}:${pkgs.lib.makeSearchPath "share/pkgconfig" runtimeLibs}"
-    
-    echo "🦀 Rust Wayland Compositor Dev Environment Ready"
+    echo "🦀 Master Rust Workspace Ready (Vigspa, Rusty-Clip, & Tools)"
   '';
 }

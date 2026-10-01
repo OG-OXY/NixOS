@@ -1,5 +1,5 @@
 #fish.nix
-{ pkgs, ... }: {
+{ pkgs, lib, ... }: {
   programs.fish = {
     enable = true;
     functions = {
@@ -33,6 +33,12 @@
           sudo nh clean all --keep 5
         '';
       };
+      wl-copy = {
+        description = "Rusty-Clip!";
+        body = ''
+          rusty-clip $argv
+        '';
+      };
     };
 
     shellAbbrs = {
@@ -46,7 +52,7 @@
       gpf = "git push -u --force origin master";
       jl = "jj log";
       jla = "jj l";
-      jd = "jj diff -r -@";
+      jd = "jj diff -r @-";
       jbs = "jj bookmark set master -r @";
       jdc = "jj describe -m \"";
       jc = "jj commit -m \"";
@@ -124,6 +130,9 @@
       end
       if type -q direnv
           direnv hook fish | source
+      end
+      if type -q devenv
+          ${lib.getExe pkgs.devenv} hook fish | source
       end
       starship init fish | source
       zoxide init fish | source

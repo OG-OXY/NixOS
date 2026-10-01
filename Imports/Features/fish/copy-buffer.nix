@@ -1,9 +1,11 @@
 {
+  inputs,
   ...
 }:
 {  
   flake.nixosModules.fish-copy-buffer = { pkgs, ... }:
   let
+    rustyClip = inputs.rusty-clip.packages.${pkgs.system}.default;
     fishBinding = pkgs.writeText "copy-buffer.fish" ''
       # This hook runs AFTER Fish finishes its keymap resets, making the bind stick
       function fish_user_key_bindings
@@ -12,7 +14,7 @@
                   #echo "--- BINDING FIRED ---" >> /tmp/fish_debug.log
                   set -l cmd (commandline)
                   #echo "CMD: '$cmd'" >> /tmp/fish_debug.log
-                  echo -n "$cmd" | ${pkgs.wl-clipboard}/bin/wl-copy# 2>> /tmp/fish_debug.log
+                  echo -n "$cmd" | ${rustyClip}/bin/rusty-clip # 2>> /tmp/fish_debug.log
               end
           end
   
