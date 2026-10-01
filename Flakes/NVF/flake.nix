@@ -297,6 +297,21 @@
                   };
 
                   luaConfigRC = {
+                    rusty-clip = ''
+                      vim.g.clipboard = {
+                        name = 'rusty-clip-custom',
+                        copy = {
+                          ['+'] = 'rusty-clip',
+                          ['*'] = 'rusty-clip',
+                        },
+                        paste = {
+                          -- Assuming you have a paste mechanism or use wl-paste (which can also be shimmed)
+                          ['+'] = 'wl-paste --no-newline',
+                          ['*'] = 'wl-paste --no-newline',
+                        },
+                        cache_enabled = 0,
+                      }
+                    '';
                     master-repo-grep = ''
                       vim.api.nvim_create_user_command('Masterg', function()
                         require('telescope.builtin').live_grep({

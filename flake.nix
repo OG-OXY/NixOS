@@ -9,6 +9,7 @@
     import-tree.url = "github:denful/import-tree";
     nvf.url = "path:./Flakes/NVF";
     llm-agents.url = "path:./Flakes/LLM-Agents";
+    rusty-clip.url = "github:OG-OXY/rusty-clip";
     chaotic = {
       url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
       inputs.nixpkgs.follows = "nixpkgs";
