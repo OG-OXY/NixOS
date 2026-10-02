@@ -398,11 +398,11 @@
     },
     "nixpkgs_4": {
       "locked": {
-        "lastModified": 1790689126,
-        "narHash": "sha256-ilerN1WLSvF+HMjziC/Wv99J5y02maDH+6hZPwsORKg=",
+        "lastModified": 1790822859,
+        "narHash": "sha256-69xHQhAeMAD2wDXO7T2pcOZIF9Sga2W+JkmY2a11Ops=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "b4fd65b198c599cbe814fcb9f42d25d021595ec9",
+        "rev": "c59305bab2065cfecc4944690d9eedbb56f3a9fa",
         "type": "github"
       },
       "original": {
@@ -473,11 +473,11 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1790847095,
-        "narHash": "sha256-Pt70izVee/MWVSn58NLCoIYE/FUhVya/1o8qkeWSFE0=",
+        "lastModified": 1790985327,
+        "narHash": "sha256-juufHB/iFiA9UgQA3Qw1Qpg90BhleaxeceOlGppdbzg=",
         "owner": "OG-OXY",
         "repo": "rusty-clip",
-        "rev": "8d0aa55188d047f4a54bb6eb4b5acd56e4644ba6",
+        "rev": "0ef3b40b6191f50f2cfa2511ef4a93d3afdf489f",
         "type": "github"
       },
       "original": {

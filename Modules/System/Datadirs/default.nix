@@ -6,7 +6,7 @@
   let
     # Define your user name and HDD path for convenience
     userName = "ty";
-    hddPath = "/home/${userName}/2TB-HDD";
+    hddPath = "/home/${userName}/HDD";
   
     # Create a generated user-dirs.dirs file content or write it out
     userDirsFile = pkgs.writeText "xdg-data-dirs.conf" ''
@@ -14,9 +14,11 @@
       XDG_DOCUMENTS_DIR="${hddPath}/Documents"
       XDG_PICTURES_DIR="${hddPath}/Pictures"
       XDG_VIDEOS_DIR="${hddPath}/Videos"
-      XDG_MUSIC_DIR="${hddPath}/Music"
-      XDG_DESKTOP_DIR="${hddPath}/Desktop"
     '';
+    
+    # If you end up wanting desktop, music dirs in the future add these lines after videos above.
+    #XDG_MUSIC_DIR="${hddPath}/Music"
+    #XDG_DESKTOP_DIR="${hddPath}/Desktop"
   in
   {
     # 1. Systemd tmpfiles to handle both the .config file and the directory symlinks
