@@ -1,308 +1,12 @@
 #config.nix
 {
   pkgs,
-  config,
   lib,
   inputs,
   self,
   ...
 }:
 {
-  # NIX-PKG-Manager parameters.
-  nix = {
-    settings = {
-      auto-optimise-store = true;
-      download-buffer-size = 536870912;
-      max-substitution-jobs = 128;
-      experimental-features = [
-        "nix-command"
-        "flakes"
-      ];
-    };
-    # Garbage collection.
-    gc = {
-      automatic = true;
-      dates = "daily";
-      options = "--delete-older-than 3d";
-    };
-  };
-
-  # User account.
-  security = {
-    polkit.enable = true;
-    rtkit.enable = true;
-    doas = {
-      enable = true;
-      extraRules = [
-        {
-          users = [ "ty" ];
-          noPass = true;
-          keepEnv = true;
-        }
-      ];
-    };
-    sudo = {
-      enable = true;
-      extraRules = [
-        {
-          groups = [ "wheel" ];
-          commands = [
-            {
-              command = "ALL";
-              options = [ "NOPASSWD" ];
-            }
-          ];
-        }
-      ];
-    };
-    pam.services = {
-      login = {
-        #enableGnomeKeyring = false;
-        enableKwallet = false;
-      };
-    };
-  };
-
-  # User parameters.
-  users = {
-    mutableUsers = true;
-    users.root.shell = pkgs.fish;
-    users.ty = {
-      shell = pkgs.fish;
-      isNormalUser = true;
-      extraGroups = [
-        "wheel"
-        "networkmanager"
-        "video"
-        "render"
-        "input"
-        "uinput"
-        "plugdev"
-        "audio"
-        "gamemode"
-        "i2c"
-        "libvirtd"
-        "kvm"
-        "vboxusers"
-        "wireshark"
-        "tcpdump"
-      ];
-    };
-  };
-
-  # Networking PKGS + Parameters
-  networking = {
-    hostName = "nixos";
-    nameservers = [ 
-      "1.1.1.1"
-      "1.0.0.1"
-      "9.9.9.9"
-    ];
-    networkmanager = {
-      enable = true;
-      wifi = {
-        backend = "iwd";
-        powersave = false;
-      };
-      dns = "dnsmasq";
-      ensureProfiles = {
-        environmentFiles = [ config.sops.templates."WIFI_PSK.env".path ];
-        profiles = {
-          "Home-WIFI" = {
-            connection = {
-              id = "Home-WIFI";
-              type = "wifi";
-              autoconnect = true;
-            };
-            wifi = {
-              ssid = "JOSH3881";
-              bssid = "7C:9A:54:AF:D7:22";
-              interface-name = "wlan0";
-              mode = "infrastructure";
-              band = "bg";
-              powersave = 2;
-            };
-            wifi-security = {
-              key-mgmt = "wpa-psk";
-              psk = "$WIFI_PSK"; #SOPS secret
-            };
-            ipv4 = {
-              method = "auto";
-              ignore-auto-dns = true;
-            };
-            ipv6 = {
-              addr-gen-mode = "default";
-              method = "auto";
-              ignore-auto-dns = true;
-            };
-          };
-        };
-      };
-    };
-    firewall = {
-      allowedTCPPorts = [ 22 ];
-      trustedInterfaces = [ "tailscale0" ];
-    };
-    wireless = {
-      enable = false;
-      iwd = {
-        enable = true;
-        settings = {
-          General = {
-            EnableNetworkConfiguration = false;
-          };
-          Rank = {
-            BandModifier5GHz = 0.0;
-            "BandModifier2.4GHz" = 10.0;
-          };
-        };
-      };
-    };
-  };
-
-  sops = {
-    defaultSopsFile = "/home/ty/NixOS/secrets.yaml";
-    defaultSopsFormat = "yaml";
-    validateSopsFiles = false;
-    age = {
-      keyFile = "/home/ty/.config/sops/age/keys.txt";
-      sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
-    };
-    secrets = {
-      "GITHUB_TOKEN" = {
-        owner = "ty";
-        group = "users";
-        mode = "0400";
-      };
-      "GOOGLE_API_KEY" = {
-        owner = "ty";
-        group = "users";
-        mode = "0400";
-      };
-      "GEMINI_API_KEY" = {
-        owner = "ty";
-        group = "users";
-        mode = "0400";
-      };
-      "WIFI_PSK" = {
-        owner = "root";
-        group = "root";
-        mode = "0400";
-      };
-      "bw_client_id" = {
-        owner = "ty";
-        group = "users";
-        mode = "0400";
-      };
-      "bw_client_secret" = {
-        owner = "ty";
-        group = "users";
-        mode = "0400";
-      };
-    };
-    templates = {
-      "secrets.env" = {
-        owner = "ty";
-        group = "users";
-        mode = "0400";
-        content = ''
-          GITHUB_TOKEN=${config.sops.placeholder.GITHUB_TOKEN}
-          GOOGLE_API_KEY=${config.sops.placeholder.GOOGLE_API_KEY}
-          GEMINI_API_KEY=${config.sops.placeholder.GOOGLE_API_KEY}
-          BW_CLIENTID=${config.sops.placeholder.bw_client_id}
-          BW_CLIENTSECRET=${config.sops.placeholder.bw_client_secret}
-        '';
-      };
-      "WIFI_PSK.env" = {
-        owner = "root";
-        group = "root";
-        mode = "0400";
-        content = ''
-          WIFI_PSK=${config.sops.placeholder.WIFI_PSK}
-        '';
-      };
-    };
-  };
-  
-  xdg.portal = {
-    enable = true;
-    configPackages = [ pkgs.niri ];
-    extraPortals = [
-      pkgs.xdg-desktop-portal-gnome
-      pkgs.xdg-desktop-portal-gtk
-      pkgs.xdg-desktop-portal-wlr
-    ];
-    wlr = {
-      enable = true;
-      settings = {
-        screencast = {
-          force_linear = true;
-        };
-      };
-    };
-    config = {
-      common = {
-        default = lib.mkForce [ "gtk" ];
-        # Go Back To How Defaults Worked In <=1.7
-        #default = "*";
-      };
-      #niri = lib.mkForce {
-      #  default = [ "wlr" "gtk" ];
-      #  "org.freedesktop.impl.portal.Screencast" = [ "wlr" ];
-      #  "org.freedesktop.impl.portal.Screenshot" = [ "wlr" ];
-      #  "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
-      #};
-      niri = {
-        default = lib.mkForce [ "wlr" "gtk" ];
-        "org.freedesktop.impl.portal.ScreenCast" = lib.mkForce [ "wlr" ];
-        "org.freedesktop.impl.portal.Screenshot" = lib.mkForce [ "wlr" ];
-        "org.freedesktop.impl.portal.FileChooser" = lib.mkForce [ "gtk" ];
-        #"org.freedesktop.impl.portal.Access" = [ "gtk" ];
-      };
-      "niri:GNOME" = {
-        default = lib.mkForce [ "gnome" "gtk" ];
-        "org.freedesktop.impl.portal.ScreenCast" = lib.mkForce [ "gnome" ];
-        "org.freedesktop.impl.portal.Screenshot" = lib.mkForce [ "gnome" ];
-        "org.freedesktop.impl.portal.FileChooser" = lib.mkForce [ "gtk" ];
-        #"org.freedesktop.impl.portal.Access" = [ "gtk" ];
-      };
-    };
-  };
-
-  console = {
-    colors = [
-      "121212" # 0: Black (Deep Charcoal background)
-      "ff4433" # 1: Red (Fiery orange-red)
-      "33cc55" # 2: Green (Vibrant terminal green)
-      "ffaa22" # 3: Yellow (Warm orange-yellow)
-      "2255ff" # 4: Blue (Deep electric blue from fastfetch)
-      "cc33ff" # 5: Magenta (Hot pink/magenta)
-      "00e5ff" # 6: Cyan (Bright Niri/Yazi cyan accent)
-      "e0e0e0" # 7: White (Clean bright foreground)
-      # Bright variants (8-15)
-      "555555" # 8: Bright Black
-      "ff6655" # 9: Bright Red
-      "55ff77" # 10: Bright Green
-      "ffcc44" # 11: Bright Yellow
-      "4477ff" # 12: Bright Blue (Deep blue highlight)
-      "ff55ff" # 13: Bright Magenta
-      "55ffff" # 14: Bright Cyan
-      "ffffff" # 15: Bright White
-    ];
-  };
-
-  #stylix = {
-  #  enable = true;
-  #  image = ./Config/Theme/Wpapers/gruvbox-rainbow-nix.png;
-  #  #base16Scheme = "${inputs.base16-schemes}/base16/nord.yaml";
-  #  targets = {
-  #    fish.enable = false;
-  #    console.enable = false;
-  #    gtk.enable = true;
-  #    qt.enable = true;
-  #  };
-  #};
-  
   # Install PKGS With System Parameters.
   programs = {
     # Native NixOS Modules
@@ -386,42 +90,6 @@
     nano.enable = false;
   };
 
-  fonts = {
-    packages = [
-      pkgs.nerd-fonts.jetbrains-mono
-      pkgs.nerd-fonts.fira-code
-      pkgs.font-awesome
-      pkgs.inter
-    ];
-    fontconfig = {
-      enable = true;
-      defaultFonts = {
-        monospace = [
-          "JetBrainsMono Nerd Font"
-          "FiraCode Nerd Font"
-          "Inter"
-        ];
-        sansSerif = [
-          "Inter"
-          "Font Awesome 6 Free"
-          "Font Awesome 6 Brands"
-          "JetBrainsMono Nerd Font"
-          "FiraCode Nerd Font"
-        ];
-        serif = [
-          "Inter"
-          "Font Awesome 6 Free"
-          "Font Awesome 6 Brands"
-          "JetBrainsMono Nerd Font"
-          "FiraCode Nerd Font"
-        ];
-      };
-      #localConf = ''
-      #
-      #'';
-    };
-  };
-
   # Install system PKGS.
   environment = {
     shells = [ pkgs.fish ];
@@ -468,10 +136,6 @@
       Gsr = pkgs.gpu-screen-recorder.override {
         ffmpeg = pkgs.ffmpeg_6; # Uses NVENC API 13.0 compatible headers
       };
-      #ffmpeg-full = pkgs.ffmpeg-full.override {
-      #  ffmpeg = pkgs.ffmpeg_6;
-      #  withUnfree = true;
-      #};
     in
     [
       pkgs.stdenv.cc
@@ -612,14 +276,11 @@
         output "Dell Inc. DELL P2720D K6RX299P10LS" mode 2560x1440@59 pos 1920 -180
         seat * hide_cursor 3000
       '';
-      # OBS DEBUGGING
-      #"xdg/xdg-desktop-portal-wlr/config".text = ''
-      #  [screencast]
-      #  output_name =
-      #  chooser_type = simple
-      #  chooser_cmd = ${pkgs.slurp}/bin/slurp -f %o -or
-      #  force_linear = true
-      #'';
+      #OBS DEBUGGING
+      "xdg/xdg-desktop-portal-wlr/config".text = ''
+        [screencast]
+        force_linear = true
+      '';
     };
   };
 
