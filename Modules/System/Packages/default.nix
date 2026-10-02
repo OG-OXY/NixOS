@@ -60,6 +60,7 @@
       pkgs.age
       pkgs.rofi-rbw-wayland
       pkgs.ffmpeg_6-full
+      pkgs.exiftool
       pkgs.mpv
       pkgs.mpd
       pkgs.imv

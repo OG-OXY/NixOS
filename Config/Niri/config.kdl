@@ -245,5 +245,4 @@ binds {
 }
 
 debug {
-    render-drm-device "/dev/dri/renderD128"
 }

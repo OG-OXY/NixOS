@@ -87,6 +87,7 @@
         "amd_iommu=on"
         "iommu=pt"
         "nvidia-drm.modeset=1"
+        "pcie_aspm=off"
       ];
       kernel.sysctl = {
         "kernel.sysrq" = true;
@@ -123,7 +124,7 @@
           "dmask=0022"
         ];
       };
-      "/home/ty/2TB-HDD" = {
+      "/home/ty/HDD" = {
         device = "/dev/disk/by-partlabel/2TB-HDD";
         fsType = "ext4";
         options = [
@@ -136,7 +137,7 @@
           "x-systemd.idle-timeout=10m"
         ];
       };
-      "/home/ty/400GB-HDD" = {
+      "/home/ty/HDD/Storage" = {
         device = "/dev/disk/by-partlabel/400GB-HDD";
         fsType = "ext4";
         options = [
@@ -147,7 +148,18 @@
           "x-systemd.device-timeout=5s"
         ];
       };
-      "/home/ty/Ventoy" = {
+      "/home/ty/HDD/Pictures/Backup" = {
+        device = "/dev/disk/by-partlabel/300GB-HDD";
+        fsType = "ext4";
+        options = [
+          "defaults"
+          "nofail"
+          "exec"
+          "x-systemd.automount"
+          "x-systemd.device-timeout=5s"
+        ];
+      };
+      "/mnt/Ventoy" = {
         enable = true;
         device = "/dev/disk/by-partlabel/Ventoy";
         fsType = "exfat";
