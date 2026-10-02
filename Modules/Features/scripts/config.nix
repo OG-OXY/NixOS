@@ -22,33 +22,33 @@
         # Jump directly into your active configuration directory
         cd "$HOME/NixOS/Master"
 
-        echo "🔄 Fetching latest channel inputs and updating flake.lock..."
-        nix flake update
+        echo "🔄 Updating flake.lock.. ⚙️ Rebuilding and switching NixOS system..."
+        nh os switch . --update
 
-        echo "🧹 Formatting Nix files with nixfmt..."
-        ${pkgs.nixfmt}/bin/nixfmt *.nix
+        #echo "🧹 Formatting Nix files with nixfmt..."
+        #${pkgs.nixfmt}/bin/nixfmt *.nix
 
-        echo "⚡ Staging formatted elements and the new lockfile to Git..."
-        git add -A
+        #echo "⚡ Staging formatted elements and the new lockfile to Git..."
+        #git add -A
 
-        echo "⚙️ Rebuilding and switching NixOS system..."
-        sudo nixos-rebuild switch --flake .#nixos
+        #echo "⚙️ Rebuilding and switching NixOS system..."
+        #sudo nixos-rebuild switch --flake .#nixos
 
         # Reclaim user ownership of files sudo or the builder modified.
-        echo "🔑 Restoring file ownership permissions..."
-        sudo chown -R ty:users /home/ty
+        #echo "🔑 Restoring file ownership permissions..."
+        #sudo chown -R ty:users /home/ty
 
         # 2. Git Commit and Push tracking.
         echo "📝 Checking for configuration changes to commit..."
         if ! git diff-index --quiet HEAD --; then
             echo "💾 Changes detected. Committing lockfile and script mutations..."
-            git commit -m "System auto-upgrade & lock refresh: $(date +'%Y-%m-%d %H:%M')"
+            jj commit -m "System auto-upgrade & lock refresh: $(date +'%Y-%m-%d %H:%M')"
             
-            echo "⏳ Waiting 10 seconds for NetworkManager to reconnect..."
-            sleep 10
+            echo "⏳ Waiting 5 seconds for NetworkManager to reconnect..."
+            sleep 5
             
             echo "🚀 Pushing configuration updates upstream..."
-            git push
+            jj bookmark set master -r @ && jj git push --all --allow-empty-description
         else
             echo "✅ No new updates or package upgrades detected. Tree is clean."
         fi

@@ -8,6 +8,14 @@
       "nvidia"
     ];
     hardware = {
+      uinput.enable = true;
+      i2c.enable = true;
+      keyboard.qmk.enable = true;
+      bluetooth = {
+        enable = true;
+        powerOnBoot = true;
+        settings.General.Experimental = true;
+      };
       graphics = {
         enable = true;
         enable32Bit = true;
