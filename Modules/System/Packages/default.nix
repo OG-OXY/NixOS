@@ -29,6 +29,7 @@
       pkgs.ghostty
       pkgs.alacritty
       pkgs.yazi
+      pkgs.glow
       pkgs.bitwarden-desktop
       pkgs.vesktop
       pkgs.pavucontrol

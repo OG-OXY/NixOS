@@ -1,4 +1,5 @@
 {
+  inputs,
   ...
 }:
 {
@@ -6,30 +7,6 @@
   let
     cfg = config.programs.yazi;
 
-    yazi-full-border = pkgs.fetchFromGitHub {
-      owner = "yazi-rs";
-      repo = "plugins";
-      rev = "6229767f7fef39a2a78f5cee9122cc4dfb43f327";
-      hash = "sha256-crZPqubzH7re43f9XiOIpIcHrTNikgBftFh7eP1YLH4=";
-      sparseCheckout = [ "full-border.yazi" ];
-    };
-
-    yazi-git = pkgs.fetchFromGitHub {
-      owner = "yazi-rs";
-      repo = "plugins";
-      rev = "6229767f7fef39a2a78f5cee9122cc4dfb43f327";
-      hash = "sha256-+qHfMxL+zxkToK/Urd3flpA/I1bxUOSPYoyj2sUGcO0=";
-      sparseCheckout = [ "git.yazi" ];
-    };
-
-    yazi-chmod = pkgs.fetchFromGitHub {
-      owner = "yazi-rs";
-      repo = "plugins";
-      rev = "6229767f7fef39a2a78f5cee9122cc4dfb43f327";
-      hash = "sha256-pAaZvXaX8MFCafdznGkQQeVwSAaPqBjft+OCKYoTvXs=";
-      sparseCheckout = [ "chmod.yazi" ];
-    };
-    
     # Standalone Fish function package (replicates what Home Manager does behind the scenes)
     yaziFishFunction = pkgs.runCommand "yazi-fish-function" {} ''
       mkdir -p $out/share/fish/vendor_functions.d
@@ -44,6 +21,9 @@
       end
       EOF
     '';
+    
+    yaPack = inputs.ya-packs;
+    
     yaziToml = pkgs.writeText "yazi.toml" ''
       [mgr]
       show_hidden = true
@@ -64,6 +44,7 @@
     # Native Lua initialization file
     yaziInit = pkgs.writeText "init.lua" ''
       require("full-border"):setup()
+      require("starship"):setup()
       require("git"):setup {
           order = 1500,
       }
@@ -119,9 +100,12 @@
       systemd.tmpfiles.rules = [
         "d /home/ty/.config/yazi 0755 ty users -"
         "d /home/ty/.config/yazi/plugins 0755 ty users -"
-        "L+ /home/ty/.config/yazi/plugins/full-border.yazi 0755 ty users - ${yazi-full-border}/full-border.yazi"
-        "L+ /home/ty/.config/yazi/plugins/git.yazi 0755 ty users - ${yazi-git}/git.yazi"
-        "L+ /home/ty/.config/yazi/plugins/chmod.yazi 0755 ty users - ${yazi-chmod}/chmod.yazi"
+        "L+ /home/ty/.config/yazi/plugins/full-border.yazi 0755 ty users - ${yaPack}/full-border.yazi"
+        "L+ /home/ty/.config/yazi/plugins/git.yazi 0755 ty users - ${yaPack}/git.yazi"
+        "L+ /home/ty/.config/yazi/plugins/chmod.yazi 0755 ty users - ${yaPack}/chmod.yazi"
+        "L+ /home/ty/.config/yazi/plugins/smart-filter.yazi 0755 ty users - ${yaPack}/smart-filter.yazi"
+        "L+ /home/ty/.config/yazi/plugins/mount.yazi 0755 ty users - ${yaPack}/mount.yazi"
+        "L+ /home/ty/.config/yazi/plugins/starship.yazi 0755 ty users - ${inputs.ya-ship}"
         "L+ /home/ty/.config/yazi/yazi.toml 0644 ty users - ${yaziToml}"
         "L+ /home/ty/.config/yazi/init.lua 0644 ty users - ${yaziInit}"
         "L+ /home/ty/.config/yazi/keymap.toml 0644 ty users - ${yaziKeymap}"

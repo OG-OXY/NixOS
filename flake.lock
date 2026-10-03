@@ -464,6 +464,8 @@
         "nvf": "nvf",
         "rusty-clip": "rusty-clip",
         "sops": "sops",
+        "ya-packs": "ya-packs",
+        "ya-ship": "ya-ship",
         "zen-browser": "zen-browser"
       }
     },
@@ -555,6 +557,38 @@
       "original": {
         "owner": "numtide",
         "repo": "treefmt-nix",
+        "type": "github"
+      }
+    },
+    "ya-packs": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1790956605,
+        "narHash": "sha256-/BNGoWziHIZ9i+RoTWGq/q3ZowNCyHGBOWiz8v2/vOE=",
+        "owner": "yazi-rs",
+        "repo": "plugins",
+        "rev": "6229767f7fef39a2a78f5cee9122cc4dfb43f327",
+        "type": "github"
+      },
+      "original": {
+        "owner": "yazi-rs",
+        "repo": "plugins",
+        "type": "github"
+      }
+    },
+    "ya-ship": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1786993461,
+        "narHash": "sha256-Jvoc/7YaOOppu8K2lJaVgiuBIyanRHHjEA6ZvnrFtiQ=",
+        "owner": "Rolv-Apneseth",
+        "repo": "starship.yazi",
+        "rev": "ea92cf49380466f07231c952b409831e6afd2156",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Rolv-Apneseth",
+        "repo": "starship.yazi",
         "type": "github"
       }
     },
