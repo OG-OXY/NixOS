@@ -2,7 +2,7 @@
   ...
 }:
 {
-  flake.homeModules.atuin = { ... }:
+  flake.homeModules.atuin = { pkgs, ... }:
   {
     programs.atuin = {
       enable = true;

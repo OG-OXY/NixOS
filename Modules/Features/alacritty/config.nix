@@ -9,40 +9,85 @@
       package = null;
       settings = {
         window = {
-          opacity = 0.90;
+          opacity = 1.0;
           blur = true;
           padding = { x = 0; y = 0; };
           decorations = "none"; # Removes ugly OS titlebars on Wayland
+          startup_mode = "Windowed";
+        };
+        keyboard = {
+          bindings = [
+            { key = "Super"; mode = "Vi | AppCursor | AppKeypad"; action = "None"; }
+          ];
         };
 
         font = {
-          size = 11.5;
+          size = 20;
           normal = {
             family = "JetBrainsMono Nerd Font";
             style = "Bold";
           };
         };
-
-        # Catppuccin Mocha Palette
         colors = {
           primary = {
-            background = "#1e1e2e";
-            foreground = "#cdd6f4";
+            background = "#161616"; # Pure dark background
+            foreground = "#fadb14"; # Saturated yellow baseline text
           };
+        
           cursor = {
-            text = "#1e1e2e";
-            cursor = "#f5e0dc";
+            text = "#161616";
+            cursor = "#f06449";
           };
+        
+          selection = {
+            text = "#161616";
+            background = "#00d8b6";
+          };
+        
+          # Prevent Alacritty from applying an ugly tint/dim shift when focused/unfocused
+          dim = {
+            black   = "#161616";
+            red     = "#f06449";
+            green   = "#00c853";
+            #green   = "#5af78e"; # Saturated emerald green
+            yellow  = "#fadb14";
+            blue    = "#2551fe";
+            magenta = "#f02e6b";
+            cyan    = "#00d8b6";
+            white   = "#e2e8f0";
+          };
+        
           normal = {
-            black   = "#45475a";
-            red     = "#f38ba8";
-            green   = "#a6e3a1";
-            yellow  = "#f9e2af";
-            blue    = "#89b4fa";
-            magenta = "#f5c2e7";
-            cyan    = "#94e2d5";
-            white   = "#bac2de";
+            black   = "#161616"; # Keep black aligned with background
+            red     = "#f06449";
+            green   = "#00c853";
+            #green   = "#5af78e"; # Updated from pastel #a0e07d to rich saturated green
+            yellow  = "#fadb14"; # Pure yellow
+            blue    = "#2551fe";
+            magenta = "#f02e6b";
+            cyan    = "#00d8b6";
+            white   = "#e2e8f0";
           };
+        
+          bright = {
+            black   = "#45475a";
+            red     = "#f06449";
+            green   = "#00e676";
+            #green   = "#5af78e"; # Vibrant green for bold/bright output
+            yellow  = "#fadb14";
+            blue    = "#2551fe";
+            magenta = "#f02e6b";
+            cyan    = "#00d8b6";
+            white   = "#ffffff";
+          };
+          indexed_colors = [
+            { index = 16; color = "#f06449"; }
+            { index = 17; color = "#f02e6b"; }
+            { index = 18; color = "#23252e"; }
+            { index = 19; color = "#313244"; }
+            { index = 20; color = "#45475a"; }
+            { index = 21; color = "#bac2de"; }
+          ];
         };
       };
     };

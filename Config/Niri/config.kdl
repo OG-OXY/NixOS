@@ -8,6 +8,7 @@ spawn-at-startup "obsidian"
 
 environment {
     __GLX_VENDOR_LIBRARY_NAME "nvidia"
+    QT_QPA_PLATFORMTHEME "gtk3"
     GBM_BACKEND "nvidia-drm"
     ELECTRON_OZONE_PLATFORM_HINT "auto"
     XCURSOR_THEME "Saturn"
