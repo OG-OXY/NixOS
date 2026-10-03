@@ -27,6 +27,7 @@
       pkgs.xwayland-satellite
       pkgs.noctalia-shell
       pkgs.ghostty
+      pkgs.alacritty
       pkgs.yazi
       pkgs.bitwarden-desktop
       pkgs.vesktop
