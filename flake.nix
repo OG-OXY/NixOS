@@ -8,8 +8,8 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     import-tree.url = "github:denful/import-tree";
     nvf.url = "path:./Flakes/NVF";
-    llm-agents.url = "path:./Flakes/LLM-Agents";
     rusty-clip.url = "github:OG-OXY/rusty-clip";
+    llm-agents.url = "path:./Flakes/LLM-Agents";
     chaotic = {
       url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -25,6 +25,14 @@
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+    ya-packs = {
+      url = "github:yazi-rs/plugins";
+      flake = false;
+    };
+    ya-ship = {
+      url = "github:Rolv-Apneseth/starship.yazi";
+      flake = false;
     };
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
