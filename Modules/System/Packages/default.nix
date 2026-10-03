@@ -14,132 +14,199 @@
       };
     in
     [
-      pkgs.stdenv.cc
-      pkgs.binutils
-      pkgs.gnumake
-      pkgs.cmake
-      pkgs.pkg-config
-      pkgs.gdb
-      pkgs.valgrind
-      pkgs.polkit_gnome
-      pkgs.watchman
-      pkgs.pinentry-qt
+      # ============================================================================
+      # 1. CORE SYSTEM, DISPLAY & DESKTOP SUITE
+      # Primary Wayland/X11 infrastructure, session services, and Qt/KDE engines
+      # ============================================================================
       pkgs.xwayland-satellite
       pkgs.noctalia-shell
-      pkgs.ghostty
-      pkgs.alacritty
-      pkgs.yazi
-      pkgs.glow
-      pkgs.bitwarden-desktop
-      pkgs.vesktop
-      pkgs.pavucontrol
-      pkgs.pipewire
-      pkgs.slurp
-      pkgs.grim
-      pkgs.pulseaudio
-      pkgs.pulseaudio-ctl
-      pkgs.qalculate-gtk
-      pkgs.lutris
-      pkgs.steam-run
-      pkgs.protonup-ng
-      pkgs.winetricks
-      pkgs.wine
-      pkgs.wine-staging
-      pkgs.wineWow64Packages.staging
+      pkgs.polkit_gnome
+      pkgs.pinentry-qt
+      pkgs.libnotify
+      pkgs.quickshell
       pkgs.gnutls
       pkgs.xinit
-      pkgs.ttyd
-      pkgs.git
-      pkgs.gh
-      pkgs.nix-output-monitor
-      pkgs.nvd
-      pkgs.nh
-      pkgs.just
-      pkgs.fh
-      pkgs.rbw
-      pkgs.secretspec
-      pkgs.sops
-      pkgs.age
-      pkgs.rofi-rbw-wayland
-      pkgs.ffmpeg_6-full
-      pkgs.exiftool
-      pkgs.mpv
-      pkgs.mpd
-      pkgs.imv
-      pkgs.btop
-      pkgs.tree
-      pkgs.dysk
-      pkgs.tealdeer
-      pkgs.wl-clipboard
-      pkgs.cliphist
-      pkgs.wtype
-      pkgs.curl
-      pkgs.w3m
-      pkgs.wget
-      pkgs.wget2
-      pkgs.fzf
-      pkgs.ripgrep
-      pkgs._7zz
-      pkgs.poppler-utils
-      pkgs.imagemagick
-      pkgs.resvg
-      pkgs.aider-chat
-      pkgs.fd
-      pkgs.bun
-      pkgs.devenv
-      pkgs.starship
-      pkgs.fastfetch
-      pkgs.atuin
-      pkgs.libnotify
-      pkgs.aria2
-      pkgs.monero-cli
-      pkgs.easyeffects
-      pkgs.quickshell
+      pkgs.xhost # For Dendritic Test-VM
+    
+      # KDE Core Framework Packages
+      Kde.kwin
       Kde.qtdeclarative
       Kde.qtsvg
       Kde.qt5compat
-      Kde.kwin
-      pkgs.devenv
-      pkgs.nixfmt
-      pkgs.jq
-      pkgs.bat
+    
+      # ============================================================================
+      # 2. SYSTEM MANAGEMENT & NIX FLAKE TOOLING
+      # High-priority helpers for system rebuilds, flake evaluation, and secrets
+      # ============================================================================
+      pkgs.nh
+      pkgs.nix-output-monitor
+      pkgs.nvd
+      pkgs.fh
+      pkgs.sops
+      pkgs.age
+      pkgs.secretspec
+    
+      # ============================================================================
+      # 3. INTERACTIVE SHELL & TERMINAL EMULATORS
+      # Primary terminal environments and shell prompt integration
+      # ============================================================================
+      pkgs.ghostty
+      pkgs.alacritty
+      pkgs.yazi
+      pkgs.starship
+      pkgs.atuin
+      pkgs.fastfetch
+      pkgs.ttyd
+    
+      # ============================================================================
+      # 4. GUI APPLICATIONS
+      # Graphical user interface applications
+      # ============================================================================
+      pkgs.bitwarden-desktop
+      pkgs.vesktop
+      pkgs.pavucontrol
+      pkgs.qalculate-gtk
       pkgs.ventoy
+    
+      # ============================================================================
+      # 5. GAMING, PROTON & WINE ENVIRONMENT
+      # Windows compatibility runtimes and gaming performance tools
+      # ============================================================================
+      pkgs.lutris
+      pkgs.protonup-ng
+      pkgs.winetricks
+      pkgs.wineWow64Packages.staging
+      pkgs.mangohud
+    
+      # ============================================================================
+      # 6. MEDIA PLAYBACK, CAPTURE, RECORDING & EDITING
+      # Higher-level players/recorders first down to core media codecs and libraries
+      # ============================================================================
+      # Higher-Level GUI & CLI Players
+      pkgs.mpv
+      pkgs.imv
+      pkgs.mpd
+    
+      # Screen Recording & Capture Utilities
+      pkgs.grim
+      pkgs.slurp
       pkgs.wl-screenrec
-      pkgs.lolcat
+      Gsr
+    
+      # Format Processing, Metadata & Encoding Core
+      pkgs.ffmpeg_6-full
+      pkgs.imagemagick
+      pkgs.poppler-utils
+      pkgs.exiftool
+      pkgs.resvg
+    
+      # GStreamer Engine & Plugin Suite
       Gst.gstreamer
       Gst.gst-plugins-base
       Gst.gst-plugins-good
       Gst.gst-plugins-bad
       Gst.gst-plugins-ugly
-      Gsr
-      # For Dendritic Test-VM
-      pkgs.xhost
-      # Audio Wiring
-      #pkgs.qpwgraph
-      pkgs.helvum
-      # Wifi Monitor Tools
-      pkgs.iw
+    
+      # ============================================================================
+      # 7. AUDIO, NETWORK & HARDWARE MONITORING
+      # Audio routing, network diagnostics, and hardware monitoring
+      # ============================================================================
+      pkgs.easyeffects
+      pkgs.helvum # Audio Wiring
+      pkgs.pulseaudio-ctl
+      pkgs.btop
+      pkgs.dysk
+      pkgs.iw # Wifi Monitor Tools
       pkgs.wavemon
-      # Nix Config to XML
-      pkgs.repomix
-      # Disabled PKGS
-      #pkgs.sway
-      #pkgs.delicious-sddm-theme
-      # Hyprland Ecosystem
-      #pkgs.hyprpolkitagent
-      #pkgs.waybar
-      #pkgs.mako
-      #pkgs.wofi
-      #pkgs.hyprshot
-      #pkgs.hyprpicker
-      #pkgs.hyprpaper
+      pkgs.aria2
+      pkgs.monero-cli
+    
+      # ============================================================================
+      # 8. DEVELOPMENT TOOLCHAIN & ENVIRONMENT BOOTSTRAPPING
+      # Interactive dev tools, shell engines, formatters, and AI helpers
+      # ============================================================================
+      pkgs.git
+      pkgs.gh
+      pkgs.devenv
+      pkgs.just
+      pkgs.bun
+      pkgs.nixfmt
+      pkgs.jq
+      pkgs.repomix # Nix Config to XML
+      pkgs.aider-chat
+      pkgs.watchman
+    
+      # ============================================================================
+      # 9. CLI NAVIGATION, MANIPULATION & HELPER UTILITIES
+      # Searchers, clipboard tools, file helpers, and text utilities
+      # ============================================================================
+      pkgs.fzf
+      pkgs.ripgrep
+      pkgs.fd
+      pkgs.bat
+      pkgs.glow
+      pkgs.wl-clipboard
+      pkgs.cliphist
+      pkgs.wtype
+      pkgs.rofi-rbw-wayland
+      pkgs.rbw
+      pkgs.curl
+      pkgs.wget
+      pkgs.wget2
+      pkgs.w3m
+      pkgs.tealdeer
+      pkgs.tree
+      pkgs._7zz
+      pkgs.lolcat
+    
+      # ============================================================================
+      # DISABLED PACKAGES (ORGANIZED BY SUBCATEGORY)
+      # Preserved for reference, development testing, or future re-activation
+      # ============================================================================
+    
+      # --- Disabled: Window Managers, Desktop Shells & Themes ---
+      # pkgs.sway
+      # pkgs.delicious-sddm-theme
+      # pkgs.gnome-settings-daemon
+      # pkgs.gsettings-desktop-schemas
+    
+      # --- Disabled: Hyprland Ecosystem ---
+      # pkgs.hyprpolkitagent
+      # pkgs.waybar
+      # pkgs.mako
+      # pkgs.wofi
+      # pkgs.hyprshot
+      # pkgs.hyprpicker
+      # pkgs.hyprpaper
+    
+      # --- Disabled: Development, Compilers & Debuggers ---
+      # pkgs.stdenv.cc
+      # pkgs.binutils
+      # pkgs.gnumake
+      # pkgs.cmake
+      # pkgs.pkg-config
+      # pkgs.gdb
+      # pkgs.valgrind
+    
+      # --- Disabled: Alternative Wine Builds ---
+      # pkgs.wine
+      # pkgs.wine-staging
+    
+      # --- Disabled: Audio Daemons & Wiring ---
+      # pkgs.pipewire
+      # pkgs.pulseaudio
+      # pkgs.qpwgraph
     ]
     ++ [
+      # ============================================================================
+      # ACTIVE FLAKE INPUTS & HARDWARE ACCELERATION TOOLCHAINS
+      # ============================================================================
       inputs.zen-browser.packages.${pkgs.system}.default
       inputs.nvf.packages.${pkgs.system}.default
-      #inputs.llm-agents.packages.${pkgs.system}.default
       Cuda.cuda_nvcc
       Cuda.cudatoolkit
+      # --- Disabled Flake Inputs ---
+      # inputs.llm-agents.packages.${pkgs.system}.default
     ];
   };
 }

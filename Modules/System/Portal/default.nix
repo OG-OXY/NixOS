@@ -37,14 +37,14 @@
           "org.freedesktop.impl.portal.ScreenCast" = lib.mkForce [ "wlr" ];
           "org.freedesktop.impl.portal.Screenshot" = lib.mkForce [ "wlr" ];
           "org.freedesktop.impl.portal.FileChooser" = lib.mkForce [ "gtk" ];
-          #"org.freedesktop.impl.portal.Access" = [ "gtk" ];
+          "org.freedesktop.impl.portal.Access" = [ "gtk" ];
         };
         "niri:GNOME" = {
           default = lib.mkForce [ "gnome" "gtk" ];
           "org.freedesktop.impl.portal.ScreenCast" = lib.mkForce [ "gnome" ];
           "org.freedesktop.impl.portal.Screenshot" = lib.mkForce [ "gnome" ];
           "org.freedesktop.impl.portal.FileChooser" = lib.mkForce [ "gtk" ];
-          #"org.freedesktop.impl.portal.Access" = [ "gtk" ];
+          "org.freedesktop.impl.portal.Access" = [ "gtk" ];
         };
       };
     };

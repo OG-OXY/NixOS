@@ -14,6 +14,9 @@
       fontconfig = {
         enable = true;
         defaultFonts = {
+          emoji = [
+            "JetBrainsMono Nerd Font"
+          ];
           monospace = [
             "JetBrainsMono Nerd Font"
             "FiraCode Nerd Font"
@@ -34,9 +37,21 @@
             "FiraCode Nerd Font"
           ];
         };
-        #localConf = ''
-        #
-        #'';
+        localConf = ''
+          <?xml version="1.0"?>
+          <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+          <fontconfig>
+            <selectfont>
+              <rejectfont>
+                <pattern>
+                  <patelt name="family">
+                    <string>Noto Color Emoji</string>
+                  </patelt>
+                </pattern>
+              </rejectfont>
+            </selectfont>
+          </fontconfig> 
+        '';
       };
     };
   };

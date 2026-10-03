@@ -34,6 +34,7 @@
               agents.claude-code
               agents.crush
               agents.goose-cli
+              agents.herdr
             ];
           };
         }

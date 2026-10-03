@@ -18,55 +18,19 @@ fish_style_pwd_dir_length = 1
 [git_branch]
 disabled = true
 only_attached = false
-symbol = "🌿"
+symbol = ""
 style = "bold purple"
 format = "on [$symbol$branch]($style) "
-
-# Git status emojis
-#[git_status]
-#conflicted = "💥"
-#ahead = "🚀"
-#behind = "🐢"
-#diverged = "🔱"
-#untracked = "🤷"
-#staged = "📦"
-#modified = "📝"
-#renamed = "🚚"
-#deleted = "🗑️"
-#format = '([\[$all_status$ahead_behind\]]($style) )'
-#style = "bold red"
 
 [custom.jj]
 command = '''jj log -r @ --no-graph -T 'local_bookmarks.join(", ")''''
 detect_folders = [".jj"]
-symbol = "🌿"
+symbol = ""
 style = "bold purple"
 format = "on [$symbol$output]($style) "
 when = "test -d .jj"
 disabled = false
 ignore_timeout = true
-
-#[custom.jj-]
-#command = '''jj log -r @ --no-graph -T 'local_bookmarks.join(", ")' '''
-#symbol  = "🌿"
-#style   = "bold purple"
-#format  = "on [$symbol$output]($style) "
-#when    = "test -d .jj"
-#disabled = false
-
-# Python language indicator
-#[python]
-#symbol = "🐍"
-#style = "bold yellow"
-#disabled = false
-#format = "via [$symbol$version]($style) "
-
-# Rust language indicator
-#[rust]
-#symbol = "🦀"
-#style = "bold red"
-#disabled = false
-#format = "via [$symbol$version]($style) "
 
 [status]
 disabled = false

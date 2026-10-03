@@ -31,6 +31,69 @@
       sort_sensitive = false
       sort_reverse = false
       linemode = "size"
+      cwd = { fg = "#00d8b6", bold = true }
+      hovered = { fg = "#161616", bg = "#2551fe", bold = true }
+      preview_hovered = { underline = true }
+
+      # Border styling
+      border_symbol = "│"
+      border_style  = { fg = "#45475a" }
+
+      # Tab Bar
+      tab_active   = { fg = "#161616", bg = "#00d8b6", bold = true }
+      tab_inactive = { fg = "#e2e8f0", bg = "#23252e" }
+
+      [status]
+      separator_open  = ""
+      separator_close = ""
+      separator_style = { fg = "#23252e", bg = "#23252e" }
+
+      # Mode badges (Normal / Select / Unset)
+      mode_normal = { fg = "#161616", bg = "#00c853", bold = true }
+      mode_select = { fg = "#161616", bg = "#fadb14", bold = true }
+      mode_unset  = { fg = "#161616", bg = "#f02e6b", bold = true }
+
+      # Permissions styling
+      permissions_t = { fg = "#2551fe" }
+      permissions_r = { fg = "#fadb14" }
+      permissions_w = { fg = "#f06449" }
+      permissions_x = { fg = "#00c853" }
+      permissions_s = { fg = "#45475a" }
+
+      # Filetype rules (THIS IS WHAT CONTROLS FILE COLORS IN YAZI)
+      [filetype]
+      rules = [
+        # Directories -> Electric Blue
+        { url = "*/", fg = "#2551fe", bold = true },
+        
+        # Executables -> Emerald Green
+        { url = "*", is = "exec", fg = "#00c853", bold = true },
+        
+        # Symbolic links -> Bright Cyan
+        { url = "*", is = "link", fg = "#00d8b6" },
+        { url = "*", is = "orphan", fg = "#f02e6b" },
+        
+        # Plain / Regular files fallback -> Pure Crisp White
+        { url = "*", fg = "#ffffff" }
+      ]
+
+      [git]
+      unknown_sign   = " "
+      unstaged_sign  = "-S"
+      staged_sign    = "S"
+      deleted_sign   = "-D"
+      clean_sign     = "✔"
+      ignored_sign   = "I"
+      untracked_sign = "-T"
+      added_sign     = "+S"
+      updated_sign   = "U"
+      
+      # Git file status colors
+      unstaged = { fg = "#2551fe" }
+      staged   = { fg = "#00c853" }
+      deleted  = { fg = "#f06449", bold = true }
+      added    = { fg = "#00c853" }
+      untracked = { fg = "#fadb14" }
       [[plugin.prepend_fetchers]]
       url   = "*"
       run   = "git"

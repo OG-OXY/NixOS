@@ -9,10 +9,8 @@
         auto-optimise-store = true;
         download-buffer-size = 536870912;
         max-substitution-jobs = 128;
-        experimental-features = [
-          "nix-command"
-          "flakes"
-        ];
+        trusted-users = [ "root" "ty" "@wheel" ];
+        experimental-features = [ "nix-command" "flakes" ];
       };
       # Garbage collection.
       gc = {

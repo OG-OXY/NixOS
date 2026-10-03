@@ -53,7 +53,12 @@
           "gpu"
           "memory"
           "swap"
-          "disk"
+          {
+            type = "disk";
+            format = "{1} / {2} ({3})";
+            folder = "/:/boot:/home/ty/HDD:/home/ty/HDD/Storage:/home/ty/HDD/Pictures/Backup";
+            key = "Disk ({1})";
+          }
           "localip"
           #"battery"
           #"poweradapter"

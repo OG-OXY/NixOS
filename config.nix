@@ -45,8 +45,10 @@
     };
     gamescope = {
       enable = true;
-      enableWsi = true;
-      capSysNice = false;
+      # Commenting out and setting to false removed VK swapchain error popup from steam desktop
+      #enableWsi = false;
+      # Commented out after steam-desktop worked
+      #capSysNice = false;
     };
     steam = {
       enable = true;
@@ -56,9 +58,28 @@
       gamescopeSession = {
         enable = true;
         args = [
-          "-W 1920"
-          "-H 1080"
-          "-r 239"
+          ## Commented out after steam desktop working launch
+          #"--backend"
+          #"wayland"
+          ##
+          "-W"
+          "1920"
+          "-H"
+          "1080"
+          "-r"
+          "239"
+          "-f"
+          "-e"
+          # Added after working steam desktop launch
+          "-mangoapp"
+        ];
+        env = {
+          # Not sure if this works or is causing issues was in my sessionVars but is now commented out there
+          GAMESCOPE_WSI_ENABLE = "1";
+        };
+        steamArgs = [
+          # Redundant?
+          "-gamepadui"
         ];
       };
       extraCompatPackages = [

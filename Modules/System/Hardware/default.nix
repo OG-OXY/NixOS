@@ -143,9 +143,11 @@
         options = [
           "defaults"
           "nofail"
+          "noatime"
           "exec"
           "x-systemd.automount"
           "x-systemd.device-timeout=5s"
+          "x-systemd.idle-timeout=10m"
         ];
       };
       "/home/ty/HDD/Pictures/Backup" = {
@@ -154,9 +156,11 @@
         options = [
           "defaults"
           "nofail"
+          "noatime"
           "exec"
           "x-systemd.automount"
           "x-systemd.device-timeout=5s"
+          "x-systemd.idle-timeout=10m"
         ];
       };
       "/mnt/Ventoy" = {
