@@ -47,15 +47,9 @@
           description = "Fuzzy select a past operation to RESTORE working copy state";
           body = ''
             jj status > /dev/null 2>&1
-            jj op log --no-graph --template 'if(!description.starts_with("args: jj log"), id.short() ++ "\t" ++ user ++ "\t" ++ time.start().ago() ++ "\t" ++ description ++ "\n")' -n 100 | fzf --delimiter="\t" --with-nth=2.. --preview 'jj diff --git --at-op {1}' --preview-window=right:50% --bind 'enter:execute(jj op restore {1})+accept'
+            jj op log --no-graph --template 'if(!description.starts_with("args: jj log"), id.short() ++ "\t" ++ user ++ "\t" ++ time.start().ago() ++ "\t" ++ description ++ "\n")' -n 100 | fzf --delimiter="\t" --with-nth=2.. --preview 'jj diff --git --at-op {1}' --preview-window=right:50% --bind 'enter:execute(read -p "echo -e \"\nRestore operation {1}? [y/N] \"" -l confirm; if test "$confirm" = "y" -o "$confirm" = "Y"; echo -e "\n[Restoring operation {1}...]"; jj op restore {1}; else; echo -e "\n[Aborted restoration for {1}]"; end)+accept'
           '';
         };
-        #jor = { 
-        #  description = "Fuzzy select a past operation to RESTORE working copy state";
-        #  body = ''
-        #    jj op log --no-graph --template 'if(!description.starts_with("snapshot working copy") && !description.starts_with("args: jj log"), id.short() ++ "\t" ++ user ++ "\t" ++ time.start().ago() ++ "\t" ++ description ++ "\n")' -n 100 | fzf --delimiter="\t" --with-nth=2.. --preview 'jj diff --git --at-op {1}' --preview-window=right:65% --bind 'enter:execute(jj op restore {1})+accept'
-        #  '';
-        #};
         jol = {
           description = "Browse jj operation log history with live diff preview";
           body = ''
@@ -63,16 +57,21 @@
             jj op log --no-graph --template 'if(!description.starts_with("args: jj log"), id.short() ++ "\t" ++ user ++ "\t" ++ time.start().ago() ++ "\t" ++ description ++ "\n")' -n 100 | fzf --delimiter="\t" --with-nth=2.. --preview 'jj diff --git --at-op {1}' --preview-window=right:50%
           '';
         };
-        #jol = {
-        #  description = "Browse jj operation log history with live diff preview";
-        #  body = ''
-        #    jj op log --no-graph --template 'if(!description.starts_with("snapshot working copy") && !description.starts_with("args: jj log"), id.short() ++ "\t" ++ user ++ "\t" ++ time.start().ago() ++ "\t" ++ description ++ "\n")' -n 100 | fzf --delimiter="\t" --with-nth=2.. --preview 'jj diff --git --at-op {1}' --preview-window=right:65%
-        #  '';
-        #};
         jss = {
           description = "";
           body = ''
             jj workspace snapshot
+          '';
+        };
+        logout = {
+          description = "Logout of Niri UWSM Session to Greeter";
+          body = ''
+            # Option 1: Quit Niri directly (recommended for UWSM)
+            if type -q niri
+                niri msg action quit
+            else
+                uwsm stop -s
+            end
           '';
         };
       };
