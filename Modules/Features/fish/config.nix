@@ -55,6 +55,12 @@
             jj op log --no-graph --template 'if(!description.starts_with("snapshot working copy") && !description.starts_with("args: jj log"), id.short() ++ "\t" ++ user ++ "\t" ++ time.start().ago() ++ "\t" ++ description ++ "\n")' -n 100 | fzf --delimiter="\t" --with-nth=2.. --preview 'jj diff --git --at-op {1}' --preview-window=right:65%
           '';
         };
+        jss = {
+          description = "";
+          body = ''
+            jj workspace snapshot
+          '';
+        };
       };
 
       shellAbbrs = {
@@ -68,7 +74,8 @@
         gpf = "git push -u --force origin master";
         jl = "jj log";
         jla = "jj l";
-        jd = "jj diff -r @-";
+        jdr = "jj diff -r @- | less -R";
+        jd = "jj d | less -R";
         jbs = "jj bookmark set master -r @";
         jdc = "jj describe -m \"";
         jc = "jj commit -m \"";
@@ -80,14 +87,13 @@
         v = "vis";
         sv = "sudoedit vis";
         sy = "doas yazi";
-        nrs = "doas nixos-rebuild switch --flake .#nixos";
-        nrsu = "doas nixos-rebuild switch --upgrade --flake .#nixos";
-        nrt = "doas nixos-rebuild test --flake .#nixos";
-        nrtu = "doas nixos-rebuild test --upgrade --flake .#nixos";
-        nrvm = "doas nixos-rebuild build-vm --flake .#nixos";
+        nrs = "nh os switch .";
+        nrsu = "nh os switch . --update";
+        nrt = "nh os test .";
+        nrtu = "nh os test . --update";
+        nrvm = "nh os vm-build .";
         vm = "./result/bin/run-nixos-vm";
-        nhs = "nh os switch .";
-        nhsu = "nh os switch . --upgrade";
+        nrb = "nh os build .";
         nb = "nix-backup";
         nub = "nix-upgrade-backup";
         nck = "doas nh clean all --keep 5";
@@ -137,6 +143,12 @@
         set -U fish_ambiguous_width 1
         set -U fish_emoji_width 3
 
+        # Ctrl+X: Force a jj snapshot and open the operation log viewer
+        bind \cx 'jss; jjo; commandline -f repaint'
+
+        # Alt+X: View diff against the parent commit (@-)
+        bind \ex 'jj diff -r @- | less -R; commandline -f repaint'
+        
         if test "$USER" = "root"
             fastfetch 2>/dev/null
             set -gx ATUIN_CONFIG_DIR "/root/.config/atuin"
