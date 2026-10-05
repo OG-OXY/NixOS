@@ -43,32 +43,13 @@
             rusty-clip $argv
           '';
         };
-        jol = {
-          description = "Fuzzy search meaningful jj operations with live diff preview";
-          body = ''
-            jj op log ''${""}
-              --template 'if(!description.starts_with("snapshot working copy") && !description.starts_with("args: jj log"), id.short() ++ "\t" ++ user ++ "\t" ++ time.start().ago() ++ "\t" ++ description ++ "\n")' ''${""}
-              -n 100 |
-            fzf --delimiter="\t" ''${""}
-              --with-nth=2.. ''${""}
-              --preview 'jj diff --at op={1}' ''${""}
-              --preview-window=right:65% ''${""}
-              --bind 'enter:execute(jj op restore {1})+accept'
-          '';
-        };
         jor = {
-          description = "Fuzzy search meaningful jj operations with live diff preview";
-          body = ''
-            jj op log --template 'if(!description.starts_with("snapshot working copy") && !description.starts_with("args: jj log"), id.short() ++ "\t" ++ user ++ "\t" ++ time.start().ago() ++ "\t" ++ description ++ "\n")' -n 100 | fzf --delimiter="\t" --with-nth=2.. --preview 'jj diff --at op={1}' --preview-window=right:65% --bind 'enter:execute(jj op restore {1})+accept'
-          '';
-        };
-        jjor = {
           description = "Fuzzy select a past operation to RESTORE working copy state";
           body = ''
             jj op log --no-graph --template 'if(!description.starts_with("snapshot working copy") && !description.starts_with("args: jj log"), id.short() ++ "\t" ++ user ++ "\t" ++ time.start().ago() ++ "\t" ++ description ++ "\n")' -n 100 | fzf --delimiter="\t" --with-nth=2.. --preview 'jj diff --git --at-op {1}' --preview-window=right:65% --bind 'enter:execute(jj op restore {1})+accept'
           '';
         };
-        jjo = {
+        jol = {
           description = "Browse jj operation log history with live diff preview";
           body = ''
             jj op log --no-graph --template 'if(!description.starts_with("snapshot working copy") && !description.starts_with("args: jj log"), id.short() ++ "\t" ++ user ++ "\t" ++ time.start().ago() ++ "\t" ++ description ++ "\n")' -n 100 | fzf --delimiter="\t" --with-nth=2.. --preview 'jj diff --git --at-op {1}' --preview-window=right:65%
