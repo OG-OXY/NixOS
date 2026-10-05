@@ -49,7 +49,6 @@
             black   = "#161616";
             red     = "#f06449";
             green   = "#00c853";
-            #green   = "#5af78e"; # Saturated emerald green
             yellow  = "#fadb14";
             blue    = "#2551fe";
             magenta = "#f02e6b";
@@ -61,7 +60,6 @@
             black   = "#161616"; # Keep black aligned with background
             red     = "#f06449";
             green   = "#00c853";
-            #green   = "#5af78e"; # Updated from pastel #a0e07d to rich saturated green
             yellow  = "#fadb14"; # Pure yellow
             blue    = "#2551fe";
             magenta = "#f02e6b";
@@ -73,7 +71,6 @@
             black   = "#45475a";
             red     = "#f06449";
             green   = "#00e676";
-            #green   = "#5af78e"; # Vibrant green for bold/bright output
             yellow  = "#fadb14";
             blue    = "#2551fe";
             magenta = "#f02e6b";

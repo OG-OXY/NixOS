@@ -15,13 +15,14 @@
             "2" = "cyan";
           };
           padding = {
-            top = 0;
-            left = 0;
+            top = 2;
+            bottom = 2;
+            left = 2;
             right = 2;
           };
         };
         display = {
-          separator = "➜ ";
+          separator = " ➜ ";
           color = {
             keys = "blue";
             title = "blue";
@@ -32,7 +33,10 @@
         };
         modules = [
           "title"
-          "separator"
+          {
+            type = "separator";
+            string = "───◆───";
+          }
           "os"
           "host"
           "kernel"
@@ -50,7 +54,11 @@
           "terminal"
           #"terminalfont"
           "cpu"
-          "gpu"
+          {
+            type = "gpu";
+            hideType = "integrated"; # Hides Raphael iGPU completely
+            format = "{2}";
+          }
           "memory"
           "swap"
           {
@@ -64,7 +72,16 @@
           #"poweradapter"
           #"locale"
           #"break"
-          "colors"
+          {
+            type = "colors";
+            key = " ";
+            symbol = "block";
+            paddingLeft = 0;
+            block = {
+              range = [ 0 15 ];
+              width = 3;
+            };
+          }
         ];
       };
     };
