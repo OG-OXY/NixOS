@@ -43,18 +43,32 @@
             rusty-clip $argv
           '';
         };
-        jor = {
+        jor = { 
           description = "Fuzzy select a past operation to RESTORE working copy state";
           body = ''
-            jj op log --no-graph --template 'if(!description.starts_with("snapshot working copy") && !description.starts_with("args: jj log"), id.short() ++ "\t" ++ user ++ "\t" ++ time.start().ago() ++ "\t" ++ description ++ "\n")' -n 100 | fzf --delimiter="\t" --with-nth=2.. --preview 'jj diff --git --at-op {1}' --preview-window=right:65% --bind 'enter:execute(jj op restore {1})+accept'
+            jj status > /dev/null 2>&1
+            jj op log --no-graph --template 'if(!description.starts_with("args: jj log"), id.short() ++ "\t" ++ user ++ "\t" ++ time.start().ago() ++ "\t" ++ description ++ "\n")' -n 100 | fzf --delimiter="\t" --with-nth=2.. --preview 'jj diff --git --at-op {1}' --preview-window=right:50% --bind 'enter:execute(jj op restore {1})+accept'
           '';
         };
+        #jor = { 
+        #  description = "Fuzzy select a past operation to RESTORE working copy state";
+        #  body = ''
+        #    jj op log --no-graph --template 'if(!description.starts_with("snapshot working copy") && !description.starts_with("args: jj log"), id.short() ++ "\t" ++ user ++ "\t" ++ time.start().ago() ++ "\t" ++ description ++ "\n")' -n 100 | fzf --delimiter="\t" --with-nth=2.. --preview 'jj diff --git --at-op {1}' --preview-window=right:65% --bind 'enter:execute(jj op restore {1})+accept'
+        #  '';
+        #};
         jol = {
           description = "Browse jj operation log history with live diff preview";
           body = ''
-            jj op log --no-graph --template 'if(!description.starts_with("snapshot working copy") && !description.starts_with("args: jj log"), id.short() ++ "\t" ++ user ++ "\t" ++ time.start().ago() ++ "\t" ++ description ++ "\n")' -n 100 | fzf --delimiter="\t" --with-nth=2.. --preview 'jj diff --git --at-op {1}' --preview-window=right:65%
+            jj status > /dev/null 2>&1
+            jj op log --no-graph --template 'if(!description.starts_with("args: jj log"), id.short() ++ "\t" ++ user ++ "\t" ++ time.start().ago() ++ "\t" ++ description ++ "\n")' -n 100 | fzf --delimiter="\t" --with-nth=2.. --preview 'jj diff --git --at-op {1}' --preview-window=right:50%
           '';
         };
+        #jol = {
+        #  description = "Browse jj operation log history with live diff preview";
+        #  body = ''
+        #    jj op log --no-graph --template 'if(!description.starts_with("snapshot working copy") && !description.starts_with("args: jj log"), id.short() ++ "\t" ++ user ++ "\t" ++ time.start().ago() ++ "\t" ++ description ++ "\n")' -n 100 | fzf --delimiter="\t" --with-nth=2.. --preview 'jj diff --git --at-op {1}' --preview-window=right:65%
+        #  '';
+        #};
         jss = {
           description = "";
           body = ''
@@ -143,12 +157,6 @@
         set -U fish_ambiguous_width 1
         set -U fish_emoji_width 3
 
-        # Ctrl+X: Force a jj snapshot and open the operation log viewer
-        bind \cx 'jss; jjo; commandline -f repaint'
-
-        # Alt+X: View diff against the parent commit (@-)
-        bind \ex 'jj diff -r @- | less -R; commandline -f repaint'
-        
         if test "$USER" = "root"
             fastfetch 2>/dev/null
             set -gx ATUIN_CONFIG_DIR "/root/.config/atuin"
