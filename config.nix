@@ -6,9 +6,7 @@
   ...
 }:
 {
-  # Install PKGS With System Parameters.
   programs = {
-    # Native NixOS Modules
     niri.enable = true;
     uwsm = {
       enable = true;
