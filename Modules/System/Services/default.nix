@@ -90,42 +90,42 @@
           PermitRootLogin = "no";
         };
       };
-      #ollama = {
-      #  enable = true;
-      #  package = (pkgs.ollama-cuda.override { }).overrideAttrs (oldAttrs: {
-      #    cmakeFlags = (oldAttrs.cmakeFlags or [ ]) ++ [
-      #      "-DCMAKE_CUDA_ARCHITECTURES=61"
-      #    ];
-      #  });
-      #  environmentVariables = {
-      #    CUDA_VISIBLE_DEVICES = "0";
-      #    OLLAMA_GPU_OVERHEAD = "512";
-      #  };
-      #};
-      #llama-cpp = {
-      #  enable = true;
-      #  settings = {
-      #    hf-repo = "Qwen/Qwen2.5-Coder-32B-Instruct-GGUF";
-      #    hf-file = "qwen2.5-coder-32b-instruct-q4_k_m.gguf";
-      #    host = "0.0.0.0";
-      #    port = 8012;
-      #    jinja = true;
-      #    flash-attn = "on";
-      #    ctx-size = 32768;
-      #    cache-type-k = "q8_0";
-      #    cache-type-v = "q8_0";
-      #    n-gpu-layers = 40;
-      #  };
-      #  package =
-      #    (pkgs.llama-cpp.override {
-      #      cudaSupport = true;
-      #    }).overrideAttrs
-      #      (oldAttrs: {
-      #        cmakeFlags = (oldAttrs.cmakeFlags or [ ]) ++ [
-      #          "-DCMAKE_CUDA_ARCHITECTURES=61"
-      #        ];
-      #      });
-      #};
+      ollama = {
+        enable = false;
+        package = (pkgs.ollama-cuda.override { }).overrideAttrs (oldAttrs: {
+          cmakeFlags = (oldAttrs.cmakeFlags or [ ]) ++ [
+            "-DCMAKE_CUDA_ARCHITECTURES=61"
+          ];
+        });
+        environmentVariables = {
+          CUDA_VISIBLE_DEVICES = "0";
+          OLLAMA_GPU_OVERHEAD = "512";
+        };
+      };
+      llama-cpp = {
+        enable = false;
+        settings = {
+          hf-repo = "Qwen/Qwen2.5-Coder-32B-Instruct-GGUF";
+          hf-file = "qwen2.5-coder-32b-instruct-q4_k_m.gguf";
+          host = "0.0.0.0";
+          port = 8012;
+          jinja = true;
+          flash-attn = "on";
+          ctx-size = 32768;
+          cache-type-k = "q8_0";
+          cache-type-v = "q8_0";
+          n-gpu-layers = 40;
+        };
+        package =
+          (pkgs.llama-cpp.override {
+            cudaSupport = true;
+          }).overrideAttrs
+            (oldAttrs: {
+              cmakeFlags = (oldAttrs.cmakeFlags or [ ]) ++ [
+                "-DCMAKE_CUDA_ARCHITECTURES=61"
+              ];
+            });
+      };
       kmscon = {
         enable = true;
         config = {
@@ -134,11 +134,11 @@
         };
       };
       dbus.enable = true;
-      tailscale.enable = true;
-      power-profiles-daemon.enable = true;
       gnome.gnome-keyring.enable = true;
-      pulseaudio.enable = false;
+      power-profiles-daemon.enable = true;
+      tailscale.enable = true;
       resolved.enable = false;
+      pulseaudio.enable = false;
       libinput.enable = false;
       printing.enable = false;
     };
