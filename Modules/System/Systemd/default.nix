@@ -12,10 +12,10 @@
         hybrid-sleep.enable = false;
       };
       services = {
+        NetworkManager-wait-online.enable = true;
         # Override Ollama And Llama-CPP To Be Started Manually.
-        #ollama.wantedBy = pkgs.lib.mkForce [ ];
-        #llama-cpp.wantedBy = pkgs.lib.mkForce [ ];
-        #};
+        ollama.wantedBy = pkgs.lib.mkForce [ ];
+        llama-cpp.wantedBy = pkgs.lib.mkForce [ ];
       };
       user = {
         #settings.Manager = {

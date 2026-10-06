@@ -10,15 +10,17 @@
         logo = {
           source = "nixos";
           type = "auto";
-          color = {
-            "1" = "blue";
-            "2" = "cyan";
-          };
+          #width = 10;
+          #height = 10;
           padding = {
             top = 2;
             bottom = 2;
             left = 2;
             right = 2;
+          };
+          color = {
+            "1" = "blue";
+            "2" = "cyan";
           };
         };
         display = {
@@ -27,8 +29,25 @@
             keys = "blue";
             title = "blue";
           };
+          key = {
+            #width = "12";
+            type = "string";
+          };
+          bar = {
+            #width = "10";
+            char = {
+              elapsed = "■";
+              total = "-";
+            };
+          };
           percent = {
-            type = 3;
+            type = 2;
+            color = {
+              # Change module colors in reference to location of default colors, ie: set whats normally yellow to blue, whats green to red, etc.
+              #green = "";
+              #yellow = "";
+              #red = "";
+            };
           };
         };
         modules = [
@@ -36,38 +55,92 @@
           {
             type = "separator";
             string = "───◆───";
+            #string = "━━━━━━━━";
           }
-          "os"
-          "host"
-          "kernel"
-          "uptime"
-          "packages"
-          "shell"
-          "display"
-          #"de"
-          "wm"
-          #"wmtheme",
-          #"theme"
-          #"icons"
-          #"font"
-          #"cursor"
-          "terminal"
-          #"terminalfont"
-          "cpu"
+          { type = "os"; key = " OS"; }
+          { type = "host"; key = "󰌢 Host"; }
+          { type = "kernel"; key = " Kernel"; }
+          { type = "uptime"; key = " Uptime"; }
+          { type = "packages"; key = "󰏖 Packages"; }
+          { type = "shell"; key = " Shell"; }
+          { type = "display"; key = "󰍹 Display"; }
+          { type = "wm"; key = " WM"; }
+          { type = "wmtheme"; key = "󰉼 WM Theme"; }
+          { type = "theme"; key = "󰉼 Theme"; }
+          { type = "icons"; key = "󰀻 Icons"; }
+          #{ type = "font"; key = "󰛖 Font"; }
+          #{ type = "cursor"; key = "󰆾 Cursor"; }
+          { type = "terminal"; key = " Terminal"; }
+          #{ type = "terminalfont"; key = "󰛖 Terminal Font"; }
+          { type = "cpu"; key = " CPU"; }
           {
             type = "gpu";
+            key = "󰾲 GPU";
             hideType = "integrated"; # Hides Raphael iGPU completely
             format = "{2}";
           }
-          "memory"
-          "swap"
+          { type = "memory"; key = " Memory"; }
+          { type = "swap"; key = "󰓡 Swap"; }
           {
             type = "disk";
-            format = "{1} / {2} ({3})";
-            folder = "/:/boot:/home/ty/HDD:/home/ty/HDD/Storage:/home/ty/HDD/Pictures/Backup";
-            key = "Disk ({1})";
+            folders = "/";
+            key = " ({name})";
+            format = "{size-percentage-bar} {size-used} / {size-total}";
           }
-          "localip"
+          {
+            type = "disk";
+            folders = "/boot";
+            key = " ({name})";
+            format = "{size-percentage-bar} {size-used} / {size-total}";
+            showRegular = true;
+            showHidden = true;
+            showExternel = true;
+            showUnknown = true;
+            showSubvolumes = true;
+            showFS = "vfat";
+            hideFS = "autofs";
+          }
+          {
+            type = "disk";
+            folders = "/home/ty/HDD";
+            key = " ({name})";
+            format = "{size-percentage-bar} {size-used} / {size-total}";
+            hideFS = "autofs";
+          }
+          {
+            type = "disk";
+            folders = "/home/ty/HDD/Storage";
+            key = " ({name})";
+            format = "{size-percentage-bar} {size-used} / {size-total}";
+            hideFS = "autofs";
+          }
+          {
+            type = "disk";
+            folders = "/home/ty/HDD/Pictures/Backup";
+            key = " ({name})";
+            format = "{size-percentage-bar} {size-used} / {size-total}";
+            hideFS = "autofs";
+          }
+          #{
+          #  type = "disk";
+          #  key = " ({6})";
+          #  format = "{1} / {2} ({3})";
+          #  showHidden = true;
+          #  showUnknown = true;
+          #  showFS = "vfat";
+          #  hideFS = "autofs";
+          #  percent = {
+          #    type = 3;
+          #  };
+          #  folders = [
+          #    "/"
+          #    "/boot"
+          #    "/home/ty/HDD"
+          #    "/home/ty/HDD/Storage"
+          #    "/home/ty/HDD/Pictures/Backup"
+          #  ];
+          #}
+          #"localip"
           #"battery"
           #"poweradapter"
           #"locale"
