@@ -99,9 +99,9 @@
         "fs.inotify.max_user_watches" = 524288;
       };
       extraModprobeConfig = ''
-        options iwlwifi 11n_disable=1
         options iwlwifi power_save=0
         options v4l2loopback exclusive_caps=1 card_label="Virtual Screen Capture"
+        options mt7921_common disable_btcoex=1
       '';
       binfmt.emulatedSystems = [ "aarch64-linux" ];
     };

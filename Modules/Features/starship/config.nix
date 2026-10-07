@@ -1,0 +1,13 @@
+{
+  ...
+}:
+{
+  flake.homeModules.starship = { ... }:
+  {
+    programs.starship = {
+      enable = true;
+      enableFishIntegration = true;
+      enableNushellIntegration = true;
+    };
+  };
+}

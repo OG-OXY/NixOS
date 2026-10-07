@@ -21,8 +21,24 @@
       end
       EOF
     '';
-    
-    yaPack = inputs.ya-packs;
+
+    yaziNushellFunction = pkgs.runCommand "yazi-nushell-function" {} ''
+      mkdir -p $out/share/nushell/vendor/autoload
+      cat << 'EOF' > $out/share/nushell/vendor/autoload/yazi.nu
+      def --env y [...args] {
+        let tmp = (mktemp -t "yazi-cwd.XXXXXX")
+        #yazi ...$args --cwd-file=$tmp
+        ^yazi ...$args --cwd-file $tmp
+        #let cwd = (open $tmp | str trim)
+        let cwd = (open $tmp)
+        if $cwd != "" and $cwd != $env.PWD {
+          cd $cwd
+        }
+        #rm -f $tmp
+        rm -fp $tmp
+      }
+      EOF
+    '';
     
     yaziToml = pkgs.writeText "yazi.toml" ''
       [mgr]
@@ -136,27 +152,34 @@
       unstaged = { fg = "blue" }
       deleted  = { fg = "red", bold = true }
     '';
+    
+    yaPack = inputs.ya-packs;
+    yaShip = inputs.ya-ship;
   in
   {
     options.programs.yazi = {
       enableFishIntegration = lib.mkOption {
         type = lib.types.bool;
         default = true;
-        description = "Enable Fish shell integration wrapper for yazi";
+        description = "Enable Fish shell integration wrapper for Yazi";
+      };
+      enableNushellIntegration = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+        description = "Enable Nushell integration wrappper for Yazi";
       };
     };
     
     config = lib.mkIf config.programs.yazi.enable {
       
       environment = {
-        systemPackages = lib.optionals cfg.enableFishIntegration [ yaziFishFunction ];
-        #etc = {
-        #  "xdg/yazi/plugins/full-border.yazi".source = "${yazi-full-border}/full-border.yazi";
-        #  "xdg/yazi/plugins/git.yazi".source = "${yazi-git}/git.yazi";
-        #  "xdg/yazi/plugins/chmod.yazi".source = "${yazi-chmod}/chmod.yazi";
-        #  "xdg/yazi/init.lua".source = "${yaziInit}/init.lua";
-        #  "xdg/yazi/keymap.toml".source = "${yaziKeymap}/keymap.toml";
-        #};
+        systemPackages = [
+          (if cfg.enableFishIntegration then yaziFishFunction else null)
+          (if cfg.enableNushellIntegration then yaziNushellFunction else null)
+        ];
+        etc = {
+          #
+        };
       };
       
       # 2. Link the configuration file natively
@@ -168,12 +191,16 @@
         "L+ /home/ty/.config/yazi/plugins/chmod.yazi 0755 ty users - ${yaPack}/chmod.yazi"
         "L+ /home/ty/.config/yazi/plugins/smart-filter.yazi 0755 ty users - ${yaPack}/smart-filter.yazi"
         "L+ /home/ty/.config/yazi/plugins/mount.yazi 0755 ty users - ${yaPack}/mount.yazi"
-        "L+ /home/ty/.config/yazi/plugins/starship.yazi 0755 ty users - ${inputs.ya-ship}"
+        "L+ /home/ty/.config/yazi/plugins/starship.yazi 0755 ty users - ${yaShip}"
         "L+ /home/ty/.config/yazi/yazi.toml 0644 ty users - ${yaziToml}"
         "L+ /home/ty/.config/yazi/init.lua 0644 ty users - ${yaziInit}"
         "L+ /home/ty/.config/yazi/keymap.toml 0644 ty users - ${yaziKeymap}"
         "L+ /home/ty/.config/yazi/theme.toml 0644 ty users - ${yaziTheme}"
       ];
     };
+    # Old Code 
+    #pathsToLink = lib.optionals cfg.enableNushellIntegration [ "/share/nushell" ];
+    #systemPackages = lib.optionals cfg.enableFishIntegration [ yaziFishFunction ] ++
+    #lib.optionals cfg.enableNushellIntegration [ yaziNushellFunction ];
   };
 }
