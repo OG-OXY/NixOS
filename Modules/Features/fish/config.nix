@@ -154,24 +154,48 @@
         set -g fish_greeting "Welcome to NixOS!"
         set -g fish_handle_reflow 1
         set -U fish_ambiguous_width 1
-        set -U fish_emoji_width 3
+        set -U fish_emoji_width 1
+
+        function __devenv_auto_greeting --on-event fish_prompt
+            if set -q SHOW_PROJECT_GREETING
+                set -e SHOW_PROJECT_GREETING
+                
+                switch "$PWD"
+                    case "*/Develop/C*"
+                        echo "⚡ C/C++ Development Environment Active"
+                        gcc --version | head -n 1
+                        cmake --version | head -n 1
+                    case "*/Develop/Rust*"
+                        echo "🦀 Rust Development Environment Active"
+                        rustc --version
+                    case "*/Develop/Web*"
+                        echo "🌐 Web Development Environment Active"
+                        node --version
+                    case "*/Develop/QMK*"
+                        echo "  QMK Firmware Environment Active"
+                        qmk --version
+                    case '*'
+                        echo "❄  Devenv Environment Active"
+                end
+            end
+        end
 
         if test "$USER" = "root"
-            fastfetch 2>/dev/null
+            ${pkgs.fastfetch}/bin/fastfetch 2>/dev/null
             set -gx ATUIN_CONFIG_DIR "/root/.config/atuin"
         else
             set -gx ATUIN_CONFIG_DIR "$HOME/.config/atuin"
-            fastfetch
+            ${pkgs.fastfetch}/bin/fastfetch
         end
         if type -q direnv
-            direnv hook fish | source
+            ${lib.getExe pkgs.direnv} hook fish | source
         end
         if type -q devenv
             ${lib.getExe pkgs.devenv} hook fish | source
         end
-        starship init fish | source
-        zoxide init fish | source
-        atuin init fish | source
+        ${pkgs.starship}/bin/starship init fish | source
+        ${pkgs.zoxide}/bin/zoxide init fish | source
+        ${pkgs.atuin}/bin/atuin init fish | source
       '';
 
       plugins =

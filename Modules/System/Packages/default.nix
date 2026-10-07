@@ -112,14 +112,13 @@
       # Audio routing, network diagnostics, and hardware monitoring
       # ============================================================================
       pkgs.easyeffects
-      pkgs.helvum # Audio Wiring
+      pkgs.helvum
       pkgs.pulseaudio-ctl
       pkgs.btop
       pkgs.dysk
-      pkgs.iw # Wifi Monitor Tools
+      pkgs.udiskie
+      pkgs.iw
       pkgs.wavemon
-      pkgs.aria2
-      pkgs.monero-cli
     
       # ============================================================================
       # 8. DEVELOPMENT TOOLCHAIN & ENVIRONMENT BOOTSTRAPPING
@@ -140,10 +139,15 @@
       # 9. CLI NAVIGATION, MANIPULATION & HELPER UTILITIES
       # Searchers, clipboard tools, file helpers, and text utilities
       # ============================================================================
+      pkgs.pciutils
+      pkgs.usbutils
+      pkgs.lshw
       pkgs.fzf
       pkgs.ripgrep
       pkgs.fd
       pkgs.bat
+      pkgs.ethtool
+      pkgs.lm_sensors
       pkgs.glow
       pkgs.wl-clipboard
       pkgs.cliphist
@@ -153,10 +157,14 @@
       pkgs.curl
       pkgs.wget
       pkgs.wget2
+      pkgs.aria2
       pkgs.w3m
       pkgs.tealdeer
       pkgs.tree
       pkgs._7zz
+      pkgs.udisks2
+      pkgs.monero-cli
+      pkgs.chafa
       pkgs.lolcat
     
       # ============================================================================

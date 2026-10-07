@@ -2,7 +2,7 @@
   ...
 }:
 {
-  flake.nixosModules.network = { config, ... }:
+  flake.nixosModules.network = { pkgs, config, ... }:
   {
     networking = {
       hostName = "nixos";

@@ -2,15 +2,12 @@
   ...
 }:
 {
-  flake.nixosModules.zoxide = { ... }:
+  flake.homeModules.starship = { ... }:
   {
-    programs.zoxide = {
+    programs.starship = {
       enable = true;
       enableFishIntegration = true;
       enableNushellIntegration = true;
-      options = [
-        "--cmd cd"
-      ];
     };
   };
 }
