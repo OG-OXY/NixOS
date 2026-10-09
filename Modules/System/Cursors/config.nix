@@ -27,6 +27,7 @@
           cp -r ${../../../Config/Theme/Cursors/Fire-Arrow} $out/share/icons/Fire-Arrow
         '')
       ];
+      pathsToLink = [ "/share/icons" ];
     };
     services.displayManager.noctalia-greeter.settings.cursor = {
       theme = "Saturn";
