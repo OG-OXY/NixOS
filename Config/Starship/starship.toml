@@ -42,7 +42,7 @@ format = "([$state( $progress_current/$progress_total)]($style) )"
 
 [git_metrics]
 disabled = false
-format = "[+$added]($added_style)[-$deleted]($deleted_style) "
+format = '[+$added]($added_style)/[-$deleted]($deleted_style) '
 added_style = 'bold purple'
 deleted_style = 'bold red'
 only_nonzero_diffs = true
