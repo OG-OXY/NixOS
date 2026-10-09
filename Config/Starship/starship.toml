@@ -1,4 +1,4 @@
-format = '[Ty](bold green)[@](bold red)[NixOS](bold blue)[:](bold red)$directory$vcsh$fossil_branch$fossil_summary$git_state$git_metrics$git_branch${custom.jj-}${custom.jj}$git_commit$git_status$nix_shell$hg_branch$pijul_channel$docker_context$package$c$cmake$cobol$daml$dart$deno$dotnet$elixir$elm$erlang$fennel$gleam$golang$guix_shell$haskell$haxe$java$julia$kotlin$lua$nim$nodejs$ocaml$opa$perl$php$pulumi$purescript$python$quarto$raku$rlang$red$ruby$rust$scala$solidity$spM$swift$terraform$typst$v$vagrant$vlang$zig$buf$nix_shell$conda$meson$spack$aws$gcloud$openstack$azure$crystal[\]](bold green)[†](bold red) $character'
+format = '[Ty](bold green)[@](bold red)[NixOS](bold blue)[:](bold red)$directory$vcsh$fossil_branch$fossil_summary$git_state$git_metrics$git_branch${custom.jj-}${custom.jj}$git_commit(bold purple)$git_status$nix_shell$hg_branch$pijul_channel$docker_context$package$c$cmake$cobol$daml$dart$deno$dotnet$elixir$elm$erlang$fennel$gleam$golang$guix_shell$haskell$haxe$java$julia$kotlin$lua$nim$nodejs$ocaml$opa$perl$php$pulumi$purescript$python$quarto$raku$rlang$red$ruby$rust$scala$solidity$spM$swift$terraform$typst$v$vagrant$vlang$zig$buf$nix_shell$conda$meson$spack$aws$gcloud$openstack$azure$crystal[†](bold red) $character'
 
 right_format = "$os$shell$cmd_duration$jobs$memory_usage$status"
 
@@ -30,6 +30,23 @@ symbol = ""
 style = "bold purple"
 format = "on [$symbol$branch]($style) "
 
+[git_commit]
+disabled = false
+format = "[($hash)]($style) "
+style = "bold purple"
+
+[git_state]
+disabled = false
+style = "bold purple"
+format = "([$state( $progress_current/$progress_total)]($style) )"
+
+[git_metrics]
+disabled = false
+format = "[+$added]($added_style)[-$deleted]($deleted_style) "
+added_style = 'bold purple'
+deleted_style = 'bold red'
+only_nonzero_diffs = true
+
 [custom.jj]
 command = '''jj log -r @ --no-graph -T 'local_bookmarks.join(", ")''''
 detect_folders = [".jj"]
@@ -51,7 +68,7 @@ format = '[\[$int\]](bold red) '
 
 [memory_usage]
 disabled = false
-format = "[$symbol $ram $swap]($style)"
+format = "[$symbol $ram $swap]($style) "
 threshold = -1
 style = "white bold dimmed"
 symbol = "󰍛 "
