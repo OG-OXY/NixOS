@@ -53,7 +53,8 @@
         };
       };
       firewall = {
-        allowedTCPPorts = [ 22 ];
+        allowedTCPPorts = [ 22 53317 ];
+        allowedUDPPorts = [ 53317 ];
         trustedInterfaces = [ "tailscale0" ];
       };
       wireless = {
