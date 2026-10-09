@@ -18,12 +18,6 @@
                 echo (set_color green)"✨ Done! Check 'git status' to see your uncommitted files."(set_color normal)
           '';
         };
-        ss = {
-          description = "Run Secretspec To Grab Secrets";
-          body = ''
-            secretspec run -- $argv
-          '';
-        };
         pci = {
           description = "Ls and Grep PCI ID's";
           body = ''

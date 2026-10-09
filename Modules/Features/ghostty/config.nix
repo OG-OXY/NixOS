@@ -9,7 +9,6 @@
       enableFishIntegration = true;
       settings = {
         confirm-close-surface = false;
-        #theme = "Aurora";
         background-opacity = 1.0;
         adjust-cell-height = "-10%";
         adjust-cell-width = "-10%";
@@ -18,7 +17,6 @@
         shell-integration-features = "no-cursor";
         scrollback-limit = 100000000;
         # Turns off color emojis?
-        font-codepoint-map = "U+1F000-U+1F9FF = JetBrainsMono NFM ExtraBold";
         font-family = "JetBrainsMono NFM ExtraBold";
         font-family-bold = "JetBrainsMono NFM ExtraBold";
         font-family-italic = "JetBrainsMono NFM ExtraBold Italic";
@@ -27,8 +25,6 @@
         font-feature = [
           "liga"
           "calt"
-          "-colr"
-          "-cpal"
         ];
         background = "161616";
         foreground = "fadb14";

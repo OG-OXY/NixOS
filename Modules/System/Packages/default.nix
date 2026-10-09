@@ -158,6 +158,7 @@
       pkgs.wget
       pkgs.wget2
       pkgs.aria2
+      pkgs.localsend
       pkgs.w3m
       pkgs.tealdeer
       pkgs.tree
