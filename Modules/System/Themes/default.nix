@@ -40,13 +40,17 @@
     };
     environment = {
       systemPackages = [
+        pkgs.adwaita-qt
+        pkgs.adwaita-qt6
+        pkgs.adw-gtk3
+        pkgs.gnome-themes-extra
         pkgs.papirus-icon-theme
         pkgs.adwaita-icon-theme
         pkgs.hicolor-icon-theme
       ];
       sessionVariables = {
         GTK_ICON_THEME = "Papirus-Dark";
-        GTK_THEME = "Adwaita-dark";
+        #GTK_THEME = "Adwaita:dark";
       };
       pathsToLink = [
         "/share/applications"

@@ -37,6 +37,7 @@
       inputs.chaotic.nixosModules.default
       inputs.home-manager.nixosModules.home-manager
       inputs.sops.nixosModules.sops
+      inputs.nirinit.nixosModules.nirinit
       inputs.rusty-clip.nixosModules.default
       inputs.nix-index-database.nixosModules.default
       #inputs.stylix.nixosModules.stylix
