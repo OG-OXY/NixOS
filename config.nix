@@ -45,10 +45,7 @@
     };
     gamescope = {
       enable = true;
-      ## Commenting out and setting to false removed VK swapchain error popup from steam desktop and allowed me to launch mordhau and everything else in steam-desktop, still dont know why gamescope isnt working.
       enableWsi = false;
-      ##
-      # Commented out after steam-desktop worked
       #capSysNice = false;
     };
     steam = {
@@ -59,33 +56,29 @@
       gamescopeSession = {
         enable = true;
         args = [
+          "-w" "1280"
+          "-h" "720"
           "-W" "1920"
           "-H" "1080"
           "-r" "239"
-          "-w" "1280"
-          "-h" "720"
-          # Upscaler selection & sharpening
-          "-F" "fsr"                  # Options: fsr, nis
-          #"--fsr-sharpness 4"       # 0 = max sharp, 20 = minimum sharp
-          # Display & session flags
-          "-e"                      # Enable Steam Gamepad UI / Embedded mode
-          "--fs"                    # Native fullscreen
-          "--force-windows-fullscreen"
-          "--rt"                    # Real-time process scheduling for lower latency
-          "--expose-wayland"
-          # CRITICAL FOR DUAL-GPU: PCI ID for GTX 1070 (10de = NVIDIA, 1b81 = GTX 1070)
-          "--prefer-vk-device" "10de:1b81"
+          "-f"
+          "-e" # Enable Steam Gamepad UI / Embedded mode
+          "--force-grab-cursor"
+          "--mangoapp"
+          #"-fs" # Enable True Fullscreen
+          #"--rt" # Real-time process scheduling for lower latency
+          #"--prefer-vk-device" "10de:1b81" # For Specifying DXVK Device By PCI
         ];
         env = {
-          # Not sure if this works or is causing issues was in my sessionVars but is now commented out there
-          GAMESCOPE_WSI_ENABLE = "0";
-          DXVK_FILTER_DEVICE_NAME = "\"GeForce GTX 1070\"";
+          #DXVK_FILTER_DEVICE_NAME = "\"GeForce GTX 1070\"";
           GBM_BACKEND = "nvidia-drm";
           __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-          VK_DRIVER_FILES = "/run/opengl-driver/share/vulkan/implicit_layer.d/nvidia_icd.x86_64.json";
-          GDK_BACKEND = "x11";
-          QT_QPA_PLATFORM = "xcb";
-          WLR_NO_HARDWARE_CURSORS = "0";
+          LIBVA_DRIVER_NAME = "nvidia";
+          NVD_BACKEND = "direct";
+          #VK_DRIVER_FILES = "/run/opengl-driver/share/vulkan/implicit_layer.d/nvidia_icd.x86_64.json";
+          #GDK_BACKEND = "x11";
+          #QT_QPA_PLATFORM = "xcb";
+          #SDL_VIDEO_DRIVER = "x11";
           PROTON_ENABLE_NVAPI = "1";
           STEAM_EXTRA_COMPAT_TOOLS_PATHS = "$HOME/.steam/root/compatibilitytools.d";
         };

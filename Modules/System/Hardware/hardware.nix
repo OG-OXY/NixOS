@@ -2,8 +2,7 @@
   ...
 }:
 {
-  flake.nixosModules.nvidia =
-    { config, ... }:
+  flake.nixosModules.nvidia = { pkgs, config, ... }:
     {
       services.xserver.videoDrivers = [
         "nvidia"
@@ -20,6 +19,9 @@
         graphics = {
           enable = true;
           enable32Bit = true;
+          extraPackages32 = [
+            pkgs.pkgsi686Linux.nvidia-vaapi-driver
+          ];
         };
         nvidia = {
           #prime = {

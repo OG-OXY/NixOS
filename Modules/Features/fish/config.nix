@@ -62,7 +62,7 @@
           body = ''
             # Option 1: Quit Niri directly (recommended for UWSM)
             if type -q niri
-                niri msg action quit
+                niri msg action quit; and uwsm stop -s
             else
                 uwsm stop -s
             end

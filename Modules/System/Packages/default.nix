@@ -139,6 +139,7 @@
       # 9. CLI NAVIGATION, MANIPULATION & HELPER UTILITIES
       # Searchers, clipboard tools, file helpers, and text utilities
       # ============================================================================
+      pkgs.binutils
       pkgs.pciutils
       pkgs.usbutils
       pkgs.lshw
@@ -149,6 +150,7 @@
       pkgs.ethtool
       pkgs.lm_sensors
       pkgs.glow
+      pkgs.nvimpager
       pkgs.wl-clipboard
       pkgs.cliphist
       pkgs.wtype
@@ -190,7 +192,6 @@
     
       # --- Disabled: Development, Compilers & Debuggers ---
       # pkgs.stdenv.cc
-      # pkgs.binutils
       # pkgs.gnumake
       # pkgs.cmake
       # pkgs.pkg-config
