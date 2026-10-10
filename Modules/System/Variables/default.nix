@@ -17,6 +17,7 @@
         # Toolkit Backends
         GDK_BACKEND = "wayland,x11";
         QT_QPA_PLATFORM = "wayland;xcb";
+        #QT_QPA_PLATFORMTHEME = "gnome";
         SDL_VIDEO_DRIVER = "wayland,x11";
         CLUTTER_BACKEND = "wayland";
 

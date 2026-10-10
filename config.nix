@@ -43,11 +43,6 @@
         };
       };
     };
-    gamescope = {
-      enable = true;
-      enableWsi = false;
-      #capSysNice = false;
-    };
     steam = {
       enable = true;
       remotePlay.openFirewall = true;

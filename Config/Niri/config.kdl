@@ -1,14 +1,13 @@
 // ~/.config/niri/config.kdl
 
 spawn-at-startup "uwsm" "finalize"
-spawn-at-startup "ghostty" "-e" "herdr"
-spawn-at-startup "zen-beta"
-spawn-at-startup "vesktop"
-spawn-at-startup "obsidian"
+//spawn-at-startup "ghostty" "-e" "herdr"
+//spawn-at-startup "zen-beta"
+//spawn-at-startup "vesktop"
+//spawn-at-startup "obsidian"
 
 environment {
     __GLX_VENDOR_LIBRARY_NAME "nvidia"
-    QT_QPA_PLATFORMTHEME "gtk3"
     GBM_BACKEND "nvidia-drm"
     ELECTRON_OZONE_PLATFORM_HINT "auto"
     XCURSOR_THEME "Saturn"

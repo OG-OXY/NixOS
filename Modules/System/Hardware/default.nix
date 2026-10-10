@@ -88,6 +88,8 @@
         "iommu=pt"
         "nvidia-drm.modeset=1"
         "pcie_aspm=off"
+        #"video=DP-6:1920x1080@240"
+        #"video=HDMI-A-2:2560x1440@60"
       ];
       kernel.sysctl = {
         "kernel.sysrq" = true;
