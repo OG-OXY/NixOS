@@ -248,6 +248,11 @@
                     rust.enable = true;
                     clang.enable = true;
                     cmake.enable = true;
+                    make.enable = true;
+                    csharp.enable = true;
+                    zig.enable = true;
+                    java.enable = true;
+                    astro.enable = true;
                     go.enable = true;
 
                     nix = {
@@ -283,12 +288,19 @@
                     };
 
                     fish.enable = true;
+                    nu.enable = true;
                     bash.enable = true;
+                    lisp.enable = true;
                     json.enable = true;
+                    jq.enable = true;
                     toml.enable = true;
-                    css.enable = true;
+                    sql.enable = true;
+                    qml.enable = true;
                     xml.enable = true;
+                    css.enable = true;
                     html.enable = true;
+                    typescript.enable = true;
+                    awk.enable = true;
                   };
 
                   diagnostics.presets = {
@@ -296,7 +308,30 @@
                     deadnix.enable = true;
                   };
 
+                  extraPlugins.smear-cursor = {
+                    package = pkgs.vimUtils.buildVimPlugin {
+                      pname = "smear-cursor.nvim";
+                      version = "2026-03-01";
+                      src = pkgs.fetchFromGitHub {
+                        owner = "sphamba";
+                        repo = "smear-cursor.nvim";
+                        rev = "main";
+                        sha256 = "sha256-QFLgVMKbOnrDfeXvNMvtCnMlE/+0in+D+n6M7Gkwpxg=";
+                      };
+                    };
+                  };
+                  
                   luaConfigRC = {
+                    smear_cursor = ''
+                      require('smear_cursor').setup({
+                        cursor_color = "#d4be98",
+                        normal_bg = "#282828",
+                        smear_between_buffers = true,
+                        smear_between_neighbor_lines = true,
+                        scroll_buffer_space = true,
+                        smear_insert_mode = true,
+                      })
+                    '';
                     #rusty-clip = ''
                       #vim.g.clipboard = {
                       #  name = 'rusty-clip-custom',
@@ -394,7 +429,7 @@
                         load = {
                           "core.defaults" = { };
                           "core.concealer" = { };
-                          "core.completion" = { };
+                          "core.completion" = { config = { engine = "nvim-cmp"; }; };
                           "core.export" = { };
                           "core.export.markdown" = { };
                           "core.dirman" = {

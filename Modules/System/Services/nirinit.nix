@@ -5,7 +5,7 @@
   flake.nixosModules.nirinit = { ... }:
   {
     services.nirinit = {
-      enable = true;
+      enable = false;
       settings = {
         skip.apps = [ 
           "steam"

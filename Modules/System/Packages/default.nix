@@ -57,6 +57,12 @@
       pkgs.atuin
       pkgs.fastfetch
       pkgs.ttyd
+      
+      # Emacs?
+      #pkgs.emacs-pgtk
+      #pkgs.clang
+      # Or
+      #pkgs.gcc
     
       # ============================================================================
       # 4. GUI APPLICATIONS
@@ -66,7 +72,6 @@
       pkgs.vesktop
       pkgs.pavucontrol
       pkgs.qalculate-gtk
-      pkgs.ventoy
     
       # ============================================================================
       # 5. GAMING, PROTON & WINE ENVIRONMENT
@@ -142,6 +147,7 @@
       pkgs.binutils
       pkgs.pciutils
       pkgs.usbutils
+      pkgs.ventoy
       pkgs.lshw
       pkgs.fzf
       pkgs.ripgrep
@@ -175,11 +181,10 @@
       # Preserved for reference, development testing, or future re-activation
       # ============================================================================
     
-      # --- Disabled: Window Managers, Desktop Shells & Themes ---
       # pkgs.sway
       # pkgs.delicious-sddm-theme
-      # pkgs.gnome-settings-daemon
-      # pkgs.gsettings-desktop-schemas
+      # pkgs.wine
+      # pkgs.wine-staging
     
       # --- Disabled: Hyprland Ecosystem ---
       # pkgs.hyprpolkitagent
@@ -197,15 +202,6 @@
       # pkgs.pkg-config
       # pkgs.gdb
       # pkgs.valgrind
-    
-      # --- Disabled: Alternative Wine Builds ---
-      # pkgs.wine
-      # pkgs.wine-staging
-    
-      # --- Disabled: Audio Daemons & Wiring ---
-      # pkgs.pipewire
-      # pkgs.pulseaudio
-      # pkgs.qpwgraph
     ]
     ++ [
       # ============================================================================
