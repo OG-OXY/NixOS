@@ -5,7 +5,10 @@
   flake.nixosModules.environment = { pkgs, ... }:
   {
     environment = {
-      shells = [ pkgs.fish ];
+      shells = [ 
+        pkgs.fish
+        pkgs.nushell
+      ];
       variables = {
         #CPATH = "/run/current-system/sw/include";
         #LIBRARY_PATH = "/run/current-system/sw/lib";
@@ -17,7 +20,6 @@
         # Toolkit Backends
         GDK_BACKEND = "wayland,x11";
         QT_QPA_PLATFORM = "wayland;xcb";
-        #QT_QPA_PLATFORMTHEME = "gnome";
         SDL_VIDEO_DRIVER = "wayland,x11";
         CLUTTER_BACKEND = "wayland";
 
