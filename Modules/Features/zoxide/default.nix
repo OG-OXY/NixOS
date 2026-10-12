@@ -32,6 +32,9 @@
         systemPackages = [
           (if cfg.enableNushellIntegration then zoxideNushellInit else null)
         ];
+        pathsToLink = [
+          "/share/zoxide"
+        ];
       };
     };
   };

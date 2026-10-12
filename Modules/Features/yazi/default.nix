@@ -177,6 +177,10 @@
           (if cfg.enableFishIntegration then yaziFishFunction else null)
           (if cfg.enableNushellIntegration then yaziNushellFunction else null)
         ];
+        pathsToLink = [
+          (if cfg.enableFishIntegration then "/share/fish" else null)
+          (if cfg.enableNushellIntegration then "/share/nushell" else null)
+        ];
         etc = {
           #
         };

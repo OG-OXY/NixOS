@@ -17,7 +17,7 @@
       done
   
       # Fallback if detection fails
-      CONNECTOR="''${CONNECTOR:-DP-1}"
+      CONNECTOR="''${CONNECTOR:-DP-2}"
   
       # Launch gamescope with the dynamically resolved connector
       exec ${pkgs.gamescope}/bin/gamescope -O "$CONNECTOR" "$@"
