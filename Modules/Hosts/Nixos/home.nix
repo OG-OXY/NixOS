@@ -10,8 +10,8 @@
         "$HOME/.local/bin"
       ];
       sessionVariables = {
-        EDITOR = "nvf";
-        VISUAL = "nvf";
+        EDITOR = "hx";
+        VISUAL = "hx";
       };
       activation.removeLegacyNixArtifacts = ''
         rm -f $HOME/.nix-profile $HOME/.steampath $HOME/.Xauthority
