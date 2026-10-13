@@ -16,7 +16,7 @@
         grapheme-width-method = "legacy";
         shell-integration-features = "no-cursor";
         scrollback-limit = 100000000;
-        # Turns off color emojis?
+        font-synthetic-style = false;
         font-family = "JetBrainsMono NFM ExtraBold";
         font-family-bold = "JetBrainsMono NFM ExtraBold";
         font-family-italic = "JetBrainsMono NFM ExtraBold Italic";
