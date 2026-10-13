@@ -30,11 +30,11 @@
             title = "blue";
           };
           key = {
-            width = "12";
+            # width = "12";
             type = "string";
           };
           bar = {
-            width = "10";
+            # width = "15";
             char = {
               elapsed = "■";
               total = "-";
@@ -65,9 +65,6 @@
           { type = "shell"; key = " Shell"; }
           { type = "display"; key = "󰍹 Display"; }
           { type = "wm"; key = " WM"; }
-          { type = "wmtheme"; key = "󰉼 WM Theme"; }
-          { type = "theme"; key = "󰉼 Theme"; }
-          { type = "icons"; key = "󰀻 Icons"; }
           #{ type = "font"; key = "󰛖 Font"; }
           #{ type = "cursor"; key = "󰆾 Cursor"; }
           { type = "terminal"; key = " Terminal"; }

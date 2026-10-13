@@ -6,26 +6,28 @@ spawn-at-startup "zen-beta"
 spawn-at-startup "vesktop"
 spawn-at-startup "obsidian"
 
+environment {
+    GBM_BACKEND "nvidia-drm"
+    __GLX_VENDOR_LIBRARY_NAME "nvidia"
+    LIBVA_DRIVER_NAME "nvidia"
+    NVD_BACKEND "direct"
+}
+
 input {
+    focus-follows-mouse max-scroll-amount="0%"
     keyboard {
-        numlock
-    }
-    touchpad {
-        tap
-        natural-scroll
     }
     mouse {
     }
-    focus-follows-mouse max-scroll-amount="0%"
 }
 
 cursor {
-  xcursor-theme "Saturn"
-  xcursor-size 32
+    xcursor-theme "Saturn"
+    xcursor-size 32
 }
 
 output "desc:ASUSTek COMPUTER INC ROG PG258Q #ASP9OUVfHcfd" {
-    mode "1920x1080@240"
+    mode "1920x1080@240.000"
     position x=0 y=0
     scale 1.0
 }

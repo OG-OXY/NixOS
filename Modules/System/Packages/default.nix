@@ -127,15 +127,13 @@
     
       # ============================================================================
       # 8. DEVELOPMENT TOOLCHAIN & ENVIRONMENT BOOTSTRAPPING
-      # Interactive dev tools, shell engines, formatters, and AI helpers
+      # Interactive dev tools, shell engines, and AI helpers
       # ============================================================================
       pkgs.git
       pkgs.gh
       pkgs.devenv
       pkgs.just
       pkgs.bun
-      pkgs.nixfmt
-      pkgs.jq
       pkgs.repomix # Nix Config to XML
       pkgs.aider-chat
       pkgs.watchman
