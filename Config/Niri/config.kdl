@@ -112,7 +112,7 @@ binds {
     // Core Program Launchers & Actions
     Mod+Space { spawn "apps"; }
     Mod+W { spawn "warp"; }
-    Mod+D { spawn-sh "niri msg action set-dynamic-cast-window --id $(niri msg --json focused-window | jq .id)"; }
+    // Mod+D { spawn-sh "niri msg action set-dynamic-cast-window --id $(niri msg --json focused-window | jq .id)"; }
 
     // Layout Controls & Sizing
     Mod+X { center-column; }

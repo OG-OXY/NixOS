@@ -149,6 +149,7 @@
         set -g fish_handle_reflow 1
         set -U fish_ambiguous_width 1
         set -U fish_emoji_width 1
+        set -gx STARSHIP_SHELL "fish"
 
         function __devenv_auto_greeting --on-event fish_prompt
             if set -q SHOW_PROJECT_GREETING

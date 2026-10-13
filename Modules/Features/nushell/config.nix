@@ -7,6 +7,9 @@
     programs = {
       nushell = {
         enable = true;
+        envFile.text = ''
+          $env.STARSHIP_SHELL = "nu"
+        '';
         configFile.text = ''
           $env.config = {
             show_banner: false
