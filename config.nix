@@ -21,7 +21,6 @@
     direnv = {
       enable = true;
       nix-direnv.enable = true;
-      #enableNushellIntegration = true;
       enableFishIntegration = true;
     };
     gamemode = {
@@ -31,7 +30,6 @@
         general = {
           renice = 20;
         };
-        # Warning: GPU optimisations have the potential to damage hardware
         gpu = {
           apply_gpu_optimisations = "accept-responsibility";
           gpu_device = "NVIDIA";
@@ -57,7 +55,7 @@
           "-H" "1080"
           "-r" "239"
           "-f"
-          "-e" # Enable Steam Gamepad UI / Embedded mode
+          "-e"
           "--force-grab-cursor"
           "--mangoapp"
           #"-fs" # Enable True Fullscreen
@@ -78,8 +76,6 @@
           STEAM_EXTRA_COMPAT_TOOLS_PATHS = "$HOME/.steam/root/compatibilitytools.d";
         };
         steamArgs = [
-          # Redundant?
-          #"-gamepadui"
         ];
       };
       extraCompatPackages = [
@@ -137,12 +133,9 @@
     '';
   };
   # Old Code
+  #AQ_DRM_DEVICES = "/dev/dri/by-path/pci-0000:01:00.0-card";
   ### OBS-Debugging
   #PIPEWIRE_NODE = "1";
   #OBS_USE_EGL = "1";
-  # Commented Out For OBS
-  #LIBVA_DRIVER_NAME = "nvidia";
-  ###NVD_BACKEND = "direct";
-  #__GLX_VENDOR_LIBRARY_NAME = "nvidia";
-  #AQ_DRM_DEVICES = "/dev/dri/by-path/pci-0000:01:00.0-card";
+  ###
 }
