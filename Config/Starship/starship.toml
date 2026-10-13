@@ -16,6 +16,9 @@ style = "bold yellow"
 truncation_length = 3
 fish_style_pwd_dir_length = 1
 
+[git_status]
+disabled = true
+
 [cmd_duration]
 format = "[$duration]($style) "
 

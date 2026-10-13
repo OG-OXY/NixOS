@@ -30,11 +30,11 @@
             title = "blue";
           };
           key = {
-            #width = "12";
+            width = "12";
             type = "string";
           };
           bar = {
-            #width = "10";
+            width = "10";
             char = {
               elapsed = "■";
               total = "-";
@@ -121,25 +121,6 @@
             format = "{size-percentage-bar} {size-used} / {size-total}";
             hideFS = "autofs";
           }
-          #{
-          #  type = "disk";
-          #  key = " ({6})";
-          #  format = "{1} / {2} ({3})";
-          #  showHidden = true;
-          #  showUnknown = true;
-          #  showFS = "vfat";
-          #  hideFS = "autofs";
-          #  percent = {
-          #    type = 3;
-          #  };
-          #  folders = [
-          #    "/"
-          #    "/boot"
-          #    "/home/ty/HDD"
-          #    "/home/ty/HDD/Storage"
-          #    "/home/ty/HDD/Pictures/Backup"
-          #  ];
-          #}
           #"localip"
           #"battery"
           #"poweradapter"
