@@ -8,7 +8,7 @@
       nushell = {
         enable = true;
         envFile.text = ''
-          $env.STARSHIP_SHELL = "nu"
+          #
         '';
         configFile.text = ''
           $env.config = {
@@ -17,6 +17,7 @@
               mode: rounded
             }
           }
+          alias nsh = help commands | where command_type == built-in | select name category description | explore
         '';
       };
       carapace = {
