@@ -6,7 +6,7 @@ bufferline = "multiple"
 line-number = "relative"
 indent-guides = { render = true, character = "│" }
 # Vertical Line To Mark Position Of Cursor(Could Help Me Not Loose Cursor In Large Lines?).
-cursorcolumn = true
+# cursorcolumn = true
 color-modes = true
 scrolloff = 3
 default-yank-register = "+"
