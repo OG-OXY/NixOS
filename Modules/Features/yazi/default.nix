@@ -202,9 +202,5 @@
         "L+ /home/ty/.config/yazi/theme.toml 0644 ty users - ${yaziTheme}"
       ];
     };
-    # Old Code 
-    #pathsToLink = lib.optionals cfg.enableNushellIntegration [ "/share/nushell" ];
-    #systemPackages = lib.optionals cfg.enableFishIntegration [ yaziFishFunction ] ++
-    #lib.optionals cfg.enableNushellIntegration [ yaziNushellFunction ];
   };
 }

@@ -6,6 +6,7 @@ spawn-at-startup "zen-beta"
 spawn-at-startup "vesktop"
 spawn-at-startup "obsidian"
 
+// Already Set In ==> sessionVariables, Redundant?
 environment {
     GBM_BACKEND "nvidia-drm"
     __GLX_VENDOR_LIBRARY_NAME "nvidia"
@@ -42,13 +43,13 @@ layout {
     gaps 0
     background-color "transparent"
     center-focused-column "never"
+    default-column-display "tabbed"
+    default-column-width { proportion 0.5; }
     preset-column-widths {
         proportion 0.33333
         proportion 0.5
-        proportion 0.66667
+        proportion 0.66666
     }
-    default-column-width { proportion 0.5; }
-    
     focus-ring {
         width 0
         active-color "rgba(33, 204, 255, 0.93)"
@@ -80,7 +81,6 @@ overview {
   backdrop-color "#ff7300"
   workspace-shadow {
     on
-    //off
   }
 }
 
@@ -93,7 +93,6 @@ window-rule {
     open-floating true
     geometry-corner-radius 0
     clip-to-geometry true
-    //block-out-from "screen-capture"
     background-effect {
       blur true
       xray false
@@ -114,13 +113,13 @@ binds {
     // Core Program Launchers & Actions
     Mod+Space { spawn "apps"; }
     Mod+W { spawn "warp"; }
-    // Mod+D { spawn-sh "niri msg action set-dynamic-cast-window --id $(niri msg --json focused-window | jq .id)"; }
 
     // Layout Controls & Sizing
     Mod+X { center-column; }
     Mod+F { maximize-column; }
+    Mod+Shift+F { fullscreen-window; }
     Mod+V { toggle-window-floating; }
-    Mod+T { toggle-column-tabbed-display; }
+    Mod+Z { toggle-column-tabbed-display; }
     Mod+Q repeat=false { toggle-overview; }
     Mod+C repeat=false { close-window; }
     
@@ -135,30 +134,25 @@ binds {
     Mod+J { focus-window-down; }
     Mod+K { focus-window-up; }
 
-    // VI Window/Column Reordering (Mod+Ctrl+H/J/K/L)
-    Mod+Ctrl+H { move-column-left; }
-    Mod+Ctrl+L { move-column-right; }
-    Mod+Ctrl+J { move-window-down; }
-    Mod+Ctrl+K { move-window-up; }
-
     // Monitor Focus & Movement
-    Mod+Shift+H { focus-monitor-left; }
-    Mod+Shift+J { focus-monitor-down; }
-    Mod+Shift+K { focus-monitor-up; }
-    Mod+Shift+L { focus-monitor-right; }
+    Mod+G { focus-monitor-left; }
+    Mod+Semicolon { focus-monitor-right; }
 
-    Mod+Shift+Ctrl+H { move-column-to-monitor-left; }
-    Mod+Shift+Ctrl+J { move-column-to-monitor-down; }
-    Mod+Shift+Ctrl+K { move-column-to-monitor-up; }
-    Mod+Shift+Ctrl+L { move-column-to-monitor-right; }
+    // Window/Column Reordering (Mod+Shift+G/H/J/K/L/Semicolon)
+    Mod+Shift+H { move-column-left; }
+    Mod+Shift+L { move-column-right; }
+    Mod+Shift+J { move-window-down; }
+    Mod+Shift+K { move-window-up; }
+    Mod+Shift+G { move-column-to-monitor-left; }
+    Mod+Shift+Semicolon { move-column-to-monitor-right; }
 
     // Workspace Management (VI + Number Defaults)
     Mod+U { focus-workspace-down; }
     Mod+I { focus-workspace-up; }
-    Mod+Ctrl+U { move-column-to-workspace-down; }
-    Mod+Ctrl+I { move-column-to-workspace-up; }
-    Mod+Shift+U { move-workspace-down; }
-    Mod+Shift+I { move-workspace-up; }
+    Mod+Shift+U { move-column-to-workspace-down; }
+    Mod+Shift+I { move-column-to-workspace-up; }
+    Mod+Shift+Ctrl+U { move-workspace-down; }
+    Mod+Shift+Ctrl+I { move-workspace-up; }
     Mod+O { focus-workspace-previous; }
 
     Mod+1 { focus-workspace 1; }
@@ -171,15 +165,15 @@ binds {
     Mod+8 { focus-workspace 8; }
     Mod+9 { focus-workspace 9; }
 
-    Mod+Ctrl+1 { move-column-to-workspace 1; }
-    Mod+Ctrl+2 { move-column-to-workspace 2; }
-    Mod+Ctrl+3 { move-column-to-workspace 3; }
-    Mod+Ctrl+4 { move-column-to-workspace 4; }
-    Mod+Ctrl+5 { move-column-to-workspace 5; }
-    Mod+Ctrl+6 { move-column-to-workspace 6; }
-    Mod+Ctrl+7 { move-column-to-workspace 7; }
-    Mod+Ctrl+8 { move-column-to-workspace 8; }
-    Mod+Ctrl+9 { move-column-to-workspace 9; }
+    Mod+Shift+1 { move-column-to-workspace 1; }
+    Mod+Shift+2 { move-column-to-workspace 2; }
+    Mod+Shift+3 { move-column-to-workspace 3; }
+    Mod+Shift+4 { move-column-to-workspace 4; }
+    Mod+Shift+5 { move-column-to-workspace 5; }
+    Mod+Shift+6 { move-column-to-workspace 6; }
+    Mod+Shift+7 { move-column-to-workspace 7; }
+    Mod+Shift+8 { move-column-to-workspace 8; }
+    Mod+Shift+9 { move-column-to-workspace 9; }
 
     // Granular Column & Window Sizing (Home-row adjacent)
     Mod+Comma { set-column-width "-10%"; }
@@ -188,24 +182,25 @@ binds {
     Mod+Shift+Period { set-window-height "+10%"; }
 
     // Mouse Controls & Scrolling
-    Mod+WheelScrollDown cooldown-ms=150 { focus-workspace-down; }
     Mod+WheelScrollUp cooldown-ms=150 { focus-workspace-up; }
-    Mod+Ctrl+WheelScrollDown cooldown-ms=150 { move-column-to-workspace-down; }
-    Mod+Ctrl+WheelScrollUp cooldown-ms=150 { move-column-to-workspace-up; }
+    Mod+WheelScrollDown cooldown-ms=150 { focus-workspace-down; }
+    Mod+Shift+WheelScrollUp cooldown-ms=150 { move-column-to-workspace-up; }
+    Mod+Shift+WheelScrollDown cooldown-ms=150 { move-column-to-workspace-down; }
 
     // Hardware & System (Natively Handled)
-    Print { screenshot; }
-    Ctrl+Print { screenshot-screen; }
-    Alt+Print { screenshot-window; }
+    Print { screenshot-window; }
+    Alt+Print { screenshot-screen; }
+    Ctrl+Print { screenshot; }
     XF86Calculator { spawn-sh "pkill qalculate-gtk || qalculate-gtk"; }
 
     // Multimedia Keys
-    XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "-l" "1" "@DEFAULT_AUDIO_SINK@" "5%+"; }
+    // Put "-l" "1" After "set-volume" On RaiseVolume To Set Max-Volume Limit. (1=100%, 1.5=150%)
+    XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+"; }
     XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-"; }
     XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
     XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
-    XF86MonBrightnessUp  allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
-    XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
+    XF86MonBrightnessUp  allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+5%"; }
+    XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "5%-"; }
     XF86AudioNext { spawn "playerctl" "next"; }
     XF86AudioPause { spawn "playerctl" "play-pause"; }
     XF86AudioPlay { spawn "playerctl" "play-pause"; }
@@ -214,29 +209,23 @@ binds {
     // Session Control
     Mod+Shift+Slash { show-hotkey-overlay; }
     Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
-    Mod+Shift+E { quit; }
-    Ctrl+Alt+Delete { quit; }
+    Ctrl+Alt+Delete { spawn "fish" "-c" "logout"; }
     Mod+Shift+P { power-off-monitors; }
-    
-    // Old/unused Binds And Code
-    //spawn-at-startup "ghostty" "-e" "fish" "-i" "-C" "tmux new-session -A -s main"
-    //spawn-at-startup "ghostty"
-    //Mod+R { spawn "sh" "-c" "pkill wofi || wofi --show run"; }
-    //Mod+D { spawn "noctalia-shell" "toggle-menu"; }
-    //Mod+D { spawn "sh" "-c" "pkill wofi || wofi --show drun"; }
-    //Mod+B { spawn "zen-beta"; }
-    //Mod+V { spawn "vesktop"; }
-    //Mod+BracketLeft { consume-or-expel-window-left; }
-    //Mod+BracketRight { consume-or-expel-window-right; }
-    //Mod+Shift+R { switch-preset-column-width-back; }
-    // Fucking Useless Shit.
-    //Mod+Shift+T { expand-column-to-available-width; }
-    //Mod+Shift+F { fullscreen-window; }
-    //Mod+M { maximize-window-to-edges; }
-    //Mod+T { switch-preset-column-width; }
-    //LIBVA_DRIVER_NAME = "nvidia"
-    //NVD_BACKEND = "direct";
 }
-
-debug {
-}
+// Old/unused Binds And Code
+/// Now Set To Fish Logout Function Instead Which Does niri msg quit && uwsm stop
+/// Ctrl+Alt+Delete { quit; }
+// spawn-at-startup "ghostty" "-e" "fish" "-i" "-C" "tmux new-session -A -s main"
+// Mod+R { spawn "sh" "-c" "pkill wofi || wofi --show run"; }
+// Mod+D { spawn "noctalia-shell" "toggle-menu"; }
+// Mod+D { spawn "sh" "-c" "pkill wofi || wofi --show drun"; }
+// Mod+B { spawn "zen-beta"; }
+// Mod+V { spawn "vesktop"; }
+// Consume-Window And Expel-Window Are Superior (Without "or")
+// Mod+BracketLeft { consume-or-expel-window-left; }
+// Mod+BracketRight { consume-or-expel-window-right; }
+// Mod+Shift+R { switch-preset-column-width-back; }
+// Fucking Useless Shit.
+// Mod+Shift+T { expand-column-to-available-width; }
+// Mod+M { maximize-window-to-edges; }
+// Mod+T { switch-preset-column-width; }

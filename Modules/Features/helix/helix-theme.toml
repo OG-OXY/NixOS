@@ -1,0 +1,21 @@
+[theme]
+inherits = "base16_terminal"
+"ui.cursorcolumn.primary" = { bg = "five" }
+
+[palette]
+one = "#161616"
+two = "#f06449"
+three = "#00c853"
+four = "#fadb14"
+five = "#2551fe"
+six = "#f02e6b"
+seven = "#00d8b6"
+eight = "#f06449"
+nine = "#45475a"
+ten = "#f06449"
+eleven = "#00e676"
+twelve = "#fadb14"
+thirteen = "#2551fe"
+fourteen = "#f02e6b"
+fifteen = "#00d8b6"
+sixteen = "#f06449"
