@@ -91,6 +91,8 @@
       pkgs.mpv
       pkgs.imv
       pkgs.mpd
+      # Media Keybinds CLI (Play, Pause, Stop)
+      pkgs.playerctl
     
       # Screen Recording & Capture Utilities
       pkgs.grim
@@ -145,6 +147,7 @@
       pkgs.binutils
       pkgs.pciutils
       pkgs.usbutils
+      pkgs.wlr-randr
       pkgs.ventoy
       pkgs.lshw
       pkgs.fzf

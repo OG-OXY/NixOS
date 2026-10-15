@@ -6,6 +6,7 @@
   let
     helixConfig = ./helix-config.toml;
     helixLanguages = ./helix-languages.toml;
+    helixTheme = ./helix-theme.toml;
     efmConfig = ./efm-langserver-config.yaml;
   in
   {
@@ -48,6 +49,7 @@
       "d /home/ty/.config/efm-langserver 0755 ty users -"
       "L+ /home/ty/.config/helix/config.toml - - - - ${helixConfig}"
       "L+ /home/ty/.config/helix/languages.toml - - - - ${helixLanguages}"
+      "L+ /home/ty/.config/helix/themes/base16_custom.toml - - - - ${helixTheme}"
       "L+ /home/ty/.config/efm-langserver/config.yaml - - - - ${efmConfig}"
     ];
   };

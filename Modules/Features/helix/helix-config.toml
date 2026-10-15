@@ -1,11 +1,32 @@
-theme = "base16_terminal"
+theme = "base16_custom"
 [editor]
 auto-format = true
 cursorline = true
 bufferline = "multiple"
 line-number = "relative"
 indent-guides = { render = true, character = "│" }
+# Vertical Line To Mark Position Of Cursor(Could Help Me Not Loose Cursor In Large Lines?).
+cursorcolumn = true
+color-modes = true
+scrolloff = 3
+default-yank-register = "+"
+shell = [ "fish", "-c" ]
+completion-timeout = 100
+default-line-ending = "lf"
+trim-final-newlines = true
+# Max Width A Single Line Can Have By Number Of Characters.
+# text-width = 80
 [editor.cursor-shape]
 normal = "block"
 insert = "bar"
 select = "underline"
+[editor.file-picker]
+# Set To True To See Hidden Files In Picker.
+# hidden = false
+[editor.soft-wrap]
+enable = true
+# max-wrap = 20
+# max-indent-retain = 40
+# wrap-at-text-width = false
+[editor.gutters.line-numbers]
+min-width = 0
