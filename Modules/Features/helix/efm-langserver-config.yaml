@@ -1,0 +1,23 @@
+  version: 2
+  locales: []
+  root-markers:
+    - flake.nix
+    - devenv.nix
+    - .git
+    - .jj
+  languages:
+    nix:
+      - lint-command: 'statix check --err --format=errtags %filepath'
+        lint-workspace: false
+        lint-source: 'statix'
+        lint-formats:
+          - '%f:%l:%c:%t:%m'
+      - lint-command: 'deadnix --no-lambda %filepath'
+        lint-source: 'deadnix'
+        lint-formats:
+          - '%f:%l:%c: %m'
+    yaml:
+      - lint-command: 'yamllint -f parsable -'
+        lint-stdin: true
+        lint-formats:
+          - '%f:%l:%c: [%t%*[^]] %m'

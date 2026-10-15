@@ -1,0 +1,11 @@
+theme = "base16_terminal"
+[editor]
+auto-format = true
+cursorline = true
+bufferline = "multiple"
+line-number = "relative"
+indent-guides = { render = true, character = "│" }
+[editor.cursor-shape]
+normal = "block"
+insert = "bar"
+select = "underline"

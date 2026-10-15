@@ -1,6 +1,6 @@
-format = '[Root](bold yellow)[@](bold red)[NixOS](bold blue)[:](bold red)$directory$vcsh$fossil_branch$fossil_summary$git_state$git_metrics$git_branch${custom.jj-}${custom.jj}$git_commit(bold purple)$git_status$nix_shell$hg_branch$pijul_channel$docker_context$package$c$cmake$cobol$daml$dart$deno$dotnet$elixir$elm$erlang$fennel$gleam$golang$guix_shell$haskell$haxe$java$julia$kotlin$lua$nim$nodejs$ocaml$opa$perl$php$pulumi$purescript$python$quarto$raku$rlang$red$ruby$rust$scala$solidity$spM$swift$terraform$typst$v$vagrant$vlang$zig$buf$conda$meson$spack$aws$gcloud$openstack$azure$crystal[‡](bold red) $character'
+format = '[Root](bold yellow)[@](bold red)[NixOS](bold blue)[:](bold red)$directory$vcsh$fossil_branch$fossil_summary$git_state$git_metrics$git_branch${custom.jj}$git_commit$git_status$nix_shell$hg_branch$pijul_channel$docker_context$package$c$cmake$cobol$daml$dart$deno$dotnet$elixir$elm$erlang$fennel$gleam$golang$guix_shell$haskell$haxe$java$julia$kotlin$lua$nim$nodejs$ocaml$opa$perl$php$pulumi$purescript$python$quarto$raku$rlang$red$ruby$rust$scala$solidity$spM$swift$terraform$typst$v$vagrant$vlang$zig$buf$conda$meson$spack$aws$gcloud$openstack$azure$crystal[‡](bold red) $character'
 
-right_format = "$os${custom.fsh}${custom.nu}$shell$cmd_duration$jobs$memory_usage(bold red)$status"
+right_format = "$os${custom.fsh}${custom.nu}$shell$cmd_duration$jobs$memory_usage$status"
 
 scan_timeout = 0
 command_timeout = 0
@@ -38,9 +38,9 @@ ignore_timeout = true
 disabled = true
 
 [nix_shell]
-symbol = ""
+symbol = " "
 style = "bold blue"
-format = "[$symbol DevShell]($style) "
+format = "[$symbolDevShell]($style) "
 disabled = false
 
 [os]
@@ -52,7 +52,7 @@ format = "[$symbol]($style)"
 [git_branch]
 disabled = true
 only_attached = false
-symbol = ""
+symbol = " "
 style = "bold purple"
 format = "on [$symbol$branch]($style) "
 
@@ -76,7 +76,7 @@ only_nonzero_diffs = true
 [custom.jj]
 command = '''jj log -r @ --no-graph -T 'local_bookmarks.join(", ")''''
 detect_folders = [".jj"]
-symbol = ""
+symbol = " "
 style = "bold purple"
 format = " [$symbol$output]($style) "
 when = "test -d .jj"
@@ -85,106 +85,107 @@ ignore_timeout = true
 
 [shell]
 disabled = false
-style = "cyan bold"
+style = "bold cyan"
 format = "[$indicator]($style) "
 
 [status]
 disabled = false
-format = '[\[$int\]](bold red) '
+format = '[\[$int\]]($style) '
+style = "bold red"
 
 [memory_usage]
 disabled = false
-format = "[$symbol $ram $swap]($style) "
+format = "[$symbol$ram $swap]($style) "
 threshold = -1
-style = "red bold"
+style = "bold white dimmed"
 symbol = "󰍛 "
 
 [env_var]
 disabled = false
 format = "[$env_value]($style) "
-style = "black bold"
+style = "bold black"
 
 [shlvl]
 disabled = false
 format = "[$symbol$shlvl]($style) "
 threshold = 2
-style = "cyan bold"
+style = "bold cyan"
 symbol = " "
 
 [localip]
 disabled = false
 format = "[$localipv4]($style) "
 ssh_only = true
-style = "red bold"
+style = "bold red"
 
 [container]
 disabled = false
 format = "[$symbol[$name]]($style) "
-style = "red bold"
+style = "bold red"
 symbol = "⬢ "
 
 [kubernetes]
 disabled = false
 format = "[$symbol$context( ($namespace))]($style) "
-style = "cyan bold"
+style = "bold cyan"
 symbol = "󱃾 "
 
 [docker_context]
 disabled = false
 format = "[$symbol$context]($style) "
-style = "blue bold"
+style = "bold blue"
 symbol = " "
 
 [vagrant]
 disabled = false
 format = "[$symbol$version]($style) "
-style = "cyan bold"
+style = "bold blue"
 symbol = "󰒍 "
 
 [aws]
 disabled = false
 format = "[$symbol($profile)(\\($region\\))]($style) "
-style = "orange bold"
+style = "bold orange"
 symbol = " "
 
 [gcloud]
 disabled = false
 format = "[$symbol($account)(\\($project\\))]($style) "
-style = "blue bold"
+style = "bold blue"
 symbol = "󱇊 "
 
 [azure]
 disabled = false
 format = "[$symbol($subscription)]($style) "
-style = "blue bold"
+style = "bold blue"
 symbol = "󰠅 "
 
 [openstack]
 disabled = false
 format = "[$symbol$cloud(\\($project\\))]($style) "
-style = "violet bold"
+style = "bold violet"
 symbol = "󰜉 "
 
 [pulumi]
 disabled = false
 format = "[$symbol($stack)]($style) "
-style = "orange bold"
+style = "bold orange"
 symbol = " "
 
 [vcsh]
 disabled = false
 format = "[$symbol$clone]($style) "
-style = "yellow bold"
+style = "bold yellow"
 symbol = " "
 
 [fossil_branch]
 disabled = false
 format = "[$symbol$branch]($style) "
-style = "purple bold"
+style = "bold purple"
 symbol = " "
 
 [pijul_channel]
 disabled = false
 format = "[$symbol$channel]($style) "
-style = "purple bold"
+style = "bold purple"
 symbol = " "
