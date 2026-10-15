@@ -1,0 +1,10 @@
+[language-server.efm]
+command = "efm-langserver"
+[[language]]
+name = "nix"
+auto-format = false
+language-servers = [ "nixd", "efm" ]
+[[language]]
+name = "yaml"
+language-servers = [ "yaml-language-server", "efm" ]
+formatter = { command = "prettier", args = [ "--parser", "yaml" ] }
