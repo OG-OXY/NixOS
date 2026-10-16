@@ -1,0 +1,11 @@
+{
+  ...
+}:
+{
+  flake.nixosModules.llama-cpp = { pkgs, ... }:
+  {
+    services.llama-cpp = {
+      
+    };
+  };
+}

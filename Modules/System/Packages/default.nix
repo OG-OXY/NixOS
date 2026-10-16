@@ -6,8 +6,9 @@
   flake.nixosModules.systemPackages = { pkgs, ... }:
   {
     environment.systemPackages = let
-      Cuda = pkgs.cudaPackages;
+      Cuda = pkgs.cudaPackages_12;
       Kde = pkgs.kdePackages;
+      py3 = pkgs.python313Packages;
       Gst = pkgs.gst_all_1;
       Gsr = pkgs.gpu-screen-recorder.override {
         ffmpeg = pkgs.ffmpeg_6; # Uses NVENC API 13.0 compatible headers
@@ -58,12 +59,6 @@
       pkgs.fastfetch
       pkgs.ttyd
       
-      # Emacs?
-      #pkgs.emacs-pgtk
-      #pkgs.clang
-      # Or
-      #pkgs.gcc
-    
       # ============================================================================
       # 4. GUI APPLICATIONS
       # Graphical user interface applications
@@ -138,6 +133,7 @@
       pkgs.bun
       pkgs.repomix # Nix Config to XML
       pkgs.aider-chat
+      py3.huggingface-hub
       pkgs.watchman
     
       # ============================================================================

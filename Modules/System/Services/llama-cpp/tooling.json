@@ -1,0 +1,68 @@
+{
+  "tools": [
+    {
+      "name": "read_file",
+      "description": "Read the contents of a file. Allowed freely.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "path": { "type": "string", "description": "Absolute or relative path to the file" }
+        },
+        "required": ["path"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "list_dir",
+      "description": "List files and directories. Allowed freely.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "path": { "type": "string", "description": "Directory path (default: .)" },
+          "recursive": { "type": "boolean", "description": "Recurse into subdirs", "default": false }
+        },
+        "required": ["path"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "search",
+      "description": "Search for text or files (ripgrep-style). Allowed freely.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "query": { "type": "string" },
+          "path": { "type": "string", "default": "." },
+          "glob": { "type": "string", "description": "Optional glob filter" }
+        },
+        "required": ["query"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "write_file",
+      "description": "Write or overwrite a file. REQUIRES user confirmation before execution.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "path": { "type": "string" },
+          "content": { "type": "string" }
+        },
+        "required": ["path", "content"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "run_shell",
+      "description": "Execute a shell command. REQUIRES user confirmation before execution.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "command": { "type": "string" }
+        },
+        "required": ["command"],
+        "additionalProperties": false
+      }
+    }
+  ]
+}
