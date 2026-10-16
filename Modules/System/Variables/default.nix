@@ -42,6 +42,13 @@
         # SSH & AI
         SSH_AUTH_SOCK = "/home/ty/.bitwarden-ssh-agent.sock";
         SECRETSPEC_PROVIDER = "keyring";
+        GOOSE_PROVIDER = "openai";
+        GOOSE_PROVIDER__HOST = "http://127.0.0.1:8012";
+        GOOSE_PROVIDER__API_KEY = "not-needed";
+        GOOSE_MODEL = "qwen2.5-coder";
+        OPENAI_HOST= "http://127.0.0.1:8012";
+        OPENAI_BASE_PATH= "/v1/chat/completions";
+        OPENAI_API_KEY= "not-needed";
         ANTHROPIC_API_KEY = "local";
         ANTHROPIC_AUTH_TOKEN = "ollama";
         ANTHROPIC_BASE_URL = "http://127.0.0.1:11434";

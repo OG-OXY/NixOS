@@ -35,10 +35,13 @@
           default = pkgs.symlinkJoin {
             name = "numtide_llm-agents";
             paths = [
-              agents.claude-code
+              agents.herdr
+              agents.opencode
               agents.crush
               agents.goose-cli
-              agents.herdr
+              agents.copilot-cli
+              agents.claude-code
+              # agents.codex
             ];
           };
         }

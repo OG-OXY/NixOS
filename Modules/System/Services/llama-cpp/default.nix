@@ -1,9 +1,12 @@
+
 {
   ...
 }:
 {
   flake.nixosModules.llama-cpp = { pkgs, lib, ... }:
   let
+    opencodeConfig = ./opencode-config.json;
+    gooseConfig = ./goose-config.yaml;
     grammarFile = ./tools.gbnf;
     jsonSchema = ./tooling.json;
   in
@@ -15,7 +18,7 @@
         # hf-file = "qwen2.5-coder-32b-instruct-q4_k_m.gguf";
         hf-repo = "Qwen/Qwen2.5-Coder-14B-Instruct-GGUF";
         hf-file = "qwen2.5-coder-14b-instruct-q4_k_m.gguf";
-        host = "127.0.0.1";
+        host = "0.0.0.0";
         port = 8012;
         jinja = true;
         flash-attn = "on";
@@ -30,27 +33,25 @@
         grammar-file = "${grammarFile}";
         json-schema-file = "${jsonSchema}";
       };
-      package =
-        (pkgs.llama-cpp.override {
-          cudaSupport = true;
-        }).overrideAttrs
-          (oldAttrs: {
-            nativeBuildInputs = (oldAttrs.nativeBuildInputs or []) ++ [
-              pkgs.cudaPackages_12.cudatoolkit
-              pkgs.cudaPackages_12.cuda_nvcc        
-            ];
-            cmakeFlags = (oldAttrs.cmakeFlags or [ ]) ++ [
-              "-DGGML_CUDA=ON"
-              "-DCMAKE_CUDA_ARCHITECTURES=61"
-              "-DGGML_CUDA_FORCE_MMQ=ON"
-              "-DGGML_CUDA_FA_ALL_QUANTS=ON"
-            ];
-          });
+      package = pkgs.llama-cpp-cuda.overrideAttrs (oldAttrs: {
+        cmakeFlags = (oldAttrs.cmakeFlags or [ ]) ++ [
+          "-DGGML_CUDA=ON"
+          "-DCMAKE_CUDA_ARCHITECTURES=61"
+          "-DGGML_CUDA_FORCE_MMQ=ON"
+          "-DGGML_CUDA_FA_ALL_QUANTS=ON"
+        ];
+      });
     };
-    systemd.services.llama-cpp = {
-      wantedBy = lib.mkForce [];
-      # serviceConfig = {
-      # };
+    systemd = {
+      services.llama-cpp = {
+        wantedBy = lib.mkForce [];
+      };
+      tmpfiles.rules = [
+        "d /home/ty/.config/goose 0755 ty users -"
+        "d /home/ty/.config/opencode 0755 ty users -"
+        "C+ /home/ty/.config/goose/config.yaml - - - - ${gooseConfig}"
+        "C+ /home/ty/.config/opencode/opencode.json - - - - ${opencodeConfig}"
+      ];
     };
   };
 }
