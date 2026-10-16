@@ -206,10 +206,10 @@
       # ============================================================================
       inputs.zen-browser.packages.${pkgs.system}.default
       inputs.nvf.packages.${pkgs.system}.default
+      inputs.llm-agents.packages.${pkgs.system}.default
       Cuda.cuda_nvcc
       Cuda.cudatoolkit
       # --- Disabled Flake Inputs ---
-      # inputs.llm-agents.packages.${pkgs.system}.default
     ];
   };
 }

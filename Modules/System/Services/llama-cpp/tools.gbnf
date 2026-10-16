@@ -1,0 +1,19 @@
+root ::= tool-call | final-answer
+
+tool-call ::= "{" ws "\"name\"" ws ":" ws tool-name ws "," ws "\"arguments\"" ws ":" ws args ws "}"
+
+tool-name ::= "\"read_file\"" | "\"list_dir\"" | "\"search\"" | "\"write_file\"" | "\"run_shell\""
+
+args ::= read-file-args | list-dir-args | search-args | write-file-args | run-shell-args
+
+read-file-args ::= "{" ws "\"path\"" ws ":" ws string ws "}"
+list-dir-args  ::= "{" ws "\"path\"" ws ":" ws string (ws "," ws "\"recursive\"" ws ":" ws boolean)? ws "}"
+search-args    ::= "{" ws "\"query\"" ws ":" ws string (ws "," ws "\"path\"" ws ":" ws string)? (ws "," ws "\"glob\"" ws ":" ws string)? ws "}"
+write-file-args ::= "{" ws "\"path\"" ws ":" ws string ws "," ws "\"content\"" ws ":" ws string ws "}"
+run-shell-args  ::= "{" ws "\"command\"" ws ":" ws string ws "}"
+
+final-answer ::= string
+
+string ::= "\"" ([^"\\] | "\\" ["\\/bfnrt] | "\\u" [0-9a-fA-F]{4})* "\""
+boolean ::= "true" | "false"
+ws ::= [ \t\n]*
