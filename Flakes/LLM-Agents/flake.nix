@@ -17,7 +17,11 @@
         "aarch64-linux"
       ];
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
-      config = nixpkgs.config.allowUnfree;
+      config = [
+        nixpkgs.config.allowUnfree
+        nixpkgs.config.cudaSupport
+        nixpkgs.config.cudaCapabilities
+      ];
     in
     {
       packages = forAllSystems (

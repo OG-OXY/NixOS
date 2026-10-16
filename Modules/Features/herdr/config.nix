@@ -4,26 +4,7 @@
 {   
   flake.nixosModules.herdr = { pkgs, lib, ... }:
   let
-    herdrConfig = pkgs.writeText "herdr-config.toml" ''
-      onboarding = false
-  
-      [theme]
-      name = "terminal"
-  
-      [ui]
-      status_indicators = "symbols"
-  
-      [ui.sound]
-      enabled = true
-      
-      [ui.toast]
-      delivery = "herdr"
-  
-      [keys]
-      prefix = "ctrl+space"
-      #previous_tab "prefix+shift+h"
-      #next_tab = "prefix+shift+l"
-    '';
+    herdrConfig = ./herdr-config.toml;
   in
   {
     environment.systemPackages = [
