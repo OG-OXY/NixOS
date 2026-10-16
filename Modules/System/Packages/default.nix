@@ -149,6 +149,7 @@
       pkgs.fzf
       pkgs.ripgrep
       pkgs.fd
+      pkgs.gawk
       pkgs.bat
       pkgs.ethtool
       pkgs.lm_sensors
