@@ -28,6 +28,11 @@
           group = "users";
           mode = "0400";
         };
+        "GOOGLE_GENERATIVE_AI_API_KEY" = {
+          owner = "ty";
+          group = "users";
+          mode = "0400";
+        };
         "WIFI_PSK" = {
           owner = "root";
           group = "root";
@@ -53,6 +58,7 @@
             GITHUB_TOKEN=${config.sops.placeholder.GITHUB_TOKEN}
             GOOGLE_API_KEY=${config.sops.placeholder.GOOGLE_API_KEY}
             GEMINI_API_KEY=${config.sops.placeholder.GOOGLE_API_KEY}
+            GOOGLE_GENERATIVE_AI_API_KEY=${config.sops.placeholder.GOOGLE_GENERATIVE_AI_API_KEY}
             BW_CLIENTID=${config.sops.placeholder.bw_client_id}
             BW_CLIENTSECRET=${config.sops.placeholder.bw_client_secret}
           '';

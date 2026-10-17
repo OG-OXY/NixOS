@@ -32,6 +32,11 @@
         repeat-penalty = 1.05;
         # grammar-file = "${grammarFile}";
         # json-schema-file = "${jsonSchema}";
+        stop = [
+          "<|im_end|>"
+          "<|endoftext|>"
+          "<|im_start|>"
+        ];
       };
       package = pkgs.llama-cpp-cuda.overrideAttrs (oldAttrs: {
         cmakeFlags = (oldAttrs.cmakeFlags or [ ]) ++ [
