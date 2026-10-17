@@ -4,8 +4,10 @@
 {
   flake.nixosModules.llama-cpp = { pkgs, lib, ... }:
   let
-    opencodeConfig = ./opencode-config.json;
-    gooseConfig = ./goose-config.yaml;
+    modelsIni = ./models-preset.ini;
+    opencodeConfig = ../agent/opencode-config.json;
+    gooseConfig = ../agent/goose-config.yaml;
+    keyFile = ./keys.txt;
     # grammarFile = ./tools.gbnf;
     # jsonSchema = ./tooling.json;
   in
@@ -13,34 +15,32 @@
     services.llama-cpp = {
       enable = true;
       settings = {
+        models-preset = "${modelsIni}";
+        host = "0.0.0.0";
+        port = 8080;
+        jinja = false;
+        repeat-penalty = 1.05;
+        api-key-file = "${keyFile}";
         # hf-repo = "Qwen/Qwen2.5-Coder-32B-Instruct-GGUF";
         # hf-file = "qwen2.5-coder-32b-instruct-q4_k_m.gguf";
-        hf-repo = "Qwen/Qwen2.5-Coder-14B-Instruct-GGUF";
-        hf-file = "qwen2.5-coder-14b-instruct-q4_k_m.gguf";
-        host = "0.0.0.0";
-        port = 8012;
-        jinja = true;
-        flash-attn = "on";
-        cache-type-k = "q8_0";
-        cache-type-v = "q8_0";
+        # hf-repo = "Qwen/Qwen2.5-Coder-14B-Instruct-GGUF";
+        # hf-file = "qwen2.5-coder-14b-instruct-q4_k_m.gguf";
+        # flash-attn = "on";
+        # cache-type-k = "q8_0";
+        # cache-type-v = "q8_0";
         # ctx-size = 32768;
         # ctx-size = 12288;
-        ctx-size = 16384;
-        n-gpu-layers = 30;
-        threads = 8;
-        temp = 0.2;
-        repeat-penalty = 1.05;
+        # ctx-size = 16384;
+        # n-gpu-layers = 28;
+        # threads = 8;
+        # temp = 0.2;
         # grammar-file = "${grammarFile}";
         # json-schema-file = "${jsonSchema}";
-        stop = [
-          "<|im_end|>"
-          "<|endoftext|>"
-          "<|im_start|>"
-        ];
       };
       package = pkgs.llama-cpp-cuda.overrideAttrs (oldAttrs: {
         cmakeFlags = (oldAttrs.cmakeFlags or [ ]) ++ [
           "-DGGML_CUDA=ON"
+          "-DGGML_NATIVE=ON"
           "-DCMAKE_CUDA_ARCHITECTURES=61"
           "-DGGML_CUDA_FORCE_MMQ=ON"
           "-DGGML_CUDA_FA_ALL_QUANTS=ON"

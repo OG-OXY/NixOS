@@ -1,20 +1,19 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "model": "llama-cpp/qwen2.5-coder",
   "provider": {
-    "llama-cpp": {
-      "name": "Local Llama",
+    "llama.cpp": {
+      "name": "Llama",
       "options": {
-        "baseURL": "http://127.0.0.1:8012/v1"
+        "baseURL": "http://127.0.0.1:8080/v1"
       },
       "models": {
-        "qwen2.5-coder": {
-          "name": "Qwen 2.5 Coder (Llama)"
+        "qwen2.5-coder:14b": {
+          "name": "Qwen 2.5 Coder 14B (Llama)"
         }
       }
     },
     "ollama": {
-      "name": "Local Ollama",
+      "name": "Ollama",
       "options": {
         "baseURL": "http://127.0.0.1:11434/v1"
       },

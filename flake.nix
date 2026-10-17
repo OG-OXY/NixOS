@@ -18,10 +18,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nirinit = {
-      url = "github:amaanq/nirinit";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     sops = {
       url = "github:mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";

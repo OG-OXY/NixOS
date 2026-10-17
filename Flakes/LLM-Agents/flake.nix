@@ -37,6 +37,7 @@
             paths = [
               llm.herdr
               llm.opencode
+              llm.pi
               llm.crush
               llm.goose-cli
               llm.copilot-cli
