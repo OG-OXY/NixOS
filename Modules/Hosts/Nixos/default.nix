@@ -28,9 +28,9 @@
               };
             in {
                 hello = stable.hello;
-                cudaPackages = prev.cudaPackages_12_6;
-                ffmpeg = prev.ffmpeg_6;
-                ffmpeg-full = prev.ffmpeg_6-full;
+                cudaPackages = prev.cudaPackages_12_9;
+                # ffmpeg = prev.ffmpeg_6;
+                # ffmpeg-full = prev.ffmpeg_6-full;
             })
           ];
         };

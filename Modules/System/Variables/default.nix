@@ -33,6 +33,8 @@
         __GLX_VENDOR_LIBRARY_NAME = "nvidia";
         LIBVA_DRIVER_NAME = "nvidia";
         NVD_BACKEND = "direct";
+        EGL_ALLOW_UNSUPPORTED_EXTENSIONS = "1";
+        EGL_PLATFORM = "wayland";
 
         # Gaming / Proton
         PROTON_ENABLE_WAYLAND = "1";

@@ -13,8 +13,6 @@
       };
       services = {
         NetworkManager-wait-online.enable = true;
-        # Override To Start Manually.
-        ollama.wantedBy = pkgs.lib.mkForce [ ];
       };
       user = {
         #settings.Manager = {
