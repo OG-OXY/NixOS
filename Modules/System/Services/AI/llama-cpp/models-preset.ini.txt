@@ -1,0 +1,20 @@
+version = 1
+
+[*]
+flash-attn = true
+cache-type-k = q8_0
+cache-type-v = q8_0
+n-gpu-layers = 28
+threads = 8
+
+[qwen-14b]
+hf-repo = Qwen/Qwen2.5-Coder-14B-Instruct-GGUF
+hf-file = qwen2.5-coder-14b-instruct-q4_k_m.gguf
+ctx-size = 16384
+temp = 0.2
+
+[qwen-32b]
+hf-repo = Qwen/Qwen2.5-Coder-32B-Instruct-GGUF
+hf-file = qwen2.5-coder-32b-instruct-q4_k_m.gguf
+ctx-size = 16384
+temp = 0.2

@@ -16,7 +16,7 @@
             cudaCapabilities = ["6.1"];
             permittedInsecurePackages = [
               "electron-39.8.10"
-              "ventoy-1.1.17"
+              "ventoy-1.1.18"
             ];
           };
           overlays = [
@@ -40,10 +40,10 @@
       inputs.chaotic.nixosModules.default
       inputs.home-manager.nixosModules.home-manager
       inputs.sops.nixosModules.sops
-      inputs.nirinit.nixosModules.nirinit
       inputs.rusty-clip.nixosModules.default
       inputs.nix-index-database.nixosModules.default
-      #inputs.stylix.nixosModules.stylix
+      # inputs.stylix.nixosModules.stylix
+      # inputs.nirinit.nixosModules.nirinit
       {
         home-manager = {
           useGlobalPkgs = true;

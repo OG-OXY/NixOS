@@ -4,7 +4,7 @@
 {
   flake.nixosModules.ollama = { pkgs, ... }:
   let
-    qwenModelFile = ./modelfile;
+    # qwenModelFile = ./modelfile;
   in
   {
     services.ollama = {
