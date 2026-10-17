@@ -90,18 +90,6 @@
           PermitRootLogin = "no";
         };
       };
-      ollama = {
-        enable = false;
-        package = (pkgs.ollama-cuda.override { }).overrideAttrs (oldAttrs: {
-          cmakeFlags = (oldAttrs.cmakeFlags or [ ]) ++ [
-            "-DCMAKE_CUDA_ARCHITECTURES=61"
-          ];
-        });
-        environmentVariables = {
-          CUDA_VISIBLE_DEVICES = "0";
-          OLLAMA_GPU_OVERHEAD = "512";
-        };
-      };
       kmscon = {
         enable = true;
         config = {

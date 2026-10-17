@@ -6,13 +6,21 @@
   flake.nixosModules.systemPackages = { pkgs, ... }:
   {
     environment.systemPackages = let
-      Cuda = pkgs.cudaPackages_12;
+      Cuda = pkgs.cudaPackages_12_6;
       Kde = pkgs.kdePackages;
       py3 = pkgs.python313Packages;
       Gst = pkgs.gst_all_1;
       Gsr = pkgs.gpu-screen-recorder.override {
         ffmpeg = pkgs.ffmpeg_6; # Uses NVENC API 13.0 compatible headers
       };
+      llama = pkgs.llama-cpp-cuda.overrideAttrs (oldAttrs: {
+        cmakeFlags = (oldAttrs.cmakeFlags or [ ]) ++ [
+          "-DGGML_CUDA=ON"
+          "-DCMAKE_CUDA_ARCHITECTURES=61"
+          "-DGGML_CUDA_FORCE_MMQ=ON"
+          "-DGGML_CUDA_FA_ALL_QUANTS=ON"
+        ];
+      });
     in
     [
       # ============================================================================
@@ -132,7 +140,10 @@
       pkgs.just
       pkgs.bun
       pkgs.repomix # Nix Config to XML
+      llama
       pkgs.aider-chat
+      pkgs.antigravity-cli
+      pkgs.geminicommit
       py3.huggingface-hub
       pkgs.watchman
     

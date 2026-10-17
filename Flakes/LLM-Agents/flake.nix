@@ -27,7 +27,7 @@
       packages = forAllSystems (
         system:
         let
-          agents = llm-agents.packages.${pkgs.system};
+          llm = llm-agents.packages.${pkgs.system};
           pkgs = nixpkgs.legacyPackages.${system};
         in
         {
@@ -35,53 +35,14 @@
           default = pkgs.symlinkJoin {
             name = "numtide_llm-agents";
             paths = [
-              agents.herdr
-              agents.opencode
-              agents.crush
-              agents.goose-cli
-              agents.copilot-cli
-              agents.claude-code
-              # agents.codex
+              llm.herdr
+              llm.opencode
+              llm.crush
+              llm.goose-cli
+              llm.copilot-cli
+              llm.claude-code
+              # llm.codex
             ];
-          };
-        }
-      );
-
-      devShells = forAllSystems (
-        system:
-        let
-          agents = llm-agents.packages.${pkgs.system};
-          pkgs = nixpkgs.legacyPackages.${system};
-        in
-        {
-          inherit config;
-          default = pkgs.mkShell {
-            name = "numtide_llm-agents-shell";
-            nativeBuildInputs = [
-              agents.claude-code
-              agents.crush
-              agents.goose-cli
-
-              pkgs.herdr
-              pkgs.llama-cpp
-              pkgs.nodejs_22
-              pkgs.ripgrep
-              pkgs.gawk
-              pkgs.bun
-              pkgs.gh
-              pkgs.fd
-              pkgs.fzf
-              pkgs.jq
-              pkgs.git
-            ];
-            shellHook = ''
-              echo "========================================================"
-              echo " 🤖 AI AGENT SANDBOX ACTIVATED                          "
-              echo " System Context: ${pkgs.system}                         "
-              echo " Available: claude-code, crush, goose                   "
-              echo "========================================================"
-              export PATH="$PWD/node_modules/.bin:$PATH"
-            '';
           };
         }
       );

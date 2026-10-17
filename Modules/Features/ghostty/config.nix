@@ -26,6 +26,9 @@
           "liga"
           "calt"
         ];
+        keybind = [
+          "unconsumed:alt+c=text:\\x1bc"
+        ];
         background = "161616";
         foreground = "fadb14";
         cursor-color = "f06449";

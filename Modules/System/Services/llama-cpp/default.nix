@@ -1,4 +1,3 @@
-
 {
   ...
 }:
@@ -7,8 +6,8 @@
   let
     opencodeConfig = ./opencode-config.json;
     gooseConfig = ./goose-config.yaml;
-    grammarFile = ./tools.gbnf;
-    jsonSchema = ./tooling.json;
+    # grammarFile = ./tools.gbnf;
+    # jsonSchema = ./tooling.json;
   in
   {
     services.llama-cpp = {
@@ -25,13 +24,14 @@
         cache-type-k = "q8_0";
         cache-type-v = "q8_0";
         # ctx-size = 32768;
-        ctx-size = 12288;
+        # ctx-size = 12288;
+        ctx-size = 16384;
         n-gpu-layers = 30;
         threads = 8;
         temp = 0.2;
         repeat-penalty = 1.05;
-        grammar-file = "${grammarFile}";
-        json-schema-file = "${jsonSchema}";
+        # grammar-file = "${grammarFile}";
+        # json-schema-file = "${jsonSchema}";
       };
       package = pkgs.llama-cpp-cuda.overrideAttrs (oldAttrs: {
         cmakeFlags = (oldAttrs.cmakeFlags or [ ]) ++ [

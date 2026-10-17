@@ -12,37 +12,41 @@
   {
     environment.systemPackages = [
       pkgs.helix
-      # Proxy-Server
+      # Proxy-LS
       pkgs.efm-langserver
-      # Nix
+      # NIX
       pkgs.nixd
       pkgs.deadnix
       pkgs.statix
       pkgs.nixfmt-rs
-      # Rust
+      # RUST
       pkgs.rust-analyzer
       pkgs.clippy
       pkgs.bacon
-      # Shell
+      # SHELL
       pkgs.fish-lsp
       pkgs.bash-language-server        
-      # Lua
+      # LUA
       pkgs.lua-language-server
       pkgs.hyprls
       pkgs.stylua
       # JSON
+      pkgs.vscode-json-languageserver
       pkgs.jq
-      # Yaml
+      # YAML
       pkgs.yaml-language-server
       pkgs.yamllint
       pkgs.prettier
-      # Toml
+      # TOML
       pkgs.taplo
-      # jq
+      # HTML
+      pkgs.vscode-html-languageserver
+      # CSS
+      pkgs.vscode-css-languageserver
+      # JQ
       pkgs.jq-lsp
       pkgs.jqfmt
-    ];
-    
+    ];   
     systemd.tmpfiles.rules = [
       "d /home/ty/.config/helix 0755 ty users -"
       "d /home/ty/.config/helix/themes 0755 ty users -"
@@ -54,4 +58,3 @@
     ];
   };
 }
-
