@@ -27,23 +27,6 @@
       ollama = {
         wantedBy = pkgs.lib.mkForce [ ];
       };
-      # ollama-model-init = {
-      #   description = "Initialize Ollama custom model context window";
-      #   after = [ "ollama.service" ];
-      #   requires = [ "ollama.service" ];
-      #   wantedBy = [ "multi-user.target" ];
-      #   serviceConfig = {
-      #     Type = "oneshot";
-      #     RemainAfterExit = true;
-      #   };
-      #   script = ''
-      #     # Wait for the local ollama socket to respond
-      #     until ${pkgs.curl}/bin/curl -s http://127.0.0.1:11434/api/tags >/dev/null 2>&1; do
-      #       sleep 1
-      #     done
-      #     ${pkgs.ollama}/bin/ollama create qwen2.5-coder:14b -f ${qwenModelFile}
-      #   '';
-      # };
     };
   };
 }
