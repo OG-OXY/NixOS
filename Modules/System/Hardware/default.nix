@@ -166,7 +166,7 @@
         ];
       };
       "/mnt/Ventoy" = {
-        enable = true;
+        enable = false;
         device = "/dev/disk/by-partlabel/Ventoy";
         fsType = "exfat";
         options = [

@@ -18,6 +18,11 @@
           group = "users";
           mode = "0400";
         };
+        "LLAMA_API_KEY" = {
+          owner = "ty";
+          group = "users";
+          mode = "0400";
+        };
         "GOOGLE_API_KEY" = {
           owner = "ty";
           group = "users";
@@ -56,6 +61,7 @@
           mode = "0400";
           content = ''
             GITHUB_TOKEN=${config.sops.placeholder.GITHUB_TOKEN}
+            LLAMA_API_KEY=${config.sops.placeholder.LLAMA_API_KEY}
             GOOGLE_API_KEY=${config.sops.placeholder.GOOGLE_API_KEY}
             GEMINI_API_KEY=${config.sops.placeholder.GOOGLE_API_KEY}
             GOOGLE_GENERATIVE_AI_API_KEY=${config.sops.placeholder.GOOGLE_GENERATIVE_AI_API_KEY}

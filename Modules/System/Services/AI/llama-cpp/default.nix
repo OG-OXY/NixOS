@@ -7,7 +7,6 @@
     modelsIni = ./models-preset.ini;
     opencodeConfig = ../agent/opencode-config.json;
     gooseConfig = ../agent/goose-config.yaml;
-    keyFile = ./keys.txt;
     # grammarFile = ./tools.gbnf;
     # jsonSchema = ./tooling.json;
   in
@@ -19,21 +18,13 @@
         host = "0.0.0.0";
         port = 8080;
         jinja = false;
+        # chat-template = "chatml";
+        ctx-size = 32768;
+        temp = 0.2;
         repeat-penalty = 1.05;
-        api-key-file = "${keyFile}";
-        # hf-repo = "Qwen/Qwen2.5-Coder-32B-Instruct-GGUF";
-        # hf-file = "qwen2.5-coder-32b-instruct-q4_k_m.gguf";
-        # hf-repo = "Qwen/Qwen2.5-Coder-14B-Instruct-GGUF";
-        # hf-file = "qwen2.5-coder-14b-instruct-q4_k_m.gguf";
-        # flash-attn = "on";
-        # cache-type-k = "q8_0";
-        # cache-type-v = "q8_0";
-        # ctx-size = 32768;
+        api-key = "$LLAMA_API_KEY";
         # ctx-size = 12288;
         # ctx-size = 16384;
-        # n-gpu-layers = 28;
-        # threads = 8;
-        # temp = 0.2;
         # grammar-file = "${grammarFile}";
         # json-schema-file = "${jsonSchema}";
       };
@@ -49,7 +40,11 @@
     };
     systemd = {
       services.llama-cpp = {
-        wantedBy = lib.mkForce [];
+        wantedBy = lib.mkForce [ ];
+        # requires = [ "litellm.service" ];
+        serviceConfig = {
+          EnvironmentFile = "/run/secrets/rendered/secrets.env";
+        };
       };
       tmpfiles.rules = [
         "d /home/ty/.config/goose 0755 ty users -"
