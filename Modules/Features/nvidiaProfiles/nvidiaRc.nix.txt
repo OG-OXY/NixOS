@@ -1,0 +1,18 @@
+{
+  ...
+}:
+{
+  flake.nixosModules.nvidiaApplicationProfilesRc = { lib, ... }:
+  let
+    nvidiaRc = ./nvidia-application-profiles-rc.json;
+  in
+  {
+    environment.etc = lib.mkForce {
+      "nvidia/nvidia-application-profiles-rc" = {
+        source = "${nvidiaRc}";
+        mode = "0440";
+      };
+    # "default/useradd".text = "GROUP=100 ...";
+    };
+  };
+}

@@ -28,7 +28,17 @@
           group = "users";
           mode = "0400";
         };
-        "GEMINI_API_KEY" = {
+        "GEMINI_KEY_1" = {
+          owner = "ty";
+          group = "users";
+          mode = "0400";
+        };
+        "GEMINI_KEY_2" = {
+          owner = "ty";
+          group = "users";
+          mode = "0400";
+        };
+        "GEMINI_KEY_3" = {
           owner = "ty";
           group = "users";
           mode = "0400";
@@ -63,10 +73,12 @@
             GITHUB_TOKEN=${config.sops.placeholder.GITHUB_TOKEN}
             LLAMA_API_KEY=${config.sops.placeholder.LLAMA_API_KEY}
             GOOGLE_API_KEY=${config.sops.placeholder.GOOGLE_API_KEY}
-            GEMINI_API_KEY=${config.sops.placeholder.GOOGLE_API_KEY}
             GOOGLE_GENERATIVE_AI_API_KEY=${config.sops.placeholder.GOOGLE_GENERATIVE_AI_API_KEY}
             BW_CLIENTID=${config.sops.placeholder.bw_client_id}
             BW_CLIENTSECRET=${config.sops.placeholder.bw_client_secret}
+            GEMINI_KEY_1=${config.sops.placeholder.GEMINI_KEY_1}
+            GEMINI_KEY_2=${config.sops.placeholder.GEMINI_KEY_2}
+            GEMINI_KEY_3=${config.sops.placeholder.GEMINI_KEY_3}
           '';
         };
         "WIFI_PSK.env" = {
