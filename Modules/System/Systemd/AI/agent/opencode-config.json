@@ -1,0 +1,67 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "lite-llm": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "LiteLLM Proxy",
+      "options": {
+        "baseURL": "http://127.0.0.1:4000/v1"
+      },
+      "models": {
+        "llama3.1-instruct:8B": {
+          "name": "Llama 3.1 Instruct 8B (Llama-CPP)",
+          "tool_call": true
+        },
+        "qwen3.5-instruct:27B": {
+          "name": "Qwen 3.5 Instruct 27B (Llama-CPP)",
+          "tool_call": true
+        },
+        "gemini-flash": {
+          "name": "Gemini 1.5 Flash (via Proxy)",
+          "tool_call": true
+        }
+      }
+    },
+    "llama-cpp": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Llama",
+      "options": {
+        "baseURL": "http://127.0.0.1:8080/v1",
+        "headers": {
+          "Authorization": "Bearer {env:LLAMA_API_KEY}"
+        }
+      },
+      "models": {
+        "llama3.1-instruct:8B": {
+          "name": "Llama 3.1 Instruct 8B (Llama-CPP)",
+          "tool_call": true
+        },
+        "qwen3.5-instruct:27B": {
+          "name": "Qwen 3.5 Instruct 27B (Llama-CPP)",
+          "tool_call": true
+        }
+      }
+    },
+    "ollama": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Ollama",
+      "options": {
+        "baseURL": "http://127.0.0.1:11434/v1"
+      },
+      "models": {
+        "qwen3.5-coder:27B": {
+          "name": "Qwen 3.5 Coder 27B Instruct (Ollama)",
+          "tool_call": true
+        }
+      }
+    }
+  },
+  "permission": {
+    "read": "allow",
+    "grep": "allow",
+    "glob": "allow",
+    "list": "allow",
+    "edit": "ask",
+    "bash": "ask"
+  }
+}

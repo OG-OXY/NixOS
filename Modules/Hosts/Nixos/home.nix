@@ -14,7 +14,7 @@
         VISUAL = "hx";
       };
       activation.removeLegacyNixArtifacts = ''
-        rm -f $HOME/.nix-profile $HOME/.steampath $HOME/.Xauthority
+        rm -f $HOME/.nix-profile $HOME/.steampath
       '';
       file = {
         # "NixOS/secretspec.toml".source = config.lib.file.mkOutOfStoreSymlink "/home/ty/NixOS/Master/Config/Secretspec/secretspec.toml";

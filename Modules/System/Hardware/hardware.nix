@@ -2,44 +2,182 @@
   ...
 }:
 {
-  flake.nixosModules.nvidia = { pkgs, config, ... }:
-    {
-      services.xserver.videoDrivers = [
-        "nvidia"
-      ];
-      hardware = {
-        uinput.enable = true;
-        i2c.enable = true;
-        keyboard.qmk.enable = true;
-        bluetooth = {
-          enable = true;
-          powerOnBoot = true;
-          settings.General.Experimental = true;
+  flake.nixosModules.hardware = { pkgs, config, modulesPath, ... }:
+  {
+    imports = [
+      (modulesPath + "/installer/scan/not-detected.nix")
+    ];
+
+    specialisation = {
+      NYXOS.configuration = {
+        system.nixos.label = "NYXOS";
+        boot = {
+          loader.grub.configurationName = "NYXOS";
+          kernelPackages = pkgs.linuxPackages_cachyos-lto-znver4;
         };
-        graphics = {
-          enable = true;
-          enable32Bit = true;
-          extraPackages32 = [
-            pkgs.pkgsi686Linux.nvidia-vaapi-driver
-          ];
+      };
+      NIXOS.configuration = {
+        system.nixos.label = "NIXOS";
+        boot = {
+          loader.grub.configurationName = "NIXOS";
+          kernelPackages = pkgs.linuxPackages_cachyos-lts;
         };
-        nvidia = {
-          #prime = {
-          #  offload = {
-          #    enable = false;
-          #    enableOffloadCmd = false;
-          #  };
-          #amdgpuBusId = "PCI:14:0:0"; # Internal
-          #nvidiaBusId = "PCI:1:0:0"; # External
-          #};
-          modesetting.enable = true;
-          powerManagement.enable = false;
-          powerManagement.finegrained = false;
-          open = false;
-          nvidiaSettings = true;
-          branch = "legacy_580";
-          package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
+      };
+      NIXOS-HACKER.configuration = {
+        system.nixos.label = "NIXOS-HACKER";
+        boot = {
+          loader.grub.configurationName = "NIXOS-HACKER";
+          kernelPackages = pkgs.linuxPackages_cachyos-hardened;
         };
       };
     };
+
+    boot = {
+      loader = {
+        grub = {
+          enable = true;
+          efiSupport = true;
+          useOSProber = true;
+          device = "nodev";
+          configurationLimit = 15;
+          default = "3";
+        };
+        efi = {
+          canTouchEfiVariables = true;
+        };
+      };
+      plymouth = {
+        enable = true;
+        theme = "breeze";
+      };
+      initrd = {
+        kernelModules = [
+          "amdgpu"
+          #"nvidia"
+          #"nvidia_modeset"
+          #"nvidia_uvm"
+          #"nvidia_drm"
+        ];
+        availableKernelModules = [
+          "xhci_pci"
+          "ahci"
+          "nvme"
+          "usbhid"
+          "sd_mod"
+        ];
+      };
+      kernelModules = [
+        "kvm-amd"
+        "vfio"
+        "vfio_iommu_type1"
+        "vfio_pci"
+        "i2c-dev"
+        "i2c-piix4"
+        "v4l2loopback"
+      ];
+      extraModulePackages = [ 
+        config.hardware.nvidia.package
+        config.boot.kernelPackages.v4l2loopback
+      ];
+      kernelParams = [
+        "quiet"
+        "splash"
+        "processor.max_cstate=0"
+        "amd_idle.max_cstate=0"
+        "amd_iommu=on"
+        "iommu=pt"
+        "nvidia-drm.modeset=1"
+        "pcie_aspm=off"
+        #"video=DP-6:1920x1080@240"
+        #"video=HDMI-A-2:2560x1440@60"
+      ];
+      kernel.sysctl = {
+        "kernel.sysrq" = true;
+        "kernel.unprivileged_userns_clone" = 1;
+        "vm.max_map_count" = 2147483642;
+        "vm.swappiness" = 100;
+        "vm.dirty_background_ratio" = 5;
+        "vm.dirty_ratio" = 10;
+        "fs.inotify.max_user_watches" = 524288;
+      };
+      extraModprobeConfig = ''
+        options iwlwifi power_save=0
+        options v4l2loopback exclusive_caps=1 card_label="Virtual Screen Capture"
+        options mt7921_common disable_btcoex=1
+      '';
+      binfmt.emulatedSystems = [ "aarch64-linux" ];
+    };
+
+    fileSystems = {
+      "/" = {
+        device = "/dev/disk/by-partlabel/NixOS";
+        fsType = "ext4";
+        options = [
+          "nofail"
+          "noatime"
+          "nodiratime"
+        ];
+      };
+      "/boot" = {
+        device = "/dev/disk/by-partlabel/NixOS-BOOT";
+        fsType = "vfat";
+        options = [
+          "fmask=0022"
+          "dmask=0022"
+        ];
+      };
+      "/home/ty/HDD" = {
+        device = "/dev/disk/by-partlabel/2TB-HDD";
+        fsType = "ext4";
+        options = [
+          "defaults"
+          "nofail"
+          "exec"
+          "noatime"
+          "x-systemd.automount"
+          "x-systemd.device-timeout=5s"
+          "x-systemd.idle-timeout=10m"
+        ];
+      };
+      "/home/ty/HDD/Storage" = {
+        device = "/dev/disk/by-partlabel/400GB-HDD";
+        fsType = "ext4";
+        options = [
+          "defaults"
+          "nofail"
+          "noatime"
+          "exec"
+          "x-systemd.automount"
+          "x-systemd.device-timeout=5s"
+          "x-systemd.idle-timeout=10m"
+        ];
+      };
+      "/home/ty/HDD/Pictures/Backup" = {
+        device = "/dev/disk/by-partlabel/300GB-HDD";
+        fsType = "ext4";
+        options = [
+          "defaults"
+          "nofail"
+          "noatime"
+          "exec"
+          "x-systemd.automount"
+          "x-systemd.device-timeout=5s"
+          "x-systemd.idle-timeout=10m"
+        ];
+      };
+      "/mnt/Ventoy" = {
+        enable = false;
+        device = "/dev/disk/by-partlabel/Ventoy";
+        fsType = "exfat";
+        options = [
+          "defaults"
+          "nofail"
+          "x-systemd.automount"
+          "x-systemd.device-timeout=5s"
+        ];
+      };
+      # extraModprobeConfig
+      #options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
+    };
+  };
 }
