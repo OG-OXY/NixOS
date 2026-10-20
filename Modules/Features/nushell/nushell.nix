@@ -4,7 +4,7 @@
 {
   flake.homeModules.nushell = { ... }:
   let
-    qwenAgentScript = ./qwenAgent.nu;
+    qwenScript = ./qwen.nu;
   in
   {
     programs = {
@@ -77,7 +77,7 @@
           def nsh [] {
               help commands | where command_type == built-in | select name category description | explore
           }
-          alias qwen-agent = nu ${qwenAgentScript}
+          alias qwen = nu ${qwenScript}
           alias hl = hx
           alias nrs = nh os switch .
           alias nrsu = nh os switch . --upgrade

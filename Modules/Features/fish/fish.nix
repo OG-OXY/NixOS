@@ -3,6 +3,9 @@
 }:
 {
   flake.homeModules.fish = { pkgs, lib, ... }:
+  let
+    rogFish = builtins.readFile ./rog.fish;
+  in
   {
     programs.fish = {
       enable = true;
@@ -69,7 +72,7 @@
     
             set -l selected_key $keys[(math 1 + (random) % $key_count)]
 
-            echo "=== Launching OpenCode with Gemini Flash (Rotated Key) ==="
+            echo "=== Launching OpenCode with Gemini Flash, Rotating Keys! ==="
             env GEMINI_API_KEY=$selected_key opencode $argv
           '';
         };
@@ -158,6 +161,7 @@
         set -g fish_pager_color_completion normal
         set -g fish_pager_color_description ffcc44 --dim
         set -g fish_pager_color_progress brwhite --background=00e5ff
+        ${rogFish}
       '';
 
       interactiveShellInit = ''

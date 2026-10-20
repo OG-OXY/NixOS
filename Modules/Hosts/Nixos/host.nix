@@ -29,9 +29,8 @@
             in {
                 hello = stable.hello;
                 cudaPackages = prev.cudaPackages_12_9;
-                # ffmpeg = prev.ffmpeg_6;
-                # ffmpeg-full = prev.ffmpeg_6-full;
             })
+            inputs.doom.overlays.default
           ];
         };
         hardware.enableRedistributableFirmware = true;
@@ -49,7 +48,9 @@
           useGlobalPkgs = true;
           useUserPackages = true;
           backupFileExtension = ".bak";
-          sharedModules = builtins.attrValues self.homeModules;
+          sharedModules = [
+            inputs.doom.homeModule
+          ] ++ builtins.attrValues self.homeModules;
           users = {
             root = import ../../../Homes/root.nix;
             ty = import ../../../Homes/ty.nix;

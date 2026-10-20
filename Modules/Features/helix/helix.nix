@@ -11,6 +11,10 @@
   in
   {
     environment.systemPackages = [
+      # Helix+Steel (Version == Nixpkgs-Unstable)
+      # inputs.helix.packages.${pkgs.system}.default
+      # inputs.steel.packages.${pkgs.system}.default
+      # Nixpkgs-Unstable
       pkgs.helix
       # Proxy-LS
       pkgs.efm-langserver

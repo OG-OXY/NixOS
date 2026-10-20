@@ -32,10 +32,14 @@
         }
       },
       "models": {
-        "llama3.1-instruct:8B": {
-          "name": "Llama 3.1 Instruct 8B (Llama-CPP)",
+        "llama3.3-instruct:8B": {
+          "name": "Llama 3.3 Instruct 8B (Llama-CPP)",
           "tool_call": true
         },
+        /*"llama3.1-instruct:8B": {
+          "name": "Llama 3.1 Instruct 8B (Llama-CPP)",
+          "tool_call": true
+        },*/
         "qwen3.5-instruct:27B": {
           "name": "Qwen 3.5 Instruct 27B (Llama-CPP)",
           "tool_call": true

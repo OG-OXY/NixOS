@@ -142,7 +142,6 @@
       pkgs.repomix # Nix Config to XML
       llama
       pkgs.aider-chat
-      pkgs.antigravity-cli
       pkgs.geminicommit
       py3.huggingface-hub
       pkgs.watchman
@@ -217,7 +216,7 @@
       # ACTIVE FLAKE INPUTS & HARDWARE ACCELERATION TOOLCHAINS
       # ============================================================================
       inputs.zen-browser.packages.${pkgs.system}.default
-      inputs.nvf.packages.${pkgs.system}.default
+      # inputs.nvf.packages.${pkgs.system}.default
       inputs.llm-agents.packages.${pkgs.system}.default
       Cuda.cuda_nvcc
       Cuda.cudatoolkit

@@ -53,6 +53,7 @@
         #GTK_THEME = "Adwaita:dark";
       };
       pathsToLink = [
+        "/share"
         "/share/applications"
         "/share/icons"
       ];
