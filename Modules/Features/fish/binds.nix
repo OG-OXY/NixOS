@@ -6,7 +6,7 @@
   flake.nixosModules.fishKeyBinds = { pkgs, ... }:
   let
     rustyClip = inputs.rusty-clip.packages.${pkgs.system}.default;
-    fishBinds = pkgs.writeText "keyBinds.fish" ''
+    fishBinds = pkgs.writeText "binds.fish" ''
       # This hook runs AFTER Fish finishes its keymap resets, making the bind stick
       function fish_user_key_bindings
           if not functions -q __copy_commandline

@@ -37,12 +37,12 @@
             paths = [
               llm.herdr
               llm.opencode
+              llm.claude-code
               llm.pi
               llm.crush
+              llm.antigravity-cli
               llm.goose-cli
               llm.copilot-cli
-              llm.claude-code
-              # llm.codex
             ];
           };
         }
