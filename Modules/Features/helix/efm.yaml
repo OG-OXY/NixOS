@@ -21,3 +21,10 @@
         lint-stdin: true
         lint-formats:
           - '%f:%l:%c: [%t%*[^]] %m'
+    markdown:
+      - lint-command: 'markdownlint-cli2 "${INPUT}"'
+        lint-stdin: false
+        lint-formats:
+          - '%f:%l:%c %m'
+          - '%f:%l %m'
+        lint-show-level: 1

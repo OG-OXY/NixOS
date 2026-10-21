@@ -1,2 +1,3 @@
 ;; doom.d/packages.el -*- lexical-binding: t; -*-
-(package! org-roam)
+(package! org-appear)
+(package! pandoc-mode)

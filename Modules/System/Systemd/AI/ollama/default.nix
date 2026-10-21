@@ -8,7 +8,7 @@
   in
   {
     services.ollama = {
-      enable = true;
+      enable = false;
       loadModels = [
         "qwen2.5-coder:14b"
         "qwen2.5-coder:32b"

@@ -1,5 +1,4 @@
 ;; doom.d/init.el
-
 (doom!
 	:input
 	;; layout              ; auieo layout support
@@ -10,11 +9,16 @@
 
 	:ui
 	doom                   ; Visual theme
-	doom-dashboard         ; Start screen
+	dashboard         ; Start screen
 	hl-todo                ; Highlight TODO keywords
 	modeline               ; Status bar
+	ophints
 	window-select          ; Easy window switching
-
+	workspaces
+	vi-tilde-fringe
+	(popup +defaults)
+	(vc-gutter +pretty)
+	
 	:editor
 	(evil +everywhere)     ; Evil-mode (Vim modal editing)
 	file-templates         ; Fast note templates
@@ -25,7 +29,7 @@
 	undo                   ; Undo tree
 
 	:lang                  
-    org
+    (org +roam2)
 	markdown
 
 	:config

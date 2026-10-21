@@ -56,6 +56,11 @@
             cmd = "${inputs.zen-browser.packages.${pkgs.system}.default}/bin/zen-beta";
           }
           {
+            key = "d";
+            desc = "Doom";
+            cmd = "emacsclient -c -a ''";
+          }
+          {
             key = "o";
             desc = "Obsidian";
             cmd = "${pkgs.obsidian}/bin/obsidian /home/ty/Notes/Vault";
