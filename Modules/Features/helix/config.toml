@@ -16,17 +16,53 @@ default-line-ending = "lf"
 trim-final-newlines = true
 # Max Width A Single Line Can Have By Number Of Characters.
 # text-width = 80
+
 [editor.cursor-shape]
 normal = "block"
 insert = "bar"
 select = "underline"
+
 [editor.file-picker]
 # Set To True To See Hidden Files In Picker.
 # hidden = false
+
 [editor.soft-wrap]
 enable = true
 # max-wrap = 20
 # max-indent-retain = 40
 # wrap-at-text-width = false
+
 [editor.gutters.line-numbers]
 min-width = 0
+
+[keys.normal]
+X = "extend_line_above"
+
+[keys.normal.space]
+f = "file_picker_in_current_directory"
+F = "file_picker"
+e = [
+  ":sh rm -f /tmp/unique-file-zjf947h2d7",
+  ":insert-output yazi '%{buffer_name}' --chooser-file=/tmp/unique-file-zjf947h2d7",
+  ":insert-output echo \"x1b[?1049h\" > /dev/tty",
+  ":open %sh{cat /tmp/unique-file-zjf947h2d7}",
+  ":redraw",
+]
+# E = [
+#   ":sh rm -f /tmp/unique-file-h34s3hz657",
+#   ":insert-output yazi '%{workspace_directory}' --chooser-file=/tmp/unique-file-h34s3hz657", 
+#   ":insert-output echo \"x1b[?1049h\" > /dev/tty",
+#   ":open %sh{cat /tmp/unique-file-h34s3hz657}",
+#   ":redraw",
+# ]
+
+# AI Gave Me This IDK If I Trust It.
+# F = [
+#   ':sh rm -f /tmp/unique-ca1ea106',
+#   ':insert-output yazi "%{buffer_name}" --chooser-file=/tmp/unique-file-ca1ea106',
+#   ':sh printf "\\x1b[?1049h\\x1b[?2004h" > /dev/tty',
+#   ':open %sh{cat /tmp/unique-file-ca1ea106}',
+#   ':redraw',
+#   ':set mouse false',
+#   ':set mouse true',
+# ]

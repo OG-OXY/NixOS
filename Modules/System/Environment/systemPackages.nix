@@ -164,7 +164,6 @@
       pkgs.ethtool
       pkgs.lm_sensors
       pkgs.glow
-      pkgs.nvimpager
       pkgs.wl-clipboard
       pkgs.cliphist
       pkgs.wtype
@@ -179,6 +178,7 @@
       pkgs.tealdeer
       pkgs.tree
       pkgs._7zz
+      pkgs.pandoc
       pkgs.udisks2
       pkgs.monero-cli
       pkgs.chafa
@@ -193,6 +193,7 @@
       # pkgs.delicious-sddm-theme
       # pkgs.wine
       # pkgs.wine-staging
+      # pkgs.nvimpager
     
       # --- Disabled: Hyprland Ecosystem ---
       # pkgs.hyprpolkitagent

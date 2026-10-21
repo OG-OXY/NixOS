@@ -1,10 +1,21 @@
 [language-server.efm]
 command = "efm-langserver"
+
+[language-server.zk]
+command = "zk"
+args = [ "lsp" ]
+
 [[language]]
 name = "nix"
 auto-format = false
 language-servers = [ "nixd", "efm" ]
+
 [[language]]
 name = "yaml"
 language-servers = [ "yaml-language-server", "efm" ]
 formatter = { command = "prettier", args = [ "--parser", "yaml" ] }
+
+[[language]]
+name = "markdown"
+language-servers = [ "marksman", "markdown-oxide", "zk", "efm" ]
+formatter = { command = "prettier", args = [ "--parser", "markdown" ] }

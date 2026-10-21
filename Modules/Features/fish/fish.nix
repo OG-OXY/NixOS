@@ -89,6 +89,10 @@
         };
       };
 
+      shellAliases = {
+        ds = "systemctl --user restart emacs";
+      };
+
       shellAbbrs = {
         steamrun = "gamescope --backend wayland -W 1920 -H 1080 -r 240 -f -e -- steam -gamepadui";
         su = "doas fish";

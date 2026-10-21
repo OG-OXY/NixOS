@@ -43,6 +43,11 @@
       pkgs.prettier
       # TOML
       pkgs.taplo
+      # Markdown
+      pkgs.marksman
+      pkgs.markdown-oxide
+      pkgs.markdownlint-cli2
+      pkgs.zk
       # HTML
       pkgs.vscode-html-languageserver
       # CSS
