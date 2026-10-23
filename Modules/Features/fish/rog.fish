@@ -8,9 +8,5 @@ for d in /sys/class/drm/card*-*
         end
     end
 end
-
-if test -z "$rog_connector"
-    set rog_connector DP-2
-end
-
-niri msg output $rog_connector mode "1920x1080@240.000" position x=0 y=0 scale 1.0 >/dev/null 2>&1
+echo "$rog_connector"
+niri msg output $rog_connector mode 1920x1080@240

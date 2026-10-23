@@ -5,6 +5,8 @@
   flake.nixosModules.console = { ... }:
   {
     console = {
+      # keyMap = "/run/current-system/sw/share/keymaps/i386/qwerty/us.map.gz";
+      useXkbConfig = true;
       colors = [
         "121212" # 0: Black (Deep Charcoal background)
         "ff4433" # 1: Red (Fiery orange-red)

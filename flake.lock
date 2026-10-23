@@ -307,6 +307,22 @@
         "type": "github"
       }
     },
+    "image-roll": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1766040757,
+        "narHash": "sha256-qlQfJVmfvnDoWmmZgI8eRDvIc14p3hXrKf+FcnEPs28=",
+        "owner": "dalanicolai",
+        "repo": "image-roll.el",
+        "rev": "1585715aeb0e4acff0ca23af707faf14ed5c7427",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dalanicolai",
+        "repo": "image-roll.el",
+        "type": "github"
+      }
+    },
     "import-tree": {
       "locked": {
         "lastModified": 1788467110,
@@ -359,6 +375,22 @@
       "original": {
         "owner": "numtide",
         "repo": "llm-agents.nix",
+        "type": "github"
+      }
+    },
+    "majutsu": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1792753954,
+        "narHash": "sha256-6T/dhmzVtj6Sg6hT+Y3438/lqF57Gj/rVR0/nT+7ngg=",
+        "owner": "0WD0",
+        "repo": "majutsu",
+        "rev": "19856a9c06f7a03b743c5556987202117783365c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "0WD0",
+        "repo": "majutsu",
         "type": "github"
       }
     },
@@ -468,8 +500,10 @@
         "doom": "doom",
         "flake-parts": "flake-parts",
         "home-manager": "home-manager_2",
+        "image-roll": "image-roll",
         "import-tree": "import-tree",
         "llm-agents": "llm-agents",
+        "majutsu": "majutsu",
         "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-stable": "nixpkgs-stable",

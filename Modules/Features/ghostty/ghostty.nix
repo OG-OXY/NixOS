@@ -21,7 +21,7 @@
         font-family-bold = "JetBrainsMono NFM ExtraBold";
         font-family-italic = "JetBrainsMono NFM ExtraBold Italic";
         font-family-bold-italic = "JetBrainsMono NFM ExtraBold Italic";
-        font-size = 25;
+        font-size = 13;
         font-feature = [
           "liga"
           "calt"

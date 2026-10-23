@@ -21,22 +21,29 @@
       url = "github:mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # helix = {
-    #   url = "github:mattwparas/helix";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-    # steel = {
-    #   url = "github:mattwparas/steel";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-    doom = {
-      url = "github:marienz/nix-doom-emacs-unstraightened";
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    doom = {
+      url = "github:marienz/nix-doom-emacs-unstraightened";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    ## Doom Pkgs
+    majutsu = {
+      url = "github:0WD0/majutsu";
+      flake = false;
+    };
+    image-roll = {
+      url = "github:dalanicolai/image-roll.el";
+      flake = false;
+    };
+    ##
+    ## Yazi Plugins
     ya-packs = {
       url = "github:yazi-rs/plugins";
       flake = false;
@@ -45,10 +52,7 @@
       url = "github:Rolv-Apneseth/starship.yazi";
       flake = false;
     };
-    nix-index-database = {
-      url = "github:nix-community/nix-index-database";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    ##
     base16-schemes = {
       url = "github:tinted-theming/schemes";
       flake = false;
@@ -57,8 +61,17 @@
   
   outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./Modules);
 }
+# Disabled
 # nvf.url = "path:./Flakes/NVF";
 #stylix = {
 #  url = "github:nix-community/stylix";
 #  inputs.nixpkgs.follows = "nixpkgs";
 #};
+# helix = {
+#   url = "github:mattwparas/helix";
+#   inputs.nixpkgs.follows = "nixpkgs";
+# };
+# steel = {
+#   url = "github:mattwparas/steel";
+#   inputs.nixpkgs.follows = "nixpkgs";
+# };

@@ -1,36 +1,53 @@
 ;; doom.d/init.el
 (doom!
 	:input
-	;; layout              ; auieo layout support
+	;; layout
 
 	:completion
-	(corfu +orderless)     ; Minimal, fast auto-completion
-	vertico                ; Ultra-lightweight minibuffer search
+	(corfu +orderless) ;; add +icons if using gui
+	vertico
 
 	:ui
-	doom                   ; Visual theme
-	dashboard         ; Start screen
-	hl-todo                ; Highlight TODO keywords
-	modeline               ; Status bar
+	doom
+	dashboard
+	hl-todo
+	modeline
 	ophints
-	window-select          ; Easy window switching
+	window-select
 	workspaces
 	vi-tilde-fringe
 	(popup +defaults)
 	(vc-gutter +pretty)
 	
 	:editor
-	(evil +everywhere)     ; Evil-mode (Vim modal editing)
-	file-templates         ; Fast note templates
-	snippets               ; Fast snippet expansion
+	;; (evil +everywhere)
+	meow
+	file-templates
+	snippets
 
 	:emacs
-	dired                  ; Fast terminal file manager
-	undo                   ; Undo tree
+	dired
+	undo
 
-	:lang                  
-    (org +roam2)
+	:term
+	eshell
+	vterm
+
+	:os
+	(tty +osc)
+
+	:lang
+	emacs-lisp
+    (org +roam2 +pretty +dragndrop)
+	nix
+	rust
+	(cc +ccls)
 	markdown
+
+	:tools
+	(lsp +eglot)
+	magit
+	tree-sitter
 
 	:config
 	(default +bindings +smartparens))

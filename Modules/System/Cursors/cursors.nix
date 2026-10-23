@@ -7,11 +7,11 @@
     environment = {
       variables = {
         XCURSOR_THEME = "Saturn";
-        XCURSOR_SIZE = "32";
+        XCURSOR_SIZE = "24";
       };
       sessionVariables = {
         XCURSOR_THEME = "Saturn";
-        XCURSOR_SIZE = "32";
+        XCURSOR_SIZE = "24";
       };
       systemPackages = [
         (pkgs.runCommand "saturn-cursor" {} ''
@@ -31,7 +31,7 @@
     };
     services.displayManager.noctalia-greeter.settings.cursor = {
       theme = "Saturn";
-      size = 32;
+      size = 24;
     };
   };
 }
