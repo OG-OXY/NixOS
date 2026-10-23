@@ -63,7 +63,11 @@
           { type = "uptime"; key = " Uptime"; }
           { type = "packages"; key = "󰏖 Packages"; }
           { type = "shell"; key = " Shell"; }
-          { type = "display"; key = "󰍹 Display"; }
+          {
+            type = "display";
+            key = "󰍹 Display";
+            format = "{height}x{width}@{refresh-rate}Hz {inch}\"";
+          }
           { type = "wm"; key = " WM"; }
           #{ type = "font"; key = "󰛖 Font"; }
           #{ type = "cursor"; key = "󰆾 Cursor"; }

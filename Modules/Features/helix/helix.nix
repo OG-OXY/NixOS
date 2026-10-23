@@ -52,6 +52,9 @@
       pkgs.vscode-html-languageserver
       # CSS
       pkgs.vscode-css-languageserver
+      # Lisp
+      pkgs.sbcl
+      pkgs.roswell
       # JQ
       pkgs.jq-lsp
       pkgs.jqfmt

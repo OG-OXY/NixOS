@@ -7,7 +7,7 @@
     gtkIni = pkgs.writeText "gtk-settings.ini" ''
       [Settings]
       gtk-cursor-theme-name = Saturn
-      gtk-cursor-theme-size = 32
+      gtk-cursor-theme-size = 24
       gtk-icon-theme-name = Papirus-Dark
       gtk-theme-name = Adwaita-dark
       gtk-application-prefer-dark-theme = 1

@@ -118,11 +118,7 @@
       settings.General.Experimental = true;
     };
   };
-
   powerManagement.cpuFreqGovernor = "performance";
-
-  # Time zone.
-  time.timeZone = "America/New_York";
 
   # Origin NixOS install version, NEVER CHANGE.
   system = {
@@ -132,10 +128,10 @@
       ln -s ${self} $out/src
     '';
   };
+}
   # Old Code
   #AQ_DRM_DEVICES = "/dev/dri/by-path/pci-0000:01:00.0-card";
   ### OBS-Debugging
   #PIPEWIRE_NODE = "1";
   #OBS_USE_EGL = "1";
   ###
-}

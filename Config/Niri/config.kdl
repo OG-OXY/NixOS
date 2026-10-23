@@ -14,29 +14,45 @@ environment {
     NVD_BACKEND "direct"
 }
 
+// Keeps games at native 1:1 pixel grid
+xwayland-satellite {
+}
+
 input {
     focus-follows-mouse max-scroll-amount="0%"
     keyboard {
+        // If you change any of this make sure you change them in keyboard.nix
+        // Perfect or maybe a little lower? 40?
+        repeat-rate 45
+        // Set to anywhere between 275 and 295 (285/290 perfect? maybe 295?)
+        repeat-delay 285
+        xkb {
+            layout "us"
+        }
     }
     mouse {
+        accel-profile "flat"
+        accel-speed 0.0
+        // natural-scroll
     }
 }
 
 cursor {
     xcursor-theme "Saturn"
-    xcursor-size 32
+    xcursor-size 24
 }
 
-output "desc:ASUSTek COMPUTER INC ROG PG258Q #ASP9OUVfHcfd" {
+output "ASUSTek COMPUTER INC ROG PG258Q #ASP9OUVfHcfd" {
     mode "1920x1080@240.000"
     position x=0 y=0
     scale 1.0
+    variable-refresh-rate
 }
 
-output "desc:Dell Inc. DELL P2720D K6RX299P10LS" {
+output "Dell Inc. DELL P2720D K6RX299P10LS" {
     mode "2560x1440@59.951"
     position x=1920 y=-180
-    scale 1.0
+    scale 1.185
 }
 
 layout {
@@ -99,6 +115,13 @@ window-rule {
     }
 }
 
+window-rule {
+    // Match games running via Steam or Wine/Proton
+    match app-id=r#"^steam_app_.*"#
+    // Forces the window to receive unscaled geometry directly
+    default-column-width { }
+}
+
 recent-windows {
   binds {
     Mod+R { next-window scope="output"; }
@@ -112,13 +135,17 @@ screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 binds {
     // Core Program Launchers & Actions
     Mod+Space { spawn "apps"; }
-    Mod+W { spawn "warp"; }
+    Mod+D { spawn "warp"; }
 
     // Layout Controls & Sizing
     Mod+X { center-column; }
     Mod+F { maximize-column; }
-    Mod+Shift+F { fullscreen-window; }
-    Mod+V { toggle-window-floating; }
+    Mod+M { maximize-window-to-edges; }
+    Mod+Shift+M { fullscreen-window; }
+    Mod+Comma { switch-preset-column-width; }
+    Mod+Slash { switch-preset-column-width-back; }
+    // Mod+Slash { expand-column-to-available-width; }
+    Mod+Shift+F { toggle-window-floating; }
     Mod+Z { toggle-column-tabbed-display; }
     Mod+Q repeat=false { toggle-overview; }
     Mod+C repeat=false { close-window; }
@@ -127,6 +154,9 @@ binds {
  
     Mod+Y { consume-window-into-column; }
     Mod+P { expel-window-from-column; }
+    // Both Current Focus Oriented
+    Mod+B { consume-or-expel-window-left; }
+    Mod+Period { consume-or-expel-window-right; }
 
     // VI Movement & Focus (H/J/K/L)
     Mod+H { focus-column-left; }
@@ -153,33 +183,33 @@ binds {
     Mod+Shift+I { move-column-to-workspace-up; }
     Mod+Shift+Ctrl+U { move-workspace-down; }
     Mod+Shift+Ctrl+I { move-workspace-up; }
-    Mod+O { focus-workspace-previous; }
+    Mod+W { focus-workspace-previous; }
 
-    Mod+1 { focus-workspace 1; }
-    Mod+2 { focus-workspace 2; }
-    Mod+3 { focus-workspace 3; }
-    Mod+4 { focus-workspace 4; }
-    Mod+5 { focus-workspace 5; }
-    Mod+6 { focus-workspace 6; }
-    Mod+7 { focus-workspace 7; }
-    Mod+8 { focus-workspace 8; }
-    Mod+9 { focus-workspace 9; }
+    // Mod+1 { focus-workspace 1; }
+    // Mod+2 { focus-workspace 2; }
+    // Mod+3 { focus-workspace 3; }
+    // Mod+4 { focus-workspace 4; }
+    // Mod+5 { focus-workspace 5; }
+    // Mod+6 { focus-workspace 6; }
+    // Mod+7 { focus-workspace 7; }
+    // Mod+8 { focus-workspace 8; }
+    // Mod+9 { focus-workspace 9; }
 
-    Mod+Shift+1 { move-column-to-workspace 1; }
-    Mod+Shift+2 { move-column-to-workspace 2; }
-    Mod+Shift+3 { move-column-to-workspace 3; }
-    Mod+Shift+4 { move-column-to-workspace 4; }
-    Mod+Shift+5 { move-column-to-workspace 5; }
-    Mod+Shift+6 { move-column-to-workspace 6; }
-    Mod+Shift+7 { move-column-to-workspace 7; }
-    Mod+Shift+8 { move-column-to-workspace 8; }
-    Mod+Shift+9 { move-column-to-workspace 9; }
+    // Mod+Shift+1 { move-column-to-workspace 1; }
+    // Mod+Shift+2 { move-column-to-workspace 2; }
+    // Mod+Shift+3 { move-column-to-workspace 3; }
+    // Mod+Shift+4 { move-column-to-workspace 4; }
+    // Mod+Shift+5 { move-column-to-workspace 5; }
+    // Mod+Shift+6 { move-column-to-workspace 6; }
+    // Mod+Shift+7 { move-column-to-workspace 7; }
+    // Mod+Shift+8 { move-column-to-workspace 8; }
+    // Mod+Shift+9 { move-column-to-workspace 9; }
 
     // Granular Column & Window Sizing (Home-row adjacent)
-    Mod+Comma { set-column-width "-10%"; }
-    Mod+Period { set-column-width "+10%"; }
-    Mod+Shift+Comma { set-window-height "-10%"; }
-    Mod+Shift+Period { set-window-height "+10%"; }
+    Mod+A { set-column-width "-10%"; }
+    Mod+S { set-column-width "+10%"; }
+    Mod+Shift+A { set-window-height "-10%"; }
+    Mod+Shift+S { set-window-height "+10%"; }
 
     // Mouse Controls & Scrolling
     Mod+WheelScrollUp cooldown-ms=150 { focus-workspace-up; }
@@ -221,11 +251,3 @@ binds {
 // Mod+D { spawn "sh" "-c" "pkill wofi || wofi --show drun"; }
 // Mod+B { spawn "zen-beta"; }
 // Mod+V { spawn "vesktop"; }
-// Consume-Window And Expel-Window Are Superior (Without "or")
-// Mod+BracketLeft { consume-or-expel-window-left; }
-// Mod+BracketRight { consume-or-expel-window-right; }
-// Mod+Shift+R { switch-preset-column-width-back; }
-// Fucking Useless Shit.
-// Mod+Shift+T { expand-column-to-available-width; }
-// Mod+M { maximize-window-to-edges; }
-// Mod+T { switch-preset-column-width; }

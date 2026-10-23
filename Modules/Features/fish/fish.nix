@@ -3,9 +3,6 @@
 }:
 {
   flake.homeModules.fish = { pkgs, lib, ... }:
-  let
-    rogFish = builtins.readFile ./rog.fish;
-  in
   {
     programs.fish = {
       enable = true;
@@ -75,6 +72,10 @@
             echo "=== Launching OpenCode with Gemini Flash, Rotating Keys! ==="
             env GEMINI_API_KEY=$selected_key opencode $argv
           '';
+        };
+        rog = {
+          description = "Apply 240z To ASUS Monitor" ;
+          body = builtins.readFile ./rog.fish;
         };
         logout = {
           description = "Logout of Niri UWSM Session to Greeter";
@@ -165,7 +166,6 @@
         set -g fish_pager_color_completion normal
         set -g fish_pager_color_description ffcc44 --dim
         set -g fish_pager_color_progress brwhite --background=00e5ff
-        ${rogFish}
       '';
 
       interactiveShellInit = ''

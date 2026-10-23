@@ -14,8 +14,8 @@
       menus = {
         warp = [
           {
-            key = "w";
-            desc = "Normal Mode";
+            key = "d";
+            desc = "Run (Normal Mode)";
             cmd = "${pkgs.warpd}/bin/warpd --normal";
           }
           {
@@ -58,7 +58,7 @@
           {
             key = "d";
             desc = "Doom";
-            cmd = "emacsclient -c -a ''";
+            cmd = "${pkgs.emacs-pgtk}/bin/emacsclient -c -a 'emacs'";
           }
           {
             key = "o";
