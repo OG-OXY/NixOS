@@ -6,6 +6,7 @@
 (package! pandoc-mode)
 (package! corfu-terminal)
 (package! undo-fu-session)
+; (package! hel)
 
 ;; Example on how to fetch github repos with packages.el (usually better to use flake inputs.)
 ;; (package! image-roll :recipe (:host github :repo "github:dalanicolai/image-roll.el"))

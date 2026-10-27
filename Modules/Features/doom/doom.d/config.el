@@ -1,10 +1,5 @@
 ;;;  doom.d/config.el -*- lexical-binding: t; -*-
 
-(require 'hel)
-(after! hel
-	(setq hel-global-mode t)
-	(hel-global-mode +1))
-
 ;: Enable persistent undo history across restarts and increase history limits
 (global-undo-fu-session-mode +1)
 (setq undo-fu-session-file-limit 1000
