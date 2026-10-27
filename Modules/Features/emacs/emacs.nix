@@ -33,7 +33,7 @@
       epkgs.treesit-grammars.with-all-grammars
       (fpkgs "image-roll" inputs.image-roll [ ])
       (fpkgs "majutsu" inputs.majutsu [ epkgs.magit epkgs.consult epkgs.plz epkgs.transient ])
-      (fpkgs "hel" inputs.hel [ epkgs.dash epkgs.avy epkgs.pcre2el epkgs.ultra-scroll ])
+      # (fpkgs "hel" inputs.hel [ epkgs.dash epkgs.avy epkgs.pcre2el epkgs.ultra-scroll ])
     ]);
   in
   {
