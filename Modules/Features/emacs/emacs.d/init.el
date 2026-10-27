@@ -38,24 +38,20 @@
   (corfu-auto t)
   (corfu-quit-no-match t))
 
-;; Terminal fallback for corfu if running emacs -nw inside Ghostty
-(unless (display-graphic-p)
-  (use-package corfu-terminal
-    :init (corfu-terminal-mode +1)))
-
 ;; --- 3. Helix Emulation Layer (hel) ---
 ;; Completely isolated from Evil since Evil is absent from the system package list
 (use-package hel
-  :config
-  (global-hel-mode +1))
+  :ensure t
+  :custom (inhibit-startup-screen t)
+  :config (hel-mode))
 
 ;; --- 4. Persistent Undo (Undo-Fu-Session) ---
-(use-package undo-fu-session
-  :init
-  (global-undo-fu-session-mode +1)
-  :custom
-  (undo-fu-session-file-limit 1000)
-  (undo-fu-session-compression 'zlib))
+; (use-package undo-fu-session
+;   :init
+;   (undo-fu-session-mode +1)
+;   :custom
+;   (undo-fu-session-file-limit 1000)
+;   (undo-fu-session-compression 'zlib))
 
 ;; --- 5. Org-mode & Ecosystem ---
 (use-package org
