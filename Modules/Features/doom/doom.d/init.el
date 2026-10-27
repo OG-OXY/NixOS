@@ -20,8 +20,7 @@
 	(vc-gutter +pretty)
 	
 	:editor
-	;; (evil +everywhere)
-	meow
+	(evil +everywhere +multiple-cursors)
 	file-templates
 	snippets
 

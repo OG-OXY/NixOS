@@ -1,5 +1,10 @@
 ;;;  doom.d/config.el -*- lexical-binding: t; -*-
 
+(require 'hel)
+(after! hel
+	(setq hel-global-mode t)
+	(hel-global-mode +1))
+
 ;: Enable persistent undo history across restarts and increase history limits
 (global-undo-fu-session-mode +1)
 (setq undo-fu-session-file-limit 1000
@@ -11,6 +16,7 @@
 
 ;; --- Org-mode Visual & Functional Settings ---
 (after! org
+
   ;; Syntax highlighting inside #+begin_src blocks
   (setq org-src-fontify-natively t
         org-src-tab-acts-natively t
@@ -26,6 +32,9 @@
         org-startup-indented t
         org-ellipsis " ▾")
 
+  (setq org-superstar-headline-bullets-list '("◉" "○" "✸" "✿" "•")
+		org-superstar-special-item-bullet-alist '((?- . "•") (?+ . "➤")))
+ 
   ;; Inline image settings & Chafa terminal preview bridge
   (setq org-startup-with-inline-images t
         image-use-external-converter t

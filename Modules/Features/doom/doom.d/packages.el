@@ -1,4 +1,5 @@
 ;;; doom.d/packages.el -*- lexical-binding: t; -*-
+ 
 (package! org-appear)
 (package! org-modern)
 (package! org-superstar)

@@ -10,9 +10,10 @@
       doomDir = ./doom.d;
       doomLocalDir = "/home/ty/.local/share/nix-doom";
       emacs = pkgs.emacs-pgtk;
-      provideEmacs = true;
+      # provideEmacs = false;
       experimentalFetchTree = true;
       extraPackages = epkgs: [
+        epkgs.treesit-grammars.with-all-grammars
         (epkgs.melpaBuild {
           pname = "image-roll";
           version = "1.0.0";
@@ -29,6 +30,17 @@
             epkgs.transient
           ]; # Majutsu requires Magit (which Doom enables via :tools magit)
           src = inputs.majutsu;
+        })
+        (epkgs.melpaBuild {
+          pname = "hel";
+          version = "1.0.0";
+          packageRequires = [
+            epkgs.dash
+            epkgs.avy
+            epkgs.pcre2el
+            epkgs.ultra-scroll
+          ]; 
+          src = inputs.hel;
         })
       ];
     };
