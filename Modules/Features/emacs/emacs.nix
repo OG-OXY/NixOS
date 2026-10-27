@@ -24,7 +24,6 @@
       epkgs.consult
       epkgs.orderless
       epkgs.corfu
-      epkgs.corfu-terminal
       epkgs.org-roam
       epkgs.org-appear
       epkgs.org-modern

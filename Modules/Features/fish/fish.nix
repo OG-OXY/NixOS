@@ -88,13 +88,28 @@
             end
           '';
         };
+        emacs-client = {
+          description = "Start Emacs CLient";
+          body = ''
+              emacsclient --socket-name=server -c -a 'doom'
+          '';
+        };
+        doom-client = {
+          description = "Start Doom Client";
+          body = ''
+            emacsclient --socket-name=emacs -c -a 'emacs'
+          '';
+        };
       };
 
       shellAliases = {
-        ds = "systemctl --user restart emacs";
       };
 
       shellAbbrs = {
+        doomt = "emacsclient --socket-name=server -t";
+        emacst = "emacsclient --socket-name=emacs -t";
+        ds = "systemctl --user restart emacs";        
+        es = "systemctl --user restart emacs-pgtk";
         steamrun = "gamescope --backend wayland -W 1920 -H 1080 -r 240 -f -e -- steam -gamepadui";
         su = "doas fish";
         ls = "ls -a";
