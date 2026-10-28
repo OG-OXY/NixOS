@@ -16,8 +16,18 @@
 ;; Load Theme & Modeline
 (load-theme 'doom-one t)
 (doom-modeline-mode 1)
-(doom-dashboard 1)
 
+(use-package dashboard
+  :after nerd-icons
+  :config
+  (setq dashboard-display-icons-p t)
+  (setq dashboard-icon-type 'nerd-icons)
+  (dashboard-setup-startup-hook))
+
+(use-package doom-dashboard
+  :after dashboard
+  :demand t)
+              
 ;; --- 2. Completion (Vertico / Corfu / Orderless) ---
 (use-package vertico
   :init (vertico-mode 1))

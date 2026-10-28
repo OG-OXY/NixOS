@@ -15,8 +15,6 @@
     in
     [
       epkgs.use-package
-      # epkgs.evil
-      # epkgs.evil-mc
       epkgs.meow
       epkgs.doom-themes
       epkgs.doom-modeline
@@ -34,7 +32,7 @@
       epkgs.treesit-grammars.with-all-grammars
       (fpkgs "image-roll" inputs.image-roll [ ])
       (fpkgs "majutsu" inputs.majutsu [ epkgs.magit epkgs.consult epkgs.plz epkgs.transient ])
-      # (fpkgs "hel" inputs.hel [ epkgs.dash epkgs.avy epkgs.pcre2el epkgs.ultra-scroll ])
+      (fpkgs "doom-dashboard" inputs.doom-dashboard [ epkgs.dashboard epkgs.nerd-icons ])
     ]);
   in
   {
@@ -55,3 +53,7 @@
     };    
   };
 }
+# Disabled
+# (fpkgs "hel" inputs.hel [ epkgs.dash epkgs.avy epkgs.pcre2el epkgs.ultra-scroll ])
+# epkgs.evil
+# epkgs.evil-mc
