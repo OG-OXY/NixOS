@@ -17,6 +17,7 @@
       epkgs.use-package
       # epkgs.evil
       # epkgs.evil-mc
+      epkgs.meow
       epkgs.doom-themes
       epkgs.doom-modeline
       epkgs.vertico
@@ -39,8 +40,9 @@
   {
     environment.systemPackages = [ emacs ];
     # Launch the isolated tinkering service
-    systemd.user.services.emacs-pgtk = {
+    systemd.user.services.emacs = {
       description = "Emacs PGTK Daemon";
+      documentation = [ "info:emacs" "man:emacs(1)" "https://gnu.org/software/emacs/" ];
       wantedBy = [ "default.target" ];
       after = [ "graphical-session.target" ];
       serviceConfig = {
@@ -48,6 +50,7 @@
         ExecStart = "${emacs}/bin/emacs --init-directory=${emacsDir} --fg-daemon=emacs";
         ExecStop = "${emacs}/bin/emacsclient --socket-name=emacs --eval '(kill-emacs)'";
         Restart = "on-failure";
+        SuccessExitStatus = 15;
       };
     };    
   };
