@@ -296,6 +296,22 @@
         "type": "github"
       }
     },
+    "helix-mode": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1791218260,
+        "narHash": "sha256-1nFXyJJ4gu+wFAkYsIbzk6nKdZo9+mjxzW+jVEZtApI=",
+        "owner": "mgmarlow",
+        "repo": "helix-mode",
+        "rev": "a258ba88cf55e22fa67ff9c50538dd71dd0d4683",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mgmarlow",
+        "repo": "helix-mode",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -585,6 +601,7 @@
         "emacs-overlay": "emacs-overlay_2",
         "flake-parts": "flake-parts",
         "hel": "hel",
+        "helix-mode": "helix-mode",
         "home-manager": "home-manager_2",
         "image-roll": "image-roll",
         "import-tree": "import-tree",

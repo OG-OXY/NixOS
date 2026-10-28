@@ -5,28 +5,60 @@
 (setq use-package-always-ensure nil)
 
 ;; Basic UI cleanup & startup tweaks
-(setq inhibit-startup-screen t
-      scroll-bar-mode -1
-      tool-bar-mode -1
-      tooltip-mode -1
-      menu-bar-mode -1)
-
+; (setq inhibit-startup-screen t)
+(scroll-bar-mode -1)
+(tool-bar-mode -1)
+(tooltip-mode -1)
+(menu-bar-mode -1)
 (global-display-line-numbers-mode 1)
 
 ;; Load Theme & Modeline
 (load-theme 'doom-one t)
 (doom-modeline-mode 1)
 
+
+;; --- Startup Splash Screen ---
+(setq inhibit-startup-screen nil) ; Must be nil to show a dashboard!
+
 (use-package dashboard
-  :after nerd-icons
+  :ensure nil
+  :demand t
   :config
-  (setq dashboard-display-icons-p t)
-  (setq dashboard-icon-type 'nerd-icons)
+  (setq dashboard-display-icons-p t
+        dashboard-icon-type 'nerd-icons
+        ;; Optional: center it nicely like Doom
+        dashboard-center-content t)
+  
+  ;; Load doom-dashboard extensions and map its custom widgets
+  (require 'doom-dashboard)
+  (setq dashboard-items '((projects . doom-dashboard-insert-project-shortmenu)
+                          (agenda . doom-dashboard-insert-org-agenda-shortmenu)
+                          (bookmarks . doom-dashboard-insert-bookmark-shortmenu)
+                          (recents . doom-dashboard-insert-recents-shortmenu)))
+
   (dashboard-setup-startup-hook))
 
-(use-package doom-dashboard
-  :after dashboard
-  :demand t)
+;; Helix-Mode
+(use-package helix
+  :demand t
+  :hook ((helix-normal-mode . (lambda () (setq display-line-numbers 'relative)))
+         (helix-normal-mode-hook (lambda () (setq cursor-type 'box)))
+         (helix-insert-mode-hook (lambda () (setq cursor-type 'bar)))
+         (helix-insert-mode . (lambda () (setq display-line-numbers t))))
+  :config
+  (helix-mode))
+  
+;; Old Dashboard Settings (non working?)
+; (use-package dashboard
+;   :after nerd-icons
+;   :config
+;   (setq dashboard-display-icons-p t)
+;   (setq dashboard-icon-type 'nerd-icons)
+;   (dashboard-setup-startup-hook))
+
+; (use-package doom-dashboard
+;   :after dashboard
+;   :demand t)
               
 ;; --- 2. Completion (Vertico / Corfu / Orderless) ---
 (use-package vertico
@@ -53,46 +85,45 @@
   (corfu-quit-no-match t))
 
 ;; --- 3. Modal Editing Layer (Meow - Helix Selection Model) ---
-(use-package meow
-  :init
-  (meow-global-mode 1)
-  :config
-  ;; Cursor visibility matching your high-visibility block preferences
-  (setq meow-cursor-type-normal 'box
-        meow-cursor-type-insert 'bar)
-
-  (meow-setup-indicator)
+; (use-package meow
+;   :init
+;   (meow-global-mode 1)
+;   :config
+;   ;; Cursor visibility matching your high-visibility block preferences
+;   (setq meow-cursor-type-normal 'box
+;         meow-cursor-type-insert 'bar)
+;   (meow-setup-indicator)
 
   ;; Helix-style normal state keybindings
-  (meow-define-keys 'normal
-    ;; Movement
-    '("h" . meow-left)
-    '("j" . meow-next)
-    '("k" . meow-prev)
-    '("l" . meow-right)
+  ; (meow-define-keys 'normal
+  ;   ;; Movement
+  ;   '("h" . meow-left)
+  ;   '("j" . meow-next)
+  ;   '("k" . meow-prev)
+  ;   '("l" . meow-right)
     
-    ;; Selection & Words
-    '("w" . meow-mark-word)
-    '("b" . meow-back-word)
-    '("e" . meow-next-word)
-    '("x" . meow-line)
+  ;   ;; Selection & Words
+  ;   '("w" . meow-mark-word)
+  ;   '("b" . meow-back-word)
+  ;   '("e" . meow-next-word)
+  ;   '("x" . meow-line)
     
-    ;; Actions (Action-Last grammar)
-    '("d" . meow-kill)
-    '("c" . meow-change)
-    '("y" . meow-save)
-    '("p" . meow-yank)
+  ;   ;; Actions (Action-Last grammar)
+  ;   '("d" . meow-kill)
+  ;   '("c" . meow-change)
+  ;   '("y" . meow-save)
+  ;   '("p" . meow-yank)
     
-    ;; Undo / Redo
-    '("u" . undo)
-    '("U" . undo-redo)
+  ;   ;; Undo / Redo
+  ;   '("u" . undo)
+  ;   '("U" . undo-redo)
 
-    ;; Goto Menu
-    '("g h" . move-beginning-of-line)
-    '("g l" . move-end-of-line)
-    '("g g" . goto-line)
+  ;   ;; Goto Menu
+  ;   '("g h" . move-beginning-of-line)
+  ;   '("g l" . move-end-of-line)
+  ;   '("g g" . goto-line)
 
-    '("<escape>" . meow-cancel-selection)))
+  ;   '("<escape>" . meow-cancel-selection)))
 
 ;; --- 4. Org-mode & Ecosystem ---
 (use-package org
