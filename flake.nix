@@ -48,6 +48,12 @@
       flake = false;
     };
     ##
+    ## Emacs Pkgs
+    doom-dashboard = {
+      url = "github:emacs-dashboard/doom-dashboard";
+      flake = false;
+    };
+    ##
     ## Yazi Plugins
     ya-packs = {
       url = "github:yazi-rs/plugins";

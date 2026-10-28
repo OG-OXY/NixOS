@@ -101,6 +101,22 @@
         "type": "github"
       }
     },
+    "doom-dashboard": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1781857557,
+        "narHash": "sha256-5iFnTZqvqY6peLiXV0DhtdTK0z5Ar1VUSMOTUkHl50o=",
+        "owner": "emacs-dashboard",
+        "repo": "doom-dashboard",
+        "rev": "cb6756974237a18124a4713a25d19118247e3ac3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "emacs-dashboard",
+        "repo": "doom-dashboard",
+        "type": "github"
+      }
+    },
     "doomdir": {
       "flake": false,
       "locked": {
@@ -565,6 +581,7 @@
         "base16-schemes": "base16-schemes",
         "chaotic": "chaotic",
         "doom": "doom",
+        "doom-dashboard": "doom-dashboard",
         "emacs-overlay": "emacs-overlay_2",
         "flake-parts": "flake-parts",
         "hel": "hel",
