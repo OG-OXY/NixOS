@@ -3,165 +3,99 @@
   ...
 }:
 {
-  flake.homeModules.doom = { pkgs, ... }:
-  {
-    programs.doom-emacs = {
-      enable = true;
+  # flake.homeModules.doom = { pkgs, ... }:
+  # {
+  #   programs.doom-emacs = {
+  #     enable = true;
+  #     doomDir = ./doom.d;
+  #     doomLocalDir = "/home/ty/.local/share/doom";
+  #     emacs = pkgs.emacs-pgtk;
+  #     # provideEmacs = false;
+  #     experimentalFetchTree = true;
+  #     extraPackages = epkgs: [
+  #       epkgs.treesit-grammars.with-all-grammars
+  #       (epkgs.melpaBuild {
+  #         pname = "image-roll";
+  #         version = "1.0.0";
+  #         packageRequires = [ ]; 
+  #         src = inputs.image-roll;
+  #       })
+  #       (epkgs.melpaBuild {
+  #         pname = "majutsu";
+  #         version = "1.0.0";
+  #         packageRequires = [
+  #           epkgs.magit
+  #           epkgs.consult 
+  #           epkgs.plz 
+  #           epkgs.transient
+  #         ]; # Majutsu requires Magit (which Doom enables via :tools magit)
+  #         src = inputs.majutsu;
+  #       })
+  #       # (epkgs.melpaBuild {
+  #       #   pname = "hel";
+  #       #   version = "1.0.0";
+  #       #   packageRequires = [
+  #       #     epkgs.dash
+  #       #     epkgs.avy
+  #       #     epkgs.pcre2el
+  #       #     epkgs.ultra-scroll
+  #       #   ]; 
+  #       #   src = inputs.hel;
+  #       # })
+  #     ];
+  #   };
+
+  #   services.emacs = {
+  #     enable = true;
+  #   };
+  # };
+  flake.nixosModules.doom = { pkgs, ... }:
+  let
+    doom = pkgs.doomEmacs {
       doomDir = ./doom.d;
-      doomLocalDir = "/home/ty/.local/share/nix-doom";
+      doomLocalDir = "~/.local/share/doom";
       emacs = pkgs.emacs-pgtk;
-      # provideEmacs = false;
       experimentalFetchTree = true;
-      extraPackages = epkgs: [
+      extraPackages = epkgs:
+      let
+        fpkgs = pname: src: packageRequires: epkgs.melpaBuild {
+          inherit pname src packageRequires;
+          version = "1.0.0";
+        };
+      in
+      [
         epkgs.treesit-grammars.with-all-grammars
-        (epkgs.melpaBuild {
-          pname = "image-roll";
-          version = "1.0.0";
-          packageRequires = [ ]; 
-          src = inputs.image-roll;
-        })
-        (epkgs.melpaBuild {
-          pname = "majutsu";
-          version = "1.0.0";
-          packageRequires = [
-            epkgs.magit
-            epkgs.consult 
-            epkgs.plz 
-            epkgs.transient
-          ]; # Majutsu requires Magit (which Doom enables via :tools magit)
-          src = inputs.majutsu;
-        })
-        # (epkgs.melpaBuild {
-        #   pname = "hel";
-        #   version = "1.0.0";
-        #   packageRequires = [
-        #     epkgs.dash
-        #     epkgs.avy
-        #     epkgs.pcre2el
-        #     epkgs.ultra-scroll
-        #   ]; 
-        #   src = inputs.hel;
-        # })
+        (fpkgs "image-roll" inputs.image-roll [ ])
+        (fpkgs "majutsu" inputs.majutsu [ epkgs.magit epkgs.consult epkgs.plz epkgs.transient ])
+      ];
+    };
+  in
+  {
+    environment = {
+      systemPackages = [
+        doom
+      ];
+      pathsToLink = [
+        "/share"
+        "/share/applications"
       ];
     };
 
-    services.emacs = {
-      enable = true;
+    systemd.user.services.doom = {
+      description = "Doom Emacs Daemon";
+      documentation = [ "info:emacs" "man:emacs(1)" "https://gnu.org/software/emacs/" ];
+      wantedBy = [ "default.target" ];
+      after = [ "graphical-session.target" ];
+      serviceConfig = {
+        Type = "notify";
+        ExecStart = "${pkgs.emacs-pgtk}/bin/emacs --init-directory=${doom}/bin/doom --fg-daemon=doom";
+        ExecStop = "${pkgs.emacs-pgtk}/bin/emacsclient --socket-name=doom --eval '(kill-emacs)'";
+        Restart = "on-failure";
+        SuccessExitStatus = 15;
+      };
     };
   };
 }
-  # flake.nixosModules.doom = { pkgs, ... }:
-  # let
-  #   Doom = pkgs.emacsWithDoom {
-  #     doomDir = ./doom.d;
-  #     doomLocalDir = "~/.local/share/nix-doom";
-  #     emacs = pkgs.emacs-pgtk;
-  #     experimentalFetchTree = true;
-  #   };
-  #   # emacsPgtkWithDoom = "/nix/store/[a-z0-9]{32}-emacs-pgtk-with-doom-[0-9.]*";
-  # in
-  # {
-  #   environment = {
-  #     systemPackages = [
-  #       Doom
-  #     ];
-  #     pathsToLink = [
-  #       "/share/applications"
-  #       "/share/emacs"
-  #     ];
-  #   };
-
-  #   systemd.user.services.doom = {
-  #     description = "Doom Emacs Daemon";
-  #     documentation = [ "info:emacs" "man:emacs(1)" "https://gnu.org/software/emacs/" ];
-  #     wantedBy = [ "default.target" ];
-  #     serviceConfig = {
-  #       ExecStart = "${pkgs.bash}/bin/bash -l -c '${Doom}/bin/emacs --fg-daemon'";
-  #       ExecStop = "${pkgs.bash}/bin/bash -l -c  '${Doom}/bin/emacsclient --eval \"(kill-emacs)\"'";
-  #       Restart = "on-failure";
-  #       SuccessExitStatus = 15;
-  #       Type = "notify";
-  #     };
-  #   };
-
-  #   xdg.desktopEntries = {
-  #     emacsclient = {
-  #       name = "Emacs Client";
-  #       genericName = "Text Editor";
-  #       comment = "Edit text";
-  #       exec = "${Doom}/bin/emacsclient -c -a \"emacs\"";
-  #       # OR
-  #       # exec = "/nix/store/[a-z0-9]{32}-emacs-pgtk-with-doom-[0-9.]*/bin/emacsclient -c -a 'emacs'";
-  #       icon = "emacs";
-  #       terminal = false;
-  #       type = "Application";
-  #       categories = [ "TextEditor" "Development" ];
-  #       mimeType = [
-  #         "text/english"
-  #         "text/plain"
-  #         "text/x-makefile"
-  #         "text/x-c++hdr"
-  #         "text/x-c++src"
-  #         "text/x-chdr"
-  #         "text/x-csrc"
-  #         "text/x-java"
-  #         "text/x-moc"
-  #         "text/x-pascal"
-  #         "text/x-tcl"
-  #         "text/x-tex"
-  #         "application/x-shellscript"
-  #         "text/x-c"
-  #         "text/x-c++"
-  #       ];
-  #       settings = {
-  #         Keywords = "Text;Editor";
-  #         StartupWMClass = "Emacsd";
-  #       };
-  #     };
-  #     emacsclient-mail = {
-  #       categories = [ "Network" "Email" ];
-  #       comment = "GNU Emacs is an extensible, customizable text editor - and more";
-  #       exec = ''${pkgs.emacs-pgtk}/bin/emacsclient --alternate-editor= --eval "(message-mailto (pop server-eval-args-left))" %u '';
-  #       icon = "emacs";
-  #       name = "Emacs (Mail, Client)";
-  #       mimeType = "x-scheme-handler/mailto";
-  #       noDisplay = "true";
-  #       terminal = "false";
-  #       type = "Application";
-  #       settings = {
-  #         Keywords = "emacsclient";
-  #       };
-  #       actions = {
-  #         "new-window" = {
-  #             exec = ''${pkgs.emacs-pgtk}/bin/emacsclient --alternate-editor= --create-frame --eval "(message-mailto (pop server-eval-args-left))" %u'';
-  #           };
-  #         "new-instance" = {
-  #           exec = ''${pkgs.emacs-pgtk}/bin/emacsclient --alternate-editor= --create-frame --eval "(message-mailto (pop server-eval-args-left))" %u'';
-  #         };
-  #       };
-  #     };
-  #   };
-  # };
-# }
 # Extra Configurations + Disabled, Changed
 # tangleArgs = "--all config.org";
-# extraPackages = epkgs: [
-#   epkgs.treesit-grammars.with-all-grammars
-# ];
-# wantedBy = [ "graphical-session.target" ];
-# partOf = [ "graphical-session.target" ];
-# flake.homeModules.doom = { pkgs, ... }:
-# {
-#   programs.doom-emacs = {
-#     enable = true;
-#     doomDir = ./doom.d;
-#     emacs = pkgs.emacs-pgtk;
-#     provideEmacs = true;
-#     experimentalFetchTree = true;
-#   };
-
-#   services.emacs = {
-#     enable = true;
-#     client.enable = true;
-#   };
-# };
+# (fpkgs "hel" inputs.hel [ epkgs.dash epkgs.avy epkgs.pcre2el epkgs.ultra-scroll ])
