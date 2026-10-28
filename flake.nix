@@ -53,6 +53,10 @@
       url = "github:emacs-dashboard/doom-dashboard";
       flake = false;
     };
+    helix-mode = {
+      url = "github:mgmarlow/helix-mode";
+      flake = false;
+    };
     ##
     ## Yazi Plugins
     ya-packs = {
