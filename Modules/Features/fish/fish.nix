@@ -148,8 +148,8 @@
         dfr = "df -h /";
         ts = "doas tailscale up";
         pcig = "lspci | grep \'|\'";
-        btcsw = "doas bluetoothctl connect 54:D4:96:53:E4:41";
-        btcs = "doas bluetoothctl connect D6:88:C3:AC:1B:0C";
+        btcs = "doas bluetoothctl connect 21:35:F7:94:2E:26";
+        btcbb = "doas bluetoothctl connect D6:88:C3:AC:1B:0C";
       };
 
       shellInit = ''

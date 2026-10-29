@@ -4,7 +4,7 @@
 	;; layout
 
 	:completion
-	(corfu +orderless) ;; add +icons if using gui
+	(corfu +orderless +icons +dabbrev) ;; add +icons if using gui
 	vertico
 
 	:ui
@@ -21,6 +21,7 @@
 	
 	:editor
 	(evil +everywhere +multiple-cursors)
+	; evil
 	file-templates
 	snippets
 
@@ -44,9 +45,15 @@
 	markdown
 
 	:tools
-	(lsp +eglot)
-	magit
+	(lsp +eglot +booster)
+	(majutsu +forge)
 	tree-sitter
 
 	:config
 	(default +bindings +smartparens))
+
+
+	; Disabled
+	; editor:
+	; evil
+	; multiple-cursors

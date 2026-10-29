@@ -4,8 +4,14 @@
 (setenv "PATH" (concat (getenv "PATH") ":/run/current-system/sw/bin:~/.nix-profile/bin"))
 (setq exec-path (append exec-path '("/run/current-system/sw/bin" "~/.nix-profile/bin")))
 
+(add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
+
 (require 'use-package)
 (setq use-package-always-ensure nil)
+
+(require 'which-key-config)
+(require 'buffer-load)
+(require 'buffer-map)
 
 ;; Basic UI cleanup & startup tweaks
 (scroll-bar-mode -1)
@@ -17,11 +23,6 @@
 ;; Load Theme & Modeline
 (load-theme 'doom-one t)
 (doom-modeline-mode 1)
-
-(require 'nerd-icons)
-(use-package nerd-icons
-  :ensure nil
-  :demand t)
 
 ;; --- 1. Icon Dependency ---
 (use-package nerd-icons
@@ -43,7 +44,9 @@
 
   ;; Aesthetic and Text Formatting
   (dashboard-banner-logo-title "E M A C S")
-  (dashboard-startup-banner 3) ;; Uses the clean official Emacs logo
+  ; (dashboard-startup-banner 3)
+  (dashboard-startup-banner
+   (expand-file-name "banners/bcc.txt" user-emacs-directory))
   (dashboard-page-separator "\n\n")
   (dashboard-center-content t)         ;; Centers the layout nicely
 
@@ -68,11 +71,7 @@
                                dashboard-insert-footer))
   :config
   (dashboard-setup-startup-hook))
-
-;; --- 3. Reliable Buffer & Frame Management ---
 (setq inhibit-startup-screen t)
-
-;; Prevents blank buffers on nixos when starting as a background systemd user daemon
 (if (daemonp)
     (add-hook 'server-after-make-frame-hook
               (lambda ()
@@ -80,45 +79,15 @@
                   (dashboard-open))))
   (setq initial-buffer-choice #'dashboard-open))
 
-; (use-package doom-dashboard
-;   :ensure nil
-;   :after dashboard
-;   :demand t
-;   :bind
-;   (:map dashboard-mode-map
-;         ("<remap> <dashboard-previous-line>" . widget-backward)
-;         ("<remap> <dashboard-next-line>" . widget-forward)
-;         ("<remap> <previous-line>" . widget-backward)
-;         ("<remap> <next-line>"  . widget-forward)
-;         ("<remap> <right-char>" . widget-forward)
-;         ("<remap> <left-char>"  . widget-backward))
-;   :custom
-;   (dashboard-banner-logo-title "E M A C S")
-;   (dashboard-startup-banner
-;    (expand-file-name "banners/bcc.txt" user-emacs-directory))
-;    ; (concat dashboard-banner-directory "bcc.txt"))
-;   (dashboard-footer-icon 
-;    (nerd-icons-faicon "nf-fa-github_alt" :face 'success :height 1.5))
-;   (dashboard-page-separator "\n")
-;   (dashboard-startupify-list `(dashboard-insert-banner
-;                                dashboard-insert-banner-title
-;                                dashboard-insert-newline
-;                                dashboard-insert-items
-;                                ,(dashboard-insert-newline 2)
-;                                dashboard-insert-init-info
-;                                ,(dashboard-insert-newline 2)
-;                                doom-dashboard-insert-homepage-footer))
-;   (dashboard-item-generators
-;    '((recents   . doom-dashboard-insert-recents-shortmenu)
-;      (bookmarks . doom-dashboard-insert-bookmark-shortmenu)
-;      (projects  . doom-dashboard-insert-project-shortmenu)
-;      (agenda    . doom-dashboard-insert-org-agenda-shortmenu)))
-;   (dashboard-items '(projects agenda bookmarks recents))
-;   :config
-;   (dashboard-setup-startup-hook))
-; (setq inhibit-startup-screen t)
-; (setq initial-buffer-choice 'dashboard-open)
-; (setq initial-buffer-choice (lambda () (dashboard-open) (current-buffer)))
+; (use-package which-key
+;   :ensure nil ; Crucial for Nix! Tells Emacs not to try downloading it via MELPA
+;   :init
+;   (which-key-mode)
+;   :config
+;   (setq which-key-idle-delay 0.2)
+;   ;; Add any other which-key visual configurations here
+;   (setq which-key-popup-type 'side-window)
+;   (setq which-key-side-window-location 'bottom))
 
 ;; Helix-Mode
 (use-package helix
@@ -154,48 +123,6 @@
   (corfu-auto t)
   (corfu-quit-no-match t))
 
-;; --- 3. Modal Editing Layer (Meow - Helix Selection Model) ---
-; (use-package meow
-;   :init
-;   (meow-global-mode 1)
-;   :config
-;   ;; Cursor visibility matching your high-visibility block preferences
-;   (setq meow-cursor-type-normal 'box
-;         meow-cursor-type-insert 'bar)
-;   (meow-setup-indicator)
-
-  ;; Helix-style normal state keybindings
-  ; (meow-define-keys 'normal
-  ;   ;; Movement
-  ;   '("h" . meow-left)
-  ;   '("j" . meow-next)
-  ;   '("k" . meow-prev)
-  ;   '("l" . meow-right)
-    
-  ;   ;; Selection & Words
-  ;   '("w" . meow-mark-word)
-  ;   '("b" . meow-back-word)
-  ;   '("e" . meow-next-word)
-  ;   '("x" . meow-line)
-    
-  ;   ;; Actions (Action-Last grammar)
-  ;   '("d" . meow-kill)
-  ;   '("c" . meow-change)
-  ;   '("y" . meow-save)
-  ;   '("p" . meow-yank)
-    
-  ;   ;; Undo / Redo
-  ;   '("u" . undo)
-  ;   '("U" . undo-redo)
-
-  ;   ;; Goto Menu
-  ;   '("g h" . move-beginning-of-line)
-  ;   '("g l" . move-end-of-line)
-  ;   '("g g" . goto-line)
-
-  ;   '("<escape>" . meow-cancel-selection)))
-
-;; --- 4. Org-mode & Ecosystem ---
 (use-package org
   :config
   (setq org-directory "~/Notes/Org/"
@@ -258,6 +185,16 @@
 
 (use-package image-roll
   :hook (image-mode . image-roll-mode))
+
+(use-package helpful
+  :ensure nil
+  :demand t
+  :bind
+  ([remap describe-function] . helpful-callable)
+  ([remap describe-variable] . helpful-variable)
+  ([remap describe-key]      . helpful-key)
+  ([remap describe-command]  . helpful-command)
+  ([remap describe-symbol]   . helpful-symbol))
 
 ;; --- 7. GUI-Only Specific Configurations ---
 (when (display-graphic-p)

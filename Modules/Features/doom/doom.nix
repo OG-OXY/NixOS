@@ -21,6 +21,7 @@
         epkgs.treesit-grammars.with-all-grammars
         (fpkgs "image-roll" inputs.image-roll [ ])
         (fpkgs "majutsu" inputs.majutsu [ epkgs.magit epkgs.consult epkgs.plz epkgs.transient ])
+        (fpkgs "helix" inputs.helix-mode [ ])
       ];
     };
   in

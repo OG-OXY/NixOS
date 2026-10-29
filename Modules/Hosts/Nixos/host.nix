@@ -30,6 +30,7 @@
                 hello = stable.hello;
                 cudaPackages = prev.cudaPackages_12_9;
             })
+            inputs.emacs-overlay.overlays.default
             inputs.doom.overlays.default
           ];
         };
