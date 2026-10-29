@@ -88,13 +88,13 @@
             end
           '';
         };
-        doomc = {
+        dc = {
           description = "Start Emacs CLient";
           body = ''
               emacsclient --socket-name=doom -c -a 'doom'
           '';
         };
-        emacsc = {
+        ec = {
           description = "Start Doom Client";
           body = ''
             emacsclient --socket-name=emacs -c -a 'emacs'
@@ -106,8 +106,8 @@
       };
 
       shellAbbrs = {
-        doomt = "emacsclient --socket-name=doom -t";
-        emacst = "emacsclient --socket-name=emacs -t";
+        dt = "emacsclient --socket-name=doom -t";
+        et = "emacsclient --socket-name=emacs -t";
         ds = "systemctl --user restart doom";        
         es = "systemctl --user restart emacs";
         steamrun = "gamescope --backend wayland -W 1920 -H 1080 -r 240 -f -e -- steam -gamepadui";

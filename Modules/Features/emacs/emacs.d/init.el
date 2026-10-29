@@ -5,7 +5,6 @@
 (setq use-package-always-ensure nil)
 
 ;; Basic UI cleanup & startup tweaks
-; (setq inhibit-startup-screen t)
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
 (tooltip-mode -1)
@@ -16,50 +15,94 @@
 (load-theme 'doom-one t)
 (doom-modeline-mode 1)
 
+; (setq initial-buffer-choice 'dashboard-open)
+; (add-hook 'server-after-make-frame-hook 'dashboard-open)
 
-;; --- Startup Splash Screen ---
-(setq inhibit-startup-screen nil) ; Must be nil to show a dashboard!
+;; --- Dashboard Setup ---
+; (use-package dashboard
+;   :ensure nil
+;   :after nerd-icons
+;   :demand t
+;   :custom
+;   ;; Point to your custom ASCII banner if you have one, or set to 'logo
+;   (setq dashboard-startup-banner '3)
+;   (setq dashboard-startupify-list '(dashboard-insert-banner
+;                                     dashboard-insert-newline
+;                                     dashboard-insert-banner-title
+;                                     dashboard-insert-newline
+;                                     dashboard-insert-navigator
+;                                     dashboard-insert-newline
+;                                     dashboard-insert-init-info
+;                                     dashboard-insert-items
+;                                     dashboard-insert-newline
+;                                     dashboard-insert-footer))
+;   (setq dashboard-banner-logo-title "E M A C S")
+;   (setq dashboard-page-separator "\n")
+;   (setq dashboard-display-icons-p t)
+;   (setq dashboard-icon-type 'nerd-icons)
+;   (setq dashboard-set-heading-icons t)
+;   (setq dashboard-set-file-icons t)
+;   (setq dashboard-items '((recents   . 5)
+;                      (bookmarks . 5)
+;                      (projects  . 5)
+;                      (agenda    . 5)))
+;   :config
+;   (dashboard-setup-startup-hook))
+(require 'nerd-icons)
+(require 'all-the-icons)
+(use-package nerd-icons)
+(use-package 'all-the-icons) :todo add ensure and demand
 
-(use-package dashboard
-  :ensure nil
-  :demand t
-  :config
-  (setq dashboard-display-icons-p t
-        dashboard-icon-type 'nerd-icons
-        ;; Optional: center it nicely like Doom
-        dashboard-center-content t)
-  
-  ;; Load doom-dashboard extensions and map its custom widgets
-  (require 'doom-dashboard)
-  (setq dashboard-items '((projects . doom-dashboard-insert-project-shortmenu)
-                          (agenda . doom-dashboard-insert-org-agenda-shortmenu)
-                          (bookmarks . doom-dashboard-insert-bookmark-shortmenu)
-                          (recents . doom-dashboard-insert-recents-shortmenu)))
 
-  (dashboard-setup-startup-hook))
+(use-package doom-dashboard
+  :ensure nil
+  :after (dashboard nerd-icons)
+  :demand t
+  :bind
+  (:map dashboard-mode-map
+        ("<remap> <dashboard-previous-line>" . widget-backward)
+        ("<remap> <dashboard-next-line>" . widget-forward)
+        ("<remap> <previous-line>" . widget-backward)
+        ("<remap> <next-line>"  . widget-forward)
+        ("<remap> <right-char>" . widget-forward)
+        ("<remap> <left-char>"  . widget-backward))
+  :custom
+  (dashboard-banner-logo-title "E M A C S")
+  (dashboard-startup-banner
+   (expand-file-name "banners/bcc.txt" user-emacs-directory))
+   ; (concat dashboard-banner-directory "bcc.txt"))
+  (dashboard-footer-icon 
+   (nerd-icons-faicon "nf-fa-github_alt" :face 'success :height 1.5))
+  (dashboard-page-separator "\n")
+  (dashboard-startupify-list `(dashboard-insert-banner
+                               dashboard-insert-banner-title
+                               dashboard-insert-newline
+                               dashboard-insert-items
+                               ,(dashboard-insert-newline 2)
+                               dashboard-insert-init-info
+                               ,(dashboard-insert-newline 2)
+                               doom-dashboard-insert-homepage-footer))
+  (dashboard-item-generators
+   '((recents   . doom-dashboard-insert-recents-shortmenu)
+     (bookmarks . doom-dashboard-insert-bookmark-shortmenu)
+     (projects  . doom-dashboard-insert-project-shortmenu)
+     (agenda    . doom-dashboard-insert-org-agenda-shortmenu)))
+  (dashboard-items '(projects agenda bookmarks recents))
+  :config
+  (dashboard-setup-startup-hook))
+(setq inhibit-startup-screen t)
+; (setq initial-buffer-choice (lambda () (dashboard-open) (current-buffer)))
 
 ;; Helix-Mode
 (use-package helix
   :demand t
   :hook ((helix-normal-mode . (lambda () (setq display-line-numbers 'relative)))
-         (helix-normal-mode-hook (lambda () (setq cursor-type 'box)))
-         (helix-insert-mode-hook (lambda () (setq cursor-type 'bar)))
+         (helix-normal-mode . (lambda () (setq cursor-type 'box)))
+         (helix-insert-mode . (lambda () (setq cursor-type 'bar)))
          (helix-insert-mode . (lambda () (setq display-line-numbers t))))
   :config
   (helix-mode))
   
-;; Old Dashboard Settings (non working?)
-; (use-package dashboard
-;   :after nerd-icons
-;   :config
-;   (setq dashboard-display-icons-p t)
-;   (setq dashboard-icon-type 'nerd-icons)
-;   (dashboard-setup-startup-hook))
-
-; (use-package doom-dashboard
-;   :after dashboard
-;   :demand t)
-              
 ;; --- 2. Completion (Vertico / Corfu / Orderless) ---
 (use-package vertico
   :init (vertico-mode 1))
