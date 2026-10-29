@@ -42,7 +42,7 @@
   {
     environment = {
       systemPackages = [ emacs ];
-      # pathsToLink = [ "/share" "/share/emacs" "/share/emacs/site-lisp/elpa" ];
+      pathsToLink = [ "/share/applications" "/share" "/share/emacs" ];
     };
     # Launch the isolated tinkering service
     systemd.user.services.emacs = {
@@ -50,10 +50,13 @@
       documentation = [ "info:emacs" "man:emacs(1)" "https://gnu.org/software/emacs/" ];
       wantedBy = [ "default.target" ];
       after = [ "graphical-session.target" ];
+      # environment = {
+      #   PATH = "/run/current-system/sw/bin:/etc/profiles/per-user/ty/bin";
+      # };
       serviceConfig = {
         Type = "simple";
-        ExecStart = "${emacs}/bin/emacs --init-directory=${emacsDir} --fg-daemon=emacs";
-        ExecStop = "${emacs}/bin/emacsclient --socket-name=emacs --eval '(kill-emacs)'";
+        ExecStart = "${pkgs.bash}/bin/sh -l -c \"${emacs}/bin/emacs --init-directory=${emacsDir} --fg-daemon=emacs\"";
+        ExecStop = "${pkgs.bash}/bin/sh -l -c \"${emacs}/bin/emacsclient --socket-name=emacs --eval '(kill-emacs)'\"";
         Restart = "on-failure";
         SuccessExitStatus = 15;
       };
