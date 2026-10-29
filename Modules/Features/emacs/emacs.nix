@@ -18,6 +18,9 @@
       epkgs.meow
       epkgs.doom-themes
       epkgs.doom-modeline
+      epkgs.dashboard
+      epkgs.all-the-icons
+      epkgs.nerd-icons
       epkgs.vertico
       epkgs.marginalia
       epkgs.consult
@@ -32,12 +35,15 @@
       epkgs.treesit-grammars.with-all-grammars
       (fpkgs "image-roll" inputs.image-roll [ ])
       (fpkgs "majutsu" inputs.majutsu [ epkgs.magit epkgs.consult epkgs.plz epkgs.transient ])
-      (fpkgs "doom-dashboard" inputs.doom-dashboard [ epkgs.dashboard epkgs.nerd-icons ])
       (fpkgs "helix" inputs.helix-mode [ ])
+      (fpkgs "doom-dashboard" inputs.doom-dashboard [ epkgs.dashboard epkgs.nerd-icons ])
     ]);
   in
   {
-    environment.systemPackages = [ emacs ];
+    environment = {
+      systemPackages = [ emacs ];
+      # pathsToLink = [ "/share" "/share/emacs" "/share/emacs/site-lisp/elpa" ];
+    };
     # Launch the isolated tinkering service
     systemd.user.services.emacs = {
       description = "Emacs PGTK Daemon";
