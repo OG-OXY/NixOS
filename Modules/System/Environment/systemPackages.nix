@@ -134,6 +134,7 @@
       # 8. DEVELOPMENT TOOLCHAIN & ENVIRONMENT BOOTSTRAPPING
       # Interactive dev tools, shell engines, and AI helpers
       # ============================================================================
+      pkgs.jujutsu
       pkgs.git
       pkgs.gh
       pkgs.devenv
