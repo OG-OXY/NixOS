@@ -57,18 +57,18 @@
           }
           {
             key = "d";
-            desc = "Doom";
+            desc = "Doom Client";
+            cmd = "${pkgs.emacs-pgtk}/bin/emacsclient -c -a 'doom'";
+          }
+          {
+            key = "c";
+            desc = "Emacs Client";
             cmd = "${pkgs.emacs-pgtk}/bin/emacsclient -c -a 'emacs'";
           }
           {
             key = "o";
             desc = "Obsidian";
             cmd = "${pkgs.obsidian}/bin/obsidian /home/ty/Notes/Vault";
-          }
-          {
-            key = "n";
-            desc = "Obsidian (New Note)";
-            cmd = "xdg-open 'obsidian://new?vault=Vault&name=New%20Note'";
           }
           {
             key = "v";

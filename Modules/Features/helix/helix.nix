@@ -11,11 +11,13 @@
   in
   {
     environment.systemPackages = [
-      # Helix+Steel (Version == Nixpkgs-Unstable)
-      # inputs.helix.packages.${pkgs.system}.default
-      # inputs.steel.packages.${pkgs.system}.default
-      # Nixpkgs-Unstable
+      # Helix
       pkgs.helix
+      # Helix With Steel
+      pkgs.steelix
+      (pkgs.writeShellScriptBin "steelix" ''
+        exec env XDG_CONFIG_HOME="$HOME/.config/steelix-env" ${pkgs.steelix}/bin/steelix "$@"
+      '')
       # Proxy-LS
       pkgs.efm-langserver
       # NIX

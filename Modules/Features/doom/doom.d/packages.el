@@ -1,4 +1,4 @@
-;;; doom.d/packages.el -*- lexical-binding: t; -*-
+;; doom.d/packages.el -*- lexical-binding: t; -*-
  
 (package! org-appear)
 (package! org-modern)
@@ -6,8 +6,10 @@
 (package! pandoc-mode)
 (package! corfu-terminal)
 (package! undo-fu-session)
-; (package! hel)
+(package! helix)
+(package! helpful)
+;(package! hel)
 
 ;; Example on how to fetch github repos with packages.el (usually better to use flake inputs.)
 ;; (package! image-roll :recipe (:host github :repo "github:dalanicolai/image-roll.el"))
-;; (package! majutsu :recipe (:host github :repo "0WD0/majutsu"))
+;; (package! majutsu :recipe (:host github :repo "0WD0/majutsu")

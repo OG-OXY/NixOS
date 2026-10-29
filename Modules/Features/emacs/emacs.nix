@@ -19,7 +19,7 @@
       epkgs.doom-themes
       epkgs.doom-modeline
       epkgs.dashboard
-      epkgs.all-the-icons
+      epkgs.which-key
       epkgs.nerd-icons
       epkgs.vertico
       epkgs.marginalia
@@ -32,11 +32,12 @@
       epkgs.org-superstar
       epkgs.pandoc-mode
       epkgs.undo-fu-session
+      epkgs.helpful
       epkgs.treesit-grammars.with-all-grammars
       (fpkgs "image-roll" inputs.image-roll [ ])
       (fpkgs "majutsu" inputs.majutsu [ epkgs.magit epkgs.consult epkgs.plz epkgs.transient ])
       (fpkgs "helix" inputs.helix-mode [ ])
-      (fpkgs "doom-dashboard" inputs.doom-dashboard [ epkgs.dashboard epkgs.nerd-icons ])
+      # (fpkgs "doom-dashboard" inputs.doom-dashboard [ epkgs.dashboard epkgs.nerd-icons ])
     ]);
   in
   {
@@ -50,19 +51,17 @@
       documentation = [ "info:emacs" "man:emacs(1)" "https://gnu.org/software/emacs/" ];
       wantedBy = [ "default.target" ];
       after = [ "graphical-session.target" ];
-      # environment = {
-      #   PATH = "/run/current-system/sw/bin:/etc/profiles/per-user/ty/bin";
-      # };
       serviceConfig = {
         Type = "simple";
-        ExecStart = "${pkgs.bash}/bin/sh -l -c \"${emacs}/bin/emacs --init-directory=${emacsDir} --fg-daemon=emacs\"";
-        ExecStop = "${pkgs.bash}/bin/sh -l -c \"${emacs}/bin/emacsclient --socket-name=emacs --eval '(kill-emacs)'\"";
+        ExecStart = "${emacs}/bin/emacs --init-directory=${emacsDir} --fg-daemon=emacs";
+        ExecStop = "${emacs}/bin/emacsclient --socket-name=emacs --eval '(kill-emacs)'";
         Restart = "on-failure";
         SuccessExitStatus = 15;
       };
     };    
   };
 }
+
 # Disabled
 # (fpkgs "hel" inputs.hel [ epkgs.dash epkgs.avy epkgs.pcre2el epkgs.ultra-scroll ])
 # epkgs.evil

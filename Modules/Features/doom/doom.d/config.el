@@ -1,5 +1,9 @@
 ;;;  doom.d/config.el -*- lexical-binding: t; -*-
 
+;; --- 1. Package & Environment Setup ---
+(setenv "PATH" (concat (getenv "PATH") ":/run/current-system/sw/bin:~/.nix-profile/bin"))
+(setq exec-path (append exec-path '("/run/current-system/sw/bin" "~/.nix-profile/bin")))
+
 ;: Enable persistent undo history across restarts and increase history limits
 (global-undo-fu-session-mode +1)
 (setq undo-fu-session-file-limit 1000
@@ -8,6 +12,23 @@
 ;; --- Core Paths ---
 (setq org-directory "~/Notes/Org/")
 (setq org-agenda-files (list org-directory))
+
+; (after! evil
+;   (setq evil-collection-mode-list nil) 
+;   (evil-mode -1))
+
+;; --- Helix Modal Editing Mode Configuration ---
+; (after! helix
+;   (helix-mode +1)
+;   (add-hook! 'helix-normal-mode-hook
+;        (setq display-line-numbers 'relative
+;              cursor-type 'box))
+;   (add-hook! 'helix-insert-mode-hook
+;        (setq display-line-numbers t
+;              cursor-type 'bar))
+;   (map! :map helix-normal-mode-map
+;         "SPC" doom-leader-map
+; 		"C-w" doom-leader-map))
 
 ;; --- Org-mode Visual & Functional Settings ---
 (after! org
@@ -62,10 +83,25 @@
 ;; --- Pandoc Integration ---
 (add-hook! '(markdown-mode-hook org-mode-hook) #'pandoc-mode)
 
+;; Autoload helpful commands when invoked
+(autoload #'helpful-callable "helpful" nil t)
+(autoload #'helpful-variable "helpful" nil t)
+(autoload #'helpful-key      "helpful" nil t)
+(autoload #'helpful-command  "helpful" nil t)
+(autoload #'helpful-symbol   "helpful" nil t)
+
+(global-set-key [remap describe-function] #'helpful-callable)
+(global-set-key [remap describe-variable] #'helpful-variable)
+(global-set-key [remap describe-key]      #'helpful-key)
+(global-set-key [remap describe-command]  #'helpful-command)
+(global-set-key [remap describe-symbol]   #'helpful-symbol)
+
 ;; --- Terminal vs. GUI Conditional Environment Toggles ---
 (if (display-graphic-p)
+
     ;; --- GUI-ONLY SETTINGS ---
     (progn
+
       ;; Custom proportional font scaling for GUI headings if desired
       (custom-set-faces
        '(org-level-1 ((t (:inherit outline-1 :height 1.35 :weight bold))))
@@ -75,6 +111,7 @@
 
   ;; --- TERMINAL / TUI-ONLY SETTINGS (-nw inside Ghostty) ---
   (progn
+
     ;; Force tooltips into the echo area to prevent child-frame window errors
     (setq tooltip-use-echo-area t)
 
