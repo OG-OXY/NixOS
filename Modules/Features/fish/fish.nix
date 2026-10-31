@@ -103,6 +103,7 @@
       };
 
       shellAliases = {
+        steelix = "sx";
       };
 
       shellAbbrs = {
