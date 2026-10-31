@@ -24,6 +24,7 @@
       epkgs.vertico
       epkgs.marginalia
       epkgs.consult
+      epkgs.perspective
       epkgs.orderless
       epkgs.corfu
       epkgs.org-roam

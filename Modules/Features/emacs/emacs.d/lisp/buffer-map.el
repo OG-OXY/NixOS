@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (defvar my-buffer-map (make-sparse-keymap) "Buffer management map.")
 
 (define-key my-buffer-map (kbd "b") '(my/persp-switch-buffer   :which-key "Switch workspace buffer"))
