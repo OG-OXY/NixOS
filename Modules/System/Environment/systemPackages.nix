@@ -66,6 +66,13 @@
       pkgs.atuin
       pkgs.fastfetch
       pkgs.ttyd
+      pkgs.waypipe
+      pkgs.wayvnc
+      pkgs.chafa
+      pkgs.glow
+      pkgs.tealdeer
+      pkgs.tree
+      pkgs.lolcat
       
       # ============================================================================
       # 4. GUI APPLICATIONS
@@ -97,7 +104,7 @@
       # Media Keybinds CLI (Play, Pause, Stop)
       pkgs.playerctl
     
-      # Screen Recording & Capture Utilities
+      # Screen & Capture Utilities
       pkgs.grim
       pkgs.slurp
       pkgs.wl-screenrec
@@ -109,6 +116,7 @@
       pkgs.poppler-utils
       pkgs.exiftool
       pkgs.resvg
+      pkgs.pandoc
     
       # GStreamer Engine & Plugin Suite
       Gst.gstreamer
@@ -154,36 +162,29 @@
       pkgs.binutils
       pkgs.pciutils
       pkgs.usbutils
-      pkgs.wlr-randr
-      pkgs.ventoy
       pkgs.lshw
       pkgs.fzf
       pkgs.ripgrep
-      pkgs.fd
       pkgs.gawk
       pkgs.bat
+      pkgs.fd
       pkgs.ethtool
       pkgs.lm_sensors
-      pkgs.glow
+      pkgs.udisks2
+      pkgs.w3m
+      pkgs.curl
+      pkgs.wget
+      pkgs.wget2
+      pkgs.aria2
+      pkgs._7zz
+      pkgs.localsend
       pkgs.wl-clipboard
       pkgs.cliphist
       pkgs.wtype
       pkgs.rofi-rbw-wayland
       pkgs.rbw
-      pkgs.curl
-      pkgs.wget
-      pkgs.wget2
-      pkgs.aria2
-      pkgs.localsend
-      pkgs.w3m
-      pkgs.tealdeer
-      pkgs.tree
-      pkgs._7zz
-      pkgs.pandoc
-      pkgs.udisks2
+      pkgs.ventoy
       pkgs.monero-cli
-      pkgs.chafa
-      pkgs.lolcat
     
       # ============================================================================
       # DISABLED PACKAGES (ORGANIZED BY SUBCATEGORY)
