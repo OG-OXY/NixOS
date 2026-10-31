@@ -88,22 +88,9 @@
             end
           '';
         };
-        dc = {
-          description = "Start Emacs CLient";
-          body = ''
-              emacsclient --socket-name=doom -c -a 'doom'
-          '';
-        };
-        ec = {
-          description = "Start Doom Client";
-          body = ''
-            emacsclient --socket-name=emacs -c -a 'emacs'
-          '';
-        };
       };
 
       shellAliases = {
-        steelix = "sx";
       };
 
       shellAbbrs = {
@@ -111,8 +98,10 @@
         et = "emacsclient --socket-name=emacs -t";
         ds = "systemctl --user restart doom";        
         es = "systemctl --user restart emacs";
+        dc = "emacsclient --socket-name=doom -c -a 'doom'";
+        ec = "emacsclient --socket-name=emacs -c -a 'emacs'";
         steamrun = "gamescope --backend wayland -W 1920 -H 1080 -r 240 -f -e -- steam -gamepadui";
-        su = "doas fish";
+        su = "sudo -i";
         ls = "ls -a";
         cds = "cd ~/NixOS/nixos";
         ga = "git add -A";

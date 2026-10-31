@@ -33,7 +33,7 @@
       wantedBy = [ "default.target" ];
       after = [ "graphical-session.target" ];
       serviceConfig = {
-        Type = "notify";
+        Type = "simple";
         ExecStart = "${doom}/bin/doom-emacs --fg-daemon=doom";
         ExecStop = "${pkgs.emacs-pgtk}/bin/emacsclient --socket-name=doom --eval '(kill-emacs)'";
         Restart = "on-failure";

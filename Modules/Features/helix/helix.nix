@@ -4,20 +4,33 @@
 { 
   flake.nixosModules.helix = { pkgs, ... }:
   let
+    # Helix
     helixConfig = ./config.toml;
     helixLanguages = ./languages.toml;
     helixTheme = ./theme.toml;
-    efmConfig = ./efm.yaml;
+    helixSteel = pkgs.symlinkJoin {
+      name = "steel-wrapped";
+      paths = [ pkgs.steelix ];
+      buildInputs = [ pkgs.makeWrapper ];
+      postBuild = ''
+        mv $out/bin/hx $out/bin/sx 
+      '';    
+    };
+    # Steel
+    steelSCM = ./steel.scm;
+    steelInit = ./init.scm;
+    steelSplash = ./splash.scm;
+    # EFM Diagnostics Proxy
+    efmConfig = ./efm-langserver.yaml;
   in
   {
     environment.systemPackages = [
       # Helix
       pkgs.helix
-      # Helix With Steel
-      pkgs.steelix
-      (pkgs.writeShellScriptBin "steelix" ''
-        exec env XDG_CONFIG_HOME="$HOME/.config/steelix-env" ${pkgs.steelix}/bin/steelix "$@"
-      '')
+      # Steel With LSP & REPL
+      helixSteel
+      pkgs.steel
+      pkgs.steel-language-server
       # Proxy-LS
       pkgs.efm-langserver
       # NIX
@@ -68,6 +81,9 @@
       "L+ /home/ty/.config/helix/config.toml - - - - ${helixConfig}"
       "L+ /home/ty/.config/helix/languages.toml - - - - ${helixLanguages}"
       "L+ /home/ty/.config/helix/themes/base16_custom.toml - - - - ${helixTheme}"
+      "L+ /home/ty/.config/helix/helix.scm - - - - ${steelSCM}"
+      "L+ /home/ty/.config/helix/init.scm - - - - ${steelInit}"
+      "L+ /home/ty/.config/helix/splash.scm - - - - ${steelSplash}"
       "L+ /home/ty/.config/efm-langserver/config.yaml - - - - ${efmConfig}"
     ];
   };

@@ -4,7 +4,7 @@ spawn-at-startup "uwsm" "finalize"
 spawn-at-startup "ghostty" "-e" "herdr"
 spawn-at-startup "zen-beta"
 spawn-at-startup "vesktop"
-spawn-at-startup "obsidian"
+// spawn-at-startup "obsidian"
 
 // Already Set In ==> sessionVariables, Redundant?
 environment {
