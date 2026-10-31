@@ -46,11 +46,6 @@
             cmd = "${pkgs.ghostty}/bin/ghostty";
           }
           {
-            key = "y";
-            desc = "Yazi";
-            cmd = "${pkgs.ghostty}/bin/ghostty -e ${pkgs.fish}/bin/fish -i -C 'y'";
-          }
-          {
             key = "z";
             desc = "Zen-Browser";
             cmd = "${inputs.zen-browser.packages.${pkgs.system}.default}/bin/zen-beta";
@@ -58,12 +53,12 @@
           {
             key = "d";
             desc = "Doom Client";
-            cmd = "${pkgs.emacs-pgtk}/bin/emacsclient -c -a 'doom'";
+            cmd = "${pkgs.emacs-pgtk}/bin/emacsclient --socket-name=doom -c -a 'doom'";
           }
           {
             key = "c";
             desc = "Emacs Client";
-            cmd = "${pkgs.emacs-pgtk}/bin/emacsclient -c -a 'emacs'";
+            cmd = "${pkgs.emacs-pgtk}/bin/emacsclient --socket-name=emacs -c -a 'emacs'";
           }
           {
             key = "o";
@@ -90,6 +85,11 @@
             desc = "EasyEffects";
             cmd = "${pkgs.easyeffects}/bin/easyeffects";
           }
+          # {
+          #   key = "y";
+          #   desc = "Yazi";
+          #   cmd = "${pkgs.ghostty}/bin/ghostty -e ${pkgs.fish}/bin/fish -i -C 'y'";
+          # }
         ];
       };
     };
