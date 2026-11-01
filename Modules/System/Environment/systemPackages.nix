@@ -11,7 +11,7 @@
       py3 = pkgs.python313Packages;
       Gst = pkgs.gst_all_1;
       Gsr = pkgs.gpu-screen-recorder.override {
-        ffmpeg = pkgs.ffmpeg_6; # Uses NVENC API 13.0 compatible headers
+        ffmpeg = pkgs.ffmpeg_6;
       };
       llama = pkgs.llama-cpp-cuda.overrideAttrs (oldAttrs: {
         cmakeFlags = (oldAttrs.cmakeFlags or [ ]) ++ [
@@ -25,7 +25,6 @@
     [
       # ============================================================================
       # 1. CORE SYSTEM, DISPLAY & DESKTOP SUITE
-      # Primary Wayland/X11 infrastructure, session services, and Qt/KDE engines
       # ============================================================================
       pkgs.xwayland-satellite
       pkgs.noctalia-shell
@@ -35,9 +34,7 @@
       pkgs.quickshell
       pkgs.gnutls
       pkgs.xinit
-      pkgs.xhost # For Dendritic Test-VM
-    
-      # KDE Core Framework Packages
+      pkgs.xhost    
       Kde.kwin
       Kde.qtdeclarative
       Kde.qtsvg
@@ -45,7 +42,6 @@
     
       # ============================================================================
       # 2. SYSTEM MANAGEMENT & NIX FLAKE TOOLING
-      # High-priority helpers for system rebuilds, flake evaluation, and secrets
       # ============================================================================
       pkgs.nh
       pkgs.nix-output-monitor
@@ -57,10 +53,10 @@
     
       # ============================================================================
       # 3. INTERACTIVE SHELL & TERMINAL EMULATORS
-      # Primary terminal environments and shell prompt integration
       # ============================================================================
       pkgs.ghostty
       pkgs.alacritty
+      pkgs.xplr
       pkgs.yazi
       pkgs.starship
       pkgs.atuin
@@ -76,7 +72,6 @@
       
       # ============================================================================
       # 4. GUI APPLICATIONS
-      # Graphical user interface applications
       # ============================================================================
       pkgs.bitwarden-desktop
       pkgs.vesktop
@@ -85,7 +80,6 @@
     
       # ============================================================================
       # 5. GAMING, PROTON & WINE ENVIRONMENT
-      # Windows compatibility runtimes and gaming performance tools
       # ============================================================================
       pkgs.lutris
       pkgs.protonup-ng
@@ -95,13 +89,11 @@
     
       # ============================================================================
       # 6. MEDIA PLAYBACK, CAPTURE, RECORDING & EDITING
-      # Higher-level players/recorders first down to core media codecs and libraries
       # ============================================================================
       # Higher-Level GUI & CLI Players
       pkgs.mpv
       pkgs.imv
       pkgs.mpd
-      # Media Keybinds CLI (Play, Pause, Stop)
       pkgs.playerctl
     
       # Screen & Capture Utilities
@@ -127,7 +119,6 @@
     
       # ============================================================================
       # 7. AUDIO, NETWORK & HARDWARE MONITORING
-      # Audio routing, network diagnostics, and hardware monitoring
       # ============================================================================
       pkgs.easyeffects
       pkgs.helvum
@@ -139,13 +130,35 @@
       pkgs.wavemon
     
       # ============================================================================
-      # 8. DEVELOPMENT TOOLCHAIN & ENVIRONMENT BOOTSTRAPPING
-      # Interactive dev tools, shell engines, and AI helpers
+      # C / C++ TOOLCHAIN & COMPILERS
       # ============================================================================
+      pkgs.gcc                        # Standard GNU C/C++ compiler suite
+      pkgs.clang                      # LLVM C/C++ compiler suite
+      pkgs.gdb                        # GNU Debugger
+      pkgs.lldb                       # LLVM Debugger
+      pkgs.cmake                      # Modern C/C++ build system
+      pkgs.ninja                      # Fast parallel build tool
+      pkgs.gnumake                    # Traditional Makefile tool
+      pkgs.pkg-config                 # Shared library discovery utility
+      pkgs.bear                       # Generates compile_commands.json for LSP indexing
+
+      # ============================================================================
+      # C / C++ LSP, FORMATTERS, & DIAGNOSTICS
+      # ============================================================================
+      pkgs.llvmPackages.clang-tools   # Provides clangd (LSP), clang-format, & clang-tidy
+      pkgs.cppcheck                   # Static analysis & linting for C/C++
+      pkgs.valgrind                   # Memory leak detection & profiling
+
+      # ============================================================================
+      # 8. DEVELOPMENT TOOLCHAIN & ENVIRONMENT BOOTSTRAPPING
+      # ============================================================================
+      pkgs.devenv
       pkgs.jujutsu
       pkgs.git
       pkgs.gh
-      pkgs.devenv
+      pkgs.bacon
+      pkgs.cargo-edit
+      pkgs.cargo-expand
       pkgs.just
       pkgs.bun
       pkgs.repomix # Nix Config to XML
@@ -157,7 +170,6 @@
     
       # ============================================================================
       # 9. CLI NAVIGATION, MANIPULATION & HELPER UTILITIES
-      # Searchers, clipboard tools, file helpers, and text utilities
       # ============================================================================
       pkgs.binutils
       pkgs.pciutils
@@ -188,9 +200,7 @@
     
       # ============================================================================
       # DISABLED PACKAGES (ORGANIZED BY SUBCATEGORY)
-      # Preserved for reference, development testing, or future re-activation
       # ============================================================================
-    
       # pkgs.sway
       # pkgs.delicious-sddm-theme
       # pkgs.wine
@@ -205,25 +215,17 @@
       # pkgs.hyprshot
       # pkgs.hyprpicker
       # pkgs.hyprpaper
-    
-      # --- Disabled: Development, Compilers & Debuggers ---
-      # pkgs.stdenv.cc
-      # pkgs.gnumake
-      # pkgs.cmake
-      # pkgs.pkg-config
-      # pkgs.gdb
-      # pkgs.valgrind
     ]
     ++ [
       # ============================================================================
       # ACTIVE FLAKE INPUTS & HARDWARE ACCELERATION TOOLCHAINS
       # ============================================================================
       inputs.zen-browser.packages.${pkgs.system}.default
-      # inputs.nvf.packages.${pkgs.system}.default
       inputs.llm-agents.packages.${pkgs.system}.default
       Cuda.cuda_nvcc
       Cuda.cudatoolkit
       # --- Disabled Flake Inputs ---
+      # inputs.nvf.packages.${pkgs.system}.default
     ];
   };
 }

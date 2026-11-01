@@ -15,12 +15,12 @@
     in
     [
       epkgs.use-package
-      epkgs.meow
       epkgs.doom-themes
       epkgs.doom-modeline
       epkgs.dashboard
-      epkgs.which-key
       epkgs.nerd-icons
+      epkgs.helix
+      epkgs.which-key
       epkgs.vertico
       epkgs.marginalia
       epkgs.consult
@@ -38,7 +38,6 @@
       (fpkgs "image-roll" inputs.image-roll [ ])
       (fpkgs "majutsu" inputs.majutsu [ epkgs.magit epkgs.consult epkgs.plz epkgs.transient ])
       (fpkgs "helix" inputs.helix-mode [ ])
-      # (fpkgs "doom-dashboard" inputs.doom-dashboard [ epkgs.dashboard epkgs.nerd-icons ])
     ]);
   in
   {

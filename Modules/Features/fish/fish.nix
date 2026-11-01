@@ -88,6 +88,19 @@
             end
           '';
         };
+        dl = {
+          description = "Launch Sandboxed DOOM";
+          body = ''
+            set -lx EMACSDIR "$HOME/DOOM/emacs.d"
+            set -lx DOOMDIR "$HOME/DOOM/doom.d"
+            set -lx DOOMLOCALDIR "$HOME/DOOM/.local"
+            if test (count $argv) -gt 0
+                "$HOME/DOOM/emacs.d/bin/doom" $argv
+            else
+                emacs
+            end
+          '';
+        };
       };
 
       shellAliases = {

@@ -1,6 +1,6 @@
 ;;; emacs.d/init.el -*- lexical-binding: t; -*-
  
-  ;; --- 1. Package & Environment Setup ---
+;; --- 1. Package & Environment Setup ---
 (setenv "PATH" (concat (getenv "PATH") ":/run/current-system/sw/bin:~/.nix-profile/bin"))
 (setq exec-path (append exec-path '("/run/current-system/sw/bin" "~/.nix-profile/bin")))
 
@@ -79,16 +79,6 @@
                   (dashboard-open))))
   (setq initial-buffer-choice #'dashboard-open))
 
-; (use-package which-key
-;   :ensure nil ; Crucial for Nix! Tells Emacs not to try downloading it via MELPA
-;   :init
-;   (which-key-mode)
-;   :config
-;   (setq which-key-idle-delay 0.2)
-;   ;; Add any other which-key visual configurations here
-;   (setq which-key-popup-type 'side-window)
-;   (setq which-key-side-window-location 'bottom))
-
 ;; Helix-Mode
 (use-package helix
   :demand t
@@ -123,7 +113,9 @@
   (corfu-auto t)
   (corfu-quit-no-match t))
 
+;; added demand t
 (use-package org
+  :demand t
   :config
   (setq org-directory "~/Notes/Org/"
         org-agenda-files (list org-directory)
@@ -147,10 +139,13 @@
           (file . find-file)
           (wl . wl-other-frame))))
 
-(use-package org-modern
-  :hook (org-mode . org-modern-mode))
-
+;; commented out
+;; (use-package org-modern
+;;   :hook (org-mode . org-modern-mode))
+ 
+;; added demand t
 (use-package org-superstar
+  :demand t
   :hook (org-mode . org-superstar-mode)
   :custom
   (org-superstar-headline-bullets-list '("◉" "○" "✸" "✿" "•"))
