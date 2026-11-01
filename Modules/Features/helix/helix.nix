@@ -4,7 +4,6 @@
 { 
   flake.nixosModules.helix = { pkgs, ... }:
   let
-    # Helix
     helixConfig = ./config.toml;
     helixLanguages = ./languages.toml;
     helixTheme = ./theme.toml;
@@ -16,11 +15,11 @@
         mv $out/bin/hx $out/bin/sx 
       '';    
     };
-    # Steel
+    Rust = pkgs.rust-bin.stable.latest.default.override {
+      extensions = [ "rust-src" "rust-analyzer" "clippy" "rustfmt" ];
+    };
+    initSCM = ./init.scm;
     steelSCM = ./steel.scm;
-    steelInit = ./init.scm;
-    steelSplash = ./splash.scm;
-    # EFM Diagnostics Proxy
     efmConfig = ./efm-langserver.yaml;
   in
   {
@@ -39,9 +38,7 @@
       pkgs.statix
       pkgs.nixfmt-rs
       # RUST
-      pkgs.rust-analyzer
-      pkgs.clippy
-      pkgs.bacon
+      Rust
       # SHELL
       pkgs.fish-lsp
       pkgs.bash-language-server        
@@ -81,9 +78,8 @@
       "L+ /home/ty/.config/helix/config.toml - - - - ${helixConfig}"
       "L+ /home/ty/.config/helix/languages.toml - - - - ${helixLanguages}"
       "L+ /home/ty/.config/helix/themes/base16_custom.toml - - - - ${helixTheme}"
+      "L+ /home/ty/.config/helix/init.scm - - - - ${initSCM}"
       "L+ /home/ty/.config/helix/helix.scm - - - - ${steelSCM}"
-      "L+ /home/ty/.config/helix/init.scm - - - - ${steelInit}"
-      "L+ /home/ty/.config/helix/splash.scm - - - - ${steelSplash}"
       "L+ /home/ty/.config/efm-langserver/config.yaml - - - - ${efmConfig}"
     ];
   };

@@ -22,6 +22,12 @@
         (fpkgs "image-roll" inputs.image-roll [ ])
         (fpkgs "majutsu" inputs.majutsu [ epkgs.magit epkgs.consult epkgs.plz epkgs.transient ])
         (fpkgs "helix" inputs.helix-mode [ ])
+        # (fpkgs "evil" (pkgs.lib.cleanSourceWith {
+        #   src = inputs.evil-stripped;
+        #   filter = path: type: 
+        #     let base = baseNameOf path;
+        #     in !(builtins.match ".*test.*" base != null || base == "evil-tests.el");
+        # }) [ epkgs.goto-chg ])
       ];
     };
   in

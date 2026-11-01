@@ -7,6 +7,7 @@
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-26.05";
     flake-parts.url = "github:hercules-ci/flake-parts";
     import-tree.url = "github:denful/import-tree";
+    rust-overlay.url = "github:oxalica/rust-overlay";
     emacs-overlay.url = "github:nix-community/emacs-overlay";
     rusty-clip.url = "github:OG-OXY/rusty-clip";
     llm-agents.url = "path:./Flakes/LLM-Agents";
@@ -45,6 +46,10 @@
     };
     hel = {
       url = "github:helheim-emacs/hel";
+      flake = false;
+    };
+    evil-stripped = {
+      url = "github:OG-OXY/evil-stripped";
       flake = false;
     };
     ##

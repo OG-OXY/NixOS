@@ -12,23 +12,35 @@
 ;; --- Core Paths ---
 (setq org-directory "~/Notes/Org/")
 (setq org-agenda-files (list org-directory))
+; (use-package! evil)
+; (after! evil
+;   ;; Disable default state overrides if your stripped fork handles keymaps differently
+;   (setq evil-want-keybinding nil)
+  
+;   ;; Initialize your custom evil fork mode
+;   (evil-mode 1)
+
+;   ;; Coordinate your custom evil bindings alongside your helix-mode setup
+;   (map! :map evil-normal-state-map
+;         "SPC" doom-leader-map
+;         "C-w" doom-leader-map))
 
 ; (after! evil
 ;   (setq evil-collection-mode-list nil) 
 ;   (evil-mode -1))
 
-;; --- Helix Modal Editing Mode Configuration ---
-; (after! helix
-;   (helix-mode +1)
-;   (add-hook! 'helix-normal-mode-hook
-;        (setq display-line-numbers 'relative
-;              cursor-type 'box))
-;   (add-hook! 'helix-insert-mode-hook
-;        (setq display-line-numbers t
-;              cursor-type 'bar))
-;   (map! :map helix-normal-mode-map
-;         "SPC" doom-leader-map
-; 		"C-w" doom-leader-map))
+; --- Helix Modal Editing Mode Configuration ---
+ (after! helix
+   (helix-mode +1)
+   (add-hook! 'helix-normal-mode-hook
+        (setq display-line-numbers 'relative
+              cursor-type 'box))
+   (add-hook! 'helix-insert-mode-hook
+        (setq display-line-numbers t
+              cursor-type 'bar)))
+   ; (map! :map helix-normal-mode-map
+   ;       "SPC" doom-leader-map
+ 		; "C-w" doom-leader-map))
 
 ;; --- Org-mode Visual & Functional Settings ---
 (after! org

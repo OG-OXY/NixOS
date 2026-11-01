@@ -48,6 +48,13 @@ e = [
   ":open %sh{cat /tmp/unique-file-zjf947h2d7}",
   ":redraw",
 ]
+
+[keys.normal."+"]
+m = ":run-shell-command echo 2"
+c = ":run-shell-command cargo build"
+t = ":run-shell-command cargo test"
+n = ":run-shell-command echo 3"
+
 # E = [
 #   ":sh rm -f /tmp/unique-file-h34s3hz657",
 #   ":insert-output yazi '%{workspace_directory}' --chooser-file=/tmp/unique-file-h34s3hz657", 
