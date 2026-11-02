@@ -1,21 +1,26 @@
-;; imit.scm
 (require-builtin steel/random as rand::)
-(require "keymaps.scm")
 (require (prefix-in helix. "helix/commands.scm"))
 (require (prefix-in helix.static. "helix/static.scm"))
 (require "helix/configuration.scm")
-(require "helix.scm")
-(require "splash.scm")
-(require "recentf.scm")
+(require "helix/keymaps.scm")
 (require "helix-file-watcher/file-watcher.scm")
+(require "recentf-hx/recentf.scm")
+(require "splash-hx/splash.scm")
+(require "steel-pty/term.scm")
 (require "file-tree.scm")
-(require "term.scm")
+(require "focus.scm")
+(require "git-status-picker.scm")
+(require "labelled-buffers.scm")
+(require "package.scm")
+(require "picker.scm")
+(require "scheme-indent.scm")
+(require "helix.scm")
 
 ;; Shell
-(set-default-shell! "/bin/fish")
+(set-default-shell! "/run/current-system/sw/bin/fish")
 
 ;; Dashboard
-(when (equal? (command-line) '("sx")) 
+(when (equal? (command-line) '("hx")) 
   (show-splash))
 
 ;; Recent Files + Watcher 

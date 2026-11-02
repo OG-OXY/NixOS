@@ -247,7 +247,6 @@ binds {
 /// Ctrl+Alt+Delete { quit; }
 // spawn-at-startup "ghostty" "-e" "fish" "-i" "-C" "tmux new-session -A -s main"
 // Mod+R { spawn "sh" "-c" "pkill wofi || wofi --show run"; }
-// Mod+D { spawn "noctalia-shell" "toggle-menu"; }
 // Mod+D { spawn "sh" "-c" "pkill wofi || wofi --show drun"; }
 // Mod+B { spawn "zen-beta"; }
 // Mod+V { spawn "vesktop"; }

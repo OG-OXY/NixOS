@@ -1,5 +1,4 @@
 ;;;  doom.d/config.el -*- lexical-binding: t; -*-
-
 ;; --- 1. Package & Environment Setup ---
 (setenv "PATH" (concat (getenv "PATH") ":/run/current-system/sw/bin:~/.nix-profile/bin"))
 (setq exec-path (append exec-path '("/run/current-system/sw/bin" "~/.nix-profile/bin")))
@@ -13,7 +12,6 @@
 (setq org-directory "~/Notes/Org/")
 (setq org-agenda-files (list org-directory))
 
-; (use-package! evil)
 ; (after! evil
 ;   ;; Disable default state overrides if your stripped fork handles keymaps differently
 ;   (setq evil-want-keybinding nil)
@@ -31,14 +29,14 @@
 ;   (evil-mode -1))
 
 ; --- Helix Modal Editing Mode Configuration ---
- (after! helix
-   (helix-mode +1)
-   (add-hook! 'helix-normal-mode-hook
-        (setq display-line-numbers 'relative
+(after! helix
+  (helix-mode)
+  (add-hook! 'helix-normal-mode-hook
+       (setq display-line-numbers 'relative
               cursor-type 'box))
-   (add-hook! 'helix-insert-mode-hook
-        (setq display-line-numbers t
-              cursor-type 'bar)))
+  (add-hook! 'helix-insert-mode-hook
+       (setq display-line-numbers t
+             cursor-type 'bar)))
    ; (map! :map helix-normal-mode-map
    ;       "SPC" doom-leader-map
  		; "C-w" doom-leader-map))

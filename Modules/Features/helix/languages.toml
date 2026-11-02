@@ -8,7 +8,8 @@ args = [ "lsp" ]
 [[language]]
 name = "nix"
 auto-format = false
-language-servers = [ "nixd", "efm" ]
+language-servers = [ "nixd", "efm", "deadnix", "statix" ]
+formatter = { command = "nixfmt" }
 
 [[language]]
 name = "yaml"

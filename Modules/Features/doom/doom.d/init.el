@@ -1,4 +1,4 @@
-;; doom.d/init.el
+;;; doom.d/init.el
 (doom!
 	:input
 	;; layout
@@ -20,8 +20,8 @@
 	(vc-gutter +pretty)
 	
 	:editor
-	(evil +everywhere)
-	; (evil +everywhere +multiple-cursors)
+	; (evil +everywhere)
+	(evil +everywhere +multiple-cursors)
 	; evil
 	file-templates
 	snippets

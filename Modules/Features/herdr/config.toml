@@ -4,15 +4,66 @@ onboarding = false
 name = "terminal"
 
 [ui]
+host_cursor = "native"
+accent = "magenta"
 status_indicators = "symbols"
+prompt_new_workspace_name = true
+pane_gaps = true
+pane_scrollbars = false
+pane_outer_borders = false
+hide_tab_bar_when_single_tab = true
+sidebar_start_collapsed = true
+sidebar_collapsed_mode = "hidden"
+agent_panel_sort = "priority"
+show_agent_labels_on_pane_borders = true
+tab_bar_position = "bottom"
+tab_bar_right_seperator = "|"
+tab_bar_right = [ "hostname", "datetime", "text", "command", "zoom" ]
+confirm_close = false
+
+[ui.sidebar.agents]
+row_gap = 0
+rows = [["state_icon", "machine", "tab", "state_text" ], [ "agent" ]]
+
+[ui.sidebar.spaces]
+row_gap = 0
+rows = [[ "state_icon", "workspace" ], [ "branch", "git_status" ], [ "branch", "$jj_status" ]]
 
 [ui.sound]
 enabled = true
 
+[ui.sound.agents]
+droid = "off"
+
 [ui.toast]
-delivery = "herdr"
+delivery = "system"
+delay_seconds = 1
+
+[ui.toast.herdr]
+position = "bottom-right"
+
+[ui.toast.clipboard]
+enabled = true
+position = "bottom-center"
 
 [keys]
 prefix = "ctrl+space"
 move_tab_previous = "prefix+shift+h"
 move_tab_next = "prefix+shift+l"
+split = "prefix+V"
+settings = ""
+
+
+
+[session]
+resume_agents_on_restore = true
+startup_per_agent_delay_ms = 100
+
+[experimental]
+pane_history = true
+reveal_hidden_cursor_for_cjk_ime = true
+cjk_ime_cursor_shape = "block"
+
+
+[advanced]
+scrollback_limit_bytes = 10000000
