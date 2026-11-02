@@ -27,7 +27,7 @@
       # 1. CORE SYSTEM, DISPLAY & DESKTOP SUITE
       # ============================================================================
       pkgs.xwayland-satellite
-      pkgs.noctalia-shell
+      pkgs.noctalia
       pkgs.polkit_gnome
       pkgs.pinentry-qt
       pkgs.libnotify
