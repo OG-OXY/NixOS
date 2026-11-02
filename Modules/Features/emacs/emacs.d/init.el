@@ -87,7 +87,7 @@
          (helix-insert-mode . (lambda () (setq cursor-type 'bar)))
          (helix-insert-mode . (lambda () (setq display-line-numbers t))))
   :config
-  (helix-mode))
+  (helix-mode 1))
   
 ;; --- 2. Completion (Vertico / Corfu / Orderless) ---
 (use-package vertico

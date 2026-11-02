@@ -12,6 +12,7 @@
 ;; --- Core Paths ---
 (setq org-directory "~/Notes/Org/")
 (setq org-agenda-files (list org-directory))
+
 ; (use-package! evil)
 ; (after! evil
 ;   ;; Disable default state overrides if your stripped fork handles keymaps differently

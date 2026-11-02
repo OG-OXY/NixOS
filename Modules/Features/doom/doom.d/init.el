@@ -20,7 +20,7 @@
 	(vc-gutter +pretty)
 	
 	:editor
-	; (evil +everywhere)
+	(evil +everywhere)
 	; (evil +everywhere +multiple-cursors)
 	; evil
 	file-templates

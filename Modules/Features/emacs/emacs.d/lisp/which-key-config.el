@@ -11,4 +11,9 @@
 (defvar my-leader-map (make-sparse-keymap) "Main leader map.")
 (keymap-global-set "C-c m" my-leader-map)
 
+(use-package perspective
+  :ensure nil
+  :config
+  (setq persp-suppress-no-prefix-key-warning t))
+
 (provide 'which-key-config)
