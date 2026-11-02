@@ -1,3 +1,4 @@
+# doom.nix
 {
  inputs,
   ...

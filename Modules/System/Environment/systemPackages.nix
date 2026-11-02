@@ -14,7 +14,7 @@
         ffmpeg = pkgs.ffmpeg_6;
       };
       llama = pkgs.llama-cpp-cuda.overrideAttrs (oldAttrs: {
-        cmakeFlags = (oldAttrs.cmakeFlags or [ ]) ++ [
+        cmakeFlags = (oldAttrs.cmakeFlags or []) ++ [
           "-DGGML_CUDA=ON"
           "-DCMAKE_CUDA_ARCHITECTURES=61"
           "-DGGML_CUDA_FORCE_MMQ=ON"
@@ -35,6 +35,7 @@
       pkgs.gnutls
       pkgs.xinit
       pkgs.xhost    
+      pkgs.sqlite
       Kde.kwin
       Kde.qtdeclarative
       Kde.qtsvg
@@ -163,7 +164,6 @@
       pkgs.bun
       pkgs.repomix # Nix Config to XML
       llama
-      pkgs.aider-chat
       pkgs.geminicommit
       py3.huggingface-hub
       pkgs.watchman

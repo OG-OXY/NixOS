@@ -13,11 +13,14 @@
           config = {
             allowUnfree = true;
             cudaSupport = true;
-            cudaCapabilities = ["6.1"];
+            cudaCapabilities = [ "6.1" ];
             permittedInsecurePackages = [
               "electron-39.8.10"
               "ventoy-1.1.18"
             ];
+            problems.handlers = {
+              "gtk+".broken = "warn";
+            };
           };
           overlays = [
             (_final: prev: 

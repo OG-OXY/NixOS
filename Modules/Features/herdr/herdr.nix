@@ -17,7 +17,6 @@
     # Superior tmpfiles approach
     systemd.tmpfiles.rules = [
       "d /home/ty/.config/herdr 0755 ty users -"
-      #should probably use C+ instead ("+" means force so that even if theres a file already there it still writed to config)
       "C+ /home/ty/.config/herdr/config.toml 0644 ty users - ${herdrConfig}"
     ];
   };

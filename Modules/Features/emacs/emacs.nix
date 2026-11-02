@@ -1,3 +1,4 @@
+# emacs.nix
 {
   inputs,
   ...
@@ -25,12 +26,15 @@
       epkgs.marginalia
       epkgs.consult
       epkgs.perspective
+      epkgs.projectile
       epkgs.orderless
       epkgs.corfu
       epkgs.org-roam
       epkgs.org-appear
       epkgs.org-modern
       epkgs.org-superstar
+      epkgs.emacsql
+      epkgs.forge
       epkgs.pandoc-mode
       epkgs.undo-fu-session
       epkgs.helpful

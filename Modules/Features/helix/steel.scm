@@ -8,7 +8,7 @@
 
 (require "package.scm")
 
-; (require "cogs/themes/spacemacs.scm")
+(require "themes/spacemacs.scm")
 
 ;; Register helix packages - these will be dynamically
 ;; required in the global environment when this file is required.
@@ -17,7 +17,7 @@
 ;; when using this mechanism. We log it, but otherwise Helix will continue
 ;; on business as usual. Keep that in mind if blindly copying this
 ;; configuration.
-(load-package "term.scm")
+(load-package "cogs/steel-pty/term.scm")
 (load-package "cogs/file-tree.scm")
 (load-package "cogs/recentf.scm")
 (load-package "cogs/git-status-picker.scm")
@@ -183,7 +183,7 @@
 ;;    (hash "P" ":lam"))
 ;; ```
 (define (make-minor-mode! modifier bindings)
-  (~> (hash "normal" (hash modifier bindings)) (value->jsexpr-string) (error "DEPRECATE ME")))
+  (~> (hash "normal" (hash modifier bindings)) (value->jsexpr-string)))
 ; (helix.keybindings.set-keybindings!)))
 
 (define-syntax minor-mode!
@@ -251,22 +251,21 @@
 ; (minor-mode! "+" ("l" => lam)
 ;                  ("q" => (set-theme-dracula lam)))
 
-;; (minor-mode! "P"
-;; ("l" => lam)
-;;           ("p" => highlight-to-matching-paren)
-;;           ("d" => delete-sexpr)
-;;           ("r" => run-expr)
-; ("t" => run-prompt)
-;; ("t" => test-component)
-;;          )
+(minor-mode! "P"
+("l" => lam)
+          ("p" => highlight-to-matching-paren)
+          ("d" => delete-sexpr)
+          ("r" => run-expr)
+("t" => run-prompt)
+("t" => test-component))
 
 ; (make-minor-mode! "+" (hash "l" ":lam"))
 
 (define (git-status)
   (helix.run-shell-command "git" "status"))
 
-; (minor-mode! "G" ("s" => git-status))
-; (minor-mode! "C-r" ("f" => recentf-open-files))
+(minor-mode! "G" ("s" => git-status))
+(minor-mode! "C-r" ("f" => recentf-open-files))
 
 ;;@doc
 ;; Open the helix.scm file

@@ -1,5 +1,4 @@
 ;;; emacs.d/init.el -*- lexical-binding: t; -*-
- 
 ;; --- 1. Package & Environment Setup ---
 (setenv "PATH" (concat (getenv "PATH") ":/run/current-system/sw/bin:~/.nix-profile/bin"))
 (setq exec-path (append exec-path '("/run/current-system/sw/bin" "~/.nix-profile/bin")))
@@ -9,9 +8,12 @@
 (require 'use-package)
 (setq use-package-always-ensure nil)
 
-(require 'which-key-config)
-(require 'buffer-load)
-(require 'buffer-map)
+(require 'my-which-key)
+(require 'my-autoload)
+(require 'my-persp)
+(require 'my-consult)
+(require 'my-buffer-map)
+(require 'my-buffer-load)
 
 ;; Basic UI cleanup & startup tweaks
 (scroll-bar-mode -1)
@@ -24,14 +26,20 @@
 (load-theme 'doom-one t)
 (doom-modeline-mode 1)
 
+;; Org-Roam Dependency
+(require 'emacsql)
+(use-package emacsql
+  :demand t)
+
+(use-package emacsql-sqlite
+  :demand t)
+
 ;; --- 1. Icon Dependency ---
 (use-package nerd-icons
-  :ensure nil
   :demand t)
 
 ;; --- 2. Clean Vanilla Dashboard Setup ---
 (use-package dashboard
-  :ensure nil
   :demand t
   :after nerd-icons
   :custom
@@ -87,33 +95,42 @@
          (helix-insert-mode . (lambda () (setq cursor-type 'bar)))
          (helix-insert-mode . (lambda () (setq display-line-numbers t))))
   :config
-  (helix-mode 1))
+  (helix-mode))
   
+(use-package projectile
+  :demand t
+  :config
+  (setq projectile-known-projects-file "~/.local/state/emacs/projectile-bookmarks.eld"
+        projectile-cache-file "~/.local/state/emacs/projectile.cache"))
+; 
 ;; --- 2. Completion (Vertico / Corfu / Orderless) ---
 (use-package vertico
+  :demand t
   :init (vertico-mode 1))
 
 (use-package marginalia
+  :demand t
   :init (marginalia-mode 1))
 
-(use-package consult
-  :bind (("C-s" . consult-line)
-         ("C-x b" . consult-buffer)))
+; (use-package consult
+;   :bind (("C-s" . consult-line)
+;          ("C-x b" . consult-buffer)))
 
 (use-package orderless
+  :demand t
   :custom
   (completion-styles '(orderless basic))
   (completion-category-defaults nil)
   (completion-category-overrides '((file (styles partial-completion)))))
 
 (use-package corfu
+  :demand t
   :init
   (global-corfu-mode 1)
   :custom
   (corfu-auto t)
   (corfu-quit-no-match t))
 
-;; added demand t
 (use-package org
   :demand t
   :config
@@ -141,9 +158,9 @@
 
 ;; commented out
 ;; (use-package org-modern
+;;   :demand t
 ;;   :hook (org-mode . org-modern-mode))
  
-;; added demand t
 (use-package org-superstar
   :demand t
   :hook (org-mode . org-superstar-mode)
@@ -152,6 +169,7 @@
   (org-superstar-special-item-bullet-alist '((?- . "•") (?+ . "➤"))))
 
 (use-package org-appear
+  :demand t
   :hook (org-mode . org-appear-mode)
   :custom
   (org-appear-auto-emphasis t)
@@ -159,13 +177,18 @@
   (org-appear-autosubmarkers t))
 
 (use-package org-roam
+  :demand t
+  :after emacsql
   :custom
+  (setq org-roam-database-connector 'sqlite-builtin)
+  (setq org-roam-db-location "~/.emacs.d/org-roam.db")
   (org-roam-directory (expand-file-name "Roam" org-directory))
   :bind (("C-c n l" . org-roam-buffer-toggle)
          ("C-c n f" . org-roam-node-find)
          ("C-c n i" . org-roam-node-insert))
   :config
-  (org-roam-setup))
+  (org-roam-setup)
+  (org-roam-db-autosync-mode))
 
 ;; --- 5. Pandoc & Markdown Integration ---
 (use-package pandoc-mode
@@ -182,7 +205,6 @@
   :hook (image-mode . image-roll-mode))
 
 (use-package helpful
-  :ensure nil
   :demand t
   :bind
   ([remap describe-function] . helpful-callable)

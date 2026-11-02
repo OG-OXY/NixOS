@@ -9,7 +9,7 @@
       enable = true;
       settings = {
         anchor = "center";
-        font = "JetBrainsMono NFM 12";
+        font = "JetBrainsMono NFM 20";
       };
       menus = {
         warp = [
@@ -33,7 +33,7 @@
           {
             key = "l";
             desc = "Launcher";
-            cmd = "${pkgs.noctalia-shell}/bin/noctalia-shell ipc call launcher toggle";
+            cmd = "${pkgs.noctalia}/bin/noctalia msg panel-toggle launcher";
           }
           {
             key = "h";
@@ -63,7 +63,7 @@
           {
             key = "o";
             desc = "Obsidian";
-            cmd = "${pkgs.obsidian}/bin/obsidian /home/ty/Notes/Vault";
+            cmd = "${pkgs.obsidian}/bin/obsidian /home/ty/Notes/Obsidian";
           }
           {
             key = "v";

@@ -41,15 +41,15 @@
               '';
             };
           };
-          noctalia-shell = {
-            description = "Noctalia Shell Bar Daemon";
+          noctalia = {
+            description = "Noctalia Bar Daemon";
             wantedBy = [ "graphical-session.target" ];
             wants = [ "graphical-session.target" ];
             after = [ "graphical-session.target" "dbus.socket" ];
             requires = [ "dbus.socket" ];
             serviceConfig = {
               Type = "simple";
-              ExecStart = "${pkgs.noctalia-shell}/bin/noctalia-shell";
+              ExecStart = "${pkgs.noctalia}/bin/noctalia";
               Restart = "on-failure";
               RestartSec = 1;
               TimeoutStopSec = 10;
