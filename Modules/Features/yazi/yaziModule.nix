@@ -59,6 +59,29 @@
       tab_active   = { fg = "#161616", bg = "#00d8b6", bold = true }
       tab_inactive = { fg = "#e2e8f0", bg = "#23252e" }
 
+      [opener]
+      # EDIT = [
+      #     { run = 'hx "%s"', block = true, desc = "Helix", for = "unix" }
+      # ]
+      # VIEW =[
+      #     { run = 'glow -p "%s"', block = true, desc = "Glow", for = "unix" }
+      # ]
+      # IMV = [
+      #     { run = 'imv "%s"', orphan = true, desc = "View Image", for = "unix" }
+      # ]
+      # MPV = [
+      #     { run = 'mpv "%s"', orphan = true,  desc = "Play", for = "unix" }
+      # ]
+
+      # [open]
+      # rules = [
+      #     # { mime = "text/*", use =  [ "EDIT", "VIEW" ] },
+      #     { mime = "image/*", use = "MPV" },
+      #     { mime = "video/*", use = "MPV" }
+      #     # { url = "*.md", use = [ "VIEW", "EDIT" ] },
+      #     # { url = "*.org", use = [ "VIEW", "EDIT" ] }
+      # ]
+
       [status]
       separator_open  = ""
       separator_close = ""
@@ -110,12 +133,17 @@
       deleted  = { fg = "#f06449", bold = true }
       added    = { fg = "#00c853" }
       untracked = { fg = "#fadb14" }
+
+      [plugin]
+      # prepend_previewers = [
+      #     { mime = "text/markdown", run = "glow" },
+      #     { url = "*.md", run = "glow" },
+      #     { mime = "text/org", run = "glow" },
+      #     { url = "*.org", run = "glow" }
+      # ]
+
       [[plugin.prepend_fetchers]]
       url   = "*"
-      run   = "git"
-      group = "git"
-      [[plugin.prepend_fetchers]]
-      url   = "*/"
       run   = "git"
       group = "git"
     '';

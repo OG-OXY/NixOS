@@ -180,7 +180,7 @@
   :demand t
   :after emacsql
   :custom
-  (setq org-roam-database-connector 'sqlite-builtin)
+  ; (setq org-roam-database-connector 'sqlite-builtin)
   (setq org-roam-db-location "~/.emacs.d/org-roam.db")
   (org-roam-directory (expand-file-name "Roam" org-directory))
   :bind (("C-c n l" . org-roam-buffer-toggle)

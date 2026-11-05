@@ -4,7 +4,7 @@
 (require "helix/editor.scm")
 
 (require "helix/misc.scm")
-(require "keymaps.scm")
+(require "helix/keymaps.scm")
 
 (require "package.scm")
 
@@ -17,15 +17,16 @@
 ;; when using this mechanism. We log it, but otherwise Helix will continue
 ;; on business as usual. Keep that in mind if blindly copying this
 ;; configuration.
-(load-package "cogs/steel-pty/term.scm")
-(load-package "cogs/file-tree.scm")
-(load-package "cogs/recentf.scm")
-(load-package "cogs/git-status-picker.scm")
-(load-package "cogs/scheme-indent.scm")
-(load-package "cogs/helix-ext.scm")
+;; TODO Move requires from init to here for packages that can be lazy loaded, leave stuff like focus and splash and immediately required UI stuff in init though.
+(load-package "steel-pty/term.scm")
+(load-package "file-tree.scm")
+(load-package "recentf.scm")
+(load-package "git-status-picker.scm")
+(load-package "scheme-indent.scm")
+(load-package "helix-ext.scm")
 
 ;; Additional themes
-(load-package "cogs/themes/spacemacs.scm")
+(load-package "themes/spacemacs.scm")
 
 ;; Make this accessible to the global context
 (provide list-packages)
