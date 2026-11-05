@@ -11,7 +11,7 @@
       ];
       sessionVariables = {
         EDITOR = "hx";
-        VISUAL = "hx";
+        VISUAL = "glow";
       };
       activation.removeLegacyNixArtifacts = ''
         rm -f $HOME/.nix-profile $HOME/.steampath

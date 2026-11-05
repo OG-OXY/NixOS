@@ -38,12 +38,10 @@
 
 ;; Binds
 (keymap (global) 
-  (normal (C-r (f ":recentf-open-files")) (space (t ":open-term") (l ":load-buffer") (o ":eval-sexpr"))))
+  (normal (C-x ":helix.write-buffer-close!") (C-r (f ":recentf-open-files")) (space (t ":open-term") (l ":load-buffer") (o ":eval-sexpr"))))
 
 ;; Hooks
-;; Import the core helix commands namespace
-(require (prefix-in helix. "helix/commands.scm"))
-
+;; Import the core helix commands namespace (require (prefix-in helix. "helix/commands.scm"))
 (define scm-keybindings (hash "insert" (hash "ret" ':scheme-indent "C-l" ':insert-lambda)))
 
 (define standard-keybindings (deep-copy-global-keybindings))

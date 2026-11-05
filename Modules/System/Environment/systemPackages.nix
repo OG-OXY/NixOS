@@ -57,7 +57,6 @@
       # ============================================================================
       pkgs.ghostty
       pkgs.alacritty
-      pkgs.xplr
       pkgs.yazi
       pkgs.starship
       pkgs.atuin
@@ -188,7 +187,7 @@
       pkgs.wget
       pkgs.wget2
       pkgs.aria2
-      pkgs._7zz
+      pkgs._7zz-rar
       pkgs.localsend
       pkgs.wl-clipboard
       pkgs.cliphist

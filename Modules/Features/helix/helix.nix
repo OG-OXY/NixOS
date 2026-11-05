@@ -73,9 +73,6 @@
         pkgs.jq-lsp
         pkgs.jqfmt
       ];
-      # sessionVariables = {
-      #   STEEL_HOME = "$HOME/.config/helix";
-      # };  
     };
     systemd.userLinks = [
       { path = ".config/helix/config.toml"; source = helixConfig; }

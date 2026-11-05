@@ -116,15 +116,22 @@
         steamrun = "gamescope --backend wayland -W 1920 -H 1080 -r 240 -f -e -- steam -gamepadui";
         su = "sudo -i";
         ls = "ls -a";
-        cds = "cd ~/NixOS/nixos";
-        ga = "git add -A";
-        gc = "git commit -m \"\"";
-        gp = "git push -u origin master";
-        gpf = "git push -u --force origin master";
+        cds = "cd ~/NixOS/Master";
+        cdn = "cd ~/Notes";
+        cdc = "cd ~/.config";
+        cdl = "cd ~/.local";
+        cdsh= "cd ~/.local/share";
+        cdb = "cd ~/.local/bin";
+        cdst = "cd ~/.local/state";
+        cdsx = "cd ~/.local/share/steel";
+        # ga = "git add -A";
+        # gc = "git commit -m \"\"";
+        # gp = "git push -u origin master";
+        # gpf = "git push -u --force origin master";
         jl = "jj log";
         jla = "jj l";
-        jdr = "jj diff -r @- | less -R";
-        jd = "jj d | less -R";
+        jdr = "jj diff -r @-";
+        jd = "jj d";
         jbs = "jj bookmark set master -r @";
         jdc = "jj describe -m \"";
         jc = "jj commit -m \"";
@@ -192,6 +199,15 @@
         set -U fish_ambiguous_width 1
         set -U fish_emoji_width 1
         set -gx STARSHIP_SHELL "fish"
+        # fish_helix_key_bindings
+        # function _fish_helix_select_line
+        #   beginning-of-line
+        #   begin-selection
+        #   end-of-line
+        #   repaint-mode
+        # end
+
+        # bind -M default x _fish_helix_select_line
 
         function __devenv_auto_greeting --on-event fish_prompt
             if set -q SHOW_PROJECT_GREETING
@@ -267,6 +283,15 @@
               repo = "fish-you-should-use";
               rev = "master";
               sha256 = "sha256-MmGDFTgxEFgHdX95OjH3jKsVG1hdwo6bRht+Lvvqe5Y=";
+            };
+          }
+          {
+            name = "fish-helix";
+            src = pkgs.fetchFromGitHub {
+              owner = "sshilovsky";
+              repo = "fish-helix";
+              rev = "main";
+              sha256 = "sha256-JqN4IbLpJFBJKNE6haZH2iFSMrLFdVh+Hbl840+xbfU=";
             };
           }
         ];

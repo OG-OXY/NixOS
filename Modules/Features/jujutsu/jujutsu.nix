@@ -23,7 +23,7 @@
         };
         ui = {
           editor = "nvf";
-          paginate = "never"; # or "auto"
+          paginate = "auto"; # or "auto"
         };
         fsmonitor = {
           backend = "watchman";
