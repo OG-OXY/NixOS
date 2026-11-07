@@ -285,15 +285,15 @@
               sha256 = "sha256-MmGDFTgxEFgHdX95OjH3jKsVG1hdwo6bRht+Lvvqe5Y=";
             };
           }
-          {
-            name = "fish-helix";
-            src = pkgs.fetchFromGitHub {
-              owner = "sshilovsky";
-              repo = "fish-helix";
-              rev = "main";
-              sha256 = "sha256-JqN4IbLpJFBJKNE6haZH2iFSMrLFdVh+Hbl840+xbfU=";
-            };
-          }
+          # {
+          #   name = "fish-helix";
+          #   src = pkgs.fetchFromGitHub {
+          #     owner = "sshilovsky";
+          #     repo = "fish-helix";
+          #     rev = "main";
+          #     sha256 = "sha256-JqN4IbLpJFBJKNE6haZH2iFSMrLFdVh+Hbl840+xbfU=";
+          #   };
+          # }
         ];
     };
   };
