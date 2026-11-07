@@ -3,40 +3,13 @@
 }:
 {
   flake.homeModules.fish = { pkgs, lib, ... }:
+  let
+    makeOrg = builtins.readFile ./.fish/makeorg.fish;
+  in
   {
     programs.fish = {
       enable = true;
       functions = {
-        gback = {
-          description = "Safely undo the last Git commit but keep file changes.";
-          body = ''
-            if not git rev-parse --is-inside-work-tree >/dev/null 2>&1
-                echo (set_color red)"❌ Error: Not a git repository!"(set_color normal)
-                return 1
-            end
-                echo (set_color yellow)"⏪ Undoing last commit safely (keeping modifications)..."(set_color normal)       git reset --soft HEAD~1
-                echo (set_color green)"✨ Done! Check 'git status' to see your uncommitted files."(set_color normal)
-          '';
-        };
-        pci = {
-          description = "Ls and Grep PCI ID's";
-          body = ''
-            lspci | grep $argv
-          '';
-        };
-        sysclean = {
-          description = "Clear Nix Generations and Boot";
-          body = ''
-            sudo nix-env --delete-generations +5 --profile /nix/var/nix/profiles/system
-            sudo nh clean all --keep 5
-          '';
-        };
-        wl-copy = {
-          description = "Rusty-Clip!";
-          body = ''
-            rusty-clip $argv
-          '';
-        };
         jor = { 
           description = "Fuzzy select a past operation to RESTORE working copy state";
           body = ''
@@ -51,12 +24,6 @@
             jj op log --no-graph --template 'if(!description.starts_with("args: jj log"), id.short() ++ "\t" ++ user ++ "\t" ++ time.start().ago() ++ "\t" ++ description ++ "\n")' -n 100 | fzf --delimiter="\t" --with-nth=2.. --preview 'jj diff --git --at-op {1}' --preview-window=right:50%
           '';
         };
-        jss = {
-          description = "";
-          body = ''
-            jj workspace snapshot
-          '';
-        };
         gemmy = {
           description = "Gemini-Flash API_KEY Rotation Script (unlimited gemmy flash!)";
           body = ''
@@ -64,7 +31,7 @@
             set -l key_count (count $keys)
             if test $key_count -eq 0 -o "$keys[1]" = ""
                 echo "Error: Gemini keys not found in session environment!"
-                return 1
+           rn 1
             end
     
             set -l selected_key $keys[(math 1 + (random) % $key_count)]
@@ -72,10 +39,6 @@
             echo "=== Launching OpenCode with Gemini Flash, Rotating Keys! ==="
             env GEMINI_API_KEY=$selected_key opencode $argv
           '';
-        };
-        rog = {
-          description = "Apply 240z To ASUS Monitor" ;
-          body = builtins.readFile ./rog.fish;
         };
         logout = {
           description = "Logout of Niri UWSM Session to Greeter";
@@ -88,17 +51,10 @@
             end
           '';
         };
-        dl = {
-          description = "Launch Sandboxed DOOM";
+        makeorg = {
+          description = "Convert all files in PWD from Markdown to Org";
           body = ''
-            set -lx EMACSDIR "$HOME/DOOM/emacs.d"
-            set -lx DOOMDIR "$HOME/DOOM/doom.d"
-            set -lx DOOMLOCALDIR "$HOME/DOOM/.local"
-            if test (count $argv) -gt 0
-                "$HOME/DOOM/emacs.d/bin/doom" $argv
-            else
-                emacs
-            end
+            ${makeOrg}
           '';
         };
       };
@@ -107,6 +63,7 @@
       };
 
       shellAbbrs = {
+        hl = "hx";
         dt = "emacsclient --socket-name=doom -t";
         et = "emacsclient --socket-name=emacs -t";
         ds = "systemctl --user restart doom";        
@@ -124,25 +81,16 @@
         cdb = "cd ~/.local/bin";
         cdst = "cd ~/.local/state";
         cdsx = "cd ~/.local/share/steel";
-        # ga = "git add -A";
-        # gc = "git commit -m \"\"";
-        # gp = "git push -u origin master";
-        # gpf = "git push -u --force origin master";
         jl = "jj log";
         jla = "jj l";
         jdr = "jj diff -r @-";
         jd = "jj d";
-        jbs = "jj bookmark set master -r @";
-        jdc = "jj describe -m \"";
         jc = "jj commit -m \"";
         jmc = "jj new @ origin@master";
+        jbs = "jj bookmark set master -r @";
+        jdc = "jj describe -m \"";
         jgp = "jj git push --all --allow-empty-description";
-        yz = "yazi";
-        nv = "nvf";
-        snv = "sudoedit nvf";
-        v = "vis";
-        sv = "sudoedit vis";
-        sy = "doas yazi";
+        yy = "doas yazi";
         nrs = "nh os switch .";
         nrsu = "nh os switch . --update";
         nrt = "nh os test .";
@@ -194,20 +142,12 @@
       '';
 
       interactiveShellInit = ''
-        set -g fish_greeting "Welcome to NixOS!"
         set -g fish_handle_reflow 1
         set -U fish_ambiguous_width 1
         set -U fish_emoji_width 1
+        # set -g fish_key_bindings fish_helix_key_bindings
         set -gx STARSHIP_SHELL "fish"
-        # fish_helix_key_bindings
-        # function _fish_helix_select_line
-        #   beginning-of-line
-        #   begin-selection
-        #   end-of-line
-        #   repaint-mode
-        # end
-
-        # bind -M default x _fish_helix_select_line
+        set -g fish_greeting "Welcome to NixOS!"
 
         function __devenv_auto_greeting --on-event fish_prompt
             if set -q SHOW_PROJECT_GREETING
@@ -240,61 +180,65 @@
             set -gx ATUIN_CONFIG_DIR "$HOME/.config/atuin"
             ${pkgs.fastfetch}/bin/fastfetch
         end
-        if type -q direnv
-            ${lib.getExe pkgs.direnv} hook fish | source
-        end
+        # Not Needed with Home-manager direnv integrations
+        # Also pretty sure this effects devenv to because devenv uses direnv behind the scenes
+        # if type -q direnv
+        #     ${lib.getExe pkgs.direnv} hook fish | source
+        # end
         if type -q devenv
             ${lib.getExe pkgs.devenv} hook fish | source
         end
-        ${pkgs.starship}/bin/starship init fish | source
-        ${pkgs.zoxide}/bin/zoxide init fish | source
-        ${pkgs.atuin}/bin/atuin init fish | source
+        # Not Needed with home manager integrations
+        # ${pkgs.starship}/bin/starship init fish | source
+        # ${pkgs.zoxide}/bin/zoxide init fish --cmd cd | source
+        # Not how this works. look into atuin-fish-config.fish
+        # ${pkgs.atuin}/bin/atuin init fish | source
       '';
 
       plugins =
-        let
-          fish = pkgs.fishPlugins;
-          mkPlugin = pkg: {
-            name = pkg.pname or pkg.name;
-            src = pkg.src or pkg;
+      let
+        fish = pkgs.fishPlugins;
+        mkPlugin = pkg: {
+          name = pkg.pname or pkg.name;
+          src = pkg.src or pkg;
+        };
+      in
+      (map mkPlugin [
+        fish.bass
+        fish.fzf-fish
+        fish.autopair
+        fish.sponge
+        fish.done
+      ])
+      ++ [
+        {
+          name = "abbreviation-tips";
+          src = pkgs.fetchFromGitHub {
+            owner = "gazorby";
+            repo = "fish-abbreviation-tips";
+            rev = "v0.7.0";
+            sha256 = "sha256-F1t81VliD+v6WEWqj1c1ehFBXzqLyumx5vV46s/FZRU=";
           };
-        in
-        (map mkPlugin [
-          fish.bass
-          fish.fzf-fish
-          fish.autopair
-          fish.sponge
-          fish.done
-        ])
-        ++ [
-          {
-            name = "abbreviation-tips";
-            src = pkgs.fetchFromGitHub {
-              owner = "gazorby";
-              repo = "fish-abbreviation-tips";
-              rev = "v0.7.0";
-              sha256 = "sha256-F1t81VliD+v6WEWqj1c1ehFBXzqLyumx5vV46s/FZRU=";
-            };
-          }
-          {
-            name = "fish-you-should-use";
-            src = pkgs.fetchFromGitHub {
-              owner = "paysonwallach";
-              repo = "fish-you-should-use";
-              rev = "master";
-              sha256 = "sha256-MmGDFTgxEFgHdX95OjH3jKsVG1hdwo6bRht+Lvvqe5Y=";
-            };
-          }
-          # {
-          #   name = "fish-helix";
-          #   src = pkgs.fetchFromGitHub {
-          #     owner = "sshilovsky";
-          #     repo = "fish-helix";
-          #     rev = "main";
-          #     sha256 = "sha256-JqN4IbLpJFBJKNE6haZH2iFSMrLFdVh+Hbl840+xbfU=";
-          #   };
-          # }
-        ];
+        }
+        {
+          name = "fish-you-should-use";
+          src = pkgs.fetchFromGitHub {
+            owner = "paysonwallach";
+            repo = "fish-you-should-use";
+            rev = "master";
+            sha256 = "sha256-MmGDFTgxEFgHdX95OjH3jKsVG1hdwo6bRht+Lvvqe5Y=";
+          };
+        }
+        {
+          name = "fish-helix";
+          src = pkgs.fetchFromGitHub {
+            owner = "sshilovsky";
+            repo = "fish-helix";
+            rev = "main";
+            sha256 = "sha256-JqN4IbLpJFBJKNE6haZH2iFSMrLFdVh+Hbl840+xbfU=";
+          };
+        }
+      ];
     };
   };
 }

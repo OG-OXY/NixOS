@@ -20,6 +20,7 @@
             ];
             problems.handlers = {
               "gtk+".broken = "warn";
+              nu_plugin_highlight.broken = "warn"; # or "ignore"
             };
           };
           overlays = [

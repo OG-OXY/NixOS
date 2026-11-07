@@ -215,19 +215,17 @@
       };
       
       # 2. Link the configuration file natively
-      systemd.tmpfiles.rules = [
-        "d /home/ty/.config/yazi 0755 ty users -"
-        "d /home/ty/.config/yazi/plugins 0755 ty users -"
-        "L+ /home/ty/.config/yazi/plugins/full-border.yazi 0755 ty users - ${yaPack}/full-border.yazi"
-        "L+ /home/ty/.config/yazi/plugins/git.yazi 0755 ty users - ${yaPack}/git.yazi"
-        "L+ /home/ty/.config/yazi/plugins/chmod.yazi 0755 ty users - ${yaPack}/chmod.yazi"
-        "L+ /home/ty/.config/yazi/plugins/smart-filter.yazi 0755 ty users - ${yaPack}/smart-filter.yazi"
-        "L+ /home/ty/.config/yazi/plugins/mount.yazi 0755 ty users - ${yaPack}/mount.yazi"
-        "L+ /home/ty/.config/yazi/plugins/starship.yazi 0755 ty users - ${yaShip}"
-        "L+ /home/ty/.config/yazi/yazi.toml 0644 ty users - ${yaziToml}"
-        "L+ /home/ty/.config/yazi/init.lua 0644 ty users - ${yaziInit}"
-        "L+ /home/ty/.config/yazi/keymap.toml 0644 ty users - ${yaziKeymap}"
-        "L+ /home/ty/.config/yazi/theme.toml 0644 ty users - ${yaziTheme}"
+      systemd.userLinks = [
+        { path = ".config/yazi/plugins/full-border.yazi"; source = "${yaPack}/full-border.yazi"; }
+        { path = ".config/yazi/plugins/git.yazi"; source = "${yaPack}/git.yazi"; }
+        { path = ".config/yazi/plugins/chmod.yazi"; source = "${yaPack}/chmod.yazi"; }
+        { path = ".config/yazi/plugins/smart-filter.yazi"; source = "${yaPack}/smart-filter.yazi"; }
+        { path = ".config/yazi/plugins/mount.yazi"; source = "${yaPack}/mount.yazi"; }
+        { path = ".config/yazi/plugins/starship.yazi"; source = "${yaShip}"; }
+        { path = ".config/yazi/yazi.toml"; source = "${yaziToml}"; }
+        { path = ".config/yazi/init.lua"; source = "${yaziInit}"; }
+        { path = ".config/yazi/keymap.toml"; source = "${yaziKeymap}"; }
+        { path = ".config/yazi/theme.toml"; source = "${yaziTheme}"; }
       ];
     };
   };

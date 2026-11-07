@@ -17,7 +17,6 @@
                   echo -n "$cmd" | ${rustyClip}/bin/rusty-clip # 2>> /tmp/fish_debug.log
               end
           end
-  
           bind -M insert \cy __copy_commandline
           bind \cy __copy_commandline
           
@@ -50,12 +49,13 @@
           # --- 3. Parent Diff Full Inline Execution (Alt+X) ---
           if not functions -q __exec_jj_diff
               function __exec_jj_diff
-                  ${pkgs.jujutsu}/bin/jj diff -r @- | ${pkgs.less}/bin/less -R
+                  ${pkgs.jujutsu}/bin/jj diff -r @- | ${pkgs.glow}/bin/glow -p
                   commandline -f repaint
               end
           end
           bind -M insert \cx __exec_jj_diff
-          bind \cx __exec_jj_diff
+          bind \cj __exec_jj_diff
+
       end
     '';
   in

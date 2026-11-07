@@ -1,6 +1,6 @@
-;;; emacs.d/init.el -*- lexical-binding: t; -*-
+;; emacs.d/init.el -*- lexical-binding: t; -*-
 ;; --- 1. Package & Environment Setup ---
-(setenv "PATH" (concat (getenv "PATH") ":/run/current-system/sw/bin:~/.nix-profile/bin"))
+(setenv "PATH" (concat (getenv "PATH") ":/run/current-system/sw:/run/current-system/sw/bin:/run/current-system/sw/sbin:/run/current-system/sw/lib:/run/current-system/sw/share:/run/current-system/sw/etc:~/.nix-profile/bin"))
 (setq exec-path (append exec-path '("/run/current-system/sw/bin" "~/.nix-profile/bin")))
 
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
@@ -43,31 +43,22 @@
   :demand t
   :after nerd-icons
   :custom
-  ;; Modern Nerd-Icons engine configuration
   (dashboard-icon-type 'nerd-icons)
   (dashboard-display-icons-p t)
   (dashboard-set-heading-icons t)
   (dashboard-set-file-icons t)
   (dashboard-set-navigator-icons t)
-
-  ;; Aesthetic and Text Formatting
   (dashboard-banner-logo-title "E M A C S")
   ; (dashboard-startup-banner 3)
   (dashboard-startup-banner
    (expand-file-name "banners/bcc.txt" user-emacs-directory))
   (dashboard-page-separator "\n\n")
   (dashboard-center-content t)         ;; Centers the layout nicely
-
-  ;; Define your items and how many to show
   (dashboard-items '((recents   . 5)
                      (bookmarks . 5)
                      (projects  . 5)
                      (agenda    . 5)))
-
-  ;; Custom item shortcuts (e.g., press 'r' for recents, 'b' for bookmarks)
   (dashboard-show-shortcuts t)
-
-  ;; Define the exact layout order using core symbols
   (dashboard-startupify-list '(dashboard-insert-banner
                                dashboard-insert-banner-title
                                dashboard-insert-newline
@@ -79,7 +70,9 @@
                                dashboard-insert-footer))
   :config
   (dashboard-setup-startup-hook))
+
 (setq inhibit-startup-screen t)
+
 (if (daemonp)
     (add-hook 'server-after-make-frame-hook
               (lambda ()
@@ -134,7 +127,7 @@
 (use-package org
   :demand t
   :config
-  (setq org-directory "~/Notes/Org/"
+  (setq org-directory "~/Documents/EMACS/"
         org-agenda-files (list org-directory)
         org-src-fontify-natively t
         org-src-tab-acts-natively t
@@ -165,24 +158,24 @@
   :demand t
   :hook (org-mode . org-superstar-mode)
   :custom
-  (org-superstar-headline-bullets-list '("◉" "○" "✸" "✿" "•"))
-  (org-superstar-special-item-bullet-alist '((?- . "•") (?+ . "➤"))))
+  (setq org-superstar-headline-bullets-list '("◉" "○" "✸" "✿" "•")
+        org-superstar-special-item-bullet-alist '((?- . "•") (?+ . "➤"))))
 
 (use-package org-appear
   :demand t
   :hook (org-mode . org-appear-mode)
   :custom
-  (org-appear-auto-emphasis t)
-  (org-appear-autolinks t)
-  (org-appear-autosubmarkers t))
+  (setq org-appear-auto-emphasis t
+        org-appear-autolinks t
+        org-appear-autosubmarkers t))
 
 (use-package org-roam
   :demand t
   :after emacsql
   :custom
   ; (setq org-roam-database-connector 'sqlite-builtin)
-  (setq org-roam-db-location "~/.emacs.d/org-roam.db")
-  (org-roam-directory (expand-file-name "Roam" org-directory))
+  ; (setq org-roam-db-location "~/Notes/Roam/org-roam.db"
+        org-roam-directory (expand-file-name "roam" org-directory))
   :bind (("C-c n l" . org-roam-buffer-toggle)
          ("C-c n f" . org-roam-node-find)
          ("C-c n i" . org-roam-node-insert))

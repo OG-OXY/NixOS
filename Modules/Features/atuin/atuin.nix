@@ -2,11 +2,12 @@
   ...
 }:
 {
-  flake.homeModules.atuin = { pkgs, ... }:
+  flake.homeModules.atuin = { ... }:
   {
     programs.atuin = {
       enable = true;
       enableFishIntegration = true;
+      enableNushellIntegration = true;
       settings = {
         ai.enabled = true;
         dialect = "us";

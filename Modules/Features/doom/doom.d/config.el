@@ -9,7 +9,7 @@
       undo-fu-session-compression 'zlib)
 
 ;; --- Core Paths ---
-(setq org-directory "~/Notes/Org/")
+(setq org-directory "~/Documents/DOOM/")
 (setq org-agenda-files (list org-directory))
 
 ; (after! evil
@@ -27,6 +27,12 @@
 ; (after! evil
 ;   (setq evil-collection-mode-list nil) 
 ;   (evil-mode -1))
+
+(after! dired
+	(require 'dired-aux))
+(map! :leader
+	  :prefix "f"
+	  :desc "Find Directory" "d" #'dired)
 
 ; --- Helix Modal Editing Mode Configuration ---
 (after! helix
@@ -89,7 +95,7 @@
 
 ;; --- Org-Roam ---
 (after! org-roam
-  (setq org-roam-directory (expand-file-name "Roam" org-directory)))
+  (setq org-roam-directory (expand-file-name "roam" org-directory)))
 
 ;; --- Pandoc Integration ---
 (add-hook! '(markdown-mode-hook org-mode-hook) #'pandoc-mode)
