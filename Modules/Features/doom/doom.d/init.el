@@ -52,9 +52,3 @@
 
 	:config
 	(default +bindings +smartparens))
-
-
-	; Disabled
-	; editor:
-	; evil
-	; multiple-cursors

@@ -1,4 +1,4 @@
-;; steel.scm
+;; helix.scm
 (require (prefix-in helix. "helix/commands.scm"))
 (require (prefix-in helix.static. "helix/static.scm"))
 (require "helix/editor.scm")
@@ -6,7 +6,7 @@
 (require "helix/misc.scm")
 (require "helix/keymaps.scm")
 
-(require "package.scm")
+(require "packages/package.scm")
 
 (require "themes/spacemacs.scm")
 
@@ -129,6 +129,7 @@
   (insert-string-at-selection (to-string (current-path))))
 
 ;; Only get the doc if it exists - also use real options instead of false here cause it kinda sucks
+
 ; (define (editor-get-doc-if-exists editor doc-id)
 ;   (if (editor-doc-exists? editor doc-id) (editor->get-document editor doc-id) #f))
 

@@ -1,3 +1,4 @@
+;; init.scm
 (require-builtin steel/random as rand::)
 (require (prefix-in helix. "helix/commands.scm"))
 (require (prefix-in helix.static. "helix/static.scm"))
@@ -11,7 +12,7 @@
 (require "focus.scm")
 (require "git-status-picker.scm")
 (require "labelled-buffers.scm")
-(require "package.scm")
+(require "packages/package.scm")
 (require "picker.scm")
 (require "scheme-indent.scm")
 (require "helix.scm")

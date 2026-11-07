@@ -2,34 +2,30 @@
   ...
 }:
 {
-  flake.homeModules.nushell = { ... }:
+  flake.homeModules.nushell = { pkgs, ... }:
   let
     nushellConfig = builtins.readFile ./config.nu;
-    # nushellEnv = ./nushell-env.nu;
+    # nushellEnv = ./env.nu;
   in
   {
-    programs = {
-      nushell = {
-        enable = true;
-        envFile.text = ''
-          #
-        '';
-        configFile.text = ''
-          ${nushellConfig}
-        '';
-      };
-      carapace = {
-        enable = true;
-        enableNushellIntegration = true;
-        enableFishIntegration = true;
-      };
-      starship.enableNushellIntegration = true;
-      atuin.enableNushellIntegration = true;
-      direnv = {
-        enable = true;
-        enableNushellIntegration = true;
-        enableFishIntegration = true;
-      };
+    programs.nushell = {
+      enable = true;
+      envFile.text = ''
+        #
+      '';
+      configFile.text = ''
+        ${nushellConfig}
+      '';
+      plugins =
+      let
+        nu = pkgs.nushellPlugins;
+      in
+      [
+        nu.formats
+        nu.polars
+        nu.query
+        # nu.highlight
+      ];
     };
   };
   flake.nixosModules.nushell = { ... }:

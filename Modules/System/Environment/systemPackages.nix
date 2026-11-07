@@ -159,6 +159,8 @@
       pkgs.bacon
       pkgs.cargo-edit
       pkgs.cargo-expand
+      pkgs.qmk
+      pkgs.nodejs_22
       pkgs.just
       pkgs.bun
       pkgs.repomix # Nix Config to XML

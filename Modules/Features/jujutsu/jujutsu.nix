@@ -22,7 +22,7 @@
           key = "~/.ssh/id_ed25519.pub";
         };
         ui = {
-          editor = "nvf";
+          editor = "hx";
           paginate = "auto"; # or "auto"
         };
         fsmonitor = {

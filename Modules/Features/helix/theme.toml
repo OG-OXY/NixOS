@@ -1,6 +1,6 @@
 inherits = "base16_terminal"
 
-"ui.cursorcolumn.primary" = { bg = "five" }
+"ui.cursorcolumn.primary" = { bg = "electric-blue", fg = "orange-red" }
 # "ui.cursor" = {}
 # "ui.cursor.normal" = {}
 # "ui.cursor.insert" = {}
@@ -52,7 +52,7 @@ inherits = "base16_terminal"
 # "ui.selection.primary" =	
 # "ui.highlight" = Highlighted lines in the picker preview
 # "ui.highlight.frameline" = Line at which debugging execution is paused at
-# "ui.cursorline.primary" = The line of the primary cursor (if cursorline is enabled)
+# "ui.cursorline.primary" = "ele" #The line of the primary cursor (if cursorline is enabled)
 # "ui.cursorline.secondary" = The lines of any other cursors (if cursorline is enabled)
 # "ui.cursorcolumn.primary" = The column of the primary cursor (if cursorcolumn is enabled)
 # "ui.cursorcolumn.secondary" = The columns of any other cursors (if cursorcolumn is enabled)

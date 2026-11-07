@@ -54,6 +54,16 @@
     };
 
     programs = {
+      carapace = {
+        enable = true;
+        enableNushellIntegration = true;
+        enableFishIntegration = true;
+      };
+      direnv = {
+        enable = true;
+        enableNushellIntegration = true;
+        enableFishIntegration = true;
+      };
       home-manager.enable = true;
     };
   };
