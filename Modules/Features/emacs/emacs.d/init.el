@@ -31,9 +31,6 @@
 (use-package emacsql
   :demand t)
 
-(use-package emacsql-sqlite
-  :demand t)
-
 ;; --- 1. Icon Dependency ---
 (use-package nerd-icons
   :demand t)
@@ -148,11 +145,6 @@
           (gnus . gnus)
           (file . find-file)
           (wl . wl-other-frame))))
-
-;; commented out
-;; (use-package org-modern
-;;   :demand t
-;;   :hook (org-mode . org-modern-mode))
  
 (use-package org-superstar
   :demand t
@@ -171,11 +163,11 @@
 
 (use-package org-roam
   :demand t
-  :after emacsql
-  :custom
-  ; (setq org-roam-database-connector 'sqlite-builtin)
-  ; (setq org-roam-db-location "~/Notes/Roam/org-roam.db"
-        org-roam-directory (expand-file-name "roam" org-directory))
+  ; :after emacsql
+  :init
+  (setq org-roam-v2-ack t)
+        org-roam-database-connector 'sqlite))  :custom
+  (org-roam-directory (expand-file-name "roam" org-directory))
   :bind (("C-c n l" . org-roam-buffer-toggle)
          ("C-c n f" . org-roam-node-find)
          ("C-c n i" . org-roam-node-insert))
@@ -217,3 +209,13 @@
 ;; Terminal echo area safeguard for tooltips
 (unless (display-graphic-p)
   (setq tooltip-use-echo-area t))
+
+
+  ; (setq org-roam-database-connector 'sqlite-builtin)
+  ; (setq org-roam-db-location "~/Documents/EMACS/org-roam.db"
+;; commented out
+;; (use-package org-modern
+;;   :demand t
+;;   :hook (org-mode . org-modern-mode))
+; (use-package emacsql-sqlite
+  ; :demand t)

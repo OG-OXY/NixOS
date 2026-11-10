@@ -253,21 +253,21 @@
 ; (minor-mode! "+" ("l" => lam)
 ;                  ("q" => (set-theme-dracula lam)))
 
-(minor-mode! "P"
-("l" => lam)
-          ("p" => highlight-to-matching-paren)
-          ("d" => delete-sexpr)
-          ("r" => run-expr)
-("t" => run-prompt)
-("t" => test-component))
+; (minor-mode! "P"
+; ("l" => lam)
+;           ("p" => highlight-to-matching-paren)
+;           ("d" => delete-sexpr)
+;           ("r" => run-expr)
+; ("t" => run-prompt)
+; ("t" => test-component))
 
 ; (make-minor-mode! "+" (hash "l" ":lam"))
 
 (define (git-status)
   (helix.run-shell-command "git" "status"))
 
-(minor-mode! "G" ("s" => git-status))
-(minor-mode! "C-r" ("f" => recentf-open-files))
+; (minor-mode! "G" ("s" => git-status))
+; (minor-mode! "C-r" ("f" => recentf-open-files))
 
 ;;@doc
 ;; Open the helix.scm file
