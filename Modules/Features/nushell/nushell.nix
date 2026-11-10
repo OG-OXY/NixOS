@@ -5,13 +5,13 @@
   flake.homeModules.nushell = { pkgs, ... }:
   let
     nushellConfig = builtins.readFile ./config.nu;
-    # nushellEnv = ./env.nu;
+    nushellEnv = builtins.readFile ./env.nu;
   in
   {
     programs.nushell = {
       enable = true;
       envFile.text = ''
-        #
+        ${nushellEnv}
       '';
       configFile.text = ''
         ${nushellConfig}

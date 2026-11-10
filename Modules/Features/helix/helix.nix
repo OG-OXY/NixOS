@@ -30,6 +30,8 @@
         # RUST
         Rust
         # SHELL
+        pkgs.nu-lint
+        pkgs.nufmt
         pkgs.fish-lsp
         pkgs.bash-language-server        
         # LUA

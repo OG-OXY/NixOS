@@ -39,9 +39,23 @@
 
 ;; Binds
 (keymap (global) 
-  (normal (C-x ":helix.write-buffer-close!") (C-r (f ":recentf-open-files")) (space (t ":open-term") (l ":load-buffer") (o ":eval-sexpr"))))
+  (normal (space (t ":open-term") (l ":load-buffer") (o ":eval-sexpr"))))
+
+; (C-x ":helix.write-buffer-close!") (C-r (f ":recentf-open-files"))
+
+
+;; Register an event listener or advise the view creation hook
+; (define (on-buffer-open-or-split)
+;   (let ((current-buf ()))
+;     ;; Check if the buffer is empty or matches your splash condition
+;     (if (is-empty-buffer? current-buf)
+;         (show-splash)
+;         #f)))
 
 ;; Hooks
+;; Hook into Helix buffer/window creation events if exposed by steelix runtime
+; (register-event-listener! 'buffer-open on-buffer-open-or-split)
+
 ;; Import the core helix commands namespace (require (prefix-in helix. "helix/commands.scm"))
 (define scm-keybindings (hash "insert" (hash "ret" ':scheme-indent "C-l" ':insert-lambda)))
 
