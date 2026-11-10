@@ -12,17 +12,18 @@ $env.config = {
             mode: [ emacs vi_normal vi_insert helix_normal helix_insert helix_select ]
             event: {
                 send: executehostcommand
-                cmd: abbr-expand
-                    # let line = (commandline)
-                    # let words = ($line | split row ' ')
-                    # let last_word = ($words | last)
+                cmd: "
+                    let line = (commandline)
+                    let words = ($line | split row ' ')
+                    let last_word = ($words | last)
                     
-                    # if ($last_word in ($abbrs | columns)) {
-                    #     let expanded = ($abbrs | get $last_word)
-                    #     commandline edit --replace ($line | str replace --regex $'($last_word)$' $'($expanded) ')
-                    # } else {
-                    #     commandline edit --insert ' '
-                    # }
+                    if ($last_word in ($abbrs | columns)) {
+                        let expanded = ($abbrs | get $last_word)
+                        commandline edit --replace ($line | str replace --regex $'($last_word)$' $'($expanded) ')
+                    } else {
+                        commandline edit --insert ' '
+                    }
+                "   
             }
         }
         {
@@ -32,22 +33,23 @@ $env.config = {
             mode: [ emacs vi_normal vi_insert helix_normal helix_insert helix_select ]
             event: {
                 send: executehostcommand
-                cmd: abbr-exec
-                    # let line = (commandline)
-                    # let words = ($line | split row ' ')
-                    # let last_word = ($words | last)
+                cmd: "
+                    let line = (commandline)
+                    let words = ($line | split row ' ')
+                    let last_word = ($words | last)
 
-                    # if ($last_word in ($abbrs | columns)) {
-                    #     let expanded = ($abbrs | get $last_word)
-                    #     let new_line = ($line | str replace --regex $'($last_word)$' $expanded)
-                    #     commandline edit --replace ''
-                    #     nu -c $new_line
-                    # } else {
-                    #     # If not an abbr, clear prompt and run the typed line normally
-                    #     let normal_line = $line
-                    #     commandline edit --replace ''
-                    #     nu -c $normal_line
-                    # }
+                    if ($last_word in ($abbrs | columns)) {
+                        let expanded = ($abbrs | get $last_word)
+                        let new_line = ($line | str replace --regex $'($last_word)$' $expanded)
+                        commandline edit --replace ''
+                        nu -c $new_line
+                    } else {
+                        # If not an abbr, clear prompt and run the typed line normally
+                        let normal_line = $line
+                        commandline edit --replace ''
+                        nu -c $normal_line
+                    }
+                "
             }
         }
         {
@@ -61,15 +63,6 @@ $env.config = {
             }
         }
     ]
-}
-
-# for file in /run/current-system/sw/share/nushell/vendor/autoload/*.nu {
-#     let name = type == file | where name 
-#     source $file.name
-# }
-
-def nsh []: any -> table {
-    help commands | where command_type == built-in | select name category description | explore
 }
 
 # Nushell Alias Example
@@ -124,15 +117,55 @@ let abbrs = {
     pcig: 'lspci | grep | "'
 }
 
-# if ($last_word in ($abbrs | columns)) {
-#     let expanded = ($abbrs | get $last_word)
-#     let new_line = ($line | str replace --regex $'($last_word)$' $expanded)
-#     commandline edit --replace $new_line
-#     commandline enter
+def nsh []: any -> table {
+    help commands | where command_type == built-in | select name category description | explore
+}
+
+def abbr_expand []: any -> string {
+    let line = (commandline)
+    let words = ($line | split row ' ')
+    let last_word = ($words | last)
+
+    if ($last_word in ($abbrs | columns)) {
+        let expanded = ($abbrs | get $last_word)
+        let new_line = ($line | str replace --regex $'($last_word)$' $expanded)
+        commandline edit --replace ''
+        nu -c $new_line
+    } else {
+        # If not an abbr, clear prompt and run the typed line normally
+        let normal_line = $line
+        commandline edit --replace ''
+        nu -c $normal_line
+    }
+}
+
+def abbr-exec []: any -> string {
+    let line = (commandline)
+    let words = ($line | split row ' ')
+    let last_word = ($words | last)
+
+    if ($last_word in ($abbrs | columns)) {
+        let expanded = ($abbrs | get $last_word)
+        let new_line = ($line | str replace --regex $'($last_word)$' $expanded)
+        commandline edit --replace ''
+        nu -c $new_line
+    } else {
+        # If not an abbr, clear prompt and run the typed line normally
+        let normal_line = $line
+        commandline edit --replace ''
+        nu -c $normal_line
+    }
+}
+
+# Abbr
+# "steamrun": 'gamescope --backend wayland -W 1920 -H 1080 -r 240 -f -e -- steam -gamepadui',
+# let line = (commandline)
+# let words = ($line | split row ' ')
+# let last_word = ($words | last)
+
 # if ($last_word in ($abbrs | columns)) {
 #     let expanded = ($abbrs | get $last_word)
 #     commandline edit --replace ($line | str replace --regex $'($last_word)$' $'($expanded) ')
 # } else {
-#     commandline enter
-# Abbr
-# "steamrun": 'gamescope --backend wayland -W 1920 -H 1080 -r 240 -f -e -- steam -gamepadui',
+#     commandline edit --insert ' '
+# }

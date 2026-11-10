@@ -163,18 +163,26 @@
       pkgs.jujutsu
       pkgs.git
       pkgs.gh
+      pkgs.watchman
+      pkgs.just
+      pkgs.bun
       pkgs.bacon
       pkgs.cargo-edit
       pkgs.cargo-expand
       pkgs.qmk
       pkgs.nodejs_22
-      pkgs.just
-      pkgs.bun
-      pkgs.repomix # Nix Config to XML
+      pkgs.python3
+      pkgs.uv
+      pkgs.python3Packages.ipython
+      pkgs.ruby
+      pkgs.rubocop
+      pkgs.rubyPackages.ruby-progressbar
+      pkgs.rubyPackages.ruby-terminfo
+      pkgs.rubyPackages.ruby2ruby
+      pkgs.rubyPackages.launchy
+      pkgs.rubyPackages.addressable
+      pkgs.rubyPackages.ruby2_keywords
       llama
-      pkgs.geminicommit
-      py3.huggingface-hub
-      pkgs.watchman
     
       # ============================================================================
       # 9. CLI NAVIGATION, MANIPULATION & HELPER UTILITIES
@@ -191,19 +199,22 @@
       pkgs.ethtool
       pkgs.lm_sensors
       pkgs.udisks2
-      pkgs.w3m
+      pkgs.wl-clipboard
+      pkgs.cliphist
+      pkgs.wtype
       pkgs.curl
       pkgs.wget
       pkgs.wget2
       pkgs.aria2
       pkgs._7zz-rar
       pkgs.localsend
-      pkgs.wl-clipboard
-      pkgs.cliphist
-      pkgs.wtype
+      pkgs.w3m
       pkgs.rofi-rbw-wayland
       pkgs.rbw
       pkgs.ventoy
+      pkgs.repomix
+      pkgs.geminicommit
+      py3.huggingface-hub
       pkgs.monero-cli
     
       # ============================================================================
@@ -230,6 +241,7 @@
       # ============================================================================
       inputs.zen-browser.packages.${pkgs.system}.default
       inputs.llm-agents.packages.${pkgs.system}.default
+      # inputs.nuscripts
       Cuda.cuda_nvcc
       Cuda.cudatoolkit
       # --- Disabled Flake Inputs ---

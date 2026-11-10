@@ -2,16 +2,20 @@
   ...
 }:
 {
-  flake.homeModules.nushell = { pkgs, ... }:
+  flake.homeModules.nushell = { pkgs, config, ... }:
   let
     nushellConfig = builtins.readFile ./config.nu;
     nushellEnv = builtins.readFile ./env.nu;
+    nushellScripts = ./nu;
   in
   {
     programs.nushell = {
       enable = true;
       envFile.text = ''
-        ${nushellEnv}
+        $env.NU_LIB_DIRS = [
+            ${nushellEnv}
+            ($nu.default-config-dir | path join scripts)
+        ]
       '';
       configFile.text = ''
         ${nushellConfig}
@@ -26,6 +30,9 @@
         nu.query
         # nu.highlight
       ];
+    };
+    home.file = {
+      ".config/nushell/scripts".source = config.lib.file.mkOutOfStoreSymlink "${nushellScripts}";
     };
   };
   flake.nixosModules.nushell = { ... }:

@@ -8,7 +8,12 @@
 (require 'use-package)
 (setq use-package-always-ensure nil)
 
-(setq sqlitep t)
+(require 'sqlite3)
+(use-package sqlite3
+  :demand t)
+; (with-eval-after-load 'org-roam
+;   (org-roam-database-connector 'sqlite3)
+
 
 (require 'my-which-key)
 (require 'my-autoload)
@@ -167,7 +172,7 @@
   :demand t
   :init
   (setq org-roam-v2-ack t
-        org-roam-database-connector 'emacsql)
+        org-roam-database-connector 'sqlite3)
   :custom
   (org-roam-directory (expand-file-name "roam" org-directory))
   :bind (("C-c n l" . org-roam-buffer-toggle)
