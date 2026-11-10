@@ -101,22 +101,6 @@
         "type": "github"
       }
     },
-    "doom-dashboard": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1781857557,
-        "narHash": "sha256-5iFnTZqvqY6peLiXV0DhtdTK0z5Ar1VUSMOTUkHl50o=",
-        "owner": "emacs-dashboard",
-        "repo": "doom-dashboard",
-        "rev": "cb6756974237a18124a4713a25d19118247e3ac3",
-        "type": "github"
-      },
-      "original": {
-        "owner": "emacs-dashboard",
-        "repo": "doom-dashboard",
-        "type": "github"
-      }
-    },
     "doomdir": {
       "flake": false,
       "locked": {
@@ -624,12 +608,27 @@
         "type": "github"
       }
     },
+    "nuscripts": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1793451391,
+        "narHash": "sha256-CMwtlPDqYsdPgtbZlTqdrBZpnxKVGwhJ0ejGH4L0fNo=",
+        "owner": "nushell",
+        "repo": "nu_scripts",
+        "rev": "1e6533e8c316386f9576d7220a72ab05ce48c52a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nushell",
+        "repo": "nu_scripts",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "base16-schemes": "base16-schemes",
         "chaotic": "chaotic",
         "doom": "doom",
-        "doom-dashboard": "doom-dashboard",
         "emacs-overlay": "emacs-overlay_2",
         "evil-stripped": "evil-stripped",
         "flake-parts": "flake-parts",
@@ -643,6 +642,7 @@
         "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs_3",
         "nixpkgs-stable": "nixpkgs-stable_2",
+        "nuscripts": "nuscripts",
         "rust-overlay": "rust-overlay",
         "rusty-clip": "rusty-clip",
         "sops": "sops",

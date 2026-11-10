@@ -29,15 +29,21 @@
         pkgs.nixfmt-rs
         # RUST
         Rust
+        #PYTHON
+        pkgs.basedpyright
+        pkgs.ruff
+        #RUBY
+        pkgs.ruby-lsp
+        pkgs.rufo
+        pkgs.rubyfmt
+        # Lisp
+        pkgs.sbcl
+        pkgs.roswell
         # SHELL
         pkgs.nu-lint
         pkgs.nufmt
         pkgs.fish-lsp
-        pkgs.bash-language-server        
-        # LUA
-        pkgs.lua-language-server
-        pkgs.hyprls
-        pkgs.stylua
+        pkgs.bash-language-server
         # JSON
         pkgs.vscode-json-languageserver
         pkgs.jq
@@ -47,18 +53,19 @@
         pkgs.prettier
         # TOML
         pkgs.taplo
+        # LUA
+        pkgs.lua-language-server
+        pkgs.hyprls
+        pkgs.stylua
+        # HTML
+        pkgs.vscode-html-languageserver
         # Markdown
         pkgs.marksman
         pkgs.markdown-oxide
         pkgs.markdownlint-cli2
         pkgs.zk
-        # HTML
-        pkgs.vscode-html-languageserver
         # CSS
         pkgs.vscode-css-languageserver
-        # Lisp
-        pkgs.sbcl
-        pkgs.roswell
         # SQL
         pkgs.sqls
         pkgs.sqlint

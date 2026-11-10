@@ -1,4 +1,5 @@
 {
+  inputs,
   ...
 }:
 {
@@ -9,7 +10,13 @@
   {
     config = lib.mkIf cfg.enable {
       environment = {
-        systemPackages = [ pkgs.nushell ];
+        systemPackages = [
+          pkgs.nushell
+          (pkgs.runCommand "nu_scripts" {} ''
+            mkdir -p $out/share/nushell
+            cp -r ${inputs.nuscripts} $out/share/nushell/nu_scripts
+          '')
+        ];
         pathsToLink = [ "/share/nushell" ];
       };
     };

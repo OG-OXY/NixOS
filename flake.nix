@@ -31,6 +31,10 @@
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nuscripts = {
+      url = "github:nushell/nu_scripts";
+      flake = false;
+    };
     doom = {
       url = "github:marienz/nix-doom-emacs-unstraightened";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -54,10 +58,6 @@
     };
     ##
     ## Emacs Pkgs
-    doom-dashboard = {
-      url = "github:emacs-dashboard/doom-dashboard";
-      flake = false;
-    };
     helix-mode = {
       url = "github:mgmarlow/helix-mode";
       flake = false;
