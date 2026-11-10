@@ -36,6 +36,13 @@
       pkgs.xinit
       pkgs.xhost    
       pkgs.sqlite
+      pkgs.sqlitecpp
+      pkgs.sqlite-modern-cpp
+      pkgs.sqlite-utils
+      pkgs.sqlite-rsync
+      pkgs.sqlite3-to-mysql
+      pkgs.sqlite-vec
+      pkgs.sqlit-tui
       Kde.kwin
       Kde.qtdeclarative
       Kde.qtsvg

@@ -33,6 +33,7 @@
       epkgs.org-appear
       epkgs.org-modern
       epkgs.org-superstar
+      epkgs.sqlite3
       epkgs.emacsql
       epkgs.forge
       epkgs.pandoc-mode
