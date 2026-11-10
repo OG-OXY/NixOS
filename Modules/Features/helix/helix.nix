@@ -59,6 +59,11 @@
         # Lisp
         pkgs.sbcl
         pkgs.roswell
+        # SQL
+        pkgs.sqls
+        pkgs.sqlint
+        pkgs.sql-formatter
+        pkgs.sqlfluff
         # JQ
         pkgs.jq-lsp
         pkgs.jqfmt

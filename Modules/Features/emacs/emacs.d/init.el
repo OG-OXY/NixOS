@@ -8,6 +8,8 @@
 (require 'use-package)
 (setq use-package-always-ensure nil)
 
+(setq sqlitep t)
+
 (require 'my-which-key)
 (require 'my-autoload)
 (require 'my-persp)
@@ -163,10 +165,10 @@
 
 (use-package org-roam
   :demand t
-  ; :after emacsql
   :init
-  (setq org-roam-v2-ack t)
-        org-roam-database-connector 'sqlite))  :custom
+  (setq org-roam-v2-ack t
+        org-roam-database-connector 'emacsql)
+  :custom
   (org-roam-directory (expand-file-name "roam" org-directory))
   :bind (("C-c n l" . org-roam-buffer-toggle)
          ("C-c n f" . org-roam-node-find)
