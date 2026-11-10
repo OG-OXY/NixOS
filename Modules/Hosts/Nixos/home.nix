@@ -18,8 +18,6 @@
         rm -f $HOME/.nix-profile $HOME/.steampath
       '';
       file = {
-        ".config/nushell/nu_scripts".source = config.lib.file.mkOutOfStoreSymlink "${inputs.nuscripts}";
-        ".config/nushell/vendors/autoloads".source = config.lib.file.mkOutOfStoreSymlink "/run/current-system/sw/share/nushell/vendor/autoload";
       };
     };
 

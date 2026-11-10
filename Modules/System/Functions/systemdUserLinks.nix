@@ -8,7 +8,6 @@
       { name = "ty"; home = "/home/ty"; group = "users"; }
       { name = "root"; home = "/root"; group = "root"; }
     ];
-    # List of specs: [ { path = ".config/helix/config.toml"; source = helixConfig; type = "L+"; } ]
     mkLinks = entries:
       let
         expandEntry = u: entry:
