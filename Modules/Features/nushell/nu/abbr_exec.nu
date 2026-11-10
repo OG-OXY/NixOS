@@ -1,4 +1,4 @@
-def abbr-exec []: any -> string {
+export def --env abbr_exec []: any -> string {
     let line = (commandline)
     let words = ($line | split row ' ')
     let last_word = ($words | last)

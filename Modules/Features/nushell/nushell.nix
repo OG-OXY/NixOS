@@ -1,4 +1,5 @@
 {
+  inputs,
   ...
 }:
 {
@@ -6,16 +7,14 @@
   let
     nushellConfig = builtins.readFile ./config.nu;
     nushellEnv = builtins.readFile ./env.nu;
-    nushellScripts = ./nu;
+    nushellNu = ./nu;
+    # nushellNuScripts = "${inputs.nuscripts}";
   in
   {
     programs.nushell = {
       enable = true;
       envFile.text = ''
-        $env.NU_LIB_DIRS = [
-            ${nushellEnv}
-            ($nu.default-config-dir | path join scripts)
-        ]
+        ${nushellEnv}
       '';
       configFile.text = ''
         ${nushellConfig}
@@ -32,7 +31,9 @@
       ];
     };
     home.file = {
-      ".config/nushell/scripts".source = config.lib.file.mkOutOfStoreSymlink "${nushellScripts}";
+      ".config/nushell/nu".source = config.lib.file.mkOutOfStoreSymlink "${nushellNu}";
+      ".config/nushell/nu_scripts".source = config.lib.file.mkOutOfStoreSymlink "${inputs.nuscripts}";
+      ".config/nushell/vendors/autoload".source = config.lib.file.mkOutOfStoreSymlink "/run/current-system/sw/share/nushell/vendor/autoload";
     };
   };
   flake.nixosModules.nushell = { ... }:
