@@ -44,8 +44,7 @@ $env.config = {
                         commandline edit --replace ''
                         nu -c $new_line
                     } else {
-                        # If not an abbr, clear prompt and run the typed line normally
-                        commandline edit --replace ''
+                        commandline edit --insert $line
                         nu -c $line
                     }
                 "
@@ -116,7 +115,7 @@ let abbrs = {
     pcig: 'lspci | grep | "'
 }
 
-def nsh []: any -> table {
+def nsh [] {
     help commands | where command_type == built-in | select name category description | explore
 }
 
