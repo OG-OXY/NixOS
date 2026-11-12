@@ -6,7 +6,7 @@
 {
   flake.nixosModules.emacs = { pkgs, ... }:
   let
-    emacsDir = ./emacs.d;
+    # emacsDir = ./emacs.d;
     emacs = (pkgs.emacsPackagesFor pkgs.emacs-pgtk).emacsWithPackages (epkgs:
     let
       fpkgs = pname: src: packageRequires: epkgs.melpaBuild {
@@ -16,6 +16,7 @@
     in
     [
       epkgs.use-package
+      epkgs.no-littering
       epkgs.doom-themes
       epkgs.doom-modeline
       epkgs.dashboard
@@ -58,7 +59,7 @@
       after = [ "graphical-session.target" ];
       serviceConfig = {
         Type = "simple";
-        ExecStart = "${emacs}/bin/emacs --init-directory=${emacsDir} --fg-daemon=emacs";
+        ExecStart = "${emacs}/bin/emacs --init-directory=%h/NixOS/Master/Modules/Features/emacs/emacs.d --fg-daemon=emacs";
         ExecStop = "${emacs}/bin/emacsclient --socket-name=emacs --eval '(kill-emacs)'";
         Restart = "on-failure";
         SuccessExitStatus = 15;

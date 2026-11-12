@@ -1,46 +1,29 @@
-;; emacs.d/init.el -*- lexical-binding: t; -*-
-;; --- 1. Package & Environment Setup ---
-(setenv "PATH" (concat (getenv "PATH") ":/run/current-system/sw:/run/current-system/sw/bin:/run/current-system/sw/sbin:/run/current-system/sw/lib:/run/current-system/sw/share:/run/current-system/sw/etc:~/.nix-profile/bin"))
-(setq exec-path (append exec-path '("/run/current-system/sw/bin" "~/.nix-profile/bin")))
-
-(add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
-
-(require 'use-package)
+;;; emacs.d/init.el -*- lexical-binding: t; -*-
 (setq use-package-always-ensure nil)
-
-(require 'sqlite3)
-(use-package sqlite3
-  :demand t)
-; (with-eval-after-load 'org-roam
-;   (org-roam-database-connector 'sqlite3)
-
-
+(require 'use-package)
+(require 'no-littering)
+(require 'nerd-icons)
 (require 'my-which-key)
-(require 'my-autoload)
 (require 'my-persp)
 (require 'my-consult)
+(require 'my-autoload)
+(require 'my-file-map)
+(require 'my-notes-map)
 (require 'my-buffer-map)
-(require 'my-buffer-load)
+
+(setq custom-file (no-littering-expand-etc-file-name "custom.el"))
+(when (file-exists-p custom-file)
+  (load custom-file))
+(no-littering-theme-backups)
 
 ;; Basic UI cleanup & startup tweaks
-(scroll-bar-mode -1)
-(tool-bar-mode -1)
-(tooltip-mode -1)
-(menu-bar-mode -1)
 (global-display-line-numbers-mode 1)
+(recentf-mode 1)
+(run-at-time nil (* 2 60) 'recentf-save-list)
 
 ;; Load Theme & Modeline
 (load-theme 'doom-one t)
 (doom-modeline-mode 1)
-
-;; Org-Roam Dependency
-(require 'emacsql)
-(use-package emacsql
-  :demand t)
-
-;; --- 1. Icon Dependency ---
-(use-package nerd-icons
-  :demand t)
 
 ;; --- 2. Clean Vanilla Dashboard Setup ---
 (use-package dashboard
@@ -53,9 +36,8 @@
   (dashboard-set-file-icons t)
   (dashboard-set-navigator-icons t)
   (dashboard-banner-logo-title "E M A C S")
-  ; (dashboard-startup-banner 3)
   (dashboard-startup-banner
-   (expand-file-name "banners/bcc.txt" user-emacs-directory))
+   (expand-file-name "etc/banners/bcc.txt" user-emacs-directory))
   (dashboard-page-separator "\n\n")
   (dashboard-center-content t)         ;; Centers the layout nicely
   (dashboard-items '((recents   . 5)
@@ -75,8 +57,6 @@
   :config
   (dashboard-setup-startup-hook))
 
-(setq inhibit-startup-screen t)
-
 (if (daemonp)
     (add-hook 'server-after-make-frame-hook
               (lambda ()
@@ -93,7 +73,11 @@
          (helix-insert-mode . (lambda () (setq display-line-numbers t))))
   :config
   (helix-mode))
-  
+
+(with-eval-after-load 'dired
+  (helix-define-key 'normal "h" #'dired-up-directory 'dired-mode)
+  (helix-define-key 'normal "l" #'dired-find-file 'dired-mode))
+
 (use-package projectile
   :demand t
   :config
@@ -108,10 +92,6 @@
 (use-package marginalia
   :demand t
   :init (marginalia-mode 1))
-
-; (use-package consult
-;   :bind (("C-s" . consult-line)
-;          ("C-x b" . consult-buffer)))
 
 (use-package orderless
   :demand t
@@ -142,28 +122,33 @@
         org-pretty-entities t
         org-startup-indented t
         org-ellipsis " ▾"
+        org-return-follows-link t
         org-startup-with-inline-images t
         image-use-external-converter t
         image-converter 'chafa
-        browse-url-browser-function 'browse-url-xdg-open
-        org-link-frame-setup
-        '((vm . vm-visit-folder)
-          (vm-imap . vm-visit-imap-folder)
-          (gnus . gnus)
-          (file . find-file)
-          (wl . wl-other-frame))))
- 
+        browse-url-browser-function 'browse-url-xdg-open))
+
 (use-package org-superstar
   :demand t
+  :after org
   :hook (org-mode . org-superstar-mode)
-  :custom
+  :config
   (setq org-superstar-headline-bullets-list '("◉" "○" "✸" "✿" "•")
-        org-superstar-special-item-bullet-alist '((?- . "•") (?+ . "➤"))))
+        org-superstar-special-item-bullet-alist '((?- . "•") (?+ . "➤"))
+        org-superstar-prettify-item-bullets t))
+
+(use-package org-modern
+  :demand t
+  :after org-superstar
+  :hook (org-mode . org-modern-mode)
+  :config
+  (setq org-modern-star nil))
 
 (use-package org-appear
   :demand t
+  :after org
   :hook (org-mode . org-appear-mode)
-  :custom
+  :config
   (setq org-appear-auto-emphasis t
         org-appear-autolinks t
         org-appear-autosubmarkers t))
@@ -171,20 +156,30 @@
 (use-package org-roam
   :demand t
   :init
+  (require 'sqlite3)
   (setq org-roam-v2-ack t
         org-roam-database-connector 'sqlite3)
   :custom
-  (org-roam-directory (expand-file-name "roam" org-directory))
+  (org-roam-directory (file-truename (expand-file-name "roam" org-directory)))
   :bind (("C-c n l" . org-roam-buffer-toggle)
          ("C-c n f" . org-roam-node-find)
          ("C-c n i" . org-roam-node-insert))
   :config
+  (unless (file-exists-p org-roam-directory)
+    (make-directory org-roam-directory t))
+  (unless (file-exists-p (file-name-directory org-roam-db-location))
+    (make-directory (file-name-directory org-roam-db-location) t))
+  ;; Start autosync
   (org-roam-setup)
-  (org-roam-db-autosync-mode))
+  (org-roam-db-autosync-mode 1))  
 
 ;; --- 5. Pandoc & Markdown Integration ---
 (use-package pandoc-mode
-  :hook ((markdown-mode org-mode) . turn-on-pandoc))
+  :defer t
+  :hook ((markdown-mode org-mode) . (lambda ()
+                                      (if (fboundp 'turn-on-pandoc)
+                                          (turn-on-pandoc)
+                                        (pandoc-mode 1)))))
 
 ;; --- 6. Additional Tools (Magit, Majutsu, Image-Roll) ---
 (use-package magit
@@ -213,16 +208,5 @@
    '(org-level-3 ((t (:inherit outline-3 :height 1.1 :weight bold))))
    '(org-level-4 ((t (:inherit outline-4 :height 1.05 :weight bold))))))
 
-;; Terminal echo area safeguard for tooltips
 (unless (display-graphic-p)
   (setq tooltip-use-echo-area t))
-
-
-  ; (setq org-roam-database-connector 'sqlite-builtin)
-  ; (setq org-roam-db-location "~/Documents/EMACS/org-roam.db"
-;; commented out
-;; (use-package org-modern
-;;   :demand t
-;;   :hook (org-mode . org-modern-mode))
-; (use-package emacsql-sqlite
-  ; :demand t)

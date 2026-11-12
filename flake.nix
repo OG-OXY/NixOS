@@ -48,10 +48,6 @@
       url = "github:dalanicolai/image-roll.el";
       flake = false;
     };
-    hel = {
-      url = "github:helheim-emacs/hel";
-      flake = false;
-    };
     evil-stripped = {
       url = "github:OG-OXY/evil-stripped";
       flake = false;

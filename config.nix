@@ -84,11 +84,6 @@
     };
     obs-studio = {
       enable = true;
-      #package = (
-      #  pkgs.obs-studio.override {
-      #    cudaSupport = true;
-      #  }
-      #);
       plugins =
         let
           obs = pkgs.obs-studio-plugins;
@@ -103,7 +98,6 @@
     };
     nix-index-database.comma.enable = true;
     gpu-screen-recorder.enable = true;
-    fish.enable = true;
     virt-manager.enable = true;
     nano.enable = false;
   };

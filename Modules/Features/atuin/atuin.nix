@@ -7,7 +7,7 @@
     programs.atuin = {
       enable = true;
       enableFishIntegration = true;
-      enableNushellIntegration = true;
+      # enableNushellIntegration = true;
       settings = {
         ai.enabled = true;
         dialect = "us";

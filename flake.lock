@@ -280,22 +280,6 @@
         "type": "github"
       }
     },
-    "hel": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1793397505,
-        "narHash": "sha256-KRGVhpi6XoTqe3SPuzWg1hCCg2c0GwCBLv6fIbnsF4I=",
-        "owner": "helheim-emacs",
-        "repo": "hel",
-        "rev": "4b5c72b54d6b62050dad3edf1a29cbd267569fec",
-        "type": "github"
-      },
-      "original": {
-        "owner": "helheim-emacs",
-        "repo": "hel",
-        "type": "github"
-      }
-    },
     "helix-mode": {
       "flake": false,
       "locked": {
@@ -632,7 +616,6 @@
         "emacs-overlay": "emacs-overlay_2",
         "evil-stripped": "evil-stripped",
         "flake-parts": "flake-parts",
-        "hel": "hel",
         "helix-mode": "helix-mode",
         "home-manager": "home-manager_2",
         "image-roll": "image-roll",

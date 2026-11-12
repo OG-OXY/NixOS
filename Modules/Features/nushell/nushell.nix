@@ -1,5 +1,4 @@
 {
-  inputs,
   ...
 }:
 {
@@ -14,24 +13,10 @@
     programs.nushell = {
       enable = true;
       settings = {
-        show_banner = "false";
         edit_mode = "helix";
         buffer_editor = "hx";
-        table = {
-          mode = "rounded";
-        };
-        keybindings = [
-          {
-            name = "atuin_search";
-            modifier = "none";
-            keycode = "up";
-            mode = [ "helix_normal" "helix_insert" ];
-            event = {
-              send = "executehostcommand";
-              cmd = "atuin search --interactive";
-            };
-          }
-        ];
+        table.mode = "rounded";
+        history.file_format = "Sqlite";
         abbreviations = {
           hl = "hx";
           su = "sudo -i";
@@ -80,6 +65,7 @@
           btc = "doas bluetoothctl connect 2135F7942E26";
           pcig = "lspci | grep | '";
         };
+        show_banner = "false";
       };
       envFile.source = nushellEnv;
       configFile.source = nushellConfig;
@@ -96,12 +82,19 @@
     };
     home.file = {
       ".config/nushell/nu".source = config.lib.file.mkOutOfStoreSymlink "${nushellNu}";
+      ".config/nushell/vendors/autoload".source = config.lib.file.mkOutOfStoreSymlink "/home/ty/NixOS/Master/Modules/Features/nushell/autoload";
       # ".config/nushell/nu_scripts".source = config.lib.file.mkOutOfStoreSymlink "${inputs.nuscripts}";
-      # ".config/nushell/vendors/autoload".source = config.lib.file.mkOutOfStoreSymlink "/run/current-system/sw/share/nushell/vendor/autoload";
     };
   };
-  flake.nixosModules.nushell = { ... }:
+  flake.nixosModules.nushell = { pkgs, ... }:
   {
     programs.nushell.enable = true;
+    environment.systemPackages = [
+      (pkgs.runCommand "ghostty-nushell-autoload" {} ''
+      mkdir -p $out/share/nushell/vendor/autoload
+      ln -s ${pkgs.ghostty}/share/ghostty/shell-integration/nushell/vendor/autoload/ghostty.nu \
+        $out/share/nushell/vendor/autoload/ghostty.nu
+    '')
+    ];
   };
 }
