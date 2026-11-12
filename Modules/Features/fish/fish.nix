@@ -145,7 +145,7 @@
         set -g fish_handle_reflow 1
         set -U fish_ambiguous_width 1
         set -U fish_emoji_width 1
-        # set -g fish_key_bindings fish_helix_key_bindings
+        # set -g fish_helix_key_bindings
         set -gx STARSHIP_SHELL "fish"
         set -g fish_greeting "Welcome to NixOS!"
 
@@ -229,16 +229,20 @@
             sha256 = "sha256-MmGDFTgxEFgHdX95OjH3jKsVG1hdwo6bRht+Lvvqe5Y=";
           };
         }
-        {
-          name = "fish-helix";
-          src = pkgs.fetchFromGitHub {
-            owner = "sshilovsky";
-            repo = "fish-helix";
-            rev = "main";
-            sha256 = "sha256-JqN4IbLpJFBJKNE6haZH2iFSMrLFdVh+Hbl840+xbfU=";
-          };
-        }
+        # {
+        #   name = "fish-helix";
+        #   src = pkgs.fetchFromGitHub {
+        #     owner = "sshilovsky";
+        #     repo = "fish-helix";
+        #     rev = "main";
+        #     sha256 = "sha256-JqN4IbLpJFBJKNE6haZH2iFSMrLFdVh+Hbl840+xbfU=";
+        #   };
+        # }
       ];
     };
+  };
+  flake.nixosModules.fish = { ... }:
+  {
+    programs.fish.enable = true;
   };
 }

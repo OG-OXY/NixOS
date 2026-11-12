@@ -3,15 +3,6 @@
   :demand t
   :config
   (setq consult-line-numbers-widen t
-        consult-async-min-input 2)
-
-  ;; Exclude hidden space-prefixed buffers and internal asterisk buffers (*scratch*, *Messages*, etc.)
-  (setq consult-buffer-filter
-        '("\\` "
-          "\\`\\*Completions\\*"
-          "\\`\\*Compile-Log\\*"
-          "\\`\\*Messages\\*"
-          "\\`\\*Help\\*"
-          "\\`\\*scratch\\*")))
+        consult-async-min-input 2))
 
 (provide 'my-consult)

@@ -1,14 +1,14 @@
 ;;; doom.d/packages.el -*- lexical-binding: t; -*-
 (package! command-log-mode)
 (package! helpful)
-(package! helix)
+; (package! helix)
 (package! undo-fu-session)
 (package! pandoc-mode)
 (package! org-modern)
 (package! org-superstar)
 (package! org-appear)
 (package! org-fancy-priorities)
-(package! corfu-terminal)
+; (package! corfu-terminal)
 ; (package! evil-kakoune)
 ; (package! evil
 ;   :recipe (:host github :repo "OG-OXY/evil-stripped" :branch "master")

@@ -39,7 +39,7 @@
 
 	:lang
 	emacs-lisp
-    (org +roam2 +pretty +dragndrop)
+    (org +roam2 +pretty +dragndrop) ; +modern
 	nix
 	rust
 	(cc +ccls)
@@ -52,3 +52,4 @@
 
 	:config
 	(default +bindings +smartparens))
+	; (default +smartparens))

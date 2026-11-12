@@ -3,30 +3,38 @@
 (setenv "PATH" (concat (getenv "PATH") ":/run/current-system/sw/bin:~/.nix-profile/bin"))
 (setq exec-path (append exec-path '("/run/current-system/sw/bin" "~/.nix-profile/bin")))
 
+; (use-package! helix
+;   :demand t
+;   :hook ((helix-normal-mode . (lambda () (setq display-line-numbers 'relative)))
+;          (helix-normal-mode . (lambda () (setq cursor-type 'box)))
+;          (helix-insert-mode . (lambda () (setq cursor-type 'bar)))
+;          (helix-insert-mode . (lambda () (setq display-line-numbers t))))
+;   :config
+;   (helix-mode))
+
+; (with-eval-after-load 'helix
+;   (helix-define-key 'normal (kbd "SPC") doom-leader-map))
+
+; (with-eval-after-load 'doom-dashboard
+;   (helix-define-key 'normal "j" #'helix-next-line '+doom-dashboard-mode)
+;   (helix-define-key 'normal "k" #'helix-previous-line '+doom-dashboard-mode))
+; 
+; This one prob is right not this one^
+; (after! doom-dashboard
+  ; (define-key +doom-dashboard-mode-map (kbd "j") #'next-line)
+  ; (define-key +doom-dashboard-mode-map (kbd "k") #'previous-line))
+
+; (with-eval-after-load 'dired
+;   (helix-define-key 'normal "h" #'dired-up-directory 'dired-mode)
+;   (helix-define-key 'normal "l" #'dired-find-file 'dired-mode))
+
+
 ;: Enable persistent undo history across restarts and increase history limits
 (global-undo-fu-session-mode +1)
 (setq undo-fu-session-file-limit 1000
       undo-fu-session-compression 'zlib)
 
 ;; --- Core Paths ---
-(setq org-directory "~/Documents/DOOM/")
-(setq org-agenda-files (list org-directory))
-
-; (after! evil
-;   ;; Disable default state overrides if your stripped fork handles keymaps differently
-;   (setq evil-want-keybinding nil)
-  
-;   ;; Initialize your custom evil fork mode
-;   (evil-mode 1)
-
-;   ;; Coordinate your custom evil bindings alongside your helix-mode setup
-;   (map! :map evil-normal-state-map
-;         "SPC" doom-leader-map
-;         "C-w" doom-leader-map))
-
-; (after! evil
-;   (setq evil-collection-mode-list nil) 
-;   (evil-mode -1))
 
 (after! dired
 	(require 'dired-aux))
@@ -34,57 +42,53 @@
 	  :prefix "f"
 	  :desc "Find Directory" "d" #'dired)
 
-; --- Helix Modal Editing Mode Configuration ---
-(after! helix
-  (helix-mode)
-  (add-hook! 'helix-normal-mode-hook
-       (setq display-line-numbers 'relative
-              cursor-type 'box))
-  (add-hook! 'helix-insert-mode-hook
-       (setq display-line-numbers t
-             cursor-type 'bar)))
-   ; (map! :map helix-normal-mode-map
-   ;       "SPC" doom-leader-map
- 		; "C-w" doom-leader-map))
+(use-package! which-key
+	:demand t
+	:config
+	(which-key-mode 1)
+	(setq which-key-idle-delay 0.05
+    which-key-popup-type 'side-window
+    which-key-side-window-location 'bottom))
 
 ;; --- Org-mode Visual & Functional Settings ---
+(setq org-directory "~/Documents/DOOM/")
 (after! org
-
-  ;; Syntax highlighting inside #+begin_src blocks
-  (setq org-src-fontify-natively t
+  (setq org-agenda-files (list org-directory)
+		org-journal-dir (expand-file-name "journal" org-directory)
+        org-src-fontify-natively t
         org-src-tab-acts-natively t
-        org-src-preserve-indentation t)
-
-  ;; Collapse ugly :PROPERTIES: drawers on startup
-  (setq org-cycle-hide-drawer-startup t)
-
-  ;; Clean typography & layout matching Obsidian style
-  (setq org-hide-leading-stars t
+        org-src-preserve-indentation t
+        org-cycle-hide-drawer-startup t
+        org-hide-leading-stars t
         org-hide-emphasis-markers t
         org-pretty-entities t
         org-startup-indented t
-        org-ellipsis " ▾")
-
-  (setq org-superstar-headline-bullets-list '("◉" "○" "✸" "✿" "•")
-		org-superstar-special-item-bullet-alist '((?- . "•") (?+ . "➤")))
- 
-  ;; Inline image settings & Chafa terminal preview bridge
-  (setq org-startup-with-inline-images t
+        org-ellipsis " ▾"
+        org-return-follows-link t
+        org-startup-with-inline-images t
         image-use-external-converter t
-        image-converter 'chafa)
+        image-converter 'chafa
+        browse-url-browser-function 'browse-url-xdg-open))
 
-  ;; Safe link handling (route external links via xdg-open instead of failing frames)
-  (setq browse-url-browser-function 'browse-url-xdg-open)
-  (setq org-link-frame-setup
-        '((vm . vm-visit-folder)
-          (vm-imap . vm-visit-imap-folder)
-          (gnus . gnus)
-          (file . find-file)
-          (wl . wl-other-frame))))
+(use-package! org-roam
+  :after org
+  :config
+  (setq org-roam-directory
+       (expand-file-name "roam" org-directory)))
 
-;; --- Modern UI Overlays & Hooks ---
-(add-hook! 'org-mode-hook #'org-modern-mode)
-(add-hook! 'org-mode-hook #'org-superstar-mode)
+;; --- Unified Org Typography & Bullet Mix ---
+(use-package! org-superstar
+  :after org
+  :hook (org-mode . org-superstar-mode)
+  :config  (setq org-superstar-headline-bullets-list '("◉" "○" "✸" "✿" "•")
+        org-superstar-special-item-bullet-alist '((?- . "•") (?+ . "➤"))
+        org-superstar-prettify-item-bullets t))
+
+(use-package! org-modern
+  :after org
+  :hook (org-mode . org-modern-mode)
+  :config
+  (setq org-modern-star nil))
 
 ;; Org-Appear (reveals syntax markers dynamically on cursor approach)
 (after! org-appear
@@ -93,9 +97,9 @@
         org-appear-autosubmarkers t))
 (add-hook! 'org-mode-hook #'org-appear-mode)
 
-;; --- Org-Roam ---
-(after! org-roam
-  (setq org-roam-directory (expand-file-name "roam" org-directory)))
+  (use-package! org-fancy-priorities
+    :demand t
+	:after org)
 
 ;; --- Pandoc Integration ---
 (add-hook! '(markdown-mode-hook org-mode-hook) #'pandoc-mode)
@@ -115,10 +119,8 @@
 
 ;; --- Terminal vs. GUI Conditional Environment Toggles ---
 (if (display-graphic-p)
-
     ;; --- GUI-ONLY SETTINGS ---
     (progn
-
       ;; Custom proportional font scaling for GUI headings if desired
       (custom-set-faces
        '(org-level-1 ((t (:inherit outline-1 :height 1.35 :weight bold))))
@@ -128,11 +130,8 @@
 
   ;; --- TERMINAL / TUI-ONLY SETTINGS (-nw inside Ghostty) ---
   (progn
-
     ;; Force tooltips into the echo area to prevent child-frame window errors
     (setq tooltip-use-echo-area t)
-
     ;; Enable corfu-terminal fallback so completion overlays render as TUI text
-    (add-hook! 'corfu-mode-hook #'corfu-terminal-mode)
-	(after! image-roll
+	(fter! image-roll
       (global-image-roll-mode +1)))

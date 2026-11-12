@@ -6,9 +6,9 @@
   {
     users = {
       mutableUsers = true;
-      users.root.shell = pkgs.fish;
+      users.root.shell = pkgs.nushell;
       users.ty = {
-        shell = pkgs.fish;
+        shell = pkgs.nushell;
         isNormalUser = true;
         extraGroups = [
           "wheel"

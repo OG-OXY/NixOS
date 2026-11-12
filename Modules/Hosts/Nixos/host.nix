@@ -19,7 +19,7 @@
               "ventoy-1.1.18"
             ];
             problems.handlers = {
-              "gtk+".broken = "warn";
+              "gtk+".broken = "ignore";
               nu_plugin_highlight.broken = "warn"; # or "ignore"
             };
           };
@@ -47,8 +47,6 @@
       inputs.sops.nixosModules.sops
       inputs.rusty-clip.nixosModules.default
       inputs.nix-index-database.nixosModules.default
-      # inputs.stylix.nixosModules.stylix
-      # inputs.nirinit.nixosModules.nirinit
       {
         home-manager = {
           useGlobalPkgs = true;
@@ -67,3 +65,6 @@
     ] ++ (builtins.attrValues self.nixosModules);
   };
 }
+
+# inputs.stylix.nixosModules.stylix
+# inputs.nirinit.nixosModules.nirinit
