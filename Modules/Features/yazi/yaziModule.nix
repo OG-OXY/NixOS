@@ -24,17 +24,14 @@
 
     yaziNushellFunction = pkgs.runCommand "yazi-nushell-function" {} ''
       mkdir -p $out/share/nushell/vendor/autoload
-      cat << 'EOF' > $out/share/nushell/vendor/autoload/yazi.nu
+      cat << 'EOF' > $out/share/nushell/vendor/autoload/y.nu
       def --env y [...args] {
         let tmp = (mktemp -t "yazi-cwd.XXXXXX")
-        # yazi ...$args --cwd-file=$tmp
         ^yazi ...$args --cwd-file $tmp
-        # let cwd = (open $tmp | str trim)
         let cwd = (open $tmp)
         if $cwd != "" and $cwd != $env.PWD {
           cd $cwd
         }
-        # rm -f $tmp
         rm -fp $tmp
       }
       EOF
