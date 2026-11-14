@@ -10,9 +10,14 @@
       Kde = pkgs.kdePackages;
       py3 = pkgs.python313Packages;
       Gst = pkgs.gst_all_1;
-      Gsr = pkgs.gpu-screen-recorder.override {
-        ffmpeg = pkgs.ffmpeg_6;
-      };
+      Gsr = pkgs.gpu-screen-recorder.overrideAttrs (oldAttrs: {
+        nativeBuildInputs = (oldAttrs.nativeBuildInputs or []) ++ [
+          pkgs.ffmpeg_6
+        ];
+      });
+      # Gsr = pkgs.gpu-screen-recorder.override {
+      #   ffmpeg = pkgs.ffmpeg_6;
+      # };
       llama = pkgs.llama-cpp-cuda.overrideAttrs (oldAttrs: {
         cmakeFlags = (oldAttrs.cmakeFlags or []) ++ [
           "-DGGML_CUDA=ON"

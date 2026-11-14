@@ -1,9 +1,9 @@
 ;; init.scm
 (require-builtin steel/random as rand::)
+(require "helix/keymaps.scm")
 (require (prefix-in helix. "helix/commands.scm"))
 (require (prefix-in helix.static. "helix/static.scm"))
 (require "helix/configuration.scm")
-(require "helix/keymaps.scm")
 (require "helix-file-watcher/file-watcher.scm")
 (require "recentf-hx/recentf.scm")
 (require "splash-hx/splash.scm")
@@ -12,17 +12,30 @@
 (require "focus.scm")
 (require "git-status-picker.scm")
 (require "labelled-buffers.scm")
-(require "packages/package.scm")
+(require "package.scm")
 (require "picker.scm")
 (require "scheme-indent.scm")
 (require "helix.scm")
 
 ;; Shell
-(set-default-shell! "/run/current-system/sw/bin/fish")
+(set-default-shell! "/run/current-system/sw/bin/nu")
 
-;; Dashboard
-(when (equal? (command-line) '("hx")) 
+;; Splash Screen/Dashboard
+(when (null? (cdr (command-line)))
   (show-splash))
+
+(define (new . args)
+  (apply helix.new args)
+  (show-splash))
+
+(define (hsplit_new . args)
+  (apply helix.static.hsplit_new args)
+  (show-splash))
+
+(define (vsplit_new . args)
+  (apply helix.static.vsplit_new args)
+  (show-splash))
+```[cite: 8]
 
 ;; Recent Files + Watcher 
 (recentf-snapshot)
@@ -51,7 +64,6 @@
 ;     (if (is-empty-buffer? current-buf)
 ;         (show-splash)
 ;         #f)))
-
 ;; Hooks
 ;; Hook into Helix buffer/window creation events if exposed by steelix runtime
 ; (register-event-listener! 'buffer-open on-buffer-open-or-split)
