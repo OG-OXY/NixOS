@@ -6,7 +6,7 @@
 (require "helix/misc.scm")
 (require "helix/keymaps.scm")
 
-(require "packages/package.scm")
+(require "package.scm")
 
 (require "themes/spacemacs.scm")
 
@@ -20,10 +20,12 @@
 ;; TODO Move requires from init to here for packages that can be lazy loaded, leave stuff like focus and splash and immediately required UI stuff in init though.
 (load-package "steel-pty/term.scm")
 (load-package "file-tree.scm")
-(load-package "recentf.scm")
+(load-package "recentf-hx/recentf.scm")
 (load-package "git-status-picker.scm")
 (load-package "scheme-indent.scm")
 (load-package "helix-ext.scm")
+(load-package "picker.scm")
+(load-package "labelled-buffers.scm")
 
 ;; Additional themes
 (load-package "themes/spacemacs.scm")
