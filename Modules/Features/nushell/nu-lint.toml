@@ -1,0 +1,2 @@
+[rules]
+silence_stderr_data = "off"

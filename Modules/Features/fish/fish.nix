@@ -31,7 +31,6 @@
             set -l key_count (count $keys)
             if test $key_count -eq 0 -o "$keys[1]" = ""
                 echo "Error: Gemini keys not found in session environment!"
-           rn 1
             end
     
             set -l selected_key $keys[(math 1 + (random) % $key_count)]
@@ -145,7 +144,6 @@
         set -g fish_handle_reflow 1
         set -U fish_ambiguous_width 1
         set -U fish_emoji_width 1
-        # set -g fish_helix_key_bindings
         set -gx STARSHIP_SHELL "fish"
         set -g fish_greeting "Welcome to NixOS!"
 
@@ -180,14 +178,16 @@
             set -gx ATUIN_CONFIG_DIR "$HOME/.config/atuin"
             ${pkgs.fastfetch}/bin/fastfetch
         end
+
         # Not Needed with Home-manager direnv integrations
         # Also pretty sure this effects devenv to because devenv uses direnv behind the scenes
         # if type -q direnv
         #     ${lib.getExe pkgs.direnv} hook fish | source
         # end
-        if type -q devenv
-            ${lib.getExe pkgs.devenv} hook fish | source
-        end
+        # Uncomment this if cding into devenvs no longer autostarts them.
+        # if type -q devenv
+        #     ${lib.getExe pkgs.devenv} hook fish | source
+        # end
         # Not Needed with home manager integrations
         # ${pkgs.starship}/bin/starship init fish | source
         # ${pkgs.zoxide}/bin/zoxide init fish --cmd cd | source

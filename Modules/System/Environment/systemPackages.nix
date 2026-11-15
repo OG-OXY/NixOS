@@ -11,9 +11,10 @@
       py3 = pkgs.python313Packages;
       Gst = pkgs.gst_all_1;
       Gsr = pkgs.gpu-screen-recorder.overrideAttrs (oldAttrs: {
-        nativeBuildInputs = (oldAttrs.nativeBuildInputs or []) ++ [
-          pkgs.ffmpeg_6
-        ];
+        buildInputs = [ pkgs.ffmpeg_6 ] ++ (builtins.filter (p: pkgs.lib.getName p != "ffmpeg") (oldAttrs.buildInputs or []));
+        # buildInputs = (oldAttrs.nativeBuildInputs or []) ++ [
+          # pkgs.ffmpeg_6
+        # ];
       });
       # Gsr = pkgs.gpu-screen-recorder.override {
       #   ffmpeg = pkgs.ffmpeg_6;

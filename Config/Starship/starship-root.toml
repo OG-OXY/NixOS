@@ -16,26 +16,11 @@ style = "bold green"
 truncation_length = 3
 fish_style_pwd_dir_length = 1
 
+[git_status]
+disabled = true
+
 [cmd_duration]
 format = "[$duration]($style) "
-
-[custom.fish]
-symbol = "󰈺 "
-command = "echo fsh"
-when = 'test -n "$FISH_VERSION"'
-format = "[$symbol$output]($style) "
-style = "bold cyan"
-ignore_timeout = true
-disabled = true
-
-[custom.nu]
-symbol = "󰏖 "
-command = "echo nu"
-when = 'test -n "$NU_VERSION"'
-format = "[$symbol$output]($style) "
-style = "bold yellow"
-ignore_timeout = true
-disabled = true
 
 [nix_shell]
 symbol = " "

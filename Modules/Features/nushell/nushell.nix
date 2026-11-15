@@ -1,4 +1,5 @@
 {
+  inputs,
   ...
 }:
 {
@@ -7,7 +8,8 @@
     nushellConfig = ./config.nu;
     nushellEnv = ./env.nu;
     nushellNu = ./nu;
-    # nushellNuScripts = "${inputs.nuscripts}";
+    nushellNuScripts = "${inputs.nu_scripts}";
+    nu-lintConfig = toString ./nu-lint.toml;
   in
   {
     programs.nushell = {
@@ -77,24 +79,20 @@
         nu.formats
         nu.polars
         nu.query
-        # nu.highlight
+        # (nu.highlight.overrideAttrs (old: {
+        #   nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ pkgs.pkg-config ];
+        #   buildInputs = (old.buildInputs or []) ++ [ pkgs.oniguruma ];
+        # }))
       ];
     };
-    home.file = {
-      ".config/nushell/nu".source = config.lib.file.mkOutOfStoreSymlink "${nushellNu}";
-      ".config/nushell/vendors/autoload".source = config.lib.file.mkOutOfStoreSymlink "/home/ty/NixOS/Master/Modules/Features/nushell/autoload";
-      # ".config/nushell/nu_scripts".source = config.lib.file.mkOutOfStoreSymlink "${inputs.nuscripts}";
+    xdg.configFile = {
+      "nushell/nu".source = config.lib.file.mkOutOfStoreSymlink "${nushellNu}";
+      "nu-lint/config.toml".source = config.lib.file.mkOutOfStoreSymlink "${nu-lintConfig}";
+      "nushell/nu_scripts".source = config.lib.file.mkOutOfStoreSymlink "${nushellNuScripts}";
     };
   };
-  flake.nixosModules.nushell = { pkgs, ... }:
+  flake.nixosModules.nushell = {  ... }:
   {
     programs.nushell.enable = true;
-    environment.systemPackages = [
-      (pkgs.runCommand "ghostty-nushell-autoload" {} ''
-      mkdir -p $out/share/nushell/vendor/autoload
-      ln -s ${pkgs.ghostty}/share/ghostty/shell-integration/nushell/vendor/autoload/ghostty.nu \
-        $out/share/nushell/vendor/autoload/ghostty.nu
-    '')
-    ];
   };
 }
