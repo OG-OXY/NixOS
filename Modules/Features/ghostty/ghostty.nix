@@ -14,7 +14,6 @@
         adjust-cell-width = "-10%";
         cursor-style = "block";
         grapheme-width-method = "legacy";
-        shell-integration = "nushell";
         shell-integration-features = "no-cursor";
         scrollback-limit = 100000000;
         font-synthetic-style = false;

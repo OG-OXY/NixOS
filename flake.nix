@@ -31,10 +31,6 @@
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nuscripts = {
-      url = "github:nushell/nu_scripts";
-      flake = false;
-    };
     doom = {
       url = "github:marienz/nix-doom-emacs-unstraightened";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -69,6 +65,10 @@
       flake = false;
     };
     ##
+    nu_scripts = {
+      url = "github:nushell/nu_scripts";
+      flake = false;
+    };
     base16-schemes = {
       url = "github:tinted-theming/schemes";
       flake = false;

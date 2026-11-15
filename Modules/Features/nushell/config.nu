@@ -1,10 +1,9 @@
-def nsh [] {
-    help commands | where command_type == built-in | select name category description | explore
+if (whoami) == root {
+    fastfetch e> /dev/null
+} else {
+    fastfetch
 }
 
-$env.PROMPT_INDICATOR = ""
-$env.PROMPT_INDICATOR_HELIX_INSERT = ": "
-$env.PROMPT_INDICATOR_HELIX_NORMAL = "〉"
-$env.PROMPT_MULTILINE_INDICATOR = "::: "
-
-source /home/ty/.config/nushell/vendors/autoload/atuin-nushell-config.nu
+def nsh []: nothing -> nothing {
+    help commands | where command_type == built-in | select name category description | explore
+}
