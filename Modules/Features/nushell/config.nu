@@ -1,5 +1,5 @@
 if (whoami) == root {
-    fastfetch e> /dev/null
+    fastfetch e>/dev/null
 } else {
     fastfetch
 }

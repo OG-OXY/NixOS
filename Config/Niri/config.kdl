@@ -24,7 +24,7 @@ input {
         // If you change any of this make sure you change them in keyboard.nix
         // Perfect or maybe a little lower? 40?
         repeat-rate 45
-        // Set to anywhere between 275 and 295 (285/290 perfect? maybe 295?)
+        // Set to 275-295 (285/295 perfect?)
         repeat-delay 285
         xkb {
             layout "us"
@@ -122,6 +122,11 @@ window-rule {
     default-column-width { }
 }
 
+window-rule {
+    match app-id="zen-beta" title="Extension:.*Vimium C"
+    open-floating true
+}
+
 recent-windows {
   binds {
     Mod+R { next-window scope="output"; }
@@ -130,7 +135,7 @@ recent-windows {
 }
 
 prefer-no-csd
-screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+screenshot-path "~/Pictures/Screenshots/Screenshot-%Y-%m-%d %H-%M-%S.png"
 
 binds {
     // Core Program Launchers & Actions
@@ -250,3 +255,7 @@ binds {
 // Mod+D { spawn "sh" "-c" "pkill wofi || wofi --show drun"; }
 // Mod+B { spawn "zen-beta"; }
 // Mod+V { spawn "vesktop"; }
+// added this today 
+ debug {
+    deactivate-unfocused-windows
+}

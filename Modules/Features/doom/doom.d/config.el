@@ -3,34 +3,8 @@
 (setenv "PATH" (concat (getenv "PATH") ":/run/current-system/sw/bin:~/.nix-profile/bin"))
 (setq exec-path (append exec-path '("/run/current-system/sw/bin" "~/.nix-profile/bin")))
 
-; (use-package! helix
-;   :demand t
-;   :hook ((helix-normal-mode . (lambda () (setq display-line-numbers 'relative)))
-;          (helix-normal-mode . (lambda () (setq cursor-type 'box)))
-;          (helix-insert-mode . (lambda () (setq cursor-type 'bar)))
-;          (helix-insert-mode . (lambda () (setq display-line-numbers t))))
-;   :config
-;   (helix-mode))
-
-; (with-eval-after-load 'helix
-;   (helix-define-key 'normal (kbd "SPC") doom-leader-map))
-
-; (with-eval-after-load 'doom-dashboard
-;   (helix-define-key 'normal "j" #'helix-next-line '+doom-dashboard-mode)
-;   (helix-define-key 'normal "k" #'helix-previous-line '+doom-dashboard-mode))
-; 
-; This one prob is right not this one^
-; (after! doom-dashboard
-  ; (define-key +doom-dashboard-mode-map (kbd "j") #'next-line)
-  ; (define-key +doom-dashboard-mode-map (kbd "k") #'previous-line))
-
-; (with-eval-after-load 'dired
-;   (helix-define-key 'normal "h" #'dired-up-directory 'dired-mode)
-;   (helix-define-key 'normal "l" #'dired-find-file 'dired-mode))
-
-
 ;: Enable persistent undo history across restarts and increase history limits
-(global-undo-fu-session-mode +1)
+(global-undo-fu-session-mode 1)
 (setq undo-fu-session-file-limit 1000
       undo-fu-session-compression 'zlib)
 
@@ -47,8 +21,8 @@
 	:config
 	(which-key-mode 1)
 	(setq which-key-idle-delay 0.05
-    which-key-popup-type 'side-window
-    which-key-side-window-location 'bottom))
+	      which-key-popup-type 'side-window
+	      which-key-side-window-location 'bottom))
 
 ;; --- Org-mode Visual & Functional Settings ---
 (setq org-directory "~/Documents/DOOM/")
@@ -73,16 +47,16 @@
 (use-package! org-roam
   :after org
   :config
-  (setq org-roam-directory
-       (expand-file-name "roam" org-directory)))
+  (setq org-roam-directory (expand-file-name "roam" org-directory)))
 
 ;; --- Unified Org Typography & Bullet Mix ---
 (use-package! org-superstar
   :after org
   :hook (org-mode . org-superstar-mode)
-  :config  (setq org-superstar-headline-bullets-list '("◉" "○" "✸" "✿" "•")
-        org-superstar-special-item-bullet-alist '((?- . "•") (?+ . "➤"))
-        org-superstar-prettify-item-bullets t))
+  :config
+  (setq org-superstar-headline-bullets-list '("◉" "○" "✸" "✿" "•")
+		org-superstar-special-item-bullet-alist '((?- . "•") (?+ . "➤"))
+		org-superstar-prettify-item-bullets t))
 
 (use-package! org-modern
   :after org
@@ -97,9 +71,9 @@
         org-appear-autosubmarkers t))
 (add-hook! 'org-mode-hook #'org-appear-mode)
 
-  (use-package! org-fancy-priorities
-    :demand t
-	:after org)
+ ;  (use-package! org-fancy-priorities
+ ;    :demand t
+	; :after org)
 
 ;; --- Pandoc Integration ---
 (add-hook! '(markdown-mode-hook org-mode-hook) #'pandoc-mode)
@@ -128,10 +102,9 @@
        '(org-level-3 ((t (:inherit outline-3 :height 1.1 :weight bold))))
        '(org-level-4 ((t (:inherit outline-4 :height 1.05 :weight bold))))))
 
-  ;; --- TERMINAL / TUI-ONLY SETTINGS (-nw inside Ghostty) ---
+	  ;; --- TERMINAL / TUI-ONLY SETTINGS (-nw inside Ghostty) ---
   (progn
     ;; Force tooltips into the echo area to prevent child-frame window errors
     (setq tooltip-use-echo-area t)
-    ;; Enable corfu-terminal fallback so completion overlays render as TUI text
-	(fter! image-roll
-      (global-image-roll-mode +1)))
+	(after! image-roll
+      (global-image-roll-mode 1))))
