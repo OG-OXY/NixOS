@@ -4,7 +4,7 @@
 	;; layout
 
 	:completion
-	(corfu +orderless +icons +dabbrev) ;; add +icons if using gui
+	(corfu +orderless +icons +dabbrev)
 	vertico
 
 	:ui
@@ -20,9 +20,7 @@
 	(vc-gutter +pretty)
 	
 	:editor
-	; (evil +everywhere)
-	(evil +everywhere +multiple-cursors)
-	; evil
+	(evil +everywhere +multiple-cursors) ; evil
 	file-templates
 	snippets
 
@@ -52,4 +50,3 @@
 
 	:config
 	(default +bindings +smartparens))
-	; (default +smartparens))

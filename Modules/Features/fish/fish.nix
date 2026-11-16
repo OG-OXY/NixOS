@@ -63,15 +63,9 @@
 
       shellAbbrs = {
         hl = "hx";
-        dt = "emacsclient --socket-name=doom -t";
-        et = "emacsclient --socket-name=emacs -t";
-        ds = "systemctl --user restart doom";        
-        es = "systemctl --user restart emacs";
-        dc = "emacsclient --socket-name=doom -c -a 'doom'";
-        ec = "emacsclient --socket-name=emacs -c -a 'emacs'";
-        steamrun = "gamescope --backend wayland -W 1920 -H 1080 -r 240 -f -e -- steam -gamepadui";
         su = "sudo -i";
         ls = "ls -a";
+        yy = "doas yazi";
         cds = "cd ~/NixOS/Master";
         cdn = "cd ~/Notes";
         cdc = "cd ~/.config";
@@ -80,16 +74,16 @@
         cdb = "cd ~/.local/bin";
         cdst = "cd ~/.local/state";
         cdsx = "cd ~/.local/share/steel";
+        jd = "jj d";
+        jdl = "jj diff -r @-";
         jl = "jj log";
         jla = "jj l";
-        jdr = "jj diff -r @-";
-        jd = "jj d";
         jc = "jj commit -m \"";
         jmc = "jj new @ origin@master";
         jbs = "jj bookmark set master -r @";
         jdc = "jj describe -m \"";
         jgp = "jj git push --all --allow-empty-description";
-        yy = "doas yazi";
+        nr = "nix run nixpkgs#";
         nrs = "nh os switch .";
         nrsu = "nh os switch . --update";
         nrt = "nh os test .";
@@ -97,16 +91,26 @@
         nrvm = "nh os vm-build .";
         vm = "./result/bin/run-nixos-vm";
         nrb = "nh os build .";
+        nc = "doas nh clean all";
+        nck = "doas nh clean all --keep 5";
         nb = "nix-backup";
         nub = "nix-upgrade-backup";
-        nck = "doas nh clean all --keep 5";
-        nc = "doas nh clean all";
-        dfb = "df -h /boot";
-        dfr = "df -h /";
-        ts = "doas tailscale up";
+        dfr = "df -h /"; # Storage Analysis on /;
+        dfb = "df -h /boot"; # Storage Analysis on /boot;
+        dfrv = "df -h | grep /"; # Verbose Storage Analysis on /;
+        dfbv = "df -h | grep /boot"; # Verbose Storage Analysis on /boot;
+        dfmv = "df -h | grep /mnt"; # Verbose Storage Analysis on /;
         pcig = "lspci | grep \'|\'";
-        btcs = "doas bluetoothctl connect 21:35:F7:94:2E:26";
-        btcbb = "doas bluetoothctl connect D6:88:C3:AC:1B:0C";
+        ds = "systemctl --user restart doom";        
+        es = "systemctl --user restart emacs";
+        dt = "emacsclient --socket-name=doom -t";
+        et = "emacsclient --socket-name=emacs -t";
+        dc = "emacsclient --socket-name=doom -c -a 'doom'";
+        ec = "emacsclient --socket-name=emacs -c -a 'emacs'";
+        ts = "doas tailscale up";
+        btc = "doas bluetoothctl connect 21:35:F7:94:2E:26";
+        keychron = "nix run nixpkgs#chromium";
+        steamrun = "gamescope --backend wayland -W 1920 -H 1080 -r 240 -f -e -- steam -gamepadui";
       };
 
       shellInit = ''

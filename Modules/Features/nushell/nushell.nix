@@ -7,7 +7,7 @@
   let
     nushellConfig = ./config.nu;
     nushellEnv = ./env.nu;
-    nushellNu = ./nu;
+    nushellNu = toString ./nu;
     nushellNuScripts = "${inputs.nu_scripts}";
     nu-lintConfig = toString ./nu-lint.toml;
   in
@@ -22,13 +22,8 @@
         abbreviations = {
           hl = "hx";
           su = "sudo -i";
-          yy = "doas yazi";
           ls = "ls -a";
-          dfr = "df -h /"; # Storage Analysis on /;
-          dfb = "df -h /boot"; # Storage Analysis on /boot;
-          dfrv = "df -h | grep /"; # Verbose Storage Analysis on /;
-          dfbv = "df -h | grep /boot"; # Verbose Storage Analysis on /boot;
-          dfmv = "df -h | grep /mnt"; # Verbose Storage Analysis on /;
+          yy = "doas yazi";
           cds = "cd ~/NixOS/Master";
           cdn = "cd ~/Notes";
           cdc = "cd ~/.config";
@@ -38,7 +33,7 @@
           cdst = "cd ~/.local/state";
           cdsx = "cd ~/.local/share/steel";
           jd = "jj d";
-          jdr = "jj diff -r @-";
+          jdl = "jj diff -r @-";
           jl = "jj log";
           jla = "jj l";
           jc = "jj commit -m '";
@@ -46,6 +41,7 @@
           jbs = "jj bookmark set master -r @";
           jdc = "jj describe -m '";
           jgp = "jj git push --all --allow-empty-description";
+          nr = "nix run nixpkgs#";
           nrs = "nh os switch .";
           nrsu = "nh os switch . --update";
           nrt = "nh os test .";
@@ -57,6 +53,12 @@
           nck = "doas nh clean all --keep 5";
           nb = "nix-backup";
           nub = "nix-upgrade-backup";
+          dfr = "df -h /"; # Storage Analysis on /;
+          dfb = "df -h /boot"; # Storage Analysis on /boot;
+          dfrv = "df -h | grep /"; # Verbose Storage Analysis on /;
+          dfbv = "df -h | grep /boot"; # Verbose Storage Analysis on /boot;
+          dfmv = "df -h | grep /mnt"; # Verbose Storage Analysis on /;
+          pcig = "lspci | grep | '";
           ds = "systemctl --user restart doom";
           es = "systemctl --user restart emacs";
           dt = "emacsclient --socket-name=doom -t";
@@ -65,7 +67,7 @@
           ec = "emacsclient --socket-name=emacs -c -a 'emacs'";
           ts = "doas tailscale up";
           btc = "doas bluetoothctl connect 2135F7942E26";
-          pcig = "lspci | grep | '";
+          keychron = "nix run nixpkgs#chromium";
         };
         show_banner = "false";
       };
@@ -88,7 +90,7 @@
     xdg.configFile = {
       "nushell/nu".source = config.lib.file.mkOutOfStoreSymlink "${nushellNu}";
       "nu-lint/config.toml".source = config.lib.file.mkOutOfStoreSymlink "${nu-lintConfig}";
-      "nushell/nu_scripts".source = config.lib.file.mkOutOfStoreSymlink "${nushellNuScripts}";
+      "nushell/nu_scripts".source = "${nushellNuScripts}";
     };
   };
   flake.nixosModules.nushell = {  ... }:
