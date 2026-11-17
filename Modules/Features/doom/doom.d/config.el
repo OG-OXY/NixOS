@@ -43,7 +43,7 @@
   :hook (org-mode . org-superstar-mode)
   :config
   (setq org-superstar-headline-bullets-list '("◉" "○" "" "" "󰫢")
-		org-superstar-special-item-bullet-alist '((?- . "•") (?+ . "➤"))
+		org-superstar-special-item-bullet-alist '((?- . "✸") (?+ . "➤"))
 		org-superstar-prettify-item-bullets t))
 
 (use-package! org-modern
