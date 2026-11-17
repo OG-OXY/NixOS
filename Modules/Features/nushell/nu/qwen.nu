@@ -5,7 +5,7 @@ def main [] {
     let api_url = "http://localhost:8080/v1/chat/completions"
     
     # Verify absolute path to avoid subfolder lookup failures
-    let key_path = "/home/ty/NixOS/Master/Modules/System/Services/AI/llama-cpp/keys.txt"
+    let key_path = "/home/ty/NixOS/Modules/System/Services/AI/llama-cpp/keys.txt"
     if not ($key_path | path exists) {
         print $"(ansi red_bold)Error: Key file not found at ($key_path)!(ansi reset)"
         return
@@ -35,7 +35,7 @@ def main [] {
         }
 
         let response = (http post --content-type application/json 
-            -H [Authorization $"Bearer ($api_key)"] 
+            --headers [Authorization $"Bearer ($api_key)"] 
             $api_url 
             ($payload | to json)
         )
@@ -94,6 +94,7 @@ def main [] {
                 # Fallback if Qwen just output generic JSON text that isn't an agent tool structure
                 print $"\n(ansi green)assistant ❯(ansi reset) ($ai_text)\n"
             }
+            
         }
-    }
+    }    
 }

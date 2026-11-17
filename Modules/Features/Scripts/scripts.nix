@@ -20,7 +20,7 @@
         fi
 
         # Jump directly into your active configuration directory
-        cd "$HOME/NixOS/Master"
+        cd "$HOME/NixOS"
 
         echo "🔄 Updating flake.lock.. ⚙️ Rebuilding and switching NixOS system..."
         nh os switch . --update
@@ -56,11 +56,11 @@
         # 1. Safety backup directory.
         BACKUP_DIR="$HOME/.nix-backup/$(date +%Y-%m-%d_%H-%M)"
         echo "📦 Compiling configuration snapshot to $BACKUP_DIR..."
-        mkdir -p "$BACKUP_DIR/.config" "$BACKUP_DIR/.local/bin" "$BACKUP_DIR/NixOS/Master"
+        mkdir -p "$BACKUP_DIR/.config" "$BACKUP_DIR/.local/bin" "$BACKUP_DIR/NixOS"
 
         # Core directory copying routines
         [ -d "$HOME/.local/bin" ] && cp -R $HOME/.local/bin/* "$BACKUP_DIR/.local/bin/" 2>/dev/null || true
-        [ -d "$HOME/NixOS/Master" ] && cp -R $HOME/NixOS/Master/* "$BACKUP_DIR/NixOS/Master/" 2>/dev/null || true
+        [ -d "$HOME/NixOS" ] && cp -R $HOME/NixOS/* "$BACKUP_DIR/NixOS/" 2>/dev/null || true
         [ -d "$HOME/.config" ] && cp -R $HOME/.config/* "$BACKUP_DIR/.config/" 2>/dev/null || true
 
         echo "✨ SYSTEM UPGRADE AND BACKUP SEQUENCE COMPLETED"
@@ -80,11 +80,11 @@
         # 1. Safety backup directory.
         BACKUP_DIR="$HOME/.nix-backup/$(date +%Y-%m-%d_%H-%M)"
         echo "📦 Compiling configuration snapshot to $BACKUP_DIR..."
-        mkdir -p "$BACKUP_DIR/.config" "$BACKUP_DIR/.local/bin" "$BACKUP_DIR/NixOS/Master"
+        mkdir -p "$BACKUP_DIR/.config" "$BACKUP_DIR/.local/bin" "$BACKUP_DIR/NixOS"
 
         # Core directory copying routines
         [ -d "$HOME/.local/bin" ] && cp -R $HOME/.local/bin/* "$BACKUP_DIR/.local/bin/" 2>/dev/null || true
-        [ -d "$HOME/NixOS/Master" ] && cp -R $HOME/NixOS/Master/* "$BACKUP_DIR/NixOS/Master/" 2>/dev/null || true
+        [ -d "$HOME/NixOS" ] && cp -R $HOME/NixOS/* "$BACKUP_DIR/NixOS/" 2>/dev/null || true
         [ -d "$HOME/.config" ] && cp -R $HOME/.config/* "$BACKUP_DIR/.config/" 2>/dev/null || true
 
         echo "✨ STANDALONE BACKUP SEQUENCE COMPLETED SUCCESSFULLY"

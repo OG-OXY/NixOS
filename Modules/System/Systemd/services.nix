@@ -26,7 +26,7 @@
             # Force specific primary monitor if auto-detection picks the wrong one
             monitor = "ASUSTek COMPUTER INC ROG PG258Q #ASP9OUVfHcfd"; 
             appearance = {
-              wallpaper = "/home/ty/NixOS/Master/Config/Theme/Wpapers/gruvbox-rainbow-nix.png";
+              wallpaper = "/home/ty/NixOS/Config/Theme/Wpapers/gruvbox-rainbow-nix.png";
               blur = true;
             };
           };

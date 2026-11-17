@@ -13,6 +13,7 @@
         adjust-cell-height = "-10%";
         adjust-cell-width = "-10%";
         cursor-style = "block";
+        cursor-style-blink = false;
         grapheme-width-method = "legacy";
         shell-integration-features = "no-cursor";
         scrollback-limit = 100000000;

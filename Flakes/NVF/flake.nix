@@ -348,10 +348,10 @@
                       #}
                     #'';
                     master-repo-grep = ''
-                      vim.api.nvim_create_user_command('Masterg', function()
+                      vim.api.nvim_create_user_command('Nixg', function()
                         require('telescope.builtin').live_grep({
-                          cwd = "/home/ty/NixOS/Master/",
-                          prompt_title = "Master Repo Grep",
+                          cwd = "/home/ty/NixOS",
+                          prompt_title = "Nix Repo Grep",
                         })
                       end, {})
                     '';

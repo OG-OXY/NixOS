@@ -59,7 +59,7 @@
       after = [ "graphical-session.target" ];
       serviceConfig = {
         Type = "simple";
-        ExecStart = "${emacs}/bin/emacs --init-directory=%h/NixOS/Master/Modules/Features/emacs/emacs.d --fg-daemon=emacs";
+        ExecStart = "${emacs}/bin/emacs --init-directory=%h/NixOS/Modules/Features/emacs/emacs.d --fg-daemon=emacs";
         ExecStop = "${emacs}/bin/emacsclient --socket-name=emacs --eval '(kill-emacs)'";
         Restart = "on-failure";
         SuccessExitStatus = 15;
