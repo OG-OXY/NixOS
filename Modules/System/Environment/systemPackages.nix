@@ -10,6 +10,9 @@
       Kde = pkgs.kdePackages;
       py3 = pkgs.python313Packages;
       Gst = pkgs.gst_all_1;
+      hunspell = pkgs.hunspell.withDicts (dicts: [
+        dicts.en_US-large
+      ]);
       Gsr = pkgs.gpu-screen-recorder.overrideAttrs (oldAttrs: {
         buildInputs = [ pkgs.ffmpeg_6 ] ++ (builtins.filter (p: pkgs.lib.getName p != "ffmpeg") (oldAttrs.buildInputs or []));
         # buildInputs = (oldAttrs.nativeBuildInputs or []) ++ [
@@ -222,6 +225,7 @@
       pkgs.geminicommit
       py3.huggingface-hub
       pkgs.monero-cli
+      hunspell
     
       # ============================================================================
       # DISABLED PACKAGES (ORGANIZED BY SUBCATEGORY)

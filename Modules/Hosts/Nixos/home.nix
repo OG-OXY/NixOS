@@ -22,9 +22,9 @@
 
     xdg = {
       configFile = {
-        "niri/config.kdl".source = config.lib.file.mkOutOfStoreSymlink "/home/ty/NixOS/Master/Config/Niri/config.kdl";
-        "tealdeer/config.toml".source = config.lib.file.mkOutOfStoreSymlink "/home/ty/NixOS/Master/Config/Tealdeer/config.toml";
-        "secretspec/config.toml".source = config.lib.file.mkOutOfStoreSymlink "home/ty/NixOS/Master/Config/Secretspec/config.toml";
+        "niri/config.kdl".source = config.lib.file.mkOutOfStoreSymlink "/home/ty/NixOS/Config/Niri/config.kdl";
+        "tealdeer/config.toml".source = config.lib.file.mkOutOfStoreSymlink "/home/ty/NixOS/Config/Tealdeer/config.toml";
+        "secretspec/config.toml".source = config.lib.file.mkOutOfStoreSymlink "home/ty/NixOS/Config/Secretspec/config.toml";
       };
       dataFile = {
         #

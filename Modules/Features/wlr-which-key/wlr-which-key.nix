@@ -53,12 +53,12 @@
           {
             key = "d";
             desc = "Doom Client";
-            cmd = "${pkgs.emacs-pgtk}/bin/emacsclient --socket-name=doom -c -a 'doom'";
+            cmd = "${pkgs.emacs-pgtk}/bin/emacsclient --socket-name=doom -c -a ''";
           }
           {
             key = "c";
             desc = "Emacs Client";
-            cmd = "${pkgs.emacs-pgtk}/bin/emacsclient --socket-name=emacs -c -a 'emacs'";
+            cmd = "${pkgs.emacs-pgtk}/bin/emacsclient --socket-name=emacs -c -a ''";
           }
           {
             key = "o";

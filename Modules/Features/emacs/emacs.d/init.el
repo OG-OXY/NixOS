@@ -81,8 +81,8 @@
 (use-package projectile
   :demand t
   :config
-  (setq projectile-known-projects-file "~/.local/state/emacs/projectile-bookmarks.eld"
-        projectile-cache-file "~/.local/state/emacs/projectile.cache"))
+  (setq projectile-known-projects-file "~/.cache/emacs/projectile/projectile.eld"
+        projectile-cache-file "~/.cache/emacs/projectile/projectile.cache"))
 ; 
 ;; --- 2. Completion (Vertico / Corfu / Orderless) ---
 (use-package vertico
@@ -111,7 +111,8 @@
 (use-package org
   :demand t
   :config
-  (setq org-directory "~/Documents/EMACS/"
+  (setq org-directory "~/Documents/ORG/"
+	    org-journal-dir (expand-file-name "journal" org-directory)
         org-agenda-files (list org-directory)
         org-src-fontify-natively t
         org-src-tab-acts-natively t
@@ -143,6 +144,17 @@
   :hook (org-mode . org-modern-mode)
   :config
   (setq org-modern-star nil))
+
+; (use-package org-modern
+;   (setq org-modern-table t
+;         org-modern-block t
+;         org-modern-todo t
+;         org-modern-tag t
+; 		org-modern-star 'replace
+;         org-modern-replace-stars "◉○◉○◉○"
+;         org-modern-list '((?- . "")
+;                           (?+ . "➤")
+;                           (?* . "✸"))))
 
 (use-package org-appear
   :demand t
