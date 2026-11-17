@@ -1,7 +1,5 @@
 ;;; doom.d/packages.el -*- lexical-binding: t; -*-
 (package! command-log-mode)
-(package! helpful)
-(package! undo-fu-session)
 (package! pandoc-mode)
 (package! org-modern)
 (package! org-superstar)
