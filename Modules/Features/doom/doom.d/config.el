@@ -42,9 +42,9 @@
   :after org
   :hook (org-mode . org-superstar-mode)
   :config
-  (setq org-superstar-headline-bullets-list '("◉" "○" "" "" "󰫢")
-		org-superstar-special-item-bullet-alist '((?- . "✸") (?+ . "➤"))
-		org-superstar-prettify-item-bullets t))
+  (setq org-superstar-prettify-item-bullets t
+		org-superstar-headline-bullets-list '("" "" "" "" "󰫢") ;; Extra symbols ("◉" "○" <-- original header 1 and 2)
+		org-superstar-special-item-bullet-alist '((?- . "✸") (?+ . "➤"))))
 
 (use-package! org-modern
   :after org
@@ -69,9 +69,9 @@
 ;; --- Terminal vs. GUI Conditional Environment Toggles ---
 (if (display-graphic-p)
     (custom-set-faces
-     '(org-level-1 ((t (:inherit outline-1 :height 1.35 :weight bold))))
-     '(org-level-2 ((t (:inherit outline-2 :height 1.2 :weight bold))))
-     '(org-level-3 ((t (:inherit outline-3 :height 1.1 :weight bold))))
+     '(org-level-1 ((t (:inherit outline-1 :height 1.50 :weight bold))))
+     '(org-level-2 ((t (:inherit outline-2 :height 1.35 :weight bold))))
+     '(org-level-3 ((t (:inherit outline-3 :height 1.20 :weight bold))))
      '(org-level-4 ((t (:inherit outline-4 :height 1.05 :weight bold)))))
   (setq tooltip-use-echo-area t)
   (after! image-roll
