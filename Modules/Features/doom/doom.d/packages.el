@@ -2,12 +2,9 @@
 (package! command-log-mode)
 (package! majutsu)
 (package! pandoc-mode)
-; (package! org-modern)
-; (package! org-superstar)
-(package! org-appear)
+; (package! org-appear)
 ; (package! org-fancy-priorities)
 ; (package! helix)
-; (package! corfu-terminal)
 ; (package! evil-kakoune)
 ; (package! evil
 ;   :recipe (:host github :repo "OG-OXY/evil-stripped" :branch "master")

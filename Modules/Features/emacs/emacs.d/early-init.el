@@ -7,8 +7,8 @@
             (setq gc-cons-threshold (* 16 1024 1024))))
 
 ;; 2. System Environment & Load Paths (Available before any packages load)
-(setenv "PATH" (concat (getenv "PATH") ":/run/current-system/sw:/run/current-system/sw/bin:/run/current-system/sw/sbin:/run/current-system/sw/lib:/run/current-system/sw/share:/run/current-system/sw/etc:" (expand-file-name "~/.nix-profile/bin")))
-(setq exec-path (append exec-path (list "/run/current-system/sw/bin" (expand-file-name "~/.nix-profile/bin"))))
+(setenv "PATH" (concat (getenv "PATH") ":/run/current-system/sw:/run/current-system/sw/bin:/run/current-system/sw/sbin:/run/current-system/sw/lib:/run/current-system/sw/share:/run/current-system/sw/etc:"))
+(setq exec-path (append exec-path (list "/run/current-system/sw/bin")))
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
 ;; 3. Redirect native compilation cache before anything compiles
