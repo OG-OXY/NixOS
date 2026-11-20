@@ -4,51 +4,45 @@
   ...
 }:
 {
-  flake.nixosModules.doom = { pkgs, ... }:
+  flake.homeModules.doom = { pkgs, config, ... }:
   let
-    doom = pkgs.doomEmacs {
+    cfg = config.programs.doom-emacs;
+    localDir = "${config.xdg.dataHome}/doom";
+  in
+  {
+    programs.doom-emacs = {
+      enable = true;
       doomDir = ./doom.d;
-      doomLocalDir = "~/.local/share/doom";
+      doomLocalDir = localDir;
       emacs = pkgs.emacs-pgtk;
+      provideEmacs = false;
       experimentalFetchTree = true;
-      extraPackages = epkgs:
-      let
-        fpkgs = pname: src: packageRequires: epkgs.melpaBuild {
-          inherit pname src packageRequires;
-          version = "1.0.0";
-        };
+      extraPackages = epkgs: let
+        fpkg = pkgs.mkFpkgs epkgs;
       in
       [
         epkgs.treesit-grammars.with-all-grammars
-        (fpkgs "image-roll" inputs.image-roll [ ])
-        (fpkgs "majutsu" inputs.majutsu [ epkgs.magit epkgs.consult epkgs.plz epkgs.transient ])
-        (fpkgs "helix" inputs.helix-mode [ ])
-        # (fpkgs "evil" (pkgs.lib.cleanSourceWith {
-        #   src = inputs.evil-stripped;
-        #   filter = path: type: 
-        #     let base = baseNameOf path;
-        #     in !(builtins.match ".*test.*" base != null || base == "evil-tests.el");
-        # }) [ epkgs.goto-chg ])
+        (fpkg "image-roll" inputs.image-roll [ ])
+        (fpkg "majutsu" inputs.majutsu [ epkgs.magit epkgs.consult epkgs.plz epkgs.transient ])
+        (fpkg "helix" inputs.helix-mode [ ])
       ];
     };
-  in
-  {
-    environment.systemPackages = [ doom ];
     systemd.user.services.doom = {
-      description = "Doom Emacs Daemon";
-      documentation = [ "info:emacs" "man:emacs(1)" "https://gnu.org/software/emacs/" ];
-      wantedBy = [ "default.target" ];
-      after = [ "graphical-session.target" ];
-      serviceConfig = {
-        Type = "simple";
-        ExecStart = "${doom}/bin/doom-emacs --fg-daemon=doom";
-        ExecStop = "${pkgs.emacs-pgtk}/bin/emacsclient --socket-name=doom --eval '(kill-emacs)'";
-        Restart = "on-failure";
-        SuccessExitStatus = 15;
+      Unit = {
+        Description = "Doom Emacs Daemon";
+        After = [ "graphical-session.target" ];
       };
+      Service = {
+        Type = "simple";
+        ExecStart = "${cfg.finalDoomPackage}/bin/doom-emacs --fg-daemon=doom";
+        ExecStop = "${pkgs.emacs-pgtk}/bin/emacsclient -s doom --eval '(kill-emacs)'";
+        Restart = "on-failure";
+      };
+      Install = {
+        WantedBy = [ "graphical-session.target" ];
+      };     
     };
   };
 }
 # Extra Configurations + Disabled, Changed
 # tangleArgs = "--all config.org";
-# (fpkgs "hel" inputs.hel [ epkgs.dash epkgs.avy epkgs.pcre2el epkgs.ultra-scroll ])

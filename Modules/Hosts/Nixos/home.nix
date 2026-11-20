@@ -11,7 +11,7 @@
       ];
       sessionVariables = {
         EDITOR = "hx";
-        VISUAL = "glow";
+        VISUAL = "hx";
       };
       activation.removeLegacyNixArtifacts = ''
         rm -f $HOME/.nix-profile $HOME/.steampath
@@ -24,7 +24,6 @@
       configFile = {
         "niri/config.kdl".source = config.lib.file.mkOutOfStoreSymlink "/home/ty/NixOS/Config/Niri/config.kdl";
         "tealdeer/config.toml".source = config.lib.file.mkOutOfStoreSymlink "/home/ty/NixOS/Config/Tealdeer/config.toml";
-        "secretspec/config.toml".source = config.lib.file.mkOutOfStoreSymlink "home/ty/NixOS/Config/Secretspec/config.toml";
       };
       dataFile = {
         #
