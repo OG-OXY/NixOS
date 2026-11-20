@@ -9,6 +9,7 @@
     fishBinds = pkgs.writeText "binds.fish" ''
       # This hook runs AFTER Fish finishes its keymap resets, making the bind stick
       function fish_user_key_bindings
+
           if not functions -q __copy_commandline
               function __copy_commandline
                   #echo "--- BINDING FIRED ---" >> /tmp/fish_debug.log
@@ -20,16 +21,12 @@
           bind -M insert \cy __copy_commandline
           bind \cy __copy_commandline
           
-          # --- 2. Snapshot + jjo Full Inline Execution (Ctrl+X) ---
+          # --- 2. Snapshot + jol Full Inline Execution (Ctrl+X) ---
           if not functions -q __exec_jol
               function __exec_jol
                   # Force snapshot via status
                   ${pkgs.jujutsu}/bin/jj status > /dev/null 2>&1
-
                   ${pkgs.jujutsu}/bin/jj op log --no-graph --template 'if(!description.starts_with("args: jj log"), id.short() ++ "\t" ++ user ++ "\t" ++ time.start().ago() ++ "\t" ++ description ++ "\n")' -n 100 | ${pkgs.fzf}/bin/fzf --delimiter="\t" --with-nth=2.. --preview '${pkgs.jujutsu}/bin/jj diff --git --at-op {1}' --preview-window=right:50%
-                  # Full inline jjo op log viewer
-                  #${pkgs.jujutsu}/bin/jj op log --no-graph --template 'if(!description.starts_with("snapshot working copy") && !description.starts_with("args: jj log"), id.short() ++ "\t" ++ user ++ "\t" ++ time.start().ago() ++ "\t" ++ description ++ "\n")' -n 100 | ${pkgs.fzf}/bin/fzf --delimiter="\t" --with-nth=2.. --preview '${pkgs.jujutsu}/bin/jj diff --git --at-op {1}' --preview-window=right:65%
-
                   commandline -f repaint
               end
           end
@@ -49,7 +46,7 @@
           # --- 3. Parent Diff Full Inline Execution (Alt+X) ---
           if not functions -q __exec_jj_diff
               function __exec_jj_diff
-                  ${pkgs.jujutsu}/bin/jj diff -r @- | ${pkgs.glow}/bin/glow -p
+                  ${pkgs.jujutsu}/bin/jj diff -r @-
                   commandline -f repaint
               end
           end

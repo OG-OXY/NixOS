@@ -24,10 +24,10 @@ for f in $md_files
 end
 
 # Step 3: Copy all .org files to destination
-mkdir -p ~/Notes/Org
-cp *.org ~/Notes/Org/
+mkdir -p ~/Documents/ORG
+cp *.org ~/Documents/ORG
 if test $status -ne 0
-    echo "Error: Failed to copy .org files to ~/Notes/Org"
+    echo "Error: Failed to copy .org files to ~/Documents/ORG"
     return 1
 end
 
