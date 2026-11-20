@@ -8,15 +8,18 @@
   (+my/org-journal-open-fullscreen)
   (set-buffer (find-file-noselect (org-journal--get-entry-path))))
 
+(after! org
+  (define-key org-mode-map (kbd "C-c M-p") #'+my/org-convert-region-md-to-org))
+
 (after! org-capture
   (setq org-capture-templates
         `(("i" "Inbox" entry
-           (file ,(expand-file-name "inbox.org" org-directory))
+           (file+headline ,(expand-file-name "inbox.org" org-directory) "Inbox")
            "* %?\n  %U"
            :prepend t
 		   :immediate-finish nil)
-          ("t" "Personal todo" entry
-           (file+headline +org-capture-todo-file "Inbox")
+          ("t" "Tasks" entry
+           (file+headline +org-capture-todo-file "Tasks")
            "* [ ] %?\n%i\n%a"
            :prepend t)
 		  ("n" "New Roam Node" plain

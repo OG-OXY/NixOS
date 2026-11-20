@@ -6,6 +6,19 @@
   "Saved window configuration before jumping full-screen into `org-journal'.")
 
 ;;;###autoload
+(defun +my/org-convert-region-md-to-org (beg end)
+  "Convert Markdown in region BEG..END to Org format using pandoc."
+  (interactive "r")
+  (unless (use-region-p)
+    (user-error "Select a region first"))
+  (unless (executable-find "pandoc")
+    (user-error "Executable 'pandoc' not found in PATH"))
+  (shell-command-on-region
+   beg end
+   "pandoc -f gfm -t org --wrap=none"
+   t t))
+
+;;;###autoload
 (defun +my/org-journal-open-fullscreen ()
   "Open today's `org-journal' entry full-screen with a timestamped title."
   (interactive)

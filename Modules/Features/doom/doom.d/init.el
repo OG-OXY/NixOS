@@ -86,7 +86,7 @@
 	emacs-lisp
     (org +pretty +dragndrop +pandoc +journal +roam)
 	latex
-	markdown
+	(markdown +lsp +tree-sitter) ;; +grip?
 
 	:email
 	(mu4e +org +gmail)
