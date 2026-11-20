@@ -104,10 +104,10 @@
         pcig = "lspci | grep \'|\'";
         ds = "systemctl --user restart doom";        
         es = "systemctl --user restart emacs";
-        dt = "emacsclient --socket-name=doom -t";
-        et = "emacsclient --socket-name=emacs -t";
-        dc = "emacsclient --socket-name=doom -c -a ''";
-        ec = "emacsclient --socket-name=emacs -c -a ''";
+        dt = "emacsclient -s doom -t";
+        et = "emacsclient -t";
+        dc = "emacsclient -s doom -c -a ''";
+        ec = "emacsclient -c -a ''";
         ts = "doas tailscale up";
         btc = "doas bluetoothctl connect 21:35:F7:94:2E:26";
         keychron = "nix run nixpkgs#chromium";
