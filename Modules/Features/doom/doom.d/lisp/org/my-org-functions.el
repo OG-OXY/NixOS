@@ -63,17 +63,4 @@
     (set-buffer buf)
     (goto-char (point-max))))
 
-; ;;;###autoload
-; (defun +my/org-journal-find-location ()
-;   "Open today's `org-journal' file in the background without switching windows."
-;   (require 'org-journal)
-;   (let* ((path (org-journal--get-entry-path))
-;          (buf (find-file-noselect path)))
-;     (set-buffer buf)
-;     (when (= (buffer-size) 0)
-;       (insert (format-time-string (concat "* " org-journal-date-format "\n"))))
-;     (unless (eq org-journal-file-type 'daily)
-;       (org-narrow-to-subtree))
-;     (goto-char (point-max))))
-
 (provide 'my-org-functions)

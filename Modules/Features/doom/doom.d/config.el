@@ -148,13 +148,3 @@
     
 (unless (display-graphic-p)
   (setq tooltip-use-echo-area t))
-
-; (defvar my/in-lsp!-hook nil)
-
-; (after! nix-mode
-;   (advice-add 'lsp! :around
-;               (lambda (orig-fn &rest args)
-;                 (unless my/in-lsp!-hook
-;                   (let ((my/in-lsp!-hook t))
-;                     (apply orig-fn args))))
-;               '((name . my/guard-lsp!))))
