@@ -4,7 +4,9 @@
 {
   flake.homeModules.fish = { pkgs, lib, ... }:
   let
-    makeOrg = builtins.readFile ./.fish/makeorg.fish;
+    fn = builtins.readFile;
+    makeOrgFish = fn ./.fish/makeorg.fish;
+    recordFish = fn ./.fish/record.fish;
   in
   {
     programs.fish = {
@@ -53,7 +55,13 @@
         makeorg = {
           description = "Convert all files in PWD from Markdown to Org";
           body = ''
-            ${makeOrg}
+            ${makeOrgFish};
+          '';
+        };
+        record = {
+          description = "Dynamicaly Get Display Connector DP-* and Set Output In gpu-screen-recorder to $rog_connector";
+          body = ''
+            ${recordFish};
           '';
         };
       };
