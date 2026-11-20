@@ -53,7 +53,7 @@
           {
             key = "d";
             desc = "Doom Client";
-            cmd = "${pkgs.emacs-pgtk}/bin/emacsclient -s doom -c -a ''";
+            cmd = "${pkgs.emacs-pgtk}/bin/emacsclient -s doom -c -a 'run/current-system/sw/bin/doom-emacs'";
           }
           {
             key = "c";
