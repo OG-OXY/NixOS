@@ -67,8 +67,9 @@
         ls = "ls -a";
         yy = "doas yazi";
         cds = "cd ~/NixOS";
-        cdn = "cd ~/Documents/ORG";
         cdd = "cd ~/Documents";
+        cdn = "cd ~/Documents/ORG";
+        cdv = "cd ~/Documents/.vault";
         cdc = "cd ~/.config";
         cdl = "cd ~/.local";
         cdsh= "cd ~/.local/share";
@@ -104,10 +105,10 @@
         pcig = "lspci | grep \'|\'";
         ds = "systemctl --user restart doom";        
         es = "systemctl --user restart emacs";
-        dt = "emacsclient -s doom -t";
-        et = "emacsclient -t";
-        dc = "emacsclient -s doom -c -a ''";
-        ec = "emacsclient -c -a ''";
+        dt = "${pkgs.emacs-pgtk}/bin/emacsclient -s doom -t";
+        et = "${pkgs.emacs-pgtk}/bin/emacsclient -t";
+        dc = "${pkgs.emacs-pgtk}/bin/emacsclient -s doom -c -a ''";
+        ec = "${pkgs.emacs-pgtk}/bin/emacsclient -c -a ''";
         ts = "doas tailscale up";
         btc = "doas bluetoothctl connect 21:35:F7:94:2E:26";
         keychron = "nix run nixpkgs#chromium";

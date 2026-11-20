@@ -6,6 +6,7 @@
 {
   flake.homeModules.emacs = { pkgs, config, ... }:
   let
+    cfg = config.programs.emacs;
     HOME = config.home.homeDirectory;
   in
   {
@@ -53,6 +54,7 @@
     };
     services.emacs = {
       enable = true;
+      package = cfg.finalPackage;
       client.enable = true;
       startWithUserSession = true;
       extraOptions = [
