@@ -59,17 +59,4 @@
            :heading "Changelog"
            :prepend t))))
 
-		  ;; Original Journal Capture Entry Function (mini-buffers)
-          ; ("j" "Journal" plain
-          ;  (function +my/org-journal-find-location)
-          ;  "** %(format-time-string org-journal-time-format)%^{Title}\n%i%?"
-          ;  :jump-to-captured t
-          ;  :immediate-finish nil)
-
-          ;; Default Notes Capture Entry
-          ; ("n" "Personal notes" entry
-          ;  (file+headline +org-capture-notes-file "Inbox")
-          ;  "* %u %?\n%i\n%a"
-          ;  :prepend t)
-
 (provide 'my-org-templates)
