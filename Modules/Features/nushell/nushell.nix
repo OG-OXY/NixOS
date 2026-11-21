@@ -64,9 +64,9 @@
           ds = "systemctl --user restart doom";
           es = "systemctl --user restart emacs";
           dt = "${pkgs.emacs-pgtk}/bin/emacsclient -s doom -t";
-          et = "${pkgs.emacs-pgtk}/bin/emacsclient -t";
-          dc = "${pkgs.emacs-pgtk}/bin/emacsclient -s doom -c -a ''";
-          ec = "${pkgs.emacs-pgtk}/bin/emacsclient -c -a ''";
+          et = "${pkgs.emacs-pgtk}/bin/emacsclient -s emacs -t";
+          dc = "${pkgs.emacs-pgtk}/bin/emacsclient -s doom -c -a 'doom-emacs'";
+          ec = "${pkgs.emacs-pgtk}/bin/emacsclient -s emacs -c -a 'emacs'";
           ts = "doas tailscale up";
           btc = "doas bluetoothctl connect 2135F7942E26";
           keychron = "nix run nixpkgs#chromium";

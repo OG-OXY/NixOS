@@ -15,9 +15,8 @@
     ];
    
     # Superior tmpfiles approach
-    systemd.tmpfiles.rules = [
-      "d /home/ty/.config/herdr 0755 ty users -"
-      "C+ /home/ty/.config/herdr/config.toml 0644 ty users - ${herdrConfig}"
+    systemd.userLinks = [
+      { path = "/home/ty/.config/herdr/config.toml"; source = "${herdrConfig}"; type = "C+"; }
     ];
   };
 }
