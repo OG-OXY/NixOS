@@ -8,7 +8,6 @@
 (require "recentf-hx/recentf.scm")
 (require "splash-hx/splash.scm")
 (require "steel-pty/term.scm")
-(require "file-tree.scm")
 (require "focus.scm")
 (require "git-status-picker.scm")
 (require "labelled-buffers.scm")
@@ -51,11 +50,13 @@
 ;; (hash "normal" (hash "i" 'no_op))
 
 ;; Binds
-(keymap (global) 
-  (normal (space (t ":open-term") (l ":load-buffer") (o ":eval-sexpr"))))
-
-; (C-x ":helix.write-buffer-close!") (C-r (f ":recentf-open-files"))
-
+(keymap (global)
+  (normal (space (t ":open-term")
+                 (l ":load-buffer")
+                 (o ":eval-sexpr")
+                 ("." (r ":recentf-open-files")
+                      (x ":helix.write-buffer-close!")
+                      (j ":sh jjui")))))
 
 ;; Register an event listener or advise the view creation hook
 ; (define (on-buffer-open-or-split)

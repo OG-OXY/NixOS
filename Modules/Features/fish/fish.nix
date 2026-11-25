@@ -64,6 +64,17 @@
             ${recordFish};
           '';
         };
+        obs-switch-scene = {
+          description = "Toggle Function for 'obs-cmd'";
+          body = ''
+            set -l cur (obs-cmd scene current)
+            if test "$cur" = "Monitor 1"
+                obs-cmd scene switch "Monitor 2"
+            else
+                obs-cmd scene switch "Monitor 1"
+            end
+          '';
+        };
       };
 
       shellAliases = {
@@ -85,14 +96,21 @@
         cdst = "cd ~/.local/state";
         cdsx = "cd ~/.local/share/steel";
         jd = "jj d";
-        jdl = "jj diff -r @-";
-        jl = "jj log";
-        jla = "jj l";
+        jdp = "jj d -r @-";
+        jl = "jj l";
+        js = "jj s";
         jc = "jj commit -m \"";
-        jmc = "jj new @ origin@master";
-        jbs = "jj bookmark set master -r @";
+        jre = "jj rebase -s master -d exp";
+        jrm = "jj rebase -s exp -d master";
+        jbs = "jj bookmark set master exp -r @";
+        jmc = "jj new master exp";
+        jnm = "jj new master";
+        jne = "jj new exp";
+        jbm = "jj bookmark set master -r @";
+        jbe = "jj bookmark set exp -r @";
         jdc = "jj describe -m \"";
         jgp = "jj git push --all --allow-empty-description";
+        jgpb = "jj git push --bookmark";
         nr = "nix run nixpkgs#";
         nrs = "nh os switch .";
         nrsu = "nh os switch . --update";

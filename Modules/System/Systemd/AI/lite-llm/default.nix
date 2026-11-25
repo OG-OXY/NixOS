@@ -3,6 +3,22 @@
 }:
 {
   flake.nixosModules.lite-llm = { pkgs, lib, ... }:
+  let
+    geminiKeys = [
+      "GEMINI_KEY_1"
+      "GEMINI_KEY_2"
+      "GEMINI_KEY_3"
+    ];
+
+    mkGeminiDeployments = modelName: upstreamModel:
+      map (keyVar: {
+        model_name = modelName;
+        litellm_params = {
+          model = upstreamModel;
+          api_key = "os.environ/${keyVar}";
+        };
+      }) geminiKeys;
+  in  
   {
     services.litellm = {
       enable = true;
@@ -10,9 +26,22 @@
       port = 4000;         # Standard proxy listening port
       package = pkgs.litellm;
       settings = {
-        litellm_settings = [
-          "detailed_debug=True"
-        ];
+        litellm_settings = {
+          detailed_debug = true;
+        };
+
+        general_settings = {
+          master_key = "os.environ/LITELLM_MASTER_KEY";
+          dangerously_permit_weak_or_unset_master_key = true;
+        };
+
+        router_settings = {
+          routing_strategy = "simple-shuffle";
+          num_retries = builtins.length geminiKeys;
+          allowed_fails = 1;
+          cooldown_time = 18000; # 5 hours in seconds after a 429 quota hit
+        };
+
         model_list = [
           {
             model_name = "qwen2.5-coder:14B";
@@ -40,15 +69,7 @@
               # supported_openai_params = [ "tools" "tool_choice" "temperature" "max_tokens" ];
             };
           }
-          {
-            model_name = "gemini-flash";
-            litellm_params = {
-              model = "gemini/gemini-1.5-flash";
-              # Tells LiteLLM to grab the secret token directly from systemd environment rules
-              api_key = "os.environ/GEMINI_API_KEY"; 
-            };
-          }
-        ];
+        ] ++ (mkGeminiDeployments "gemini-flash" "gemini/gemini-3.8-flash");
       };
     };
 

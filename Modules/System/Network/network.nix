@@ -6,6 +6,7 @@
   {
     networking = {
       hostName = "nixos";
+      nftables.enable = true;
       nameservers = [ 
         "1.1.1.1"
         "1.0.0.1"
@@ -53,6 +54,7 @@
         };
       };
       firewall = {
+        checkReversePath = "loose";        
         allowedTCPPorts = [ 22 53317 ];
         allowedUDPPorts = [ 53317 ];
         trustedInterfaces = [ "tailscale0" ];

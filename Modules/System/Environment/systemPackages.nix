@@ -40,6 +40,7 @@
       pkgs.polkit_gnome
       pkgs.pinentry-qt
       pkgs.libnotify
+      pkgs.zenity
       pkgs.quickshell
       pkgs.gnutls
       pkgs.xinit
@@ -113,6 +114,7 @@
       pkgs.playerctl
     
       # Screen & Capture Utilities
+      pkgs.obs-cmd
       pkgs.grim
       pkgs.slurp
       pkgs.wl-screenrec
@@ -199,6 +201,7 @@
       pkgs.binutils
       pkgs.pciutils
       pkgs.usbutils
+      pkgs.wev
       pkgs.lshw
       pkgs.fzf
       pkgs.ripgrep

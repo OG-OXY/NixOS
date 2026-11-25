@@ -241,6 +241,14 @@ binds {
     XF86AudioPlay { spawn "playerctl" "play-pause"; }
     XF86AudioPrev { spawn "playerctl" "previous"; }
 
+    // Obs Controls (obs-cmd)
+    XF86Tools { spawn "obs-cmd" "streaming" "toggle"; }
+    XF86Launch5 { spawn "obs-switch-scene"; }
+    XF86Launch6 { spawn "obs-cmd" "recording" "toggle"; }
+    XF86Launch7 { spawn "obs-cmd" "replay" "toggle"; }
+    XF86Launch8 { spawn "obs-cmd" "replay" "save"; }
+    XF86Launch9 { spawn "obs-cmd" "recording" "toggle-pause"; }
+
     // Session Control
     Mod+Shift+Slash { show-hotkey-overlay; }
     Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
@@ -256,6 +264,7 @@ binds {
 // Mod+B { spawn "zen-beta"; }
 // Mod+V { spawn "vesktop"; }
 // added this today 
- debug {
-    deactivate-unfocused-windows
-}
+// commented this out if windows or vimiumC starts acting up again uncomment.
+//  debug {
+//     deactivate-unfocused-windows
+// }

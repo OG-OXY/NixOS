@@ -18,6 +18,7 @@
                   echo -n "$cmd" | ${rustyClip}/bin/rusty-clip # 2>> /tmp/fish_debug.log
               end
           end
+          bind -M normal \cy __copy_commandline
           bind -M insert \cy __copy_commandline
           bind \cy __copy_commandline
           
@@ -30,6 +31,7 @@
                   commandline -f repaint
               end
           end
+          bind -M normal \cs __exec_jol
           bind -M insert \cs __exec_jol
           bind \cs __exec_jol
 
@@ -40,17 +42,20 @@
                   commandline -f repaint
               end
           end
+          bind -M normal \cr __exec_jor_restore
           bind -M insert \cr __exec_jor_restore
           bind \cr __exec_jor_restore
           
-          # --- 3. Parent Diff Full Inline Execution (Alt+X) ---
+          # --- 3. Parent Diff Full Inline Execution (Ctrl+j) ---
           if not functions -q __exec_jj_diff
               function __exec_jj_diff
+                  ${pkgs.jujutsu}/bin/jj status > /dev/null 2>&1
                   ${pkgs.jujutsu}/bin/jj diff -r @-
                   commandline -f repaint
               end
           end
-          bind -M insert \cx __exec_jj_diff
+          bind -M normal \cj __exec_jj_diff
+          bind -M insert \cj __exec_jj_diff
           bind \cj __exec_jj_diff
 
       end

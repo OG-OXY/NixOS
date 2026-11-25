@@ -42,7 +42,8 @@
   (setq org-agenda-files (list
         (expand-file-name "journal" org-directory)
         (expand-file-name "inbox.org" org-directory)
-        (expand-file-name "todo.org" org-directory))
+        (expand-file-name "todo.org" org-directory)
+        (expand-file-name "roam/daily/" org-directory))
         +org-capture-journal-file
         (expand-file-name "journal/journal.org" org-directory)
         org-src-fontify-natively t
@@ -74,8 +75,8 @@
 
 ;; Org-Roam
 (after! org-roam
-  (setq org-roam-directory
-        (expand-file-name "roam" org-directory)))
+  (setq org-roam-directory (expand-file-name "roam" org-directory)
+        org-roam-dailies-directory "daily/"))
 
 ;; Org-Modern
 (after! org-modern
@@ -83,8 +84,6 @@
         org-modern-block t
         org-modern-todo t
         org-modern-tag t
-  		; org-modern-star 'replace
-        ; org-modern-replace-stars "◉○◉○◉○"
         org-modern-star 'fold
         org-modern-fold-stars '(("◉" . "○") ;;●○
                                 ("◉" . "○") ;;◆◇

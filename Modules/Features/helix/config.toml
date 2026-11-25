@@ -61,7 +61,7 @@ e = [
 ]
 
 [keys.normal."+"]
-m = ":run-shell-command "
+m = ":run-shell-command jj d"
 c = ":run-shell-command cargo build"
 t = ":run-shell-command cargo test"
 n = ":run-shell-command "
