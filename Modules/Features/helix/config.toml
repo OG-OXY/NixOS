@@ -60,6 +60,14 @@ e = [
   ":redraw",
 ]
 
+# [keys.normal.space."."]
+# j = [
+#   ":sh jjui",
+#   ":sh printf '\\x1b[?1049h\\x1b[?2004h' > /dev/tty",
+#   ":redraw",
+#   ":reload-all",
+# ]
+
 [keys.normal."+"]
 m = ":run-shell-command jj d"
 c = ":run-shell-command cargo build"

@@ -186,6 +186,7 @@
 ;; (make-minor-mode! "+"
 ;;    (hash "P" ":lam"))
 ;; ```
+
 (define (make-minor-mode! modifier bindings)
   (~> (hash "normal" (hash modifier bindings)) (value->jsexpr-string)))
 ; (helix.keybindings.set-keybindings!)))
@@ -251,7 +252,7 @@
   (eval-string (helix.static.current-highlighted-text!))
   (editor-set-mode! last-mode)
   (helix.static.set-current-selection-object! current-selection-object))
-
+  
 ; (minor-mode! "+" ("l" => lam)
 ;                  ("q" => (set-theme-dracula lam)))
 
@@ -295,3 +296,16 @@
   (helix.static.insert_string "/// ```scheme\n/// \n/// ```")
   (helix.static.move_line_up)
   (helix.static.insert_mode))
+
+;;@doc
+;; Force Write & Close Buffer
+(define (force-write-close!)
+  (helix.write-buffer-close!))
+
+;;@doc
+;; Force Write & Quit
+(define (force-write-quit-all!)
+  (helix.write-quit-all!))
+
+(provide force-write-close!
+         force-write-quit-all!)

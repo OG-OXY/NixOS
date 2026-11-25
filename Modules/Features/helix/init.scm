@@ -54,29 +54,18 @@
   (normal (space (t ":open-term")
                  (l ":load-buffer")
                  (o ":eval-sexpr")
-                 ("." (r ":recentf-open-files")
-                      (x ":helix.write-buffer-close!")
-                      (j ":sh jjui")))))
-
-;; Register an event listener or advise the view creation hook
-; (define (on-buffer-open-or-split)
-;   (let ((current-buf ()))
-;     ;; Check if the buffer is empty or matches your splash condition
-;     (if (is-empty-buffer? current-buf)
-;         (show-splash)
-;         #f)))
-;; Hooks
-;; Hook into Helix buffer/window creation events if exposed by steelix runtime
-; (register-event-listener! 'buffer-open on-buffer-open-or-split)
+                 ("." 
+                      (j open-jjui)
+                      (r ":recentf-open-files")
+                      (s ":force-write-close!")
+                      (x ":force-write-quit-all!")))))
 
 ;; Import the core helix commands namespace (require (prefix-in helix. "helix/commands.scm"))
 (define scm-keybindings (hash "insert" (hash "ret" ':scheme-indent "C-l" ':insert-lambda)))
 
 (define standard-keybindings (deep-copy-global-keybindings))
-(define file-tree-base (deep-copy-global-keybindings))
 (merge-keybindings standard-keybindings scm-keybindings)
-(merge-keybindings file-tree-base FILE-TREE-KEYBINDINGS)
-(set-global-buffer-or-extension-keymap (hash "scm" standard-keybindings FILE-TREE file-tree-base))
+(set-global-buffer-or-extension-keymap (hash "scm" standard-keybindings))
 
 ;; LSP definitions
 (define-lsp "steel-language-server" (command "steel-language-server") (args '()))
@@ -87,3 +76,5 @@
                  (formatter (command "raco") (args '("fmt" "-i")))
                  (auto-format #true)
                  (language-servers '("steel-language-server")))
+
+; (merge-keybindings file-tree-base FILE-TREE-KEYBINDINGS)
