@@ -44,6 +44,10 @@ X = "extend_line_above"
 f = "file_picker_in_current_directory"
 F = "file_picker"
 
+[keys.normal.space."."]
+j = [
+  ':sh ghostty --working-directory=%{workspace_directory} -e fish -c "jjui"'
+]
 # E = [
 #   ":sh rm -f /tmp/unique-file-zjf947h2d7",
 #   ":insert-output yazi '%{buffer_name}' --chooser-file=/tmp/unique-file-zjf947h2d7",

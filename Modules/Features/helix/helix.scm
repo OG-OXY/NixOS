@@ -291,6 +291,8 @@
 (define (print-engine-stats)
   (error "TODO"))
 
+;;@doc
+;; Create Commented Code Block (scheme)
 (provide create-commented-code-block)
 (define (create-commented-code-block)
   (helix.static.insert_string "/// ```scheme\n/// \n/// ```")

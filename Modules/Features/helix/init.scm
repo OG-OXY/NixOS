@@ -17,7 +17,7 @@
 (require "helix.scm")
 
 ;; Shell
-(set-default-shell! "/run/current-system/sw/bin/nu")
+(set-default-shell! "/run/current-system/sw/bin/fish")
 
 ;; Splash Screen/Dashboard
 (when (null? (cdr (command-line)))
@@ -55,7 +55,7 @@
                  (l ":load-buffer")
                  (o ":eval-sexpr")
                  ("." 
-                      (j open-jjui)
+                      ; (j open-jjui)
                       (r ":recentf-open-files")
                       (s ":force-write-close!")
                       (x ":force-write-quit-all!")))))
