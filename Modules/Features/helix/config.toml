@@ -44,10 +44,6 @@ X = "extend_line_above"
 f = "file_picker_in_current_directory"
 F = "file_picker"
 
-[keys.normal.space."."]
-j = [
-  ':sh ghostty --working-directory=%{workspace_directory} -e fish -c "jjui"'
-]
 # E = [
 #   ":sh rm -f /tmp/unique-file-zjf947h2d7",
 #   ":insert-output yazi '%{buffer_name}' --chooser-file=/tmp/unique-file-zjf947h2d7",
@@ -64,13 +60,23 @@ e = [
   ":redraw",
 ]
 
-# [keys.normal.space."."]
-# j = [
-#   ":sh jjui",
-#   ":sh printf '\\x1b[?1049h\\x1b[?2004h' > /dev/tty",
-#   ":redraw",
-#   ":reload-all",
-# ]
+[keys.normal.space."."]
+j = [
+  ':sh ghostty --working-directory=%{workspace_directory} -e fish -c "jjui"'
+]
+
+J = [
+  ":new",
+  ":insert-output jjui",
+  ":buffer-close",
+  ":redraw"
+]
+
+T =[
+  ":insert-output jjui",
+  ":sh printf '\\x1b[?1049h\\x1b[?2004h' > /dev/tty",
+  ":redraw",
+]
 
 [keys.normal."+"]
 m = ":run-shell-command jj d"
