@@ -5,7 +5,7 @@
 
 (after! org
   (map! :map org-mode-map
-        "C-c p" #'+my/org-convert-region-md-to-org
+        "C-c M-p" #'+my/org-convert-region-md-to-org
         "C-c q" #'+my/org-capture-finish-and-return))
 
 (after! org-capture

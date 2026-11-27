@@ -43,7 +43,7 @@
         (expand-file-name "journal" org-directory)
         (expand-file-name "inbox.org" org-directory)
         (expand-file-name "todo.org" org-directory)
-        (expand-file-name "roam/daily/" org-directory))
+        (expand-file-name "daily" org-directory))
         +org-capture-journal-file
         (expand-file-name "journal/journal.org" org-directory)
         org-src-fontify-natively t
@@ -75,7 +75,7 @@
 
 ;; Org-Roam
 (after! org-roam
-  (setq org-roam-directory (expand-file-name "roam" org-directory)
+  (setq org-roam-directory "~/Documents/ORG/"
         org-roam-dailies-directory "daily/"))
 
 ;; Org-Modern
