@@ -1,66 +1,38 @@
----@diagnostic disable: lowercase-global
----@diagnostic disable: undefined-global
+---@diagnostic disable: lowercase-global, undefined-global
 
-
-local master_nix_dir = "home/ty/NixOS"
+local master_nix_dir = "/home/ty/NixOS"
 
 ---@param config any
 function setup(config)
+  -- External tools (inline key + scope skips separate config.bind calls)
   config.action("open-helix", function()
     exec_shell("hx")
-  end, { desc = "open Helix" })
+  end, { key = "H", scope = "revisions", desc = "open Helix" })
 
-  config.bind({
-    action = "open-helix",
-    key = "H",
-    scope = "revisions",
-    desc = "open Helix",
-  })
-
-  config.action("force-describe", function()
-    local rev = context.change_id()
-    if rev then
-      jj_interactive("--ignore-immutable", "describe", "-r", rev)
-      revisions.refresh()
-    end
-  end, { desc = "describe ignoring immutable" })
-
-  config.bind({
-    action = "force-describe",
-    key = "D",
-    scope = "revisions",
-    desc = "describe ignoring immutable",
-  })
-
-  config.action("force-rebase-onto-parent", function()
-    local rev = context.change_id()
-    if rev then
-      jj_interactive("--ignore-immutable", "rebase", "-s", rev, "-o", "@-")
-      revisions.refresh()
-    end
-  end, { desc = "rebase rev onto parent ignoring immutable" })
-
-  config.bind({
-    action = "force-rebase-onto-parent",
-    seq = { "\\", "r" },
-    scope = "revisions",
-    desc = "force rebase onto parent",
-  })
-
-  config.action("nixos-switch-smart", function()
-    local target = "."
-    if config.repo and config.repo ~= master_nix_dir then
-      -- Only switch target if you explicitly want a non-current repo fallback
-      target = "."
-    end
+  config.action("nixos-switch", function()
+    local target = (config.repo and config.repo ~= master_nix_dir) and master_nix_dir or "."
     exec_shell("nh os switch " .. target)
     revisions.refresh()
-  end, { desc = "nh os switch ." })
+  end, { key = ".", scope = "revisions", desc = "nh os switch" })
 
-  config.bind({
-    action = "nixos-switch-smart",
-    key = ".",
-    scope = "revisions",
-    desc = "nh os switch .",
-  })
+  -- Always allow empty descriptions on push
+  config.action("git.push", function()
+    jj_async("git", "push", "--allow-empty-description")
+    revisions.refresh()
+  end)
+
+  -- Shim built-in apply/accept actions to ignore immutability
+  local force_overrides = {
+    ["revisions.inline_describe.accept"] = jjui.builtin.revisions.inline_describe.force_accept,
+    ["revisions.rebase.apply"] = jjui.builtin.revisions.rebase.force_apply,
+    ["revisions.abandon.apply"] = jjui.builtin.revisions.abandon.force_apply,
+    ["revisions.squash.apply"] = jjui.builtin.revisions.squash.force_apply,
+    ["revisions.duplicate.apply"] = jjui.builtin.revisions.duplicate.force_apply,
+    ["revisions.revert.apply"] = jjui.builtin.revisions.revert.force_apply,
+    ["revisions.target_picker.apply"] = jjui.builtin.revisions.target_picker.force_apply,
+  }
+
+  for name, force_fn in pairs(force_overrides) do
+    config.action(name, force_fn)
+  end
 end

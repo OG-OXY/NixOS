@@ -11,5 +11,6 @@
     };
 
     xdg.configFile."jjui/config.lua".source = ./config.lua;
+    xdg.configFile."jjui/config.toml".source = ./config.toml;
   };
 }
