@@ -52,13 +52,13 @@
 ;; Binds
 (keymap (global)
   (normal (space (t ":open-term")
+                 (x ":force-write-quit-all!")
                  (l ":load-buffer")
                  (o ":eval-sexpr")
                  ("." 
                       ; (j open-jjui)
                       (r ":recentf-open-files")
-                      (s ":force-write-close!")
-                      (x ":force-write-quit-all!")))))
+                      (s ":force-write-close!")))))
 
 ;; Import the core helix commands namespace (require (prefix-in helix. "helix/commands.scm"))
 (define scm-keybindings (hash "insert" (hash "ret" ':scheme-indent "C-l" ':insert-lambda)))

@@ -60,29 +60,11 @@ e = [
   ":redraw",
 ]
 
-[keys.normal.space."."]
-j = [
-  ':sh ghostty --working-directory=%{workspace_directory} -e fish -c "jjui"'
-]
-
-J = [
-  ":new",
-  ":insert-output jjui",
-  ":buffer-close",
-  ":redraw"
-]
-
-T =[
-  ":insert-output jjui",
-  ":sh printf '\\x1b[?1049h\\x1b[?2004h' > /dev/tty",
-  ":redraw",
-]
-
 [keys.normal."+"]
 m = ":run-shell-command jj d"
 c = ":run-shell-command cargo build"
 t = ":run-shell-command cargo test"
-n = ":run-shell-command "
+n = ":run-shell-command jjui"
 
 # E = [
 #   ":sh rm -f /tmp/unique-file-h34s3hz657",

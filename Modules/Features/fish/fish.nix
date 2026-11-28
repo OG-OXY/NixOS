@@ -4,9 +4,9 @@
 {
   flake.homeModules.fish = { pkgs, lib, ... }:
   let
-    fn = builtins.readFile;
-    makeOrgFish = fn ./.fish/makeorg.fish;
-    recordFish = fn ./.fish/record.fish;
+    fnPath = builtins.readFile;
+    makeOrgFish = fnPath ./.fish/makeorg.fish;
+    recordFish = fnPath ./.fish/record.fish;
   in
   {
     programs.fish = {
@@ -273,8 +273,14 @@
       ];
     };
   };
-  flake.nixosModules.fish = { ... }:
+  flake.nixosModules.fish = { pkgs, ... }:
+  let
+    jjuiLuaWrapper = ./.fish/jjuiLuaWrapper.fish;
+    jjuiLuaLsWrapper = pkgs.writers.writeFishBin "jjui-lua-ls"
+      (builtins.readFile jjuiLuaWrapper);
+  in
   {
     programs.fish.enable = true;
+    environment.systemPackages = [ jjuiLuaLsWrapper ];
   };
 }
