@@ -243,7 +243,7 @@ binds {
 
     // Obs Controls (obs-cmd)
     XF86Tools { spawn "obs-cmd" "streaming" "toggle"; }
-    XF86Launch5 { spawn "obs-switch-scene"; }
+    XF86Launch5 { spawn "obs-cmd" "scene" "studio-mode-transition"; }
     XF86Launch6 { spawn "obs-cmd" "recording" "toggle"; }
     XF86Launch7 { spawn "obs-cmd" "replay" "toggle"; }
     XF86Launch8 { spawn "obs-cmd" "replay" "save"; }
@@ -268,3 +268,4 @@ binds {
 //  debug {
 //     deactivate-unfocused-windows
 // }
+// XF86Launch5 { spawn "fish" "-c" "obs-switch-scene"; }

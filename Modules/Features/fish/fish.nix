@@ -61,11 +61,12 @@
         obs-switch-scene = {
           description = "Toggle Function for 'obs-cmd'";
           body = ''
-            set -l cur (obs-cmd scene current)
-            if test "$cur" = "Monitor 1"
-                obs-cmd scene switch "Monitor 2"
+            set -l out (obs-cmd scene current)
+            set -l scene (string match -r 'Current scene:\s*(.+)$' $out | tail -n 1)
+            if test "$scene" = "Monitor 1"
+              obs-cmd scene switch "Monitor 2"
             else
-                obs-cmd scene switch "Monitor 1"
+              obs-cmd scene switch "Monitor 1"
             end
           '';
         };
