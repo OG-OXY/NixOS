@@ -6,18 +6,21 @@
 (after! org
   (map! :map org-mode-map
         "C-c M-p" #'+ty/org-convert-region-md-to-org
-        "C-c q" #'+ty/org-capture-finish-and-return)
-  (map! :leader
-        :prefix ("n" . "notes")
-        (:prefix ("r" . "roam")
-         :desc "Find node (no dailies)" "f" #'ty/org-roam-node-find
-         :desc "Insert node (no dailies)" "i" #'ty/org-roam-node-insert))
-  (map! :leader
-        :prefix ("n" . "notes")
-        (:prefix ("r" . "roam")
-         (:prefix ("d" . "dailies")
-          :desc "Find daily node" "f" #'ty/org-roam-daily-find))))
+        "C-c q" #'+ty/org-capture-finish-and-return))
 
+(after! org-roam
+  (setq org-roam-node-display-template
+      (concat "${doom-hierarchy:*} "
+              (propertize "${doom-tags:24}" 'face 'org-tag)))
+  (map! :leader
+        :desc "Find node" "n r f" #'ty/org-roam-node-find
+        :desc "Insert node" "n r i" #'ty/org-roam-node-insert))
+
+(after! org-roam-dailies
+  (map! :leader
+        :desc "Find node daily" "n r d f" #'ty/org-roam-daily-find))
+		
+				
 (after! org-capture
   (setq org-capture-templates
         `(("i" "Inbox" entry
