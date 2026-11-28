@@ -1,9 +1,8 @@
 {
-  inputs,
   ...
 }:
 {
-  flake.nixosModules.wlr-which-key = { pkgs, ... }:
+  flake.nixosModules.wlr-which-key = {  ... }:
   {
     programs.wlr-which-key = {
       enable = true;
@@ -16,74 +15,74 @@
           {
             key = "d";
             desc = "Run (Normal Mode)";
-            cmd = "${pkgs.warpd}/bin/warpd --normal";
+            cmd = "uwsm app -- warpd  --normal";
           }
           {
             key = "h";
             desc = "Hint Mode";
-            cmd = "${pkgs.warpd}/bin/warpd --hint";
+            cmd = "uwsm app -- warpd --hint";
           }
           {
             key = "q";
             desc = "Quadrant Mode";
-            cmd = "${pkgs.warpd}/bin/warpd --grid";
+            cmd = "uwsm app -- warpd --grid";
           }
         ];
         apps = [
           {
             key = "l";
             desc = "Launcher";
-            cmd = "${pkgs.noctalia}/bin/noctalia msg panel-toggle launcher";
+            cmd = "noctalia msg panel-toggle launcher";
           }
           {
             key = "h";
             desc = "Herdr";
-            cmd = "${pkgs.ghostty}/bin/ghostty -e ${pkgs.herdr}/bin/herdr";
+            cmd = "uwsm app -- ghostty -e herdr";
           }
           {
             key = "g";
             desc = "Ghostty";
-            cmd = "${pkgs.ghostty}/bin/ghostty";
+            cmd = "uwsm app -- ghostty";
           }
           {
             key = "z";
             desc = "Zen-Browser";
-            cmd = "${inputs.zen-browser.packages.${pkgs.system}.default}/bin/zen-beta";
+            cmd = "uwsm app -- zen-beta";
           }
           {
             key = "d";
             desc = "Doom Client";
-            cmd = "${pkgs.emacs-pgtk}/bin/emacsclient -s doom -c -a ''";
+            cmd = "uwsm app -- emacsclient -s doom -c";
           }
           {
             key = "c";
             desc = "Emacs Client";
-            cmd = "${pkgs.emacs-pgtk}/bin/emacsclient -s emacs -c -a ''";
+            cmd = "uwsm app -- emacsclient -s emacs -c";
           }
           {
             key = "o";
             desc = "Obsidian";
-            cmd = "${pkgs.obsidian}/bin/obsidian /home/ty/Notes/Obsidian";
+            cmd = "uwsm app -- obsidian /home/ty/Notes/Obsidian";
           }
           {
             key = "v";
             desc = "Vesktop";
-            cmd = "${pkgs.vesktop}/bin/vesktop";
+            cmd = "uwsm app -- vesktop";
           }
           {
             key = "s";
             desc = "OBS-Studio";
-            cmd = "${pkgs.obs-studio}/bin/obs";
+            cmd = "uwsm app -- obs";
           }
           {
             key = "b";
             desc = "Bitwarden";
-            cmd = "${pkgs.bitwarden-desktop}/bin/bitwarden";
+            cmd = "uwsm app -- bitwarden";
           }
           {
             key = "e";
             desc = "EasyEffects";
-            cmd = "${pkgs.easyeffects}/bin/easyeffects";
+            cmd = "uwsm app -- easyeffects";
           }
           # {
           #   key = "y";
