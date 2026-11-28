@@ -45,5 +45,3 @@
     };
   };
 }
-# Extra Configurations + Disabled, Changed
-# tangleArgs = "--all config.org";

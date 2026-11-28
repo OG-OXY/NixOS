@@ -4,7 +4,7 @@
 
 ;; Convert Markdown To Org by Region or Buffer.
 ;;;###autoload
-(defun +my/org-convert-region-md-to-org (beg end)
+(defun +ty/org-convert-region-md-to-org (beg end)
   "Convert Markdown in region BEG..END to Org format using pandoc."
   (interactive "r")
   (unless (use-region-p)
@@ -17,29 +17,29 @@
    t t))
 
 ;; Saved window layout before jumping full-screen into a capture buffer.
-(defvar +my/org-return-window-config nil
+(defvar +ty/org-return-window-config nil
   "Saved window configuration before opening a full-screen Org capture buffer.")
 
 ;; Save current buffer, update Org-roam DB if available, and restore layout.
 ;;;###autoload
-(defun +my/org-capture-finish-and-return ()
+(defun +ty/org-capture-finish-and-return ()
   "Save the current Org buffer, sync Org-roam DB, and restore previous windows."
   (interactive)
   (save-buffer)
   (when (and (fboundp 'org-roam-db-update-file)
              (buffer-file-name))
     (org-roam-db-update-file))
-  (when (window-configuration-p +my/org-return-window-config)
-    (set-window-configuration +my/org-return-window-config)
-    (setq +my/org-return-window-config nil)))
+  (when (window-configuration-p +ty/org-return-window-config)
+    (set-window-configuration +ty/org-return-window-config)
+    (setq +ty/org-return-window-config nil)))
 
 ;; Org-Journal Entry Capture Template Function.
 ;;;###autoload
-(defun +my/org-journal-open-fullscreen ()
+(defun +ty/org-journal-open-fullscreen ()
   "Open today's `org-journal' entry full-screen with a timestamped title."
   (interactive)
   (require 'org-journal)
-  (setq +my/org-return-window-config (current-window-configuration))
+  (setq +ty/org-return-window-config (current-window-configuration))
   (org-journal-new-entry t)
   (delete-other-windows)
   (unless (eq org-journal-file-type 'daily)
@@ -57,11 +57,11 @@
 
 ;; Org-Roam Daily Journal Entry Function (matching journal headings + tags).
 ;;;###autoload
-(defun +my/org-roam-daily-open-fullscreen ()
+(defun +ty/org-roam-daily-open-fullscreen ()
   "Open today's `org-roam' daily note full-screen with headings and tags."
   (interactive)
   (require 'org-roam)
-  (setq +my/org-return-window-config (current-window-configuration))
+  (setq +ty/org-return-window-config (current-window-configuration))
   (let* ((daily-dir (expand-file-name org-roam-dailies-directory org-roam-directory))
          (filename (expand-file-name (format-time-string "%Y-%m-%d.org") daily-dir))
          (day-heading (format-time-string "* %A, %d %B %Y"))
@@ -95,11 +95,11 @@
 
 ;; Org-Roam New Node Function (opens full-screen immediately after title/tags).
 ;;;###autoload
-(defun +my/org-roam-new-node-open-fullscreen ()
+(defun +ty/org-roam-new-node-open-fullscreen ()
   "Prompt for title and filetags, create a new `org-roam' node, and open full-screen."
   (interactive)
   (require 'org-roam)
-  (setq +my/org-return-window-config (current-window-configuration))
+  (setq +ty/org-return-window-config (current-window-configuration))
   (let* ((title (read-string "New Roam Node Title: "))
          (tags-raw (read-string "Filetags (space-separated, e.g. nix functions systemd user): "))
          (tags-list (split-string (string-trim tags-raw) "[ \t,:]+" t))
@@ -125,9 +125,33 @@
     (delete-other-windows)
     (goto-char (point-max))))
 
+;; Org-Roam Find Node (Filter Dailies)
+(defun ty/org-roam-non-daily-p (node)
+  "Return non-nil if NODE is outside `org-roam-dailies-directory'."
+  (let* ((file (org-roam-node-file node))
+         (daily-dir (expand-file-name org-roam-dailies-directory
+                                      org-roam-directory)))
+    (not (and file (file-in-directory-p file daily-dir)))))
+
+(defun ty/org-roam-node-find ()
+  "Find org-roam nodes while excluding daily notes."
+  (interactive)
+  (org-roam-node-find nil nil #'ty/org-roam-non-daily-p))
+
+(defun ty/org-roam-node-insert ()
+  "Insert link to an org-roam node while excluding daily notes."
+  (interactive)
+  (org-roam-node-insert #'ty/org-roam-non-daily-p))
+
+(map! :leader
+      :prefix ("n" . "notes")
+      (:prefix ("r" . "roam")
+       :desc "Find node (no dailies)" "f" #'ty/org-roam-node-find
+       :desc "Insert node (no dailies)" "i" #'ty/org-roam-node-insert))
+
 ;; Org-Lint Flymake Backend Function and Args.
 (after! (org flymake)
-  (defun my/org-flymake-backend (report-fn &rest _args)
+  (defun ty/org-flymake-backend (report-fn &rest _args)
     "Run `org-lint' in org-mode and report diagnostics to Flymake via REPORT-FN."
     (when (derived-mode-p 'org-mode)
       (let* ((issues (org-lint))
@@ -149,10 +173,10 @@
                         (format "%s" msg)))))
         (funcall report-fn diagnostics))))
 
-  (defun my/setup-org-flymake ()
+  (defun ty/setup-org-flymake ()
     "Enable the custom `org-lint' Flymake backend in Org buffers."
-    (add-hook 'flymake-diagnostic-functions #'my/org-flymake-backend nil t)
+    (add-hook 'flymake-diagnostic-functions #'ty/org-flymake-backend nil t)
     (flymake-mode 1))
-  (add-hook 'org-mode-hook #'my/setup-org-flymake))
+  (add-hook 'org-mode-hook #'ty/setup-org-flymake))
 
-(provide 'my-org-functions)
+(provide 'ty-org-functions)

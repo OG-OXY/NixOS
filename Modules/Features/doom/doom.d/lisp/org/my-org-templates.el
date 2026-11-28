@@ -1,12 +1,12 @@
 ;;; lisp/org/org-templates.el --- Org Capture Templates -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;; Org Templates and Keybindings For Org Mode
-(require 'my-org-functions)
+(require 'ty-org-functions)
 
 (after! org
   (map! :map org-mode-map
-        "C-c M-p" #'+my/org-convert-region-md-to-org
-        "C-c q" #'+my/org-capture-finish-and-return))
+        "C-c M-p" #'+ty/org-convert-region-md-to-org
+        "C-c q" #'+ty/org-capture-finish-and-return))
 
 (after! org-capture
   (setq org-capture-templates
@@ -20,17 +20,17 @@
            "* [ ] %?\n%i\n%a"
            :prepend t)
           ("n" "Note" plain
-           (function +my/org-roam-new-node-open-fullscreen)
+           (function +ty/org-roam-new-node-open-fullscreen)
            ""
            :jump-to-captured t
            :immediate-finish t)
           ("d" "Daily" plain
-           (function +my/org-roam-daily-open-fullscreen)
+           (function +ty/org-roam-daily-open-fullscreen)
            ""
            :jump-to-captured t
            :immediate-finish t)
           ("j" "Journal" plain
-           (function +my/org-journal-open-fullscreen)
+           (function +ty/org-journal-open-fullscreen)
            ""
            :jump-to-captured t
            :immediate-finish t)
@@ -64,4 +64,4 @@
            :heading "Changelog"
            :prepend t))))
 
-(provide 'my-org-templates)
+(provide 'ty-org-templates)

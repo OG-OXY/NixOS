@@ -9,7 +9,7 @@
      (normal-top-level-add-subdirs-to-load-path)))
 (setq org-directory "~/Documents/ORG/") ;; Set Org DIR
 ;; Require Custom Lisp and Modularized el Files
-(require 'my-org-templates) ;; Require Org-Templates and Org-Functions
+(require 'ty-org-templates) ;; Require Org-Templates and Org-Functions
 
 ;; Undo
 (after! undo-fu-session
