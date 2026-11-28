@@ -6,7 +6,17 @@
 (after! org
   (map! :map org-mode-map
         "C-c M-p" #'+ty/org-convert-region-md-to-org
-        "C-c q" #'+ty/org-capture-finish-and-return))
+        "C-c q" #'+ty/org-capture-finish-and-return)
+  (map! :leader
+        :prefix ("n" . "notes")
+        (:prefix ("r" . "roam")
+         :desc "Find node (no dailies)" "f" #'ty/org-roam-node-find
+         :desc "Insert node (no dailies)" "i" #'ty/org-roam-node-insert))
+  (map! :leader
+        :prefix ("n" . "notes")
+        (:prefix ("r" . "roam")
+         (:prefix ("d" . "dailies")
+          :desc "Find daily node" "f" #'ty/org-roam-daily-find))))
 
 (after! org-capture
   (setq org-capture-templates

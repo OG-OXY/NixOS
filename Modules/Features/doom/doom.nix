@@ -4,29 +4,39 @@
   ...
 }:
 {
-  flake.nixosModules.doom = { pkgs, ... }:
+  flake.nixosModules.doom = { pkgs, lib, ... }:
   let
-    doom = pkgs.doomEmacs {
-      doomDir = ./doom.d;
-      doomLocalDir = "~/.local/share/doom";
-      emacs = pkgs.emacs-pgtk;
-      experimentalFetchTree = true;
-      extraPackages = epkgs:
-      let
-        fpkgs = pkgs.mkFpkg epkgs;
-      in
-      [
-        epkgs.treesit-grammars.with-all-grammars
-        (fpkgs "helix" inputs.helix-mode [ ])
-        (fpkgs "image-roll" inputs.image-roll [ ])
-        (fpkgs "majutsu" inputs.majutsu [
-          epkgs.magit
-          epkgs.consult
-          epkgs.plz
-          epkgs.transient
-        ])
-      ];
-    };
+    doomDirPath = ./doom.d;
+    orgFiles = map
+      (file: lib.removePrefix "${toString doomDirPath}/" (toString file))
+      (lib.fileset.toList (lib.fileset.fileFilter (f: f.hasExt "org") doomDirPath));
+    doom = pkgs.doomEmacs (
+      {
+        doomDir = doomDirPath;
+        doomLocalDir = "~/.local/share/doom";
+        emacs = pkgs.emacs-pgtk;
+        experimentalFetchTree = true;
+        extraPackages =
+          epkgs:
+          let
+            fpkgs = pkgs.mkFpkg epkgs;
+          in
+          [
+            epkgs.treesit-grammars.with-all-grammars
+            (fpkgs "helix" inputs.helix-mode [ ])
+            (fpkgs "image-roll" inputs.image-roll [ ])
+            (fpkgs "majutsu" inputs.majutsu [
+              epkgs.magit
+              epkgs.consult
+              epkgs.plz
+              epkgs.transient
+            ])
+          ];
+      }
+      // lib.optionalAttrs (orgFiles != [ ]) {
+        tangleArgs = "--all ${builtins.concatStringsSep " " orgFiles}";
+      }
+    );
   in
   {
     environment.systemPackages = [ doom ];

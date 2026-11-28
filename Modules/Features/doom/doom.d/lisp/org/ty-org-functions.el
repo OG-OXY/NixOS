@@ -143,11 +143,18 @@
   (interactive)
   (org-roam-node-insert #'ty/org-roam-non-daily-p))
 
-(map! :leader
-      :prefix ("n" . "notes")
-      (:prefix ("r" . "roam")
-       :desc "Find node (no dailies)" "f" #'ty/org-roam-node-find
-       :desc "Insert node (no dailies)" "i" #'ty/org-roam-node-insert))
+;; Org-Roam Find Node (Only Dailies)
+(defun ty/org-roam-daily-p (node)
+  "Return non-nil if NODE is inside `org-roam-dailies-directory'."
+  (let* ((file (org-roam-node-file node))
+         (daily-dir (expand-file-name org-roam-dailies-directory
+                                      org-roam-directory)))
+    (and file (file-in-directory-p file daily-dir))))
+
+(defun ty/org-roam-daily-find ()
+  "Find org-roam nodes restricted strictly to daily notes."
+  (interactive)
+  (org-roam-node-find nil nil #'ty/org-roam-daily-p))
 
 ;; Org-Lint Flymake Backend Function and Args.
 (after! (org flymake)
