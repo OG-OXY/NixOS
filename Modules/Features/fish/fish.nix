@@ -4,9 +4,7 @@
 {
   flake.homeModules.fish = { pkgs, lib, ... }:
   let
-    fnPath = builtins.readFile;
-    makeOrgFish = fnPath ./.fish/makeorg.fish;
-    recordFish = fnPath ./.fish/record.fish;
+    fnBody = path: builtins.readFile path;
   in
   {
     programs.fish = {
@@ -54,15 +52,11 @@
         };
         makeorg = {
           description = "Convert all files in PWD from Markdown to Org";
-          body = ''
-            ${makeOrgFish};
-          '';
+          body = fnBody ./.fish/makeorg.fish;
         };
         record = {
           description = "Dynamicaly Get Display Connector DP-* and Set Output In gpu-screen-recorder to $rog_connector";
-          body = ''
-            ${recordFish};
-          '';
+          body = fnBody ./.fish/record.fish;
         };
         obs-switch-scene = {
           description = "Toggle Function for 'obs-cmd'";
@@ -275,12 +269,13 @@
   };
   flake.nixosModules.fish = { pkgs, ... }:
   let
-    jjuiLuaWrapper = ./.fish/jjuiLuaWrapper.fish;
-    jjuiLuaLsWrapper = pkgs.writers.writeFishBin "jjui-lua-ls"
-      (builtins.readFile jjuiLuaWrapper);
+    fishBin = name: path:
+      pkgs.writers.writeFishBin name (builtins.readFile path);
   in
   {
     programs.fish.enable = true;
-    environment.systemPackages = [ jjuiLuaLsWrapper ];
+    environment.systemPackages = [
+      (fishBin "jjuiLuaLs.fish" ./.fish/jjuiLuaWrapper.fish)
+    ];
   };
 }
